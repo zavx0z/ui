@@ -27,14 +27,14 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: zavx0z/engine
-          ref: 43339040252e75c0403d2c6b2837ececb24de2b4
+          ref: 78c201fbda882356b93b08c4acdfabb8d33ad563
           path: engine
 
       - name: Check out Layout dependency
         uses: actions/checkout@v6
         with:
           repository: zavx0z/layout
-          ref: 2e3ceec6df46b7a5de873bfc6255aa760fb85fc3
+          ref: 4473651ad801c88d982593e7336d5b3b7365459c
           path: layout
 
       - name: Set up Bun
