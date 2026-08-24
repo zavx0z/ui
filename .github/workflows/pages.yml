@@ -46,6 +46,10 @@ jobs:
         working-directory: engine/packages/core
         run: bun link
 
+      - name: Install Layout dependencies
+        working-directory: layout
+        run: bun install --frozen-lockfile
+
       - name: Register Layout package
         working-directory: layout/packages/core
         run: bun link
