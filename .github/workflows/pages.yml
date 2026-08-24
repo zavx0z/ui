@@ -1,0 +1,78 @@
+name: UI Storybook Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out UI
+        uses: actions/checkout@v6
+        with:
+          path: ui
+
+      - name: Check out Engine dependency
+        uses: actions/checkout@v6
+        with:
+          repository: zavx0z/engine
+          ref: 43339040252e75c0403d2c6b2837ececb24de2b4
+          path: engine
+
+      - name: Check out Layout dependency
+        uses: actions/checkout@v6
+        with:
+          repository: zavx0z/layout
+          ref: 2e3ceec6df46b7a5de873bfc6255aa760fb85fc3
+          path: layout
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.0
+
+      - name: Register Engine package
+        working-directory: engine/packages/core
+        run: bun link
+
+      - name: Register Layout package
+        working-directory: layout/packages/core
+        run: bun link
+
+      - name: Install locked dependencies
+        working-directory: ui
+        run: bun install --frozen-lockfile
+
+      - name: Verify and build static Storybook
+        working-directory: ui
+        run: bun run check
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Storybook artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: ui/dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

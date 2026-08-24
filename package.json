@@ -1,0 +1,47 @@
+{
+  "name": "@ui/workspace",
+  "version": "0.1.0",
+  "description": "Visual UI primitives, components, HUD surfaces, and a static WebGPU Storybook. Built for MetaFor and reusable in immersive interfaces.",
+  "type": "module",
+  "private": true,
+  "packageManager": "bun@1.4.0",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "storybook": "bun run --cwd packages/storybook storybook",
+    "build": "bun run --cwd packages/storybook build",
+    "test": "bun test packages && bun run --cwd packages/storybook test:skill",
+    "typecheck": "tsc --project tsconfig.json --pretty false",
+    "check": "bun run typecheck && bun run test && bun run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zavx0z/ui.git"
+  },
+  "homepage": "https://zavx0z.github.io/ui/",
+  "metafor": "https://github.com/zavx0z/metafor",
+  "author": "zavx0z",
+  "keywords": [
+    "webgpu",
+    "ui",
+    "immersive",
+    "spatial",
+    "storybook",
+    "metafor"
+  ],
+  "dependencies": {
+    "@engine/core": "link:@engine/core",
+    "@layout/core": "link:@layout/core",
+    "@ui/components": "workspace:*",
+    "@ui/elements": "workspace:*",
+    "@ui/hud": "workspace:*",
+    "@ui/storybook": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.0",
+    "@types/node": "^25.5.0",
+    "@webgpu/types": "^0.1.68",
+    "typescript": "^7.0.2"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@ui/hud",
+  "version": "0.0.1",
+  "description": "Heads-up display surfaces built on the visual UI stack. Built for MetaFor and reusable in immersive interfaces.",
+  "type": "module",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./window": "./window.ts",
+    "./timeline": "./timeline.ts",
+    "./pane-frame": "./pane-frame.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit --pretty false"
+  },
+  "dependencies": {
+    "@engine/core": "link:@engine/core",
+    "@layout/core": "link:@layout/core",
+    "@ui/components": "workspace:*",
+    "@ui/elements": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zavx0z/ui.git",
+    "directory": "packages/hud"
+  },
+  "homepage": "https://zavx0z.github.io/ui/hud/",
+  "metafor": "https://github.com/zavx0z/metafor",
+  "keywords": ["webgpu", "ui", "hud", "immersive", "metafor"]
+}

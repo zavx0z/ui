@@ -1,0 +1,42 @@
+{
+  "name": "@ui/storybook",
+  "version": "0.0.1",
+  "description": "Static visual WebGPU Storybook and comparison workbench. Built for MetaFor and reusable with the UI packages.",
+  "type": "module",
+  "private": true,
+  "main": "index.ts",
+  "types": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./router": "./router.ts",
+    "./route-tree": "./route-tree.ts",
+    "./environment": "./environment.ts",
+    "./references": "./reference.ts",
+    "./reference-catalog": "./reference-catalog.ts",
+    "./stories": "./story.ts",
+    "./layout": "./layout.ts",
+    "./surfaces": "./surfaces.ts",
+    "./server": "./server.ts"
+  },
+  "scripts": {
+    "storybook": "bun app/server.ts",
+    "build": "bun build.ts",
+    "typecheck": "tsc --noEmit --pretty false",
+    "test": "bun test .",
+    "test:skill": "bun test ./.agents/skills/ui-dev/tests/canvas-evidence.test.ts ./.agents/skills/ui-dev/tests/interaction-plan.test.ts ./.agents/skills/ui-dev/tests/ui-dev.test.ts"
+  },
+  "dependencies": {
+    "@engine/core": "link:@engine/core",
+    "@layout/core": "link:@layout/core",
+    "@ui/components": "workspace:*",
+    "@ui/elements": "workspace:*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zavx0z/ui.git",
+    "directory": "packages/storybook"
+  },
+  "homepage": "https://zavx0z.github.io/ui/",
+  "metafor": "https://github.com/zavx0z/metafor",
+  "keywords": ["webgpu", "ui", "storybook", "visual-testing", "metafor"]
+}
