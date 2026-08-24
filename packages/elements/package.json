@@ -47,5 +47,6 @@
   },
   "homepage": "https://zavx0z.github.io/ui/elements/",
   "metafor": "https://github.com/zavx0z/metafor",
+  "license": "MIT",
   "keywords": ["webgpu", "ui", "elements", "metafor"]
 }

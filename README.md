@@ -55,3 +55,7 @@ References are metadata-first and image-lazy. Catalog metadata can remain in the
 - [`zavx0z/metafor`](https://github.com/zavx0z/metafor) composes exact revisions into the product runtime.
 
 The separation keeps the libraries reusable while preserving their original purpose: **[Built for MetaFor](https://github.com/zavx0z/metafor)**.
+
+## License
+
+[MIT](./LICENSE)
