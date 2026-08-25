@@ -2,10 +2,16 @@ import {join} from "node:path"
 import {COMPONENT_STORIES} from "../../../components/storybook/stories.ts"
 import {ELEMENT_STORIES} from "../../../elements/storybook/stories.ts"
 import {
+  defineStorybookApp,
+  type StorybookAppManifest,
+  type StorybookCapability,
+  type StorybookPageBody,
+} from "@zavx0z/storybook/app"
+import {
   createStorybookPage,
   type StorybookPage,
-} from "@ui/storybook/server"
-import {defineStorybookRouteTree} from "@ui/storybook"
+} from "@zavx0z/storybook/server"
+import {defineStorybookRouteTree} from "@zavx0z/storybook/route-tree"
 import {
   UI_PACKAGE_CATALOG,
   type UiPackageStorybookId,
@@ -20,7 +26,7 @@ export type UiStorybookPagesOptions = Readonly<{
 type PageFiles = Readonly<{
   entrypoint: string
   stylePath: string
-  body: Readonly<{kind: "canvas"; canvasId: string}> | Readonly<{kind: "html"; bodyHtmlPath: string}>
+  body: StorybookPageBody
 }>
 
 const storybookRoot = join(import.meta.dir, "../..")
@@ -58,33 +64,58 @@ const CATALOG_ROUTE_TREE = defineStorybookRouteTree({leaves: [] as const})
 const FIXTURE_ROUTE_TREE = defineStorybookRouteTree({leaves: ["overview", "details"] as const})
 const HUD_ROUTE_TREE = defineStorybookRouteTree({leaves: [] as const})
 
-export function createUiStorybookPages(options: UiStorybookPagesOptions = {}): readonly StorybookPage[] {
+/** Один UI-owned manifest для dev server, static build и lifecycle checks. */
+export function createUiStorybookApp(options: UiStorybookPagesOptions = {}): StorybookAppManifest {
   const catalog = PAGE_FILES.catalog
-  const pages: StorybookPage[] = [createStorybookPage({
+  return defineStorybookApp({
+    id: "ui",
+    title: "UI storybook",
+    basePath: options.publicBasePath ?? "",
+    home: {path: "/", label: "Главная", ariaLabel: "На главную Storybook"},
+    footer: {
+      lead: "Создано для",
+      owner: {label: "MetaFor", href: "https://github.com/zavx0z/metafor"},
+      detail: "переиспользуемая WebGPU-инфраструктура UI",
+    },
+    head: {meta: [{
+      kind: "public-path",
+      name: "engine-default-font",
+      path: "/fonts/jetbrains-mono-bold.ttf",
+    }]},
+    pages: [{
     id: "catalog",
+    title: "UI storybook",
     mountPath: "/",
-    packageName: "UI storybook",
     entrypoint: catalog.entrypoint,
     stylePath: catalog.stylePath,
     body: catalog.body,
-    ...(options.publicBasePath === undefined ? {} : {publicBasePath: options.publicBasePath}),
+    capability: "dom",
+    readiness: {dataset: "uiStorybook", value: "ready"},
     routeTree: CATALOG_ROUTE_TREE,
-  })]
-  for (const entry of UI_PACKAGE_CATALOG) {
-    const files = PAGE_FILES[entry.id]
-    pages.push(createStorybookPage({
-      id: entry.id,
-      mountPath: entry.routePrefix,
-      packageName: `UI storybook · ${entry.packageName}`,
-      entrypoint: files.entrypoint,
-      stylePath: files.stylePath,
-      body: files.body,
-      homePath: "/",
-      ...(options.publicBasePath === undefined ? {} : {publicBasePath: options.publicBasePath}),
-      routeTree: routeTreeFor(entry.id),
-    }))
-  }
-  return Object.freeze(pages)
+    }, ...UI_PACKAGE_CATALOG.map((entry) => {
+      const files = PAGE_FILES[entry.id]
+      const capability = capabilityFor(entry.id)
+      const canvasId = files.body.kind === "canvas" ? files.body.canvasId : null
+      return {
+        id: entry.id,
+        title: `UI storybook · ${entry.packageName}`,
+        mountPath: entry.routePrefix,
+        entrypoint: files.entrypoint,
+        stylePath: files.stylePath,
+        body: files.body,
+        capability,
+        readiness: {dataset: "uiStorybook", value: "ready"},
+        ...(canvasId === null ? {} : {canvas: {id: canvasId, evidence: "non-black" as const}}),
+        routeTree: routeTreeFor(entry.id),
+      }
+    })],
+  })
+}
+
+/** Compatibility-free convenience for focused page tests inside the UI app. */
+export function createUiStorybookPages(options: UiStorybookPagesOptions = {}): readonly StorybookPage[] {
+  const app = createUiStorybookApp(options)
+  return Object.freeze(app.pages.map((page) => createStorybookPage(app, page)))
 }
 
 export function uiStorybookPageFiles(id: UiStorybookPageId): PageFiles {
@@ -96,6 +127,12 @@ function routeTreeFor(id: UiPackageStorybookId) {
   if (id === "components") return COMPONENT_STORIES.routeTree
   if (id === "storybook") return FIXTURE_ROUTE_TREE
   return HUD_ROUTE_TREE
+}
+
+function capabilityFor(id: UiPackageStorybookId): StorybookCapability {
+  if (id === "hud") return "dom"
+  if (id === "storybook") return "webgpu-diagnostic"
+  return "webgpu"
 }
 
 function pageFiles(files: PageFiles): PageFiles {

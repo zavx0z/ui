@@ -21,7 +21,9 @@ Visual UI is a retained WebGPU interface stack. It does not translate components
 
 @zavx0z/highlighter ─────────────> @ui/elements / @ui/components
 
-@ui/storybook ── dev-only consumer of the same production packages
+@zavx0z/storybook ── shared dev-only infrastructure
+          ↓
+@ui/storybook ────── private UI application and catalog owner
 ```
 
 Lower layers never import higher layers. Exact lowercase package subpaths point directly to their source owner; aliases, compatibility barrels, and generated copies are not part of the contract.
@@ -50,7 +52,7 @@ Interpreter file/debugger state and Storybook chrome remain consumer-owned.
 
 ### Storybook
 
-`@ui/storybook` owns typed route trees, lazy story modules, comparison planning, the retained five-region workbench, one no-HMR development server, and a static build for the `/ui/` Pages base. Each package page is compiled independently so opening Elements does not eagerly materialize the Components or HUD browser graph.
+`@zavx0z/storybook` owns typed route trees, lazy story contracts, comparison planning, the retained five-region Workbench and generic no-HMR/static delivery. The private `@ui/storybook` application owns the UI catalog, package mounts, preview state, diagnostic fixture, lifecycle on `4017`, `/ui/` Pages output and acceptance. Each package page is compiled independently so opening Elements does not eagerly materialize the Components or HUD browser graph.
 
 Reference metadata records provenance, viewport, revision, compatibility, and acceptance. Large image assets are loaded only after the selected story requests comparison. The comparison planner chooses side-by-side or top-to-bottom placement by whichever produces the larger common scale, preserving meaningful pixel inspection for both wide and tall controls.
 
@@ -64,7 +66,9 @@ Reference metadata records provenance, viewport, revision, compatibility, and ac
 - Layout uses parent-owned slots; children draw only inside the rectangle they receive.
 - Controlled values come from the consumer. Local editing buffers are temporary interaction state, not a second source of truth.
 - Story metadata may be eager, but production implementations and reference images remain lazy.
-- Production packages do not import `@ui/storybook`.
+- Production exports do not import `@ui/storybook` or `@zavx0z/storybook`;
+  package-owned `storybook/**` sources use the shared package only in the
+  repository development application.
 
 ## UI composition law
 
@@ -106,7 +110,7 @@ parent corners is not conformance.
 
 ## Static delivery
 
-The Pages build emits package shells, independently split browser bundles, reference metadata, a deep-link recovery page, and a manifest below the public `/ui/` base. The workflow checks out [`zavx0z/engine`](https://github.com/zavx0z/engine) and [`zavx0z/layout`](https://github.com/zavx0z/layout), registers both exact package links, and then builds UI against those same identities.
+The shared static builder emits UI-owned package shells, independently split browser bundles, reference metadata, known-route-only deep-link recovery, and a revisioned manifest below `/ui/`. UI provides exact Engine font and reference assets; shared infrastructure owns neither.
 
 GitHub Pages uses the checked workflow artifact as its publishing source, but
 the workflow runs only through an explicit owner dispatch. A green build or a

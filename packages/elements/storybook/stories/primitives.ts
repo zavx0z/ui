@@ -13,7 +13,7 @@ import {
   type StorybookStoryArgs,
   type StorybookStoryControl,
   type StorybookStoryModule,
-} from "@ui/storybook/stories"
+} from "@zavx0z/storybook/stories"
 import type {PrimitiveStoryComponent} from "../stories.ts"
 
 type PrimitiveStoryArgs = StorybookStoryArgs & Readonly<{
@@ -345,6 +345,7 @@ function primitiveControls(
       label: "Акцент",
       group: "Внешний вид",
       kind: "select",
+      interactive: true,
       options: [
         {value: "cyan", label: "Голубой"},
         {value: "green", label: "Зелёный"},
@@ -352,7 +353,7 @@ function primitiveControls(
         {value: "red", label: "Красный"},
       ],
     },
-    {key: "radius", label: "Скругление", group: "Внешний вид", kind: "number"},
+    {key: "radius", label: "Скругление", group: "Внешний вид", kind: "number", interactive: false},
   ]
   if (component === "div") return [
     ...common,
@@ -361,14 +362,15 @@ function primitiveControls(
       label: "Плотность",
       group: "Внешний вид",
       kind: "select",
+      interactive: true,
       options: [{value: "regular", label: "Обычная"}, {value: "compact", label: "Компактная"}],
     },
   ]
-  if (component === "span") return [{key: "label", label: "Текст", group: "Содержимое", kind: "text"}, ...common]
+  if (component === "span") return [{key: "label", label: "Текст", group: "Содержимое", kind: "text", interactive: false}, ...common]
   if (component === "button" || component === "input" || component === "select") return [
-    {key: "label", label: component === "button" ? "Подпись" : "Значение", group: "Содержимое", kind: "text"},
-    {key: "disabled", label: "Недоступно", group: "Состояние", kind: "boolean"},
-    ...(component === "select" ? [{key: "open", label: "Раскрыто", group: "Состояние", kind: "boolean"} as const] : []),
+    {key: "label", label: component === "button" ? "Подпись" : "Значение", group: "Содержимое", kind: "text", interactive: false},
+    {key: "disabled", label: "Недоступно", group: "Состояние", kind: "boolean", interactive: true},
+    ...(component === "select" ? [{key: "open", label: "Раскрыто", group: "Состояние", kind: "boolean", interactive: true} as const] : []),
     ...common,
   ]
   if (component === "img") return [
@@ -377,9 +379,10 @@ function primitiveControls(
       label: "Вписывание",
       group: "Изображение",
       kind: "select",
+      interactive: true,
       options: [{value: "cover", label: "Заполнение"}, {value: "contain", label: "Целиком"}],
     },
-    {key: "radius", label: "Скругление", group: "Внешний вид", kind: "number"},
+    {key: "radius", label: "Скругление", group: "Внешний вид", kind: "number", interactive: false},
   ]
   return [
     {
@@ -387,6 +390,7 @@ function primitiveControls(
       label: "Режим",
       group: "Список",
       kind: "select",
+      interactive: true,
       options: [
         {value: "regular", label: "Обычный"},
         {value: "dense", label: "Плотный"},

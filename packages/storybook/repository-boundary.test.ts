@@ -83,6 +83,33 @@ describe("UI repository boundaries", () => {
     expect(await Bun.file(join(componentsRoot, "index.ts")).text()).not.toContain("code-editor.ts")
   })
 
+  test("keeps shared Storybook imports in dev-only owner directories", async () => {
+    const rootManifest = await Bun.file(join(repositoryRoot, "package.json")).json() as {
+      devDependencies: Record<string, string>
+    }
+    const storybookManifest = await Bun.file(join(repositoryRoot, "packages/storybook/package.json")).json() as {
+      dependencies: Record<string, string>
+    }
+    expect(rootManifest.devDependencies["@zavx0z/storybook"]).toBe("link:@zavx0z/storybook")
+    expect(storybookManifest.dependencies["@zavx0z/storybook"]).toBe("link:@zavx0z/storybook")
+
+    for (const owner of ["elements", "components"]) {
+      const manifest = await Bun.file(join(repositoryRoot, `packages/${owner}/package.json`)).json() as {
+        dependencies?: Record<string, string>
+        devDependencies?: Record<string, string>
+      }
+      expect(manifest.dependencies?.["@zavx0z/storybook"]).toBeUndefined()
+      expect(manifest.devDependencies?.["@zavx0z/storybook"]).toBeUndefined()
+
+      const glob = new Bun.Glob("**/*.ts")
+      for await (const path of glob.scan({cwd: join(repositoryRoot, `packages/${owner}`), onlyFiles: true})) {
+        if (path.startsWith("storybook/")) continue
+        expect(await Bun.file(join(repositoryRoot, `packages/${owner}`, path)).text(), `${owner}/${path}`)
+          .not.toContain("@zavx0z/storybook")
+      }
+    }
+  })
+
   test("keeps public attribution explicit without a runtime MetaFor dependency", async () => {
     for (const path of ["README.md", "ARCHITECTURE.md", "CONTRIBUTING.md"]) {
       const source = await Bun.file(join(repositoryRoot, path)).text()

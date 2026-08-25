@@ -1,9 +1,9 @@
 import {
   defineStorybookStories,
-  type StorybookNavigationItem,
   type StorybookStoryIndexItem,
   type StorybookStoryModule,
-} from "@ui/storybook"
+} from "@zavx0z/storybook/stories"
+import type {StorybookNavigationItem} from "@zavx0z/storybook/workbench"
 
 export type PrimitiveStoryComponent = "div" | "span" | "button" | "input" | "select" | "img" | "list"
 export type StyleStoryComponent = "css" | "theme"
@@ -250,10 +250,10 @@ export const ELEMENT_STORIES = defineStorybookStories({
       }],
     },
   ],
-  fallback: {component: "div", section: "basic", variant: "background"},
+  representative: {component: "div", section: "basic", variant: "background"},
 })
 
-export const ELEMENT_STORY_ROUTES = Object.freeze([...ELEMENT_STORIES.declaration.routes])
+export const ELEMENT_STORY_ROUTES = Object.freeze([...ELEMENT_STORIES.routeTree.leaves])
 export type ElementsStoryRoute = typeof ELEMENT_STORY_ROUTES[number]
 
 export function elementStoryIndex(route: ElementsStoryRoute): StorybookStoryIndexItem {

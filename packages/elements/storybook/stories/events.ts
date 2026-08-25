@@ -5,7 +5,7 @@ import {
   defineStorybookStoryModule,
   type StorybookStoryArgs,
   type StorybookStoryModule,
-} from "@ui/storybook/stories"
+} from "@zavx0z/storybook/stories"
 
 type EventStoryArgs = StorybookStoryArgs & Readonly<{
   label: string
@@ -28,7 +28,7 @@ export function createEventStory(variant: string): StorybookStoryModule {
       disabled: state === "disabled",
     },
     controls: [
-      {key: "label", label: "Подпись", group: "Элемент", kind: "text"},
+      {key: "label", label: "Подпись", group: "Элемент", kind: "text", interactive: false},
       {
         key: "state",
         label: "Состояние",

@@ -13,9 +13,9 @@ Visual UI is a retained, canvas-native interface stack for dense editors, spatia
 | [`@ui/elements`](packages/elements) | HTML-like visual primitives, controlled input behavior, widget appearance, theme, and icons. |
 | [`@ui/components`](packages/components) | Controlled fields and visual controls composed from Elements. |
 | [`@ui/hud`](packages/hud) | Heads-up display windows, frames, and timeline presentation. |
-| [`@ui/storybook`](packages/storybook) | Typed stories, the five-region visual workbench, reference comparison, dev server, and static Pages build. |
+| [`@ui/storybook`](packages/storybook) | Private UI catalog, routes, diagnostic fixture, lifecycle and Pages application using `@zavx0z/storybook`. |
 
-Production dependencies flow upward from [`@engine/core`](https://github.com/zavx0z/engine) through [`@layout/core`](https://github.com/zavx0z/layout), Elements, and Components. Storybook remains a development consumer and does not enter an application bundle unless imported explicitly.
+Production dependencies flow upward from [`@engine/core`](https://github.com/zavx0z/engine) through [`@layout/core`](https://github.com/zavx0z/layout), Elements, and Components. `@zavx0z/storybook` and the private UI Storybook app remain development consumers and do not enter an application bundle unless imported explicitly.
 
 The project-default TTF is owned by Engine. Each ready HTML application
 declares the URL it serves once; `UiRuntime` loads and shares it only when the
@@ -30,6 +30,7 @@ Keep Engine, Layout, and UI as sibling checkouts. Register the two lower package
 repozitarium/
 ├── engine/
 ├── layout/
+├── storybook/
 └── ui/
 ```
 
@@ -38,6 +39,7 @@ Then run:
 ```bash
 cd ../engine/packages/core && bun link
 cd ../../../layout/packages/core && bun link
+cd ../../../storybook && bun link
 cd ../../../ui
 bun install
 bun run storybook

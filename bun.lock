@@ -10,13 +10,14 @@
         "@ui/components": "workspace:*",
         "@ui/elements": "workspace:*",
         "@ui/hud": "workspace:*",
-        "@ui/storybook": "workspace:*",
         "@zavx0z/highlighter": "link:@zavx0z/highlighter",
       },
       "devDependencies": {
         "@types/bun": "^1.4.0",
         "@types/node": "^25.5.0",
+        "@ui/storybook": "workspace:*",
         "@webgpu/types": "^0.1.68",
+        "@zavx0z/storybook": "link:@zavx0z/storybook",
         "typescript": "^7.0.2",
       },
     },
@@ -29,9 +30,6 @@
         "@ui/elements": "workspace:*",
         "@zavx0z/highlighter": "link:@zavx0z/highlighter",
       },
-      "devDependencies": {
-        "@ui/storybook": "workspace:*",
-      },
     },
     "packages/elements": {
       "name": "@ui/elements",
@@ -40,9 +38,6 @@
         "@engine/core": "link:@engine/core",
         "@layout/core": "link:@layout/core",
         "@zavx0z/highlighter": "link:@zavx0z/highlighter",
-      },
-      "devDependencies": {
-        "@ui/storybook": "workspace:*",
       },
     },
     "packages/hud": {
@@ -63,6 +58,7 @@
         "@layout/core": "link:@layout/core",
         "@ui/components": "workspace:*",
         "@ui/elements": "workspace:*",
+        "@zavx0z/storybook": "link:@zavx0z/storybook",
       },
     },
   },
@@ -126,6 +122,8 @@
     "@webgpu/types": ["@webgpu/types@0.1.72", "", {}, "sha512-0cF7RFM2edNoiIS1ODJp0/Gzv4/xSXhwoR0YCza+OWpJWtn4wmo9DvK91aLlH9+uUnwIriP7ZiC3WitmyhuzBw=="],
 
     "@zavx0z/highlighter": ["@zavx0z/highlighter@link:@zavx0z/highlighter", {}],
+
+    "@zavx0z/storybook": ["@zavx0z/storybook@link:@zavx0z/storybook", {}],
 
     "bun-types": ["bun-types@1.4.0", "", { "dependencies": { "@types/node": "*" } }, "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q=="],
 

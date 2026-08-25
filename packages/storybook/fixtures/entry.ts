@@ -2,28 +2,33 @@ import {type Object3D} from "@engine/core"
 import {UiRuntime} from "@layout/core/runtime"
 import {UiSurface} from "@layout/core/surface"
 import {
-  StorybookBackdropSurface,
-  StorybookDockSurface,
-  StorybookNavigationSurface,
   StorybookRouteTreeRouter,
-  StorybookStoryPanelSurface,
   defineStorybookRouteTree,
+} from "@zavx0z/storybook/route-tree"
+import {
   defineStorybookStories,
-  drawStorybookPreviewChrome,
-  planStorybookShell,
-  storybookPublicPath,
-  type StorybookNavigationItem,
   type StorybookStoryArgs,
   type StorybookStoryIndexItem,
   type StorybookStoryModule,
+} from "@zavx0z/storybook/stories"
+import {
+  StorybookBackdropSurface,
+  StorybookDockSurface,
+  StorybookNavigationSurface,
+  StorybookStoryPanelSurface,
+  drawStorybookPreviewChrome,
+  planStorybookShell,
+  type StorybookNavigationItem,
   type StorybookStoryPanelMode,
   type StorybookStoryPanelOptions,
-} from "@ui/storybook"
+} from "@zavx0z/storybook/workbench"
+import {storybookPublicPath} from "@zavx0z/storybook/environment"
+import {UI_STORYBOOK_RESPONSIVE_POLICY} from "../app/workbench-policy.ts"
 
 type PageRoute = "overview" | "details"
 const pageRoutes = ["overview", "details"] as const
 const pageRouteTree = defineStorybookRouteTree({leaves: pageRoutes})
-const STORYBOOK_MOUNT_PATH = storybookPublicPath("/storybook")
+const STORYBOOK_MOUNT_PATH = storybookPublicPath("ui", "/storybook")
 
 type PageRouteReader = Readonly<{
   readonly current: PageRoute
@@ -60,7 +65,7 @@ const storyRegistry = defineStorybookStories({
       }],
     }],
   }],
-  fallback: {component: "button", section: "basic", variant: "contained"},
+  representative: {component: "button", section: "basic", variant: "contained"},
 })
 
 type FixturePreviewDiagnostics = Readonly<{layoutPlans: number; materializations: number; route: string}>
@@ -142,7 +147,7 @@ async function startWorkbench(): Promise<void> {
     const mountedRouter = new StorybookRouteTreeRouter(pageRouteTree, {basePath: STORYBOOK_MOUNT_PATH})
     const pageRouter = mountedPageRouter(mountedRouter)
     document.documentElement.dataset.storybookPage = "workbench"
-    let storyRoute = storyRegistry.fallback
+    let storyRoute = storyRegistry.representative
     let storyIndex = requireStory(storyRoute)
     let storyModule = await storyRegistry.load(storyRoute)
     let args: StorybookStoryArgs = Object.freeze({...storyModule.defaultArgs})
@@ -206,7 +211,9 @@ async function startWorkbench(): Promise<void> {
     })
     storyPanel = new StorybookStoryPanelSurface(panelOptions())
 
-    const frames = (w: number, h: number) => planStorybookShell(w, h)
+    const frames = (w: number, h: number) => planStorybookShell(w, h, {
+      responsive: UI_STORYBOOK_RESPONSIVE_POLICY,
+    })
     runtime.addSurface(backdrop, ({w, h}) => ({x: 0, y: 0, w, h}))
     runtime.addSurface(catalog, ({w, h}) => frames(w, h).catalog)
     runtime.addSurface(sections, ({w, h}) => frames(w, h).section)

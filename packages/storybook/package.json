@@ -29,7 +29,8 @@
     "@engine/core": "link:@engine/core",
     "@layout/core": "link:@layout/core",
     "@ui/components": "workspace:*",
-    "@ui/elements": "workspace:*"
+    "@ui/elements": "workspace:*",
+    "@zavx0z/storybook": "link:@zavx0z/storybook"
   },
   "repository": {
     "type": "git",

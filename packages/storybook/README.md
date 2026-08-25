@@ -1,22 +1,25 @@
-# @ui/storybook
+# `@ui/storybook`
 
-`@ui/storybook` is the shared development workbench and static visual catalog for the UI package family. It is **[Built for MetaFor](https://github.com/zavx0z/metafor)** while remaining a reusable development consumer of the public UI packages.
+Private UI Storybook application built on `@zavx0z/storybook`.
 
-It provides a typed hierarchical route tree, a retained five-region FlexBox shell, searchable story metadata, lazy story and reference loaders, independently split package pages, and a static GitHub Pages build below `/ui/`.
-
-Consumers own their stories, production preview surfaces, search state, and demonstration data. The initial entry contains metadata only; a selected story imports its implementation through an exact production subpath. Reference images are requested only when comparison is opened.
+UI owns the package catalog, `/elements/`, `/components/`, `/storybook/` and
+`/hud/` mounts, package previews, reference metadata, process `4017`, static
+`/ui/` output and acceptance. Generic routing, Workbench, server and build
+contracts are imported through exact shared subpaths:
 
 ```ts
-import {
-  StorybookRouteTreeRouter,
-  StorybookNavigationSurface,
-  StorybookStoryPanelSurface,
-  defineStorybookStories,
-  planStorybookComparison,
-  planStorybookShell,
-} from "@ui/storybook"
+import {defineStorybookRouteTree} from "@zavx0z/storybook/route-tree"
+import {defineStorybookStories} from "@zavx0z/storybook/stories"
+import {planStorybookShell} from "@zavx0z/storybook/workbench"
 ```
 
-Run `bun run storybook` from the repository root and open `http://127.0.0.1:4017`. The root links to `/elements/`, `/components/`, `/storybook/`, and `/hud/`. Prefix overviews end in `/`; exact leaves do not. Unknown suffixes fail closed with `404`.
+The `/storybook/` page is an UI-owned integration fixture for the shared
+infrastructure; it does not transfer UI story ownership to the shared package.
 
-See the repository [architecture](../../ARCHITECTURE.md) and [contribution guide](../../CONTRIBUTING.md) for package boundaries and evidence requirements.
+During the staged cross-repository migration, the previous generic source
+remains in this private package for the still-direct Node and MetaFor consumers.
+UI itself does not import that legacy surface. It will be deleted, without an
+alias or re-export layer, after those consumers move.
+
+Run `bun run storybook` from the repository root. Prefix overviews end in `/`,
+exact leaves do not, and unknown suffixes fail closed.

@@ -7,7 +7,7 @@ import {
   defineStorybookStoryModule,
   type StorybookStoryArgs,
   type StorybookStoryModule,
-} from "@ui/storybook/stories"
+} from "@zavx0z/storybook/stories"
 
 type PopoverStoryArgs = StorybookStoryArgs & Readonly<{
   open: boolean
@@ -23,7 +23,7 @@ export function createPopoverStory(variant: "closed" | "open"): StorybookStoryMo
     defaultArgs: {open: variant === "open", event: "Ожидание"},
     controls: [
       {key: "open", label: "Открыт", group: "Состояние", kind: "boolean"},
-      {key: "event", label: "Последнее событие", group: "События", kind: "custom"},
+      {key: "event", label: "Последнее событие", group: "События", kind: "custom", interactive: false},
     ],
     render(surface, args, frame) {
       const width = 146

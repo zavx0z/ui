@@ -3,7 +3,8 @@ import {basename, join} from "node:path"
 import {fileURLToPath} from "node:url"
 import type {TrueTypeFont} from "@engine/core"
 import {loadSharedFont} from "@engine/core/default-font"
-import {defineStorybookStoryModule, planStorybookShell} from "@ui/storybook"
+import {defineStorybookStoryModule} from "@zavx0z/storybook/stories"
+import {planStorybookShell} from "@zavx0z/storybook/workbench"
 import type {UiRuntime} from "@layout/core/runtime"
 import {
   ELEMENT_STORIES,
@@ -14,6 +15,7 @@ import {
 } from "./stories.ts"
 import {ElementsStoryPreviewSurface} from "./story-preview.ts"
 import {uiShapeMetrics} from "../shape.ts"
+import {UI_STORYBOOK_RESPONSIVE_POLICY} from "../../storybook/app/workbench-policy.ts"
 
 const storybookRoot = fileURLToPath(new URL(".", import.meta.url))
 let font: TrueTypeFont
@@ -229,7 +231,7 @@ describe("@ui/elements package-owned Workbench stories", () => {
   })
 
   test("serves detail paths through the central no-HMR UI hub and full desktop shell", async () => {
-    const desktop = planStorybookShell(1920, 1080)
+    const desktop = planStorybookShell(1920, 1080, {responsive: UI_STORYBOOK_RESPONSIVE_POLICY})
     expect(desktop.preview).toEqual({x: 375, y: 3, w: 1101, h: 1049})
     expect(desktop.info).toEqual({x: 1477, y: 3, w: 440, h: 1074})
 

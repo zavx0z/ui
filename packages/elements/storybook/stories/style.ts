@@ -6,7 +6,7 @@ import {
   defineStorybookStoryModule,
   type StorybookStoryArgs,
   type StorybookStoryModule,
-} from "@ui/storybook/stories"
+} from "@zavx0z/storybook/stories"
 import type {StyleStoryComponent} from "../stories.ts"
 
 type StyleStoryArgs = StorybookStoryArgs & Readonly<{
@@ -43,9 +43,9 @@ export function createStyleStory(options: Readonly<{
           {value: "red", label: "Красный"},
         ],
       },
-      {key: "radius", label: "Скругление", group: "Коробка", kind: "number"},
-      {key: "padding", label: "Отступ", group: "Коробка", kind: "number"},
-      {key: "opacity", label: "Непрозрачность", group: "Коробка", kind: "number"},
+      {key: "radius", label: "Скругление", group: "Коробка", kind: "number", interactive: false},
+      {key: "padding", label: "Отступ", group: "Коробка", kind: "number", interactive: false},
+      {key: "opacity", label: "Непрозрачность", group: "Коробка", kind: "number", interactive: false},
     ],
     render(surface, args, frame) {
       renderStyleStory(surface, args, frame, options)

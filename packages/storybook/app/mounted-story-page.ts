@@ -2,8 +2,8 @@ import {
   StorybookRouteTreeRouter,
   type StorybookRouteTree,
   type StorybookRouteTreeNode,
-  type StorybookStoryRegistry,
-} from "@ui/storybook"
+} from "@zavx0z/storybook/route-tree"
+import type {StorybookStoryRegistry} from "@zavx0z/storybook/stories"
 
 export type MountedStoryRouter<Route extends string> = Readonly<{
   /** Deterministic detail descendant rendered by the unchanged Workbench. */
@@ -76,8 +76,8 @@ function representativeDetailRoute<Route extends string>(
 ): Route {
   if (node.kind === "leaf") return node.path
   const prefix = node.path.length === 0 ? "" : `${node.path}/`
-  if (registry.fallback.startsWith(prefix) && tree.find(registry.fallback)?.kind === "leaf") {
-    return registry.fallback as Route
+  if (registry.representative.startsWith(prefix) && tree.find(registry.representative)?.kind === "leaf") {
+    return registry.representative as Route
   }
   const descendant = tree.leaves.find((route) => route.startsWith(prefix))
   if (descendant === undefined) throw new Error(`Storybook overview has no detail descendant: ${node.path}`)

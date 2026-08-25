@@ -1,7 +1,7 @@
 import {Button, type ButtonColor, type ButtonSize, type ButtonVariant} from "@ui/components/button"
 import {uiShapeMetrics} from "@ui/elements/shape"
-import type {StorybookStoryArgs, StorybookStoryModule} from "@ui/storybook/stories"
-import {defineStorybookStoryModule} from "@ui/storybook/stories"
+import type {StorybookStoryArgs, StorybookStoryModule} from "@zavx0z/storybook/stories"
+import {defineStorybookStoryModule} from "@zavx0z/storybook/stories"
 
 type ButtonStoryArgs = StorybookStoryArgs & Readonly<{
   label: string
@@ -25,7 +25,7 @@ export function createButtonStory(options: Readonly<{
       disabled: options.disabled === true,
     },
     controls: [
-      {key: "label", label: "Подпись", group: "Основные", kind: "text"},
+      {key: "label", label: "Подпись", group: "Основные", kind: "text", interactive: false},
       {
         key: "color",
         label: "Цвет",

@@ -1,9 +1,11 @@
-# Требования @ui/storybook
+# Требования UI Storybook application
 
 > **[Built for MetaFor](https://github.com/zavx0z/metafor)** as a reusable static WebGPU workbench.
 
-`@ui/storybook` владеет переиспользуемой dev-инфраструктурой catalog storybook
-и единым dev-каталогом семейства UI. Он не владеет production semantics UI
+Private `@ui/storybook` владеет единым dev-каталогом семейства UI, package
+mounts, preview state, lifecycle, `/ui/` static output и acceptance.
+Переиспользуемые route, Workbench, server и build contracts принадлежат
+`@zavx0z/storybook`. Ни один из них не владеет production semantics UI
 Components либо consumer.
 
 ## Законы
@@ -33,9 +35,10 @@ Components либо consumer.
    Node/Field/Socket либо product switch.
 5. Consumer preview является отдельной Surface; package не копирует и не
    адаптирует её renderer.
-6. Server helper отключает HMR, собирает browser entry по запросу и не владеет
-   persistent runtime process. HTML title равен exact package name; отдельного
-   title override у consumer нет.
+6. Shared server helper отключает HMR, собирает browser entry по запросу и не
+   владеет persistent runtime process. UI app передаёт exact page title,
+   capability, readiness и structured Russian shell strings одним typed app
+   manifest.
 7. Storybook package не входит production bundle consumer без его прямого
    import.
 8. Navigation, dock и info используют один retained root `@layout/core/surface`
@@ -58,7 +61,7 @@ Components либо consumer.
     материализует только прежний и новый item owner; disabled item пропускается.
 12. Масштабируемый catalog строится из package-owned typed story descriptors.
     Один descriptor связывает component identity, section, variant, args,
-    production render, source generator, controls и optional interaction; route,
+    production render, source generator и controls; route,
     поиск, preview, dock, копируемый код и render test не получают отдельных
     расходящихся описаний.
 13. Catalog и sections поддерживают большой индекс через поиск, сворачиваемые
@@ -69,7 +72,9 @@ Components либо consumer.
 14. Preview всегда использует production UI на текущем Engine/UiRuntime. Dock
     показывает variants выбранной story. Правая панель постоянно показывает
     сгенерированный TypeScript и действие копирования; ниже неё располагаются
-    controls и события, не скрывая код.
+    controls и события, не скрывая код. В V1 только `boolean` и `select`
+    являются interactive; `number`, `text`, `color` и `custom` обязаны явно
+    объявлять `interactive: false` и отображаются честно disabled.
     TypeScript отображается exact production `@ui/components/code-editor` в
     `readOnly: true`: Islands Dark syntax, фиксированный line-number gutter,
     обе оси scroll и single selection с `Cmd/Ctrl+C`. Верхняя Copy action
@@ -110,8 +115,9 @@ Components либо consumer.
     его fail-closed.
 21. Семейство UI запускается одним Bun process на одном origin
     `http://127.0.0.1:4017`. Главная `/` перечисляет `@ui/elements`,
-    `@ui/components`, `@ui/storybook` и `@ui/hud`, объясняет ответственность
-    пакета и содержание его dev-страницы. Package mounts — соответственно
+    `@ui/components`, integration page `@zavx0z/storybook` и `@ui/hud`,
+    объясняет ответственность владельца и содержание dev-страницы. Mounts —
+    соответственно
     `/elements/`, `/components/`, `/storybook/` и `/hud/`; отдельные
     package-серверы и порты не являются вторым способом запуска.
 22. Один browser target этого origin переходит между package mounts. Каждая
@@ -120,25 +126,36 @@ Components либо consumer.
     ровно один `UiRuntime`. `$ui-dev` владеет одним selector `ui`, одним process
     и одним target, а package выбирается exact route.
 23. Каждая вложенная package, prefix-overview и detail page имеет общий
-    видимый DOM-control `Home`, ведущий на `/` текущего storybook origin. Он
+    видимый DOM-control `Главная`, ведущий на `/` текущего storybook origin. Он
     принадлежит server shell, находится поверх DOM/SVG/WebGPU page и не требует
     consumer renderer либо ручного изменения адресной строки. На самой главной
     `/` этот control отсутствует.
 24. Static build материализует те же пять page shells под public base `/ui/`,
     сохраняет отдельные browser graphs и lazy chunks, публикует `.nojekyll`,
-    manifest и fail-closed deep-link recovery. Восстановление прямого detail URL
+    schema-version-1 manifest и fail-closed deep-link recovery. Manifest
+    фиксирует source/dependency revisions и dirty state, page routes,
+    capabilities/readiness, entry/chunks и SHA-256 emitted assets без local
+    realpaths. Восстановление прямого detail URL
     происходит до чтения route package entry. Build копирует один точный Engine
     font asset в общий `/ui/fonts/`, а каждый shell только объявляет этот URL
     через inert meta без preload.
-25. Reference catalog загружается отдельным lazy chunk, а raster asset — только
-    после явного запроса выбранной story. Descriptor хранит provenance,
+25. UI-owned reference catalog загружается отдельным lazy chunk. Shared V1
+    предоставляет только immutable schema, validation и comparison planner; он
+    не объявляет неисполняемый story-reference lifecycle. Descriptor хранит provenance,
     SHA-256, viewport/DPR, `compatible | changed | unverified` и
     `candidate | accepted | superseded`. Capture не становится accepted без
     решения владельца.
 26. Comparison layout выбирает side-by-side либо top-to-bottom по максимальному
     общему scale subject/reference. Оба кадра используют один scale; wide и tall
     controls не получают один навязанный split.
-27. Каждая public Storybook page показывает ненавязчивую footer-ссылку
-    `Built for MetaFor`, не превращая MetaFor в обязательную runtime dependency
-    reusable UI packages. Плавающий header либо badge поверх рабочей области
-    отсутствует.
+27. Каждая public Storybook page показывает ненавязчивый structured footer
+    `Создано для MetaFor · переиспользуемая WebGPU-инфраструктура UI`, не
+    превращая MetaFor в runtime dependency reusable UI packages. HTML string
+    replacement, плавающий header и badge поверх рабочей области отсутствуют.
+
+## Migration state
+
+Прежняя generic реализация внутри private `@ui/storybook` временно остаётся
+настоящим кодом для прямых Node и MetaFor consumers. UI application импортирует
+только `@zavx0z/storybook/*`. После миграции остальных consumers старый слой
+удаляется целиком без alias, wrapper или compatibility re-export.

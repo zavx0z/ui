@@ -1,12 +1,13 @@
 import {describe, expect, test} from "bun:test"
 import {join} from "node:path"
 import {fileURLToPath} from "node:url"
-import {startStorybookHubServer} from "@ui/storybook/server"
+import {startStorybookHubServer} from "@zavx0z/storybook/server"
 import {COMPONENT_STORIES} from "../../components/storybook/stories.ts"
 import {ELEMENT_STORIES} from "../../elements/storybook/stories.ts"
 import {UI_PACKAGE_CATALOG} from "./catalog/package-catalog.ts"
 import {mountedStoryRepresentativeRoute} from "./mounted-story-page.ts"
 import {
+  createUiStorybookApp,
   createUiStorybookPages,
   uiStorybookPageFiles,
 } from "./server/page-registry.ts"
@@ -50,6 +51,7 @@ describe("central UI storybook hub", () => {
   })
 
   test("registers one catalog and four independently built package pages", () => {
+    const app = createUiStorybookApp()
     const pages = createUiStorybookPages()
     expect(pages.map(({id, mountPath}) => [id, mountPath])).toEqual([
       ["catalog", "/"],
@@ -58,11 +60,17 @@ describe("central UI storybook hub", () => {
       ["storybook", "/storybook"],
       ["hud", "/hud"],
     ])
-    expect(pages.every(({routeTree}) => routeTree !== null)).toBeTrue()
-    expect(pages.find(({id}) => id === "elements")?.routeTree?.leaves).toHaveLength(47)
-    expect(pages.find(({id}) => id === "components")?.routeTree?.leaves).toHaveLength(81)
-    expect(pages.find(({id}) => id === "storybook")?.routeTree?.leaves).toEqual(["overview", "details"])
-    expect(pages.find(({id}) => id === "hud")?.routeTree?.leaves).toEqual([])
+    expect(pages.every(({manifest}) => manifest.routeTree !== null)).toBeTrue()
+    expect(pages.find(({id}) => id === "elements")?.manifest.routeTree.leaves).toHaveLength(47)
+    expect(pages.find(({id}) => id === "components")?.manifest.routeTree.leaves).toHaveLength(81)
+    expect(pages.find(({id}) => id === "storybook")?.manifest.routeTree.leaves).toEqual(["overview", "details"])
+    expect(pages.find(({id}) => id === "hud")?.manifest.routeTree.leaves).toEqual([])
+    expect(app.home.label).toBe("Главная")
+    expect(app.footer).toEqual({
+      lead: "Создано для",
+      owner: {label: "MetaFor", href: "https://github.com/zavx0z/metafor"},
+      detail: "переиспользуемая WebGPU-инфраструктура UI",
+    })
     expect(uiStorybookPageFiles("elements").body).toEqual({kind: "canvas", canvasId: "stage-canvas"})
     expect(uiStorybookPageFiles("components").body).toEqual({kind: "canvas", canvasId: "stage-canvas"})
     expect(uiStorybookPageFiles("storybook").body).toEqual({kind: "canvas", canvasId: "storybook-canvas"})
@@ -75,15 +83,15 @@ describe("central UI storybook hub", () => {
     const fixture = await Bun.file(join(storybookRoot, "fixtures/entry.ts")).text()
     const mounted = await Bun.file(join(hubRoot, "mounted-story-page.ts")).text()
 
-    expect(elements).toContain('const ELEMENTS_MOUNT_PATH = storybookPublicPath("/elements")')
+    expect(elements).toContain('const ELEMENTS_MOUNT_PATH = storybookPublicPath("ui", "/elements")')
     expect(elements).toContain("createMountedStoryRouter<ElementsStoryRoute>")
     expect(elements).toContain("runtime.addSurface(preview")
     expect(elements).toContain("runtime.addSurface(storyPanel")
-    expect(components).toContain('const COMPONENTS_MOUNT_PATH = storybookPublicPath("/components")')
+    expect(components).toContain('const COMPONENTS_MOUNT_PATH = storybookPublicPath("ui", "/components")')
     expect(components).toContain("createMountedStoryRouter<ComponentsStoryRoute>")
     expect(components).toContain("runtime.addSurface(preview")
     expect(components).toContain("runtime.addSurface(storyPanel")
-    expect(fixture).toContain('const STORYBOOK_MOUNT_PATH = storybookPublicPath("/storybook")')
+    expect(fixture).toContain('const STORYBOOK_MOUNT_PATH = storybookPublicPath("ui", "/storybook")')
     expect(fixture).toContain("new StorybookRouteTreeRouter(pageRouteTree")
     expect(mounted).toContain("new StorybookRouteTreeRouter(routeTree, {basePath})")
     expect(mounted).toContain("representativeDetailRoute")
@@ -92,12 +100,13 @@ describe("central UI storybook hub", () => {
 
   test("serves canonical package overviews, exact leaves and isolated page assets on one origin", async () => {
     const server = startStorybookHubServer({
-      pages: createUiStorybookPages(),
+      app: createUiStorybookApp(),
       hostname: "127.0.0.1",
       port: 0,
-      staticFiles: {
-        "/fonts/jetbrains-mono-bold.ttf": engineFontPath(),
-      },
+      staticFiles: [{
+        publicPath: "/fonts/jetbrains-mono-bold.ttf",
+        sourcePath: engineFontPath(),
+      }],
     })
     try {
       const origin = server.url.origin
@@ -126,8 +135,8 @@ describe("central UI storybook hub", () => {
         ["/elements/div/basic/background", "@ui/elements", 'id="stage-canvas"', "elements"],
         ["/components/", "@ui/components", 'id="stage-canvas"', "components"],
         ["/components/button/basic/contained", "@ui/components", 'id="stage-canvas"', "components"],
-        ["/storybook/", "@ui/storybook", 'id="storybook-canvas"', "storybook"],
-        ["/storybook/overview", "@ui/storybook", 'id="storybook-canvas"', "storybook"],
+        ["/storybook/", "@zavx0z/storybook", 'id="storybook-canvas"', "storybook"],
+        ["/storybook/overview", "@zavx0z/storybook", 'id="storybook-canvas"', "storybook"],
         ["/hud/", "@ui/hud", 'id="ui-hud-overview"', "hud"],
       ] as const) {
         const response = await fetch(`${origin}${path}`)
@@ -137,7 +146,10 @@ describe("central UI storybook hub", () => {
         expect(html, path).toContain(marker)
         expect(html, path).toContain(`/@storybook-assets/${pageId}/entry.js`)
         expect(html, path).toContain('data-storybook-home href="/"')
-        expect(html, path).toContain(">Home</a>")
+        expect(html, path).toContain(">Главная</a>")
+        expect(html, path).toContain("Создано для&nbsp;<a")
+        expect(html, path).toContain("переиспользуемая WebGPU-инфраструктура UI")
+        expect(html, path).not.toContain("Built for MetaFor")
       }
 
       for (const path of [

@@ -3,7 +3,7 @@ export type UiStorybookPresentation = "dom" | "webgpu" | "webgpu-diagnostic"
 
 export type UiPackageCatalogEntry = Readonly<{
   id: UiPackageStorybookId
-  packageName: `@ui/${string}`
+  packageName: `@ui/${string}` | "@zavx0z/storybook"
   title: string
   summary: string
   storybook: string
@@ -35,10 +35,10 @@ export const UI_PACKAGE_CATALOG: readonly UiPackageCatalogEntry[] = Object.freez
   }),
   Object.freeze({
     id: "storybook",
-    packageName: "@ui/storybook",
-    title: "Инфраструктура Workbench",
-    summary: "Типизированное дерево маршрутов, registry сценариев, пятипанельный shell и no-HMR server.",
-    storybook: "Показывает существующий диагностический fixture общей инфраструктуры.",
+    packageName: "@zavx0z/storybook",
+    title: "Интеграция общей Storybook-инфраструктуры",
+    summary: "Типизированные маршруты, пятипанельный Workbench и no-HMR delivery подключены как private dev dependency.",
+    storybook: "UI-owned diagnostic fixture проверяет интеграцию, не передавая shared package владение UI stories.",
     routePrefix: "/storybook",
     defaultRoute: "/storybook/",
     presentation: "webgpu-diagnostic",

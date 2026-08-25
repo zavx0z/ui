@@ -39,10 +39,10 @@ Read [references/blender-reference.md](references/blender-reference.md) before c
 | catalog | `/` | DOM package catalog |
 | `@ui/elements` | `/elements/` | WebGPU story catalog |
 | `@ui/components` | `/components/` | WebGPU story catalog |
-| `@ui/storybook` | `/storybook/` | diagnostic WebGPU fixture |
+| `@zavx0z/storybook` integration | `/storybook/` | diagnostic WebGPU fixture |
 | `@ui/hud` | `/hud/` | honest DOM package inventory |
 
-Every story prefix is an overview with trailing `/`; an exact story leaf has no trailing `/`. Every nested page exposes `Home` back to `/`. Unknown suffixes are rejected instead of opening a fallback story. Static Pages output uses the same routes below `/ui/`.
+Every story prefix is an overview with trailing `/`; an exact story leaf has no trailing `/`. Every nested page exposes `Главная` back to `/`. Unknown suffixes are rejected instead of opening a fallback story. Static Pages output uses the same routes below `/ui/`.
 
 Read [references/storybook.md](references/storybook.md) before lifecycle, browser, interaction, static build, or source-freshness work. Read [references/profiling.md](references/profiling.md) only for CPU, frame, heap, or external WebGPU Inspector evidence.
 
@@ -80,7 +80,7 @@ Automated browser operations are background-only. They never call `Page.bringToF
 
 ## Static and reference evidence
 
-`bun run build` must produce a self-contained `dist` for Pages base `/ui/`, including all five page shells, split lazy chunks, deep-link recovery, the font, and reference metadata. Story implementations and reference raster assets stay lazy. A reference records exact provenance, SHA-256, viewport, DPR, compatibility, and acceptance; automated captures remain candidates until the owner accepts them.
+`bun run build` must produce a self-contained `dist` for Pages base `/ui/`, including all five page shells, split lazy chunks, known-route-only deep-link recovery, the font, reference metadata, and schema-version-1 manifest with exact revisions and asset SHA-256. Story implementations stay lazy. A reference records exact provenance, viewport, DPR, compatibility, and acceptance; automated captures remain candidates until the owner accepts them.
 
 GitHub Pages deployment is manual and owner-gated. Never dispatch
 `.github/workflows/pages.yml`, run `gh workflow run`, change repository Pages

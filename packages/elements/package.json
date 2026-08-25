@@ -40,9 +40,6 @@
     "@layout/core": "link:@layout/core",
     "@zavx0z/highlighter": "link:@zavx0z/highlighter"
   },
-  "devDependencies": {
-    "@ui/storybook": "workspace:*"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zavx0z/ui.git",

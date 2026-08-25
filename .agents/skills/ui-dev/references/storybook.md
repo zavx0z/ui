@@ -11,7 +11,7 @@ The executable registry is `scripts/storybooks.json` and contains only selector 
 | `/` | DOM catalog | none |
 | `/elements/` | WebGPU story tree | `#stage-canvas` |
 | `/components/` | WebGPU story tree | `#stage-canvas` |
-| `/storybook/` | diagnostic WebGPU tree | `#storybook-canvas` |
+| `/storybook/` | shared-infrastructure integration tree | `#storybook-canvas` |
 | `/hud/` | DOM package inventory | none |
 
 ## Lifecycle and source freshness
@@ -46,7 +46,7 @@ Do not start an unrelated stopped repository only to satisfy this table. After a
 bun run build
 ```
 
-The build emits `dist` for public base `/ui/`. Verify `index.html`, one shell for each mount, `404.html`, `.nojekyll`, `storybook-manifest.json`, the font, independently split browser assets, and `references/catalog.json`. The deep-link recovery page must restore an exact leaf before its package entry reads the route.
+The build emits `dist` for public base `/ui/`. Verify `index.html`, one shell for each mount, `404.html`, `.nojekyll`, revisioned `storybook-manifest.json`, the font, independently split browser assets, and `references/catalog.json`. Recovery restores only a route present in that manifest before its package entry reads the route; an unknown suffix remains `404`.
 
 Reference catalog metadata may load as a separate chunk. Image loaders must not run until a selected story requests comparison. A build is not owner visual acceptance.
 
@@ -65,7 +65,7 @@ bun "$SKILL/scripts/ui-browser.ts" page "$PWD" ui \
 
 Every overview has trailing `/`; every exact leaf does not. The helper performs a no-redirect HTTP preflight. `308` reports the canonical address, `404` is rejected, and DOM routes reject canvas-only actions. One target is navigated in place. Multiple targets are explicit ambiguity; close only a duplicate proven to belong to the current task.
 
-Each nested page must expose `data-storybook-home` with `href="/"` in local development. Static Pages shells resolve the same Home control to `/ui/`. Verify the link in DOM and use `page` when the full DOM, SVG, or WebGPU composition needs inspection.
+Each nested page must expose `data-storybook-home` with text `Главная` and `href="/"` in local development. Static Pages shells resolve the same control to `/ui/`. Verify the link in DOM and use `page` when the full DOM, SVG, or WebGPU composition needs inspection.
 
 ## Interaction and viewport evidence
 

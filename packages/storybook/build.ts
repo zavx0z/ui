@@ -1,94 +1,69 @@
-import {basename, dirname, join, resolve} from "node:path"
-import {copyFile, cp, mkdir, rm, writeFile} from "node:fs/promises"
-import {normalizeStorybookBasePath} from "./environment.ts"
-import {engineFontPath} from "./engine-assets.ts"
+import {readdir} from "node:fs/promises"
+import {dirname, join, resolve} from "node:path"
+import {fileURLToPath} from "node:url"
+import type {StorybookStaticFile} from "@zavx0z/storybook/app"
 import {
-  createUiStorybookPages,
-  uiStorybookPageFiles,
-  type UiStorybookPageId,
-} from "./app/server/page-registry.ts"
+  buildStaticStorybook,
+  readGitIdentity,
+  type StorybookDependencyIdentity,
+} from "@zavx0z/storybook/build"
+import {normalizeStorybookBasePath} from "@zavx0z/storybook/environment"
+import {engineFontPath} from "./engine-assets.ts"
+import {createUiStorybookApp} from "./app/server/page-registry.ts"
 
-const outputRoot = resolve(import.meta.dir, "../../dist")
+const uiRoot = resolve(import.meta.dir, "../..")
+const outputRoot = join(uiRoot, "dist")
 const publicBasePath = normalizeStorybookBasePath(Bun.env.UI_STORYBOOK_BASE_PATH ?? "/ui")
-const engineFont = engineFontPath()
+const app = createUiStorybookApp({publicBasePath})
+const source = await readGitIdentity(uiRoot)
+const dependencies = await dependencyIdentities()
+const staticFiles = Object.freeze([
+  {
+    publicPath: "/fonts/jetbrains-mono-bold.ttf",
+    sourcePath: engineFontPath(),
+  },
+  ...await referenceStaticFiles(join(import.meta.dir, "assets/references")),
+])
 
-await rm(outputRoot, {recursive: true, force: true})
-await mkdir(outputRoot, {recursive: true})
+const manifest = await buildStaticStorybook({
+  app,
+  outputRoot,
+  source,
+  dependencies,
+  staticFiles,
+})
 
-const pages = createUiStorybookPages({publicBasePath})
-for (const page of pages) {
-  const files = uiStorybookPageFiles(page.id as UiStorybookPageId)
-  const assetDirectory = join(outputRoot, "@storybook-assets", page.id)
-  await mkdir(assetDirectory, {recursive: true})
-  await buildPage(files.entrypoint, assetDirectory)
-  await copyFile(files.stylePath, join(assetDirectory, "style.css"))
+console.log(`[UI Storybook] built ${manifest.pages.length} static pages in ${outputRoot} for ${publicBasePath}/`)
 
-  const html = await page.htmlResponse().then((response) => response.text())
-  const htmlPath = page.mountPath === "/"
-    ? join(outputRoot, "index.html")
-    : join(outputRoot, page.mountPath.slice(1), "index.html")
-  await mkdir(dirname(htmlPath), {recursive: true})
-  await writeFile(htmlPath, html)
+async function dependencyIdentities(): Promise<readonly StorybookDependencyIdentity[]> {
+  const inputs = [
+    ["@engine/core", import.meta.resolve("@engine/core")],
+    ["@layout/core", import.meta.resolve("@layout/core/runtime")],
+    ["@ui/workspace", import.meta.resolve("@ui/elements")],
+    ["@zavx0z/highlighter", import.meta.resolve("@zavx0z/highlighter")],
+    ["@zavx0z/storybook", import.meta.resolve("@zavx0z/storybook/app")],
+  ] as const
+  return Object.freeze(await Promise.all(inputs.map(async ([name, entry]) => ({
+    name,
+    ...await readGitIdentity(dirname(fileURLToPath(entry))),
+  }))))
 }
 
-await mkdir(join(outputRoot, "fonts"), {recursive: true})
-await copyFile(engineFont, join(outputRoot, "fonts/jetbrains-mono-bold.ttf"))
-await cp(join(import.meta.dir, "assets/references"), join(outputRoot, "references"), {recursive: true})
-await writeFile(join(outputRoot, ".nojekyll"), "")
-await writeFile(join(outputRoot, "404.html"), notFoundRedirect(publicBasePath))
-await writeFile(join(outputRoot, "storybook-manifest.json"), `${JSON.stringify({
-  basePath: publicBasePath,
-  pages: pages.map((page) => ({
-    id: page.id,
-    mountPath: page.mountPath,
-    routes: page.routeTree?.nodes.map((node) => node.path) ?? [],
-  })),
-}, null, 2)}\n`)
-
-console.log(`[UI Storybook] built ${pages.length} static pages in ${outputRoot} for ${publicBasePath}/`)
-
-async function buildPage(entrypoint: string, outputDirectory: string): Promise<void> {
-  const result = await Bun.build({
-    entrypoints: [entrypoint],
-    loader: {".wgsl": "text"},
-    target: "browser",
-    format: "esm",
-    splitting: true,
-    sourcemap: "none",
-    minify: true,
-  })
-  if (!result.success) throw new Error(result.logs.map((log) => String(log)).join("\n"))
-
-  const names = new Set<string>()
-  for (const output of result.outputs) {
-    const name = output.kind === "entry-point" ? "entry.js" : basename(output.path)
-    if (names.has(name)) throw new Error(`Static Storybook emitted duplicate asset: ${name}`)
-    names.add(name)
-    await Bun.write(join(outputDirectory, name), output)
+async function referenceStaticFiles(
+  root: string,
+  relativePath = "",
+): Promise<readonly StorybookStaticFile[]> {
+  const directory = relativePath === "" ? root : join(root, ...relativePath.split("/"))
+  const entries = await readdir(directory, {withFileTypes: true})
+  const files: StorybookStaticFile[] = []
+  for (const entry of entries.sort((left, right) => left.name.localeCompare(right.name))) {
+    const path = relativePath === "" ? entry.name : `${relativePath}/${entry.name}`
+    if (entry.isDirectory()) files.push(...await referenceStaticFiles(root, path))
+    else if (entry.isFile()) files.push({
+      publicPath: `/references/${path}`,
+      sourcePath: join(root, ...path.split("/")),
+    })
+    else throw new Error(`UI Storybook reference asset must be a regular file: ${path}`)
   }
-  if (!names.has("entry.js")) throw new Error(`Static Storybook entry was not emitted: ${entrypoint}`)
-}
-
-function notFoundRedirect(basePath: string): string {
-  const encodedBase = JSON.stringify(basePath)
-  return `<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>UI Storybook</title>
-    <script>
-      (() => {
-        const base = ${encodedBase}
-        const pathname = location.pathname.startsWith(base) ? location.pathname.slice(base.length) : "/"
-        const mount = pathname.split("/").filter(Boolean)[0] ?? ""
-        const known = new Set(["elements", "components", "storybook", "hud"])
-        const target = known.has(mount) ? base + "/" + mount + "/" : base + "/"
-        sessionStorage.setItem("ui-storybook-restore", location.pathname + location.search + location.hash)
-        location.replace(target)
-      })()
-    </script>
-  </head>
-  <body></body>
-</html>`
+  return Object.freeze(files)
 }

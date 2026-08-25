@@ -37,13 +37,14 @@
     "@zavx0z/highlighter": "link:@zavx0z/highlighter",
     "@ui/components": "workspace:*",
     "@ui/elements": "workspace:*",
-    "@ui/hud": "workspace:*",
-    "@ui/storybook": "workspace:*"
+    "@ui/hud": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.4.0",
     "@types/node": "^25.5.0",
     "@webgpu/types": "^0.1.68",
+    "@ui/storybook": "workspace:*",
+    "@zavx0z/storybook": "link:@zavx0z/storybook",
     "typescript": "^7.0.2"
   }
 }

@@ -1,6 +1,6 @@
 import {UI_PACKAGE_CATALOG} from "./package-catalog.ts"
-import {storybookPublicPath} from "@ui/storybook/environment"
-import {loadStorybookReferenceCatalog} from "@ui/storybook/reference-catalog"
+import {storybookPublicPath} from "@zavx0z/storybook/environment"
+import {loadStorybookReferenceCatalog} from "../../reference-catalog.ts"
 
 const cards = document.getElementById("ui-package-cards")
 if (!(cards instanceof HTMLElement)) throw new Error("UI package catalog container is missing")
@@ -27,7 +27,7 @@ for (const entry of UI_PACKAGE_CATALOG) {
   meta.className = "package-meta"
   meta.textContent = `${entry.presentation.toUpperCase()} · ${entry.defaultRoute}`
   const link = document.createElement("a")
-  link.href = storybookPublicPath(entry.defaultRoute)
+  link.href = storybookPublicPath("ui", entry.defaultRoute)
   link.textContent = "Открыть страницу package"
   link.setAttribute("aria-label", `Открыть страницу ${entry.packageName}`)
 
