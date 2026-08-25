@@ -71,6 +71,7 @@ describe("UI repository boundaries", () => {
       expect(source).toContain("https://github.com/zavx0z/metafor")
     }
     const server = await Bun.file(join(repositoryRoot, "packages/storybook/server.ts")).text()
-    expect(server.match(/Built for MetaFor/g)).toHaveLength(2)
+    expect(server).not.toContain("data-storybook-brand")
+    expect(server.match(/Built for MetaFor/g)).toHaveLength(1)
   })
 })

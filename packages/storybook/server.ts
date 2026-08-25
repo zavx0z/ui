@@ -357,7 +357,6 @@ function createPageHtml(
     <title>${escapeHtml(options.packageName)}</title>
     <link rel="stylesheet" href="${assetBasePath}/style.css">
     <style>
-      .storybook-brand,
       .storybook-footer,
       .storybook-home {
         position: fixed;
@@ -375,12 +374,6 @@ function createPageHtml(
         text-decoration: none;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
       }
-      .storybook-brand {
-        top: 10px;
-        left: 10px;
-        gap: 8px;
-      }
-      .storybook-brand a,
       .storybook-footer a {
         color: #76d2fb;
         text-decoration: none;
@@ -394,8 +387,6 @@ function createPageHtml(
         right: 10px;
         bottom: 10px;
       }
-      .storybook-brand a:hover,
-      .storybook-brand a:focus-visible,
       .storybook-footer a:hover,
       .storybook-footer a:focus-visible,
       .storybook-home:hover,
@@ -406,10 +397,6 @@ function createPageHtml(
     </style>
   </head>
   <body>
-    <header class="storybook-brand" data-storybook-brand>
-      <span>Visual UI</span>
-      <a href="https://github.com/zavx0z/metafor">Built for MetaFor</a>
-    </header>
     ${home}
     ${bodyHtml}
     <footer class="storybook-footer" data-storybook-footer>

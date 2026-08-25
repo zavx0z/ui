@@ -131,6 +131,7 @@ Components либо consumer.
 26. Comparison layout выбирает side-by-side либо top-to-bottom по максимальному
     общему scale subject/reference. Оба кадра используют один scale; wide и tall
     controls не получают один навязанный split.
-27. Каждая public Storybook page показывает header и footer со ссылкой
+27. Каждая public Storybook page показывает ненавязчивую footer-ссылку
     `Built for MetaFor`, не превращая MetaFor в обязательную runtime dependency
-    reusable UI packages.
+    reusable UI packages. Плавающий header либо badge поверх рабочей области
+    отсутствует.

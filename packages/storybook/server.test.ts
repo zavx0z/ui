@@ -186,7 +186,8 @@ describe("@ui/storybook server", () => {
     expect(html).toContain('<meta name="engine-default-font" content="/ui/fonts/jetbrains-mono-bold.ttf">')
     expect(html).toContain('href="/ui/"')
     expect(html).toContain('src="/ui/@storybook-assets/components/entry.js"')
-    expect(html.match(/Built for MetaFor/g)).toHaveLength(2)
+    expect(html).not.toContain("data-storybook-brand")
+    expect(html.match(/Built for MetaFor/g)).toHaveLength(1)
     expect(page.assetBasePath).toBe("/ui/@storybook-assets/components")
   })
 
