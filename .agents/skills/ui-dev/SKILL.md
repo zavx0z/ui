@@ -76,6 +76,12 @@ Automated browser operations are background-only. They never call `Page.bringToF
 
 `bun run build` must produce a self-contained `dist` for Pages base `/ui/`, including all five page shells, split lazy chunks, deep-link recovery, the font, and reference metadata. Story implementations and reference raster assets stay lazy. A reference records exact provenance, SHA-256, viewport, DPR, compatibility, and acceptance; automated captures remain candidates until the owner accepts them.
 
+GitHub Pages deployment is manual and owner-gated. Never dispatch
+`.github/workflows/pages.yml`, run `gh workflow run`, change repository Pages
+settings, or deploy an artifact unless the owner explicitly requests deployment
+in the current task. `bun run build` and checks verify `dist`; they do not
+authorize publishing it.
+
 Tests and typechecks prove contracts. DOM and console evidence prove one exact route and target. Page PNG proves the rendered viewport; Canvas PNG proves exact canvas pixels. Neither includes browser chrome. Synthetic interaction, emulation, profiling, and external GPU capture do not become physical-device proof or owner acceptance.
 
 At handoff report checkout and commit, selector, process ownership and PID, exact route and target, checks, static build, console, visual evidence where applicable, restored native metrics, and every remaining integration or owner gate.
