@@ -17,6 +17,11 @@ Visual UI is a retained, canvas-native interface stack for dense editors, spatia
 
 Production dependencies flow upward from [`@engine/core`](https://github.com/zavx0z/engine) through [`@layout/core`](https://github.com/zavx0z/layout), Elements, and Components. Storybook remains a development consumer and does not enter an application bundle unless imported explicitly.
 
+The project-default TTF is owned by Engine. Each ready HTML application
+declares the URL it serves once; `UiRuntime` loads and shares it only when the
+application did not supply another font. UI packages and individual stories do
+not import or fetch the default themselves.
+
 ## Local development
 
 Keep Engine, Layout, and UI as sibling checkouts. Register the two lower package owners once; UI manifests resolve only their explicit global package links:

@@ -20,8 +20,9 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
    Components, Fields, dev Workbench и Node consumers. Это не ограничивается
    Node Editor и не является свободной стилизацией по терминологии Blender.
 2. Blender 5.2 LTS задаёт также base UI palette и material states: canvas,
-   panels, inputs, borders, text, hover, active, selected и disabled. Project
-   font сохраняется MetaFor. Type/Socket/status colors получают явное
+   panels, inputs, borders, text, hover, active, selected и disabled. Binary
+   project font принадлежит Engine, а composition root выбирает его URL либо
+   передаёт другой font в `UiRuntime`; Elements не владеет загрузкой. Type/Socket/status colors получают явное
    Blender-role mapping там, где такой role существует; старую MetaFor palette
    нельзя использовать как неявный fallback после migration.
 3. Visible controls по умолчанию компактные прямоугольные low-radius элементы,
@@ -37,7 +38,7 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
    Generic `GroupedCellAppearance` одинаково маскирует Input и Button: cell
    заполняет caller rect без inset, а radius остаётся только на отмеченных
    внешних corners; middle cells всегда прямоугольные.
-6. Заранее разрешены ровно два project divergence: project font и
+6. Заранее разрешены ровно два project divergence: выбранный composition root font и
    ортогональная route geometry Links. Switcher, округлённая Node header и иные
    прежние отличия автоматически не сохраняются. Link thickness/colors,
    hover/selected/invalid, socket attachment и interaction следуют Blender.

@@ -1,5 +1,6 @@
 import {beforeAll, describe, expect, test} from "bun:test"
-import {CachedText, TrueTypeFont} from "@engine/core"
+import {CachedText, type TrueTypeFont} from "@engine/core"
+import {loadSharedFont} from "@engine/core/default-font"
 import {span} from "./span.ts"
 import {UiSurface} from "@layout/core/surface"
 
@@ -33,8 +34,7 @@ class GlyphBoundsSurface extends UiSurface {
 let font: TrueTypeFont
 
 beforeAll(async () => {
-  const bytes = await Bun.file(new URL("../../../engine/packages/core/static/fonts/jetbrains-mono-bold.ttf", import.meta.url)).arrayBuffer()
-  font = new TrueTypeFont(bytes)
+  font = await loadSharedFont(import.meta.resolve("@engine/core/fonts/jetbrains-mono-bold.ttf"))
 })
 
 describe("span project-font glyph bounds", () => {

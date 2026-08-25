@@ -1,5 +1,6 @@
 import {beforeAll, describe, expect, test} from "bun:test"
-import {BufferGeometry, Object3D, TrueTypeFont} from "@engine/core"
+import {BufferGeometry, Object3D, type TrueTypeFont} from "@engine/core"
+import {loadSharedFont} from "@engine/core/default-font"
 import type {UiRuntime} from "@layout/core/runtime"
 import {
   UiSurface,
@@ -38,8 +39,7 @@ const createFakeRuntime = (): UiRuntime => ({
 let font: TrueTypeFont
 
 beforeAll(async () => {
-  const bytes = await Bun.file(new URL("../../../engine/packages/core/static/fonts/jetbrains-mono-bold.ttf", import.meta.url)).arrayBuffer()
-  font = new TrueTypeFont(bytes)
+  font = await loadSharedFont(import.meta.resolve("@engine/core/fonts/jetbrains-mono-bold.ttf"))
 })
 
 describe("UiSurface dismissable popover layer", () => {

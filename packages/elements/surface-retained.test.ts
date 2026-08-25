@@ -7,9 +7,10 @@ import {
   MeshBasicMaterial,
   Object3D,
   Text,
-  TrueTypeFont,
+  type TrueTypeFont,
   type CachedText,
 } from "@engine/core"
+import {loadSharedFont} from "@engine/core/default-font"
 import {UiSurface} from "@layout/core/surface"
 import type {RetainedHitOptions} from "@layout/core/surface"
 import type {UiRuntime} from "@layout/core/runtime"
@@ -265,8 +266,7 @@ const countGeometry = (geometries: readonly BufferGeometry[], geometry: BufferGe
 let font: TrueTypeFont
 
 beforeAll(async () => {
-  const bytes = await Bun.file(new URL("../../../engine/packages/core/static/fonts/jetbrains-mono-bold.ttf", import.meta.url)).arrayBuffer()
-  font = new TrueTypeFont(bytes)
+  font = await loadSharedFont(import.meta.resolve("@engine/core/fonts/jetbrains-mono-bold.ttf"))
 })
 
 describe("UiSurface retained component parent", () => {

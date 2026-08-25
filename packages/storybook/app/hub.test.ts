@@ -10,6 +10,7 @@ import {
   createUiStorybookPages,
   uiStorybookPageFiles,
 } from "./server/page-registry.ts"
+import {engineFontPath} from "../engine-assets.ts"
 
 const hubRoot = fileURLToPath(new URL(".", import.meta.url))
 const storybookRoot = fileURLToPath(new URL("..", import.meta.url))
@@ -95,7 +96,7 @@ describe("central UI storybook hub", () => {
       hostname: "127.0.0.1",
       port: 0,
       staticFiles: {
-        "/fonts/jetbrains-mono-bold.ttf": join(storybookRoot, "../../../engine/packages/core/static/fonts/jetbrains-mono-bold.ttf"),
+        "/fonts/jetbrains-mono-bold.ttf": engineFontPath(),
       },
     })
     try {
@@ -104,6 +105,7 @@ describe("central UI storybook hub", () => {
       const catalogHtml = await catalog.text()
       expect(catalog.status).toBe(200)
       expect(catalogHtml).toContain("<title>UI storybook</title>")
+      expect(catalogHtml).toContain('<meta name="engine-default-font" content="/fonts/jetbrains-mono-bold.ttf">')
       expect(catalogHtml).toContain('id="ui-package-catalog"')
 
       for (const [path, location] of [

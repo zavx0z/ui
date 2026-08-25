@@ -1,4 +1,5 @@
 import {basename} from "node:path"
+import {DEFAULT_FONT_META_NAME} from "@engine/core/default-font"
 import {
   resolveStorybookRouteTree,
   type StorybookRouteTree,
@@ -325,6 +326,7 @@ function createPageHtml(
     : Bun.file(options.body.bodyHtmlPath).text()
   const publicMountPath = mountPath === "/" ? publicBasePath : `${publicBasePath}${mountPath}`
   const baseHref = publicMountPath === "" ? "/" : `${publicMountPath}/`
+  const defaultFontUrl = `${publicBasePath}/fonts/jetbrains-mono-bold.ttf` || "/fonts/jetbrains-mono-bold.ttf"
   const publicHomePath = homePath === null ? null : `${publicBasePath}${homePath}` || "/"
   const home = homePath === null
     ? ""
@@ -348,6 +350,7 @@ function createPageHtml(
     <base href="${escapeHtml(baseHref)}">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="ui-storybook-base" content="${escapeHtml(publicBasePath)}">
+    <meta name="${DEFAULT_FONT_META_NAME}" content="${escapeHtml(defaultFontUrl)}">
     ${restore}
     <meta http-equiv="cache-control" content="no-cache">
     <link rel="icon" href="data:,">

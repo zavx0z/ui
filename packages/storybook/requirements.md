@@ -79,8 +79,9 @@ Components либо consumer.
     editor headers, row navigation, thin separators и low-radius panels вместо
     oversized pill stacks и больших rounded islands. Five-panel semantic regions
     сохраняются, но их visible chrome не является исключением из UI shape law.
-    Palette/material states следуют adopted 5.2 mapping; project font остаётся
-    MetaFor.
+    Palette/material states следуют adopted 5.2 mapping. HTML shell один раз
+    объявляет Engine-owned default font URL; package pages и stories не передают
+    его в `UiRuntime`, а custom runtime font полностью обходит default request.
 17. Preview выбирает available size, позволяющий equal-scale сравнение control с
     local Blender reference. Он не растягивает input на большую часть desktop
     только ради заполнения центральной панели; свободное место остаётся рабочей
@@ -119,7 +120,9 @@ Components либо consumer.
 24. Static build материализует те же пять page shells под public base `/ui/`,
     сохраняет отдельные browser graphs и lazy chunks, публикует `.nojekyll`,
     manifest и fail-closed deep-link recovery. Восстановление прямого detail URL
-    происходит до чтения route package entry.
+    происходит до чтения route package entry. Build копирует один точный Engine
+    font asset в общий `/ui/fonts/`, а каждый shell только объявляет этот URL
+    через inert meta без preload.
 25. Reference catalog загружается отдельным lazy chunk, а raster asset — только
     после явного запроса выбранной story. Descriptor хранит provenance,
     SHA-256, viewport/DPR, `compatible | changed | unverified` и

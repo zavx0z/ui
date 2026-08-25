@@ -136,7 +136,6 @@ async function startWorkbench(): Promise<void> {
   document.documentElement.dataset.uiStorybookPage = "storybook"
   try {
     const runtime = await UiRuntime.create(canvas, {
-      fontUrl: storybookPublicPath("/fonts/jetbrains-mono-bold.ttf"),
       virtualDisplay: {initial: "near", surfaceDisplay: true, grid: false},
     })
     runtime.handleResize()

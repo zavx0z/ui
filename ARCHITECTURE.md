@@ -51,6 +51,9 @@ Reference metadata records provenance, viewport, revision, compatibility, and ac
 ## Runtime invariants
 
 - A product creates one `@layout/core/runtime` `UiRuntime` for a canvas and scene.
+- The HTML composition root declares one Engine-owned default font URL. Runtime
+  creation fetches it lazily only without an explicit `font` or `fontUrl`;
+  Elements, Components, HUD, and story modules never own that route.
 - Surfaces are attached by the runtime owner and are disposed recursively.
 - Layout uses parent-owned slots; children draw only inside the rectangle they receive.
 - Controlled values come from the consumer. Local editing buffers are temporary interaction state, not a second source of truth.
@@ -61,7 +64,9 @@ Reference metadata records provenance, viewport, revision, compatibility, and ac
 
 The Pages build emits package shells, independently split browser bundles, reference metadata, a deep-link recovery page, and a manifest below the public `/ui/` base. The workflow checks out [`zavx0z/engine`](https://github.com/zavx0z/engine) and [`zavx0z/layout`](https://github.com/zavx0z/layout), registers both exact package links, and then builds UI against those same identities.
 
-GitHub Pages uses the workflow artifact as its publishing source, so the same checked and pinned graph is deployed after every green `main` build.
+GitHub Pages uses the checked workflow artifact as its publishing source, but
+the workflow runs only through an explicit owner dispatch. A green build or a
+push to `main` does not deploy by itself.
 
 ## Cross-repository map
 

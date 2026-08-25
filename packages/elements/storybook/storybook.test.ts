@@ -1,7 +1,8 @@
 import {beforeAll, describe, expect, test} from "bun:test"
 import {basename, join} from "node:path"
 import {fileURLToPath} from "node:url"
-import {TrueTypeFont} from "@engine/core"
+import type {TrueTypeFont} from "@engine/core"
+import {loadSharedFont} from "@engine/core/default-font"
 import {defineStorybookStoryModule, planStorybookShell} from "@ui/storybook"
 import type {UiRuntime} from "@layout/core/runtime"
 import {
@@ -18,8 +19,7 @@ const storybookRoot = fileURLToPath(new URL(".", import.meta.url))
 let font: TrueTypeFont
 
 beforeAll(async () => {
-  const bytes = await Bun.file(new URL("../../../../engine/packages/core/static/fonts/jetbrains-mono-bold.ttf", import.meta.url)).arrayBuffer()
-  font = new TrueTypeFont(bytes)
+  font = await loadSharedFont(import.meta.resolve("@engine/core/fonts/jetbrains-mono-bold.ttf"))
 })
 
 describe("@ui/elements package-owned Workbench stories", () => {

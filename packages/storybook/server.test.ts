@@ -183,6 +183,7 @@ describe("@ui/storybook server", () => {
     const html = await page.htmlResponse().then((response) => response.text())
     expect(html).toContain('<base href="/ui/components/">')
     expect(html).toContain('<meta name="ui-storybook-base" content="/ui">')
+    expect(html).toContain('<meta name="engine-default-font" content="/ui/fonts/jetbrains-mono-bold.ttf">')
     expect(html).toContain('href="/ui/"')
     expect(html).toContain('src="/ui/@storybook-assets/components/entry.js"')
     expect(html.match(/Built for MetaFor/g)).toHaveLength(2)

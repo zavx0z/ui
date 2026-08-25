@@ -1,5 +1,6 @@
 import {beforeAll, describe, expect, test} from "bun:test"
-import {type BufferGeometry, Object3D, TrueTypeFont} from "@engine/core"
+import {type BufferGeometry, Object3D, type TrueTypeFont} from "@engine/core"
+import {loadSharedFont} from "@engine/core/default-font"
 import {uiShapeMetrics} from "@ui/elements"
 import {type UiRuntime} from "@layout/core/runtime"
 import {
@@ -115,8 +116,7 @@ const pressKey = (surface: {onKey(event: KeyboardEvent): void; flushPendingRende
 let font: TrueTypeFont
 
 beforeAll(async () => {
-  const bytes = await Bun.file(new URL("../../../engine/packages/core/static/fonts/jetbrains-mono-bold.ttf", import.meta.url)).arrayBuffer()
-  font = new TrueTypeFont(bytes)
+  font = await loadSharedFont(import.meta.resolve("@engine/core/fonts/jetbrains-mono-bold.ttf"))
 })
 
 describe("retained @ui/storybook surfaces", () => {

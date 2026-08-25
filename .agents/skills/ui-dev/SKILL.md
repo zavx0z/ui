@@ -16,6 +16,12 @@ re-export them. Elements owns HTML-like visual primitives, controlled editing,
 widget appearance, theme, and icons. Every TypeScript source and test filename
 is lowercase kebab-case even when its exported symbol uses PascalCase.
 
+The shared HTML shell declares one Engine-owned `engine-default-font` meta URL.
+Package pages and stories call `UiRuntime.create()` without a default-font path;
+a custom runtime font bypasses the meta request. The static build may copy the
+exact Engine asset once into its application output, but production UI packages
+never own or eagerly load it.
+
 ## UI reference and product vocabulary
 
 The adopted Blender 5.2 LTS source and visual reference constrains the visible Elements, Components, Storybook workbench, and HUD presentations. Match composition, density, grouping, material states, and interaction before calling a visual slice complete. An older artifact is current evidence only after an exact scope-specific compatibility check; otherwise it is legacy navigation.
