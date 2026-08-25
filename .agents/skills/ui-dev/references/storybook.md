@@ -62,7 +62,7 @@ bun "$SKILL/scripts/ui-browser.ts" page "$PWD" ui \
   --route /hud/ --output /tmp/ui-hud.png
 ```
 
-Every overview has trailing `/`; every exact leaf does not. The helper performs a no-redirect HTTP preflight. `308` reports the canonical address, `404` is rejected, and DOM routes reject canvas-only actions. One target is navigated in place. Multiple targets are explicit ambiguity; close only a duplicate proven to belong to the current task.
+Every overview has trailing `/`; every exact leaf does not. The helper performs a no-redirect HTTP preflight. `308` reports the canonical address, `404` is rejected, and DOM routes reject canvas-only actions. One target is navigated in place. Background focus emulation starts before navigation and readiness so a hidden WebGPU page can deliver its requested frames, then is restored in `finally` without OS focus. Multiple targets are explicit ambiguity; close only a duplicate proven to belong to the current task.
 
 Each nested page must expose `data-storybook-home` with text `Главная` and `href="/"` in local development. Static Pages shells resolve the same control to `/ui/`. Verify the link in DOM and use `page` when the full DOM, SVG, or WebGPU composition needs inspection.
 
@@ -70,6 +70,6 @@ Each nested page must expose `data-storybook-home` with text `Главная` an
 
 `interact` requires selector `ui`, an explicit canonical route, an explicit existing target ID, and a versioned JSON data plan. It never evaluates supplied JavaScript. Use pointer and key steps plus checkpoints exactly as described by the tests for `scripts/interaction-plan.ts`.
 
-`viewports` and `profile` are available only on the current route's WebGPU canvas. Viewport emulation and background focus emulation are restored in `finally`. UI pages expose their Engine-owned last presented frame to evidence tooling. The result records `engine-last-presented`; a missing owner frame fails instead of silently accepting canvas backing pixels. `canvas-backing-fallback` is used only when an inspected page has no owner bridge. Canvas capture rejects two consecutive black snapshots and never writes a rejected artifact.
+`viewports` and `profile` are available only on the current route's WebGPU canvas. Viewport emulation and background focus emulation are restored in `finally`. UI pages expose their Engine-owned last presented frame to evidence tooling. The result records `engine-last-presented`; a missing owner frame fails instead of silently accepting canvas backing pixels. `canvas-backing-fallback` is used only when an inspected page has no owner bridge. A large exact PNG readback has its own bounded 45-second CDP timeout; ordinary commands keep 15 seconds. Canvas capture rejects two consecutive black snapshots and never writes a rejected artifact.
 
 Automated DOM, canvas, input, profile, and static-build evidence remains route-specific and is not owner acceptance.

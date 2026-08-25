@@ -160,7 +160,9 @@ Components либо consumer.
     кадр через public Engine renderer capture, а не полагается на непостоянный
     WebGPU canvas backing buffer. Evidence сохраняет источник capture; если
     owner bridge существует, но кадр недоступен, проверка завершается ошибкой и
-    не переходит на backing buffer молча.
+    не переходит на backing buffer молча. Background browser tooling включает
+    focus emulation до navigation/readiness и обязательно снимает её после
+    evidence, не меняя OS focus.
 
 ## Граница private application
 

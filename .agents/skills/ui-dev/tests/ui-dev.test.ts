@@ -2,6 +2,7 @@ import {afterAll, describe, expect, test} from "bun:test"
 import {mkdtemp, readFile, rm} from "node:fs/promises"
 import {tmpdir} from "node:os"
 import {join, resolve} from "node:path"
+import {withBackgroundFrameScheduling} from "../scripts/background-frame-scheduling.ts"
 import {storybookTargetUrl} from "../scripts/target-url.ts"
 
 type RunResult = Readonly<{exitCode: number; stdout: string; stderr: string}>
@@ -98,6 +99,9 @@ describe("central ui-dev registry", () => {
       "osascript",
     ]) expect(source).not.toContain(forbidden)
     expect(source).toContain('cdp.send("Target.createTarget", {url, background: true})')
+    expect(source).toContain("withBackgroundFrameScheduling")
+    expect(source).toContain("if (selected.navigate) await awaitBackgroundFrames")
+    expect(source).not.toContain("await setFocusEmulation(cdp, false)\n  if (selected.navigate)")
     expect(source).toContain("canvasForRoute(descriptor.pages, route, descriptor.canvas)")
     expect(source).toContain("await validateRegistryRoute(config.targetUrl)")
     expect(source).toContain('document.querySelector("[data-storybook-home]")')
@@ -107,6 +111,8 @@ describe("central ui-dev registry", () => {
     expect(source).toContain('captureSource:"engine-last-presented"')
     expect(source).toContain('"canvas-backing-fallback"')
     expect(source).toContain("hasOwnerCapture && presentedBlob === null")
+    expect(source).toContain("CANVAS_CAPTURE_TIMEOUT_MS = 45_000")
+    expect(source).toContain("true, CANVAS_CAPTURE_TIMEOUT_MS)")
     expect(source).toContain('"Page.captureScreenshot"')
     expect(source).toContain('action === "page"')
     expect(source).toContain("nativeMetricsRestored")
@@ -125,6 +131,35 @@ describe("central ui-dev registry", () => {
     expect(interaction).toContain('host.send("Input.dispatchMouseEvent"')
     expect(interaction).toContain('host.send("Input.dispatchKeyEvent"')
     expect(interaction).toContain('host.send("Input.insertText"')
+  })
+
+  test("restores background frame scheduling without hiding the operation failure", async () => {
+    const successEvents: string[] = []
+    const result = await withBackgroundFrameScheduling(async (enabled) => {
+      successEvents.push(`focus:${enabled}`)
+    }, async () => {
+      successEvents.push("operation")
+      return "ready"
+    })
+    expect(result).toBe("ready")
+    expect(successEvents).toEqual(["focus:true", "operation", "focus:false"])
+
+    const operationFailure = new Error("readiness failed")
+    const failureEvents: string[] = []
+    let caught: unknown = null
+    try {
+      await withBackgroundFrameScheduling(async (enabled) => {
+        failureEvents.push(`focus:${enabled}`)
+        if (!enabled) throw new Error("cleanup failed")
+      }, async () => {
+        failureEvents.push("operation")
+        throw operationFailure
+      })
+    } catch (error) {
+      caught = error
+    }
+    expect(caught).toBe(operationFailure)
+    expect(failureEvents).toEqual(["focus:true", "operation", "focus:false"])
   })
 })
 

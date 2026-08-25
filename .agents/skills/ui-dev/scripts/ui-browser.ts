@@ -22,6 +22,7 @@ import {
   type InteractionRenderBarrier,
 } from "./interaction-plan.ts"
 import {storybookTargetUrl} from "./target-url.ts"
+import {withBackgroundFrameScheduling} from "./background-frame-scheduling.ts"
 
 type JsonObject = Record<string, unknown>
 type SupportedSelector = Readonly<{
@@ -97,6 +98,9 @@ type ConsoleEntry = Readonly<{
   line?: number
 }>
 
+const CDP_COMMAND_TIMEOUT_MS = 15_000
+const CANVAS_CAPTURE_TIMEOUT_MS = 45_000
+
 const [action, checkoutInput, selectorOrUrl, ...optionArgs] = Bun.argv.slice(2)
 const actions = new Set(["targets", "target", "open", "close", "reload", "dom", "console", "page", "canvas", "viewports", "touch", "profile", "interact"])
 
@@ -151,31 +155,32 @@ if (action === "interact") {
 }
 if (action === "target") output({action, ...targetResult(config, target), currentUrl: target.url})
 else await withPage(target, async (cdp) => {
-  await setFocusEmulation(cdp, false)
-  if (selected.navigate) await navigateAndWait(cdp, config.targetUrl, config.ready)
+  const awaitBackgroundFrames = <T>(operation: () => Promise<T>): Promise<T> =>
+    withBackgroundFrameScheduling((enabled) => setFocusEmulation(cdp, enabled), operation)
+  if (selected.navigate) await awaitBackgroundFrames(() => navigateAndWait(cdp, config.targetUrl, config.ready))
   if (action === "open") {
-    await waitReady(cdp, config.ready)
+    await awaitBackgroundFrames(() => waitReady(cdp, config.ready))
     output({action, ...targetResult(config, target), dom: await readDom(cdp, config.canvas.selector)})
   } else if (action === "reload") {
-    await reloadAndWait(cdp, config.ready)
+    await awaitBackgroundFrames(() => reloadAndWait(cdp, config.ready))
     output({action, ...targetResult(config, target), dom: await readDom(cdp, config.canvas.selector)})
   } else if (action === "dom") {
-    await waitReady(cdp, config.ready)
+    await awaitBackgroundFrames(() => waitReady(cdp, config.ready))
     output({action, ...targetResult(config, target), dom: await readDom(cdp, config.canvas.selector)})
   } else if (action === "console") {
-    await waitReady(cdp, config.ready)
+    await awaitBackgroundFrames(() => waitReady(cdp, config.ready))
     const collector = await createConsoleCollector(cdp)
     await Bun.sleep(options.durationMs)
     collector.stop()
     if (consoleErrors(collector.entries).length > 0) process.exitCode = 1
     output({action, ...targetResult(config, target), durationMs: options.durationMs, entries: collector.entries})
   } else if (action === "page") {
-    await waitReady(cdp, config.ready)
+    await awaitBackgroundFrames(() => waitReady(cdp, config.ready))
     const destination = options.output ?? fail("page requires --output <png>")
     const capture = await capturePage(cdp, destination)
     output({action, ...targetResult(config, target), capture})
   } else if (action === "canvas") {
-    await waitReady(cdp, config.ready)
+    await awaitBackgroundFrames(() => waitReady(cdp, config.ready))
     const destination = options.output ?? fail("canvas requires --output <png>")
     const capture = await captureCanvas(cdp, config, destination, true)
     output({action, ...targetResult(config, target), capture})
@@ -186,11 +191,11 @@ else await withPage(target, async (cdp) => {
     if (result.outcome === "starting-or-idle-black") process.exitCode = 1
   } else if (action === "touch") {
     if (!config.canvas.touch) fail(`touch is unsupported for ${config.selector ?? config.targetUrl}`)
-    output(await runTouch(cdp, config, target))
+    output(await awaitBackgroundFrames(() => runTouch(cdp, config, target)))
   } else if (action === "profile") {
     output(await runProfile(cdp, config, target, options.frames))
   } else if (action === "interact") {
-    await waitReady(cdp, config.ready)
+    await awaitBackgroundFrames(() => waitReady(cdp, config.ready))
     const result = await runInteraction(cdp, config, target, interactionPlan ?? fail("interaction plan was not loaded"))
     output(result)
     process.exitCode = interactionExitCode(result)
@@ -461,13 +466,17 @@ class CdpConnection {
     return new CdpConnection(socket)
   }
 
-  send<T = JsonObject>(method: string, params: unknown = {}): Promise<T> {
+  send<T = JsonObject>(
+    method: string,
+    params: unknown = {},
+    timeoutMs = CDP_COMMAND_TIMEOUT_MS,
+  ): Promise<T> {
     return new Promise<T>((resolveSend, rejectSend) => {
       const id = ++this.#sequence
       const timer = setTimeout(() => {
         this.#pending.delete(id)
-        rejectSend(new Error(`CDP command timeout: ${method}`))
-      }, 15000)
+        rejectSend(new Error(`CDP command timeout after ${timeoutMs}ms: ${method}`))
+      }, timeoutMs)
       this.#pending.set(id, {
         resolve: (value) => resolveSend(value as T),
         reject: rejectSend,
@@ -523,11 +532,16 @@ async function setFocusEmulation(cdp: CdpConnection, enabled: boolean): Promise<
   await cdp.send("Emulation.setFocusEmulationEnabled", {enabled})
 }
 
-async function evaluate<T>(cdp: CdpConnection, expression: string, awaitPromise = false): Promise<T> {
+async function evaluate<T>(
+  cdp: CdpConnection,
+  expression: string,
+  awaitPromise = false,
+  timeoutMs = CDP_COMMAND_TIMEOUT_MS,
+): Promise<T> {
   const response = await cdp.send<{
     result?: {value?: T; description?: string}
     exceptionDetails?: {text?: string; exception?: {description?: string}}
-  }>("Runtime.evaluate", {expression, awaitPromise, returnByValue: true})
+  }>("Runtime.evaluate", {expression, awaitPromise, returnByValue: true}, timeoutMs)
   if (response.exceptionDetails) {
     throw new Error(response.exceptionDetails.exception?.description ?? response.exceptionDetails.text ?? "Runtime.evaluate failed")
   }
@@ -684,7 +698,7 @@ async function readCanvasSnapshot(cdp: CdpConnection, selector: string): Promise
         rgba:Array.from(context.getImageData(0, 0, probe.width, probe.height).data),
       },
     }
-  })()`, true)
+  })()`, true, CANVAS_CAPTURE_TIMEOUT_MS)
 }
 
 async function captureCanvas(
