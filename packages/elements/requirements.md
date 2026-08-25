@@ -240,38 +240,42 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
    parent. Transform-only изменение наследуется через `matrixWorld` без новой
    materialization; screen-space blur floor запрещён.
 
-## Обязательный Flex-закон
+## UI composition consumer boundary
 
-1. Любая композиция двух и более дочерних UI slots строится только через
-   `flexRow`, `flexColumn`, `flexRowCss` или `flexColumnCss`.
-2. Прикладному UI запрещено заменять недостающую возможность Flex ручными
-   cursor loops, вычислением column/row offsets, процентной арифметикой rects
-   или fixture-specific координатами.
-3. Если действующий Flex не выражает нужную композицию, сначала расширяется его
-   общий API и pure layout implementation, затем добавляются unit tests и
-   документация, и только после этого возможность используется component-ом.
-4. Flex extension обязана оставаться deterministic pure math без renderer,
-   domain и component vocabulary.
-5. Низкоуровневые primitive drawing operations могут получать точные x/y/w/h
-   после Flex callback. Ручные coordinates также допустимы для внешней scene
-   geometry: positioned Nodes, exact Socket centers, Link routes, mesh vertices.
-   Эти данные не являются UI child-layout.
-6. Surface-to-display placement также планируется единым FlexBox flow;
-   responsive constraints задаются его CSS-style declarative form, если
-   одновременно размещается несколько UI surfaces.
-7. Structural tests каждой новой UI-системы доказывают использование Flex на
-   уровне page/region, component и вложенных controls.
-8. Surface, которая осознанно владеет touch canvas, объявляет
+1. Elements исполняет общий закон
+   [`UI-COMPOSITION-001..004`](../../ARCHITECTURE.md#ui-composition-law) и
+   механические `LAYOUT-SLOT-001`, `LAYOUT-FLEX-001`,
+   `LAYOUT-RETAINED-001`, `LAYOUT-CLIP-001` из
+   [контракта `@layout/core`](https://github.com/zavx0z/layout/blob/main/packages/core/requirements.md),
+   не становясь их вторым владельцем.
+2. HTML-like Element с несколькими semantic children получает их rect только
+   из одного Layout Flex plan. Nested composition выражается nested Flex
+   callbacks; Element не вычисляет offsets соседей и не повторяет transform
+   retained parent.
+3. `div` переводит `overflow`, border box и radius в Layout-owned descendant
+   clip. Пока `LAYOUT-CLIP-001` не реализован, прямоугольный visual clip нельзя
+   выдавать за rounded pixels/input/scrollbar parity, а локальное повторение
+   parent corners не является допустимым fallback.
+4. Structural tests нового composite Element доказывают выбранный Flex planner,
+   exact retained owner и одинаковую clip boundary для visual, hit и wheel.
+
+## Display input boundary
+
+1. Surface-to-display placement планируется единым FlexBox flow; responsive
+   constraints задаются его CSS-style declarative form, когда одновременно
+   размещается несколько UI surfaces.
+2. Surface, которая осознанно владеет touch canvas, объявляет
    `capturesTouchNavigation()`. Только такая Surface перехватывает single-touch
    у virtual display; остальные сохраняют общий display navigation.
-9. Multi-touch передаётся Surface одной typed последовательностью
+3. Multi-touch передаётся Surface одной typed последовательностью
    `start/move/end`, а не несколькими несвязанными mouse emulation events.
 
 ## Выбор primitive
 
 * `flexRow`/`flexColumn` — pixel-precise controls и заранее измеренные slots.
 * `flexRowCss`/`flexColumnCss` — responsive regions, `%`, `fr`, `grow`, `auto`.
-* Nested composition выражается nested Flex callbacks, а не вычислением offsets
-  между соседними children.
+* Эти primitives реализуют `UI-COMPOSITION-001`; ручное размещение semantic
+  siblings не является дополнительным primitive.
 
-Подробная форма browser-like API находится в [`docs/flex-css.md`](docs/flex-css.md).
+Точная CSS-style форма planner принадлежит
+[public TSDoc `@layout/core/flex-css`](https://github.com/zavx0z/layout/blob/main/packages/core/src/flex-css.ts).

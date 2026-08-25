@@ -24,8 +24,11 @@ Components либо consumer.
    desktop-only рабочей средой, сохраняет historical five-panel geometry и
    занимает весь доступный canvas с небольшим внешним отступом; искусственный
    `maxWidth`/`maxHeight` не оставляет вокруг панелей пустую рамку.
-3. Shell layout вычисляется прямым `@layout/core/flex-css`. CSS-style `%`/`fr`/`grow` является способом
-   описания той же системы, а не отдельным layout.
+3. Shell layout исполняет
+   [`UI-COMPOSITION-001..004`](../../ARCHITECTURE.md#ui-composition-law) и
+   вычисляется прямым `@layout/core/flex-css` по `LAYOUT-SLOT-001` и
+   `LAYOUT-FLEX-001`. CSS-style `%`/`fr`/`grow` является способом описания той
+   же системы, а не отдельным layout.
 4. Generic surfaces получают readonly descriptors и callbacks. Они не содержат
    Node/Field/Socket либо product switch.
 5. Consumer preview является отдельной Surface; package не копирует и не

@@ -66,6 +66,44 @@ Reference metadata records provenance, viewport, revision, compatibility, and ac
 - Story metadata may be eager, but production implementations and reference images remain lazy.
 - Production packages do not import `@ui/storybook`.
 
+## UI composition law
+
+The mechanical owner is the
+[`@layout/core` composition contract](https://github.com/zavx0z/layout/blob/main/packages/core/requirements.md).
+UI packages add semantic consumer policy without copying Layout runtime,
+retained ownership, clipping, or Flex implementations.
+
+### `UI-COMPOSITION-001` — parent-owned semantic slots
+
+The immediate parent is the sole owner of every semantic child slot. When a
+parent has two or more sibling UI slots, it obtains all their rectangles from
+one `flexRow`, `flexColumn`, `flexRowCss`, or `flexColumnCss` plan under
+`LAYOUT-SLOT-001` and `LAYOUT-FLEX-001`. A child draws and registers input only
+inside the rectangle it receives; it never reconstructs a sibling offset.
+
+### `UI-COMPOSITION-002` — consumer-owned retained subtree
+
+An independently dirty composite subtree is materialized under one stable
+consumer-owned retained parent according to `LAYOUT-RETAINED-001`. Function-
+based Elements and Components do not create component classes, parallel scene
+graphs, or their own retained parents. Their visual children, hit, wheel, and
+clip records are staged under the exact parent of the current transaction.
+
+### `UI-COMPOSITION-003` — primitive geometry exception
+
+Local coordinate arithmetic is allowed inside one assigned slot for primitive
+text, icons, borders, radii, caret, selection, mesh vertices, positioned scene
+objects, exact Socket centres, and Link routes. It must not be used to place
+semantic sibling UI slots or duplicate their parent transform.
+
+### `UI-COMPOSITION-004` — structural proof
+
+Every new composite UI system has a focused structural test proving the exact
+Flex planner at page/region, component, and nested-control boundaries. Rounded
+parent clipping adopts `LAYOUT-CLIP-001`: descendant pixels, hit, wheel, and
+scrollbars must share the same shaped clip. A consumer workaround that redraws
+parent corners is not conformance.
+
 ## Static delivery
 
 The Pages build emits package shells, independently split browser bundles, reference metadata, a deep-link recovery page, and a manifest below the public `/ui/` base. The workflow checks out [`zavx0z/engine`](https://github.com/zavx0z/engine) and [`zavx0z/layout`](https://github.com/zavx0z/layout), registers both exact package links, and then builds UI against those same identities.
