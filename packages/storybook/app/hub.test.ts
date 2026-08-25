@@ -59,7 +59,7 @@ describe("central UI storybook hub", () => {
       ["hud", "/hud"],
     ])
     expect(pages.every(({routeTree}) => routeTree !== null)).toBeTrue()
-    expect(pages.find(({id}) => id === "elements")?.routeTree?.leaves).toHaveLength(45)
+    expect(pages.find(({id}) => id === "elements")?.routeTree?.leaves).toHaveLength(47)
     expect(pages.find(({id}) => id === "components")?.routeTree?.leaves).toHaveLength(81)
     expect(pages.find(({id}) => id === "storybook")?.routeTree?.leaves).toEqual(["overview", "details"])
     expect(pages.find(({id}) => id === "hud")?.routeTree?.leaves).toEqual([])
