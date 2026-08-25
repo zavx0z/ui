@@ -119,12 +119,27 @@ export type UiThemeSpaceNode = Readonly<{
   list: Rgba8
 }>
 
+/**
+ * Text Editor region roles from Blender 5.2.0 LTS
+ * `release/datafiles/userdef/userdef_default_theme.c` `.space_text`.
+ * Syntax categories remain owned by the selected consumer syntax theme.
+ */
+export type UiThemeSpaceText = Readonly<{
+  back: Rgba8
+  gutter: Rgba8
+  lineNumbers: Rgba8
+  text: Rgba8
+  selection: Rgba8
+  cursor: Rgba8
+}>
+
 export type UiTheme = Readonly<{
   widgets: Readonly<Record<WidgetClass, WidgetColorSet>>
   state: UiThemeStateColors
   material: UiThemeMaterial
   axes: UiThemeAxes
   spaceNode: UiThemeSpaceNode
+  spaceText: UiThemeSpaceText
 }>
 
 type MutableRgba8 = [number, number, number, number]
@@ -341,6 +356,14 @@ export const uiTheme: UiTheme = Object.freeze({
       outline: commonOutline,
     }),
     list: rgba8(0x30, 0x30, 0x30, 0xff),
+  }),
+  spaceText: Object.freeze({
+    back: rgba8(0x23, 0x23, 0x23, 0x00),
+    gutter: rgba8(0x1d, 0x1d, 0x1d, 0xff),
+    lineNumbers: rgba8(0x77, 0x77, 0x77, 0xff),
+    text: rgba8(0xe6, 0xe6, 0xe6, 0xff),
+    selection: rgba8(0x4d, 0x4d, 0x4d, 0xe6),
+    cursor: rgba8(0x71, 0xa8, 0xff, 0xff),
   }),
 })
 
@@ -565,6 +588,11 @@ export function resolveScrollbarColors(pressed = false): ResolvedScrollbarColors
 
 export function rgba8ToColor(rgba: Rgba8): Color {
   return new Color(rgba[0] / 255, rgba[1] / 255, rgba[2] / 255, rgba[3] / 255)
+}
+
+/** Uses source RGB as an opaque editor-region color while preserving raw alpha in `UiTheme`. */
+export function opaqueRgba8ToColor(rgba: Rgba8): Color {
+  return new Color(rgba[0] / 255, rgba[1] / 255, rgba[2] / 255, 1)
 }
 
 /** Resolves one source RGBA role over an opaque fallback without mutating either tuple. */

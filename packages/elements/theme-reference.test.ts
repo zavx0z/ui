@@ -18,7 +18,7 @@ function expectDeepFrozen(value: unknown): void {
   for (const child of Object.values(value)) expectDeepFrozen(child)
 }
 
-describe("Blender 4.5.5 raw theme", () => {
+describe("source-backed UI theme", () => {
   test("preserves class-specific RGBA bytes and source alpha", () => {
     const expected = {
       regular: ["#3d3d3dff", "#545454ff", "#4772b3ff", "#1d1d1d80", "#e6e6e6ff", "#ffffffff", 0.2],
@@ -115,6 +115,17 @@ describe("Blender 4.5.5 raw theme", () => {
       tabBack: "#181818ff",
       tabOutline: "#3d3d3dff",
       list: "#303030ff",
+    })
+  })
+
+  test("preserves Blender 5.2 Text Editor region roles", () => {
+    expect(Object.fromEntries(Object.entries(uiTheme.spaceText).map(([key, value]) => [key, hex(value)]))).toEqual({
+      back: "#23232300",
+      gutter: "#1d1d1dff",
+      lineNumbers: "#777777ff",
+      text: "#e6e6e6ff",
+      selection: "#4d4d4de6",
+      cursor: "#71a8ffff",
     })
   })
 
