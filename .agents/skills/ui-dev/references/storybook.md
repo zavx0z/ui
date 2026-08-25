@@ -19,7 +19,7 @@ The executable registry is `scripts/storybooks.json` and contains only selector 
 From the exact UI checkout root:
 
 ```bash
-SKILL=packages/storybook/.agents/skills/ui-dev
+SKILL=.agents/skills/ui-dev
 "$SKILL/scripts/ui-dev.sh" status "$PWD"
 "$SKILL/scripts/ui-dev.sh" ensure "$PWD"
 ```

@@ -7,7 +7,7 @@ Read this reference only when a UI storybook needs performance or GPU evidence.
 Keep the normal package target non-instrumented and run:
 
 ```bash
-SKILL=packages/storybook/.agents/skills/ui-dev
+SKILL=.agents/skills/ui-dev
 bun "$SKILL/scripts/ui-browser.ts" profile "$PWD" ui \
   --route /components/button/basic/text --frames 60
 ```

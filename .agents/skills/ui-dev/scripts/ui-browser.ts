@@ -100,7 +100,7 @@ type ConsoleEntry = Readonly<{
 const [action, checkoutInput, selectorOrUrl, ...optionArgs] = Bun.argv.slice(2)
 const actions = new Set(["targets", "target", "open", "close", "reload", "dom", "console", "page", "canvas", "viewports", "touch", "profile", "interact"])
 
-if (!actions.has(action) || !checkoutInput || !selectorOrUrl) {
+if (!action || !checkoutInput || !selectorOrUrl || !actions.has(action)) {
   fail("usage: ui-browser.ts {targets|target|open|close|reload|dom|console|page|canvas|viewports|touch|profile|interact} <checkout> <selector|exact-url> [options]")
 }
 
@@ -221,7 +221,16 @@ function parseOptions(args: readonly string[]): Options {
     else fail(`unknown option: ${key}`)
     index++
   }
-  return {route, targetId, output: outputPath, outputDir, canvasSelector, plan, durationMs, frames}
+  return {
+    ...(route === undefined ? {} : {route}),
+    ...(targetId === undefined ? {} : {targetId}),
+    ...(outputPath === undefined ? {} : {output: outputPath}),
+    ...(outputDir === undefined ? {} : {outputDir}),
+    ...(canvasSelector === undefined ? {} : {canvasSelector}),
+    ...(plan === undefined ? {} : {plan}),
+    durationMs,
+    frames,
+  }
 }
 
 async function loadInteractionPlan(path: string, checkoutRoot: string): Promise<InteractionPlan> {
@@ -711,12 +720,24 @@ async function createConsoleCollector(cdp: CdpConnection) {
   const removeConsole = cdp.on("Runtime.consoleAPICalled", (raw) => {
     const event = raw as {type?: string; timestamp?: number; args?: Array<{value?: unknown; description?: string}>}
     const text = (event.args ?? []).map((arg) => arg.value === undefined ? arg.description ?? "" : printable(arg.value)).join(" ")
-    entries.push({source: "console", level: event.type ?? "log", text, timestamp: event.timestamp})
+    entries.push({
+      source: "console",
+      level: event.type ?? "log",
+      text,
+      ...(event.timestamp === undefined ? {} : {timestamp: event.timestamp}),
+    })
   })
   const removeLog = cdp.on("Log.entryAdded", (raw) => {
     const entry = (raw as {entry?: {level?: string; text?: string; timestamp?: number; url?: string; lineNumber?: number}}).entry
     if (!entry) return
-    entries.push({source: "log", level: entry.level ?? "info", text: entry.text ?? "", timestamp: entry.timestamp, url: entry.url, line: entry.lineNumber})
+    entries.push({
+      source: "log",
+      level: entry.level ?? "info",
+      text: entry.text ?? "",
+      ...(entry.timestamp === undefined ? {} : {timestamp: entry.timestamp}),
+      ...(entry.url === undefined ? {} : {url: entry.url}),
+      ...(entry.lineNumber === undefined ? {} : {line: entry.lineNumber}),
+    })
   })
   await cdp.send("Runtime.enable")
   await cdp.send("Log.enable")

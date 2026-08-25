@@ -23,7 +23,7 @@ type Status = Readonly<{
 }>
 
 const skillRoot = resolve(import.meta.dir, "..")
-const checkout = resolve(skillRoot, "../../../../..")
+const checkout = resolve(skillRoot, "../../..")
 const dispatcher = join(skillRoot, "scripts/ui-dispatcher.sh")
 const wrapper = join(skillRoot, "scripts/ui-dev.sh")
 const browser = join(skillRoot, "scripts/ui-browser.ts")
@@ -252,7 +252,7 @@ async function runWrapper(action: string, port: number | undefined, root: string
 }
 
 async function runCommand(command: readonly string[], port: number | undefined, root: string): Promise<RunResult> {
-  const process = Bun.spawn(command, {
+  const process = Bun.spawn([...command], {
     cwd: checkout,
     env: environment(port, root),
     stdout: "pipe",

@@ -23,7 +23,7 @@
     "build": "bun build.ts",
     "typecheck": "tsc --noEmit --pretty false",
     "test": "bun test .",
-    "test:skill": "bun test ./.agents/skills/ui-dev/tests/canvas-evidence.test.ts ./.agents/skills/ui-dev/tests/interaction-plan.test.ts ./.agents/skills/ui-dev/tests/ui-dev.test.ts"
+    "test:skill": "bun test ../../.agents/skills/ui-dev/tests/canvas-evidence.test.ts ../../.agents/skills/ui-dev/tests/interaction-plan.test.ts ../../.agents/skills/ui-dev/tests/ui-dev.test.ts"
   },
   "dependencies": {
     "@engine/core": "link:@engine/core",

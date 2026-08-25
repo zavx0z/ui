@@ -43,7 +43,7 @@ Read [references/storybook.md](references/storybook.md) before lifecycle, browse
 ## One lifecycle command
 
 ```bash
-SKILL=packages/storybook/.agents/skills/ui-dev
+SKILL=.agents/skills/ui-dev
 "$SKILL/scripts/ui-dev.sh" status  "$PWD"
 "$SKILL/scripts/ui-dev.sh" ensure  "$PWD"
 "$SKILL/scripts/ui-dev.sh" restart "$PWD"
