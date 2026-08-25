@@ -69,13 +69,13 @@ export function ul(surface: UiSurface, x: number, y: number, width: number, heig
     divProps.children = (ctx) => {
       props.children?.({
         ...ctx,
-        x,
-        y,
-        width,
-        height,
-        itemX: x + padding.left,
-        itemY: y + padding.top - ctx.scrollTop,
-        itemWidth: Math.max(1, width - padding.left - padding.right - (ctx.contentHeight > ctx.viewportHeight ? 10 : 0)),
+        x: ctx.viewportX,
+        y: ctx.viewportY,
+        width: ctx.viewportWidth,
+        height: ctx.viewportHeight,
+        itemX: ctx.contentX + padding.left,
+        itemY: ctx.contentY + padding.top,
+        itemWidth: Math.max(1, ctx.viewportWidth - padding.left - padding.right),
         itemHeight,
         padding,
       })

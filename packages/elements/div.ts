@@ -1,4 +1,5 @@
-import {Z, type HitOptions, type UiSurface} from "@layout/core/surface"
+import {flexColumn, flexRow} from "@layout/core/flex"
+import {Z, type HitOptions, type UiClipShape, type UiSurface} from "@layout/core/surface"
 import {scrollbar} from "./scrollbar.ts"
 import {span} from "./span.ts"
 import {
@@ -19,8 +20,12 @@ import type {Color} from "@engine/core"
 export type DivScrollContext = {
   scrollLeft: number
   scrollTop: number
+  viewportX: number
+  viewportY: number
   viewportWidth: number
   viewportHeight: number
+  contentX: number
+  contentY: number
   contentWidth: number
   contentHeight: number
 }
@@ -101,8 +106,11 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
   if (style.display === "none" || width <= 0 || height <= 0) return
   const fill = backgroundColor(style)
   const border = style.borderColor === null ? null : style.borderColor === undefined ? undefined : cssColor(style.borderColor)
-  const borderWidth = px(style.borderWidth, 1)
-  const radius = px(style.borderRadius, Math.min(32, Math.min(width, height) / 2))
+  const box = resolveDivBox(x, y, width, height, style, border !== null && border !== undefined)
+  const visibleRoundedChrome = (fill?.a ?? 0) > 0 || (border?.a ?? 0) > 0
+  const hitRadius = style.borderRadius !== undefined || visibleRoundedChrome
+    ? box.outerRadius
+    : 0
   const z = style.zIndex ?? Z.CONTAINER
   const isGlass = isGlassBackground(style)
 
@@ -115,10 +123,10 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
       opacity?: number
       z: number
     } = {
-      radius,
+      radius: box.outerRadius,
       fill,
       border: border ?? null,
-      borderWidth: border === null || border === undefined ? 0 : borderWidth,
+      borderWidth: box.borderWidth,
       z,
     }
     if (style.opacity !== undefined) roundedOpts.opacity = style.opacity
@@ -128,7 +136,7 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
       const tintOpacity = glassTintOpacity(style) * (style.opacity ?? 1)
       if (tint !== null && tintOpacity > 0 && width > 4 && height > 4) {
         surface.drawRoundedRect(x + 2, y + 2, width - 4, height - 4, {
-          radius: Math.max(0, radius - 2),
+          radius: Math.max(0, box.outerRadius - 2),
           fill: tint,
           border: null,
           borderWidth: 0,
@@ -154,7 +162,9 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
     if (props.onPointerDown !== undefined) hit.onPointerDown = props.onPointerDown
     if (props.onPointerMove !== undefined) hit.onPointerMove = props.onPointerMove
     if (props.onPointerUp !== undefined) hit.onPointerUp = props.onPointerUp
-    surface.hit(x, y, width, height, props.onClick ?? (() => {}), hit)
+    surface.withChildClip(clipShapeFor({x, y, w: width, h: height}, hitRadius), () => {
+      surface.hit(x, y, width, height, props.onClick ?? (() => {}), hit)
+    })
   }
 
   const overflowX = style.overflowX ?? style.overflow ?? "visible"
@@ -163,12 +173,15 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
   const scrollableY = overflowY === "auto" || overflowY === "scroll"
 
   if (typeof props.children === "function") {
+    const children = props.children
     const layout = divScrollLayout(surface, {
       x,
       y,
       width,
       height,
       style,
+      inner: box.inner,
+      innerRadius: box.innerRadius,
       key: props.key,
       overflowX,
       overflowY,
@@ -177,18 +190,18 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
       contentWidth: props.scrollContentWidth,
       contentHeight: props.scrollContentHeight,
     })
-    const shouldClip = overflowX === "hidden" || overflowY === "hidden" || scrollableX || scrollableY
-    if (shouldClip) surface.pushClip(layout.contentX, layout.contentY, layout.viewportW, layout.viewportH)
-    props.children({
+    renderDivOverflow(surface, layout, () => children({
       scrollLeft: scrollableX ? layout.state.left : 0,
       scrollTop: scrollableY ? layout.state.top : 0,
-      viewportWidth: layout.viewportW,
-      viewportHeight: layout.viewportH,
-      contentWidth: layout.contentW,
-      contentHeight: layout.contentH,
-    })
-    if (shouldClip) surface.popClip()
-    renderDivScrollbars(surface, layout)
+      viewportX: layout.viewport.x,
+      viewportY: layout.viewport.y,
+      viewportWidth: layout.viewport.w,
+      viewportHeight: layout.viewport.h,
+      contentX: layout.content.x,
+      contentY: layout.content.y,
+      contentWidth: layout.content.w,
+      contentHeight: layout.content.h,
+    }))
   }
   else if (props.children !== false && props.children !== null && props.children !== undefined) {
     const text = String(props.children)
@@ -203,6 +216,8 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
       width,
       height,
       style,
+      inner: box.inner,
+      innerRadius: box.innerRadius,
       key: props.key,
       overflowX,
       overflowY,
@@ -211,49 +226,71 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
       contentWidth: maxLineW,
       contentHeight: lines.length * lineHeight,
     })
-    const shouldClip = overflowX === "hidden" || overflowY === "hidden" || scrollableX || scrollableY
-    if (shouldClip) surface.pushClip(layout.contentX, layout.contentY, layout.viewportW, layout.viewportH)
-    if (lines.length === 1) {
-      span(surface, layout.contentX - (scrollableX ? layout.state.left : 0), layout.contentY - (scrollableY ? layout.state.top : 0), scrollableX ? Math.max(maxLineW, layout.viewportW + layout.state.left) : layout.viewportW, layout.viewportH, {
-        children: text,
-        style,
-      })
-    } else {
-      for (const [i, line] of lines.entries()) {
-        const lineY = layout.contentY + i * lineHeight - (scrollableY ? layout.state.top : 0)
-        if (lineY + lineHeight < y || lineY > y + height) continue
-        span(surface, layout.contentX - (scrollableX ? layout.state.left : 0), lineY, scrollableX ? Math.max(lineWidths[i] ?? 1, layout.viewportW + layout.state.left) : layout.viewportW, lineHeight, {
-          children: line,
+    renderDivOverflow(surface, layout, () => {
+      if (lines.length === 1) {
+        span(surface, layout.content.x, layout.content.y, scrollableX ? Math.max(maxLineW, layout.viewport.w + layout.state.left) : layout.viewport.w, layout.viewport.h, {
+          children: text,
           style,
         })
+      } else {
+        for (const [i, line] of lines.entries()) {
+          const lineY = layout.content.y + i * lineHeight
+          if (lineY + lineHeight < layout.viewport.y || lineY > layout.viewport.y + layout.viewport.h) continue
+          span(surface, layout.content.x, lineY, scrollableX ? Math.max(lineWidths[i] ?? 1, layout.viewport.w + layout.state.left) : layout.viewport.w, lineHeight, {
+            children: line,
+            style,
+          })
+        }
       }
-    }
-    if (shouldClip) surface.popClip()
-    renderDivScrollbars(surface, layout)
+    })
   }
 }
 
+type DivRect = {x: number; y: number; w: number; h: number}
+
+type DivBox = {
+  outerRadius: number
+  borderWidth: number
+  inner: DivRect
+  innerRadius: number
+}
+
 type DivScrollLayout = {
-  x: number
-  y: number
-  width: number
-  height: number
-  pad: {top: number; right: number; bottom: number; left: number}
-  contentX: number
-  contentY: number
-  viewportW: number
-  viewportH: number
-  contentW: number
-  contentH: number
-  trackWidth: number
-  radius: number
+  inner: DivRect
+  innerRadius: number
+  childClip: UiClipShape
+  viewport: DivRect
+  content: DivRect
+  verticalScrollbar: DivRect | null
+  horizontalScrollbar: DivRect | null
   key: string
   style: StyleProps
   state: DivScrollState
+  clipChildren: boolean
   showX: boolean
   showY: boolean
   maxScrollX: number
   maxScrollY: number
+}
+
+function resolveDivBox(x: number, y: number, width: number, height: number, style: StyleProps, hasBorder: boolean): DivBox {
+  const half = Math.max(0, Math.min(width, height) / 2)
+  const outerRadius = clamp(finiteNonNegative(px(style.borderRadius, Math.min(32, half))), 0, half)
+  const borderWidth = hasBorder
+    ? clamp(finiteNonNegative(px(style.borderWidth, 1)), 0, half)
+    : 0
+  const inner = {
+    x: x + borderWidth,
+    y: y + borderWidth,
+    w: Math.max(0, width - borderWidth * 2),
+    h: Math.max(0, height - borderWidth * 2),
+  }
+  const innerRadius = clamp(
+    Math.max(0, outerRadius - borderWidth),
+    0,
+    Math.max(0, Math.min(inner.w, inner.h) / 2),
+  )
+  return {outerRadius, borderWidth, inner, innerRadius}
 }
 
 function divScrollLayout(
@@ -264,6 +301,8 @@ function divScrollLayout(
     width: number
     height: number
     style: StyleProps
+    inner: DivRect
+    innerRadius: number
     key: string | undefined
     overflowX: string
     overflowY: string
@@ -274,33 +313,82 @@ function divScrollLayout(
   },
 ): DivScrollLayout {
   const pad = boxPadding(opts.style)
-  const trackWidth = px(opts.style.scrollbarWidth, 4)
-  const radius = Math.max(0, Math.min(
-    px(opts.style.borderRadius, Math.min(32, Math.min(opts.width, opts.height) / 2)),
-    Math.min(opts.width, opts.height) / 2,
-  ))
-  const rawViewportW = Math.max(1, opts.width - pad.left - pad.right)
-  const rawViewportH = Math.max(1, opts.height - pad.top - pad.bottom)
+  const trackWidth = Math.min(
+    finiteNonNegative(px(opts.style.scrollbarWidth, 4)),
+    opts.inner.w,
+    opts.inner.h,
+  )
+  const rawViewportW = Math.max(0, opts.inner.w - pad.left - pad.right)
+  const rawViewportH = Math.max(0, opts.inner.h - pad.top - pad.bottom)
   const intrinsicW = Math.max(1, opts.contentWidth ?? rawViewportW)
   const intrinsicH = Math.max(1, opts.contentHeight ?? rawViewportH)
   const scrollGutter = trackWidth
   let showX = opts.scrollableX && (opts.overflowX === "scroll" || intrinsicW > rawViewportW)
   let showY = opts.scrollableY && (opts.overflowY === "scroll" || intrinsicH > rawViewportH)
   for (let i = 0; i < 2; i++) {
-    const viewportW = Math.max(1, rawViewportW - (showY ? scrollGutter : 0))
-    const viewportH = Math.max(1, rawViewportH - (showX ? scrollGutter : 0))
+    const viewportW = Math.max(0, rawViewportW - (showY ? scrollGutter : 0))
+    const viewportH = Math.max(0, rawViewportH - (showX ? scrollGutter : 0))
     showX = opts.scrollableX && (opts.overflowX === "scroll" || intrinsicW > viewportW)
     showY = opts.scrollableY && (opts.overflowY === "scroll" || intrinsicH > viewportH)
   }
-  const viewportW = Math.max(1, rawViewportW - (showY ? scrollGutter : 0))
-  const viewportH = Math.max(1, rawViewportH - (showX ? scrollGutter : 0))
-  const contentW = Math.max(viewportW, intrinsicW)
-  const contentH = Math.max(viewportH, intrinsicH)
+  let viewport: DivRect = {x: opts.inner.x, y: opts.inner.y, w: 0, h: 0}
+  let verticalScrollbar: DivRect | null = null
+  let horizontalScrollbar: DivRect | null = null
+  flexColumn({
+    x: opts.inner.x,
+    y: opts.inner.y,
+    w: opts.inner.w,
+    h: opts.inner.h,
+    items: [
+      {height: "grow", draw: (mainX, mainY, mainWidth, mainHeight) => {
+        flexRow({
+          x: mainX,
+          y: mainY,
+          w: mainWidth,
+          h: mainHeight,
+          items: [
+            {width: "grow", height: mainHeight, draw: (frameX, frameY, frameWidth, frameHeight) => {
+              flexColumn({
+                x: frameX,
+                y: frameY,
+                w: frameWidth,
+                h: frameHeight,
+                paddingTop: pad.top,
+                paddingRight: pad.right,
+                paddingBottom: pad.bottom,
+                paddingLeft: pad.left,
+                items: [{height: "grow", draw: (x, y, w, h) => { viewport = {x, y, w, h} }}],
+              })
+            }},
+            showY && {width: trackWidth, height: mainHeight, draw: (x, y, w, h) => {
+              verticalScrollbar = {x, y, w, h}
+            }},
+          ],
+        })
+      }},
+      showX && {height: trackWidth, draw: (rowX, rowY, rowWidth, rowHeight) => {
+        flexRow({
+          x: rowX,
+          y: rowY,
+          w: rowWidth,
+          h: rowHeight,
+          items: [
+            {width: "grow", height: rowHeight, draw: (x, y, w, h) => {
+              horizontalScrollbar = {x, y, w, h}
+            }},
+            showY && {width: trackWidth, height: rowHeight, draw: () => {}},
+          ],
+        })
+      }},
+    ],
+  })
+  const contentW = Math.max(viewport.w, intrinsicW)
+  const contentH = Math.max(viewport.h, intrinsicH)
   const key = opts.key ?? `div:${opts.x}:${opts.y}:${opts.width}:${opts.height}`
   surface.registerRenderKey(key)
   const state = divScrollState(surface, key)
-  const maxScrollX = Math.max(0, contentW - viewportW)
-  const maxScrollY = Math.max(0, contentH - viewportH)
+  const maxScrollX = Math.max(0, contentW - viewport.w)
+  const maxScrollY = Math.max(0, contentH - viewport.h)
   const left = clamp(state.left, 0, maxScrollX)
   const top = clamp(state.top, 0, maxScrollY)
   if (left !== state.left) state.pendingLeft = 0
@@ -314,22 +402,22 @@ function divScrollLayout(
   state.maxScrollLeft = maxScrollX
   state.maxScrollTop = maxScrollY
   return {
-    x: opts.x,
-    y: opts.y,
-    width: opts.width,
-    height: opts.height,
-    pad,
-    contentX: opts.x + pad.left,
-    contentY: opts.y + pad.top,
-    viewportW,
-    viewportH,
-    contentW,
-    contentH,
-    trackWidth,
-    radius,
+    inner: opts.inner,
+    innerRadius: opts.innerRadius,
+    childClip: clipShapeFor(opts.inner, opts.innerRadius),
+    viewport,
+    content: {
+      x: viewport.x - (opts.scrollableX ? state.left : 0),
+      y: viewport.y - (opts.scrollableY ? state.top : 0),
+      w: contentW,
+      h: contentH,
+    },
+    verticalScrollbar,
+    horizontalScrollbar,
     key,
     style: opts.style,
     state,
+    clipChildren: opts.overflowX === "hidden" || opts.overflowY === "hidden" || opts.scrollableX || opts.scrollableY,
     showX,
     showY,
     maxScrollX,
@@ -337,10 +425,24 @@ function divScrollLayout(
   }
 }
 
-function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void {
-  const {state, style} = layout
+function renderDivOverflow(surface: UiSurface, layout: DivScrollLayout, drawChildren: () => void): void {
+  const draw = () => {
+    registerDivWheel(surface, layout)
+    if (layout.clipChildren) {
+      surface.withChildClip({kind: "rect", ...layout.viewport}, drawChildren)
+    } else {
+      drawChildren()
+    }
+    renderDivScrollbars(surface, layout)
+  }
+  if (layout.clipChildren) surface.withChildClip(layout.childClip, draw)
+  else draw()
+}
+
+function registerDivWheel(surface: UiSurface, layout: DivScrollLayout): void {
+  const {state} = layout
   if ((layout.showX && layout.maxScrollX > 0) || (layout.showY && layout.maxScrollY > 0)) {
-    surface.wheel(layout.x, layout.y, layout.width, layout.height, (event) => {
+    surface.wheel(layout.inner.x, layout.inner.y, layout.inner.w, layout.inner.h, (event) => {
       const eventAtMs = wheelEventTimeMs(event.timeStamp)
       const delta = wheelDeltasForEvent(event, layout)
       const locked = applyWheelAxisLock(delta.x, delta.y, nextWheelAxis(delta.x, delta.y, state.wheelAxis, state.lastWheelAtMs, eventAtMs))
@@ -352,32 +454,36 @@ function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void 
       if (handled) event.preventDefault()
     }, layout.key)
   }
+}
 
-  if (layout.showY) {
-    const edgeInset = scrollbarEdgeInset(layout.radius, layout.height)
+function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void {
+  const {state, style} = layout
+  if (layout.showY && layout.verticalScrollbar !== null) {
+    const slot = layout.verticalScrollbar
+    const edgeInset = scrollbarEdgeInset(layout.innerRadius, slot.h)
     const topInset = edgeInset
-    const bottomInset = Math.max(edgeInset, layout.showX ? layout.trackWidth : 0)
-    const scrollbarX = layout.x + layout.width - layout.trackWidth
-    const scrollbarY = layout.y + topInset
-    const scrollbarH = Math.max(1, layout.height - topInset - bottomInset)
+    const bottomInset = edgeInset
+    const scrollbarX = slot.x
+    const scrollbarY = slot.y + topInset
+    const scrollbarH = Math.max(0, slot.h - topInset - bottomInset)
     const scrollbarKey = `${layout.key}:scrollbar-y`
-    const thumb = scrollbarThumbMetrics(state.top, layout.viewportH, layout.contentH, scrollbarH)
+    const thumb = scrollbarThumbMetrics(state.top, layout.viewport.h, layout.content.h, scrollbarH)
     const thumbY = scrollbarY + thumb.y
     const thumbKey = `${scrollbarKey}:thumb`
-    const thumbState = surface.hitState(scrollbarX, thumbY, layout.trackWidth, thumb.h, thumbKey)
-    surface.hit(scrollbarX, scrollbarY, layout.trackWidth, scrollbarH, () => {}, {
+    const thumbState = surface.hitState(scrollbarX, thumbY, slot.w, thumb.h, thumbKey)
+    surface.hit(scrollbarX, scrollbarY, slot.w, scrollbarH, () => {}, {
       key: scrollbarKey,
       cursor: "pointer",
       onPointerDown: (_localX, localY) => {
         const localTrackY = localY - scrollbarY
         const direction = localTrackY < thumb.y ? -1 : 1
         stopDivScrollAnimation(state)
-        state.top = clamp(state.top + direction * layout.viewportH * 0.85, 0, layout.maxScrollY)
+        state.top = clamp(state.top + direction * layout.viewport.h * 0.85, 0, layout.maxScrollY)
         state.targetTop = state.top
         surface.requestKeyedRender(layout.key)
       },
     })
-    surface.hit(scrollbarX, thumbY, layout.trackWidth, thumb.h, () => {}, {
+    surface.hit(scrollbarX, thumbY, slot.w, thumb.h, () => {}, {
       key: thumbKey,
       cursor: "grab",
       activeCursor: "grabbing",
@@ -388,7 +494,7 @@ function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void 
       onPointerMove: (_localX, localY) => {
         if (state.dragY === null) return
         const range = Math.max(1, scrollbarH - thumb.h)
-        const contentRange = Math.max(1, layout.contentH - layout.viewportH)
+        const contentRange = Math.max(1, layout.content.h - layout.viewport.h)
         const next = state.dragY.startTop + ((localY - state.dragY.startY) / range) * contentRange
         state.top = clamp(next, 0, layout.maxScrollY)
         state.targetTop = state.top
@@ -400,40 +506,42 @@ function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void 
     })
     scrollbar(surface, scrollbarX, scrollbarY, scrollbarH, {
       offset: state.top,
-      visible: layout.viewportH,
-      total: layout.contentH,
-      trackWidth: layout.trackWidth,
+      visible: layout.viewport.h,
+      total: layout.content.h,
+      trackWidth: slot.w,
+      minThumbHeight: Math.min(16, scrollbarH),
       ...(style.scrollbarTrackColor === undefined ? {} : {trackColor: cssColor(style.scrollbarTrackColor)}),
       ...(style.scrollbarColor === undefined ? {} : {thumbColor: cssColor(style.scrollbarColor)}),
       pressed: thumbState.pressed || state.dragY !== null,
     })
   }
 
-  if (layout.showX) {
-    const edgeInset = scrollbarEdgeInset(layout.radius, layout.width)
+  if (layout.showX && layout.horizontalScrollbar !== null) {
+    const slot = layout.horizontalScrollbar
+    const edgeInset = scrollbarEdgeInset(layout.innerRadius, slot.w)
     const leftInset = edgeInset
-    const rightInset = Math.max(edgeInset, layout.showY ? layout.trackWidth : 0)
-    const scrollbarX = layout.x + leftInset
-    const scrollbarY = layout.y + layout.height - layout.trackWidth
-    const scrollbarW = Math.max(1, layout.width - leftInset - rightInset)
+    const rightInset = edgeInset
+    const scrollbarX = slot.x + leftInset
+    const scrollbarY = slot.y
+    const scrollbarW = Math.max(0, slot.w - leftInset - rightInset)
     const scrollbarKey = `${layout.key}:scrollbar-x`
-    const thumb = scrollbarThumbMetrics(state.left, layout.viewportW, layout.contentW, scrollbarW)
+    const thumb = scrollbarThumbMetrics(state.left, layout.viewport.w, layout.content.w, scrollbarW)
     const thumbX = scrollbarX + thumb.y
     const thumbKey = `${scrollbarKey}:thumb`
-    const thumbState = surface.hitState(thumbX, scrollbarY, thumb.h, layout.trackWidth, thumbKey)
-    surface.hit(scrollbarX, scrollbarY, scrollbarW, layout.trackWidth, () => {}, {
+    const thumbState = surface.hitState(thumbX, scrollbarY, thumb.h, slot.h, thumbKey)
+    surface.hit(scrollbarX, scrollbarY, scrollbarW, slot.h, () => {}, {
       key: scrollbarKey,
       cursor: "pointer",
       onPointerDown: (localX) => {
         const localTrackX = localX - scrollbarX
         const direction = localTrackX < thumb.y ? -1 : 1
         stopDivScrollAnimation(state)
-        state.left = clamp(state.left + direction * layout.viewportW * 0.85, 0, layout.maxScrollX)
+        state.left = clamp(state.left + direction * layout.viewport.w * 0.85, 0, layout.maxScrollX)
         state.targetLeft = state.left
         surface.requestKeyedRender(layout.key)
       },
     })
-    surface.hit(thumbX, scrollbarY, thumb.h, layout.trackWidth, () => {}, {
+    surface.hit(thumbX, scrollbarY, thumb.h, slot.h, () => {}, {
       key: thumbKey,
       cursor: "grab",
       activeCursor: "grabbing",
@@ -444,7 +552,7 @@ function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void 
       onPointerMove: (localX) => {
         if (state.dragX === null) return
         const range = Math.max(1, scrollbarW - thumb.h)
-        const contentRange = Math.max(1, layout.contentW - layout.viewportW)
+        const contentRange = Math.max(1, layout.content.w - layout.viewport.w)
         const next = state.dragX.startLeft + ((localX - state.dragX.startX) / range) * contentRange
         state.left = clamp(next, 0, layout.maxScrollX)
         state.targetLeft = state.left
@@ -457,9 +565,10 @@ function renderDivScrollbars(surface: UiSurface, layout: DivScrollLayout): void 
     scrollbar(surface, scrollbarX, scrollbarY, scrollbarW, {
       axis: "horizontal",
       offset: state.left,
-      visible: layout.viewportW,
-      total: layout.contentW,
-      trackWidth: layout.trackWidth,
+      visible: layout.viewport.w,
+      total: layout.content.w,
+      trackWidth: slot.h,
+      minThumbHeight: Math.min(16, scrollbarW),
       ...(style.scrollbarTrackColor === undefined ? {} : {trackColor: cssColor(style.scrollbarTrackColor)}),
       ...(style.scrollbarColor === undefined ? {} : {thumbColor: cssColor(style.scrollbarColor)}),
       pressed: thumbState.pressed || state.dragX !== null,
@@ -518,8 +627,17 @@ function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value))
 }
 
+function finiteNonNegative(value: number): number {
+  return Number.isFinite(value) ? Math.max(0, value) : 0
+}
+
+function clipShapeFor(rect: DivRect, radius: number): UiClipShape {
+  if (radius <= 0) return {kind: "rect", ...rect}
+  return {kind: "rounded-rect", ...rect, radius}
+}
+
 function scrollbarThumbMetrics(offset: number, visible: number, total: number, trackSize = visible): {y: number; h: number} {
-  const thumbH = Math.max(16, Math.floor(trackSize * (visible / total)))
+  const thumbH = Math.min(trackSize, Math.max(Math.min(16, trackSize), Math.floor(trackSize * (visible / total))))
   const range = trackSize - thumbH
   const maxOffset = Math.max(1, total - visible)
   return {
@@ -567,8 +685,8 @@ export function integrateQueuedScroll(current: number, pending: number, elapsedM
 }
 
 function wheelDeltasForEvent(event: WheelEvent, layout: DivScrollLayout): {x: number; y: number} {
-  let x = wheelDeltaPxFor(event.deltaX, event.deltaMode, layout.viewportW)
-  let y = wheelDeltaPxFor(event.deltaY, event.deltaMode, layout.viewportH)
+  let x = wheelDeltaPxFor(event.deltaX, event.deltaMode, layout.viewport.w)
+  let y = wheelDeltaPxFor(event.deltaY, event.deltaMode, layout.viewport.h)
   if (event.shiftKey && y !== 0) {
     x = y
     y = 0

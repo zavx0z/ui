@@ -819,6 +819,91 @@ describe("UiSurface retained component parent", () => {
     expect(roundTrip.y).toBeCloseTo(point.y, 6)
   })
 
+  test("keeps rounded div pixels, hit and wheel on one retained clip chain through rollback and transform", () => {
+    const fake = createFakeRuntime()
+    const surface = new RetainedTestSurface()
+    surface.attachCanvas(fake.runtime)
+    surface.setRect({x: 0, y: 0, w: 180, h: 120}, 0.001, font)
+    const parent = surface.createParent("rounded-div")
+    let actions = 0
+    let wheelCalls = 0
+    const draw = () => {
+      div(surface, 10, 10, 100, 80, {
+        key: "rounded-scroll",
+        scrollContentHeight: 160,
+        style: {
+          background: null,
+          borderColor: "cyan",
+          borderWidth: 4,
+          borderRadius: 20,
+          overflowY: "auto",
+          scrollbarWidth: 4,
+        },
+        children: ({viewportX, viewportY, viewportWidth, viewportHeight, contentX, contentY}) => {
+          surface.drawRect(contentX, contentY, 100, 100, new Color(0.2, 0.7, 0.4, 1))
+          surface.hit(viewportX, viewportY, viewportWidth, viewportHeight, () => { actions += 1 }, {key: "rounded-child"})
+          surface.wheel(viewportX, viewportY, viewportWidth, viewportHeight, () => { wheelCalls += 1 }, "rounded-child-wheel")
+        },
+      })
+    }
+    surface.materialize(parent, draw)
+
+    type ClippedVisual = Object3D & Readonly<{
+      presentationClips?: readonly Readonly<{
+        kind: string
+        coordinateSpace: Object3D
+        radii: readonly number[]
+      }>[]
+    }>
+    const clipped = parent.children.find((child) => (child as ClippedVisual).presentationClips?.length === 2) as ClippedVisual | undefined
+    const clippedScrollbar = parent.children.find((child) => (child as ClippedVisual).presentationClips?.length === 1) as ClippedVisual | undefined
+    expect(clipped).toBeDefined()
+    expect(clippedScrollbar).toBeDefined()
+    expect(clipped!.presentationClips?.map(({kind}) => kind)).toEqual(["rounded-rect", "rounded-rect"])
+    expect(clipped!.presentationClips?.[0]?.coordinateSpace).toBe(parent)
+    expect(clipped!.presentationClips?.[0]?.radii.every((radius) => radius > 0)).toBeTrue()
+    expect(clipped!.presentationClips?.[1]?.radii).toEqual([0, 0, 0, 0])
+    expect(clippedScrollbar!.presentationClips?.[0]?.radii.every((radius) => radius > 0)).toBeTrue()
+
+    expect(surface.pointerHitKey(15, 15)).toBeNull()
+    surface.onPointerDown({} as MouseEvent, 15, 15)
+    surface.onPointerUp({} as MouseEvent, 15, 15)
+    surface.onWheel({} as WheelEvent, 15, 15)
+    expect({actions, wheelCalls}).toEqual({actions: 0, wheelCalls: 0})
+
+    surface.onPointerDown({} as MouseEvent, 40, 40)
+    surface.onPointerUp({} as MouseEvent, 40, 40)
+    surface.onWheel({} as WheelEvent, 40, 40)
+    expect({actions, wheelCalls}).toEqual({actions: 1, wheelCalls: 1})
+
+    const children = [...parent.children]
+    const clips = clipped!.presentationClips
+    expect(() => surface.materialize(parent, () => {
+      draw()
+      throw new Error("rounded div staging failed")
+    })).toThrow("rounded div staging failed")
+    expect(parent.children).toEqual(children)
+    expect(clipped!.presentationClips).toBe(clips)
+    surface.onPointerDown({} as MouseEvent, 40, 40)
+    surface.onPointerUp({} as MouseEvent, 40, 40)
+    surface.onWheel({} as WheelEvent, 40, 40)
+    expect({actions, wheelCalls}).toEqual({actions: 2, wheelCalls: 2})
+
+    surface.transform(parent, (target) => {
+      target.position.set(0.04, -0.03, 0)
+      target.scale.set(0.5, 0.5, 1)
+    })
+    expect(parent.children).toEqual(children)
+    expect(clipped!.presentationClips).toBe(clips)
+    const transformedCorner = surface.toSurface(parent, {x: 15, y: 15})
+    const transformedInside = surface.toSurface(parent, {x: 40, y: 40})
+    expect(surface.pointerHitKey(transformedCorner.x, transformedCorner.y)).toBeNull()
+    expect(surface.pointerHitKey(transformedInside.x, transformedInside.y)).toBe("rounded-child")
+    surface.onWheel({} as WheelEvent, transformedInside.x, transformedInside.y)
+    expect(wheelCalls).toBe(3)
+    surface.dispose()
+  })
+
   test("keeps nested Elements stable on transform and rematerializes only the keyed owner", () => {
     const fake = createFakeRuntime()
     const surface = new RetainedElementsSurface()

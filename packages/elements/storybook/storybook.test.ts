@@ -76,9 +76,12 @@ describe("@ui/elements package-owned Workbench stories", () => {
     expect(catalog.map(({route}) => route)).toEqual(catalog.map(({id}) => id))
     expect(elementSectionItems("div/basic/background").map(({route}) => route)).toEqual([
       "div/basic",
+      "div/overflow",
       "div/scroll",
     ])
-    expect(elementSectionItems("div/scroll/vertical").map(({id}) => id)).toEqual(["basic", "scroll"])
+    expect(elementVariantItems("div/overflow/nested").map(({id}) => id)).toEqual(["nested"])
+    expect(elementVariantItems("div/scroll/both").map(({id}) => id)).toEqual(["vertical", "horizontal", "both"])
+    expect(elementSectionItems("div/scroll/vertical").map(({id}) => id)).toEqual(["basic", "overflow", "scroll"])
     expect(elementSectionItems("css/border/rounded").map(({id}) => id)).toEqual(["padding", "flex", "border", "color", "typography"])
     expect(elementVariantItems("div/basic/padding").map(({id}) => id)).toEqual(["background", "border", "padding", "z-index"])
     expect(elementVariantItems("select/state/header").map(({id}) => id)).toEqual([
@@ -122,10 +125,16 @@ describe("@ui/elements package-owned Workbench stories", () => {
     const events = await ELEMENT_STORIES.load("pointer/state/click")
     expect(events.source(events.defaultArgs)).toContain('from "@ui/elements/button"')
     expect(events.defaultArgs).toMatchObject({state: "click", clicks: 1})
+
+    const nestedOverflow = await ELEMENT_STORIES.load("div/overflow/nested")
+    expect(nestedOverflow.source(nestedOverflow.defaultArgs)).toContain('from "@layout/core/flex"')
+    expect(nestedOverflow.source(nestedOverflow.defaultArgs)).toContain('overflow: "hidden"')
+    const bothAxes = await ELEMENT_STORIES.load("div/scroll/both")
+    expect(bothAxes.source(bothAxes.defaultArgs)).toContain('overflow: "auto"')
   })
 
   test("loads every published detail story with non-empty exact code", async () => {
-    expect(ELEMENT_STORY_ROUTES).toHaveLength(45)
+    expect(ELEMENT_STORY_ROUTES).toHaveLength(47)
     for (const route of ELEMENT_STORY_ROUTES) {
       const module = await ELEMENT_STORIES.load(route)
       const source = module.source(module.defaultArgs)

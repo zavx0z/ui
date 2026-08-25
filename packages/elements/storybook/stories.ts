@@ -63,11 +63,19 @@ export const ELEMENT_STORIES = defineStorybookStories({
               ],
             },
             {
+              id: "overflow",
+              label: "Обрезка содержимого",
+              variants: [
+                {id: "nested", label: "Вложенная скруглённая", title: "div · Вложенная скруглённая обрезка", load: loadPrimitiveStory("div", "overflow", "nested")},
+              ],
+            },
+            {
               id: "scroll",
               label: "Прокрутка",
               variants: [
                 {id: "vertical", label: "Вертикальная", title: "div · Вертикальная прокрутка", load: loadPrimitiveStory("div", "scroll", "vertical")},
                 {id: "horizontal", label: "Горизонтальная", title: "div · Горизонтальная прокрутка", load: loadPrimitiveStory("div", "scroll", "horizontal")},
+                {id: "both", label: "По двум осям", title: "div · Прокрутка по двум осям", load: loadPrimitiveStory("div", "scroll", "both")},
               ],
             },
           ],

@@ -6,6 +6,7 @@ import {select} from "@ui/elements/select"
 import {li, liY, ul, ulContentHeight, type LiElementProps} from "@ui/elements/list"
 import {span} from "@ui/elements/span"
 import type {CssColor, CssTextAlign} from "@ui/elements/style"
+import {flexRow} from "@layout/core/flex"
 import {uiShapeMetrics} from "../../shape.ts"
 import {
   defineStorybookStoryModule,
@@ -64,6 +65,10 @@ function renderPrimitiveStory(
   if (options.component === "div") {
     if (options.section === "scroll") {
       renderScrollDiv(surface, args, x, centerY - 120, width, options.variant)
+      return
+    }
+    if (options.section === "overflow") {
+      renderNestedOverflowDiv(surface, args, x, centerY - 120, width)
       return
     }
     const radius = options.variant === "z-index" ? 18 : args.radius
@@ -170,6 +175,64 @@ function renderPrimitiveStory(
   renderList(surface, args, x, centerY - 155, width, 310)
 }
 
+function renderNestedOverflowDiv(
+  surface: Parameters<typeof div>[0],
+  args: PrimitiveStoryArgs,
+  x: number,
+  y: number,
+  width: number,
+): void {
+  div(surface, x, y, width, 240, {
+    key: "elements-story-div-overflow-nested",
+    style: {
+      overflow: "hidden",
+      background: toneFill(args.tone, 0.08),
+      borderColor: args.tone,
+      borderWidth: 6,
+      borderRadius: args.radius,
+    },
+    children: ({viewportX, viewportY, viewportWidth, viewportHeight}) => {
+      flexRow({
+        x: viewportX,
+        y: viewportY,
+        w: viewportWidth,
+        h: viewportHeight,
+        gap: 8,
+        items: [
+          {width: "1fr", height: viewportHeight, draw: (childX, childY, childWidth, childHeight) => {
+            div(surface, childX, childY, childWidth, childHeight, {
+              key: "elements-story-div-overflow-left",
+              children: "Левый вложенный контейнер сохраняет общий скруглённый край.",
+              style: {
+                overflow: "hidden",
+                background: "rgba(255, 255, 255, 0.08)",
+                borderColor: "rgba(255, 255, 255, 0.24)",
+                borderRadius: Math.max(4, args.radius - 8),
+                padding: 16,
+                color: "text",
+              },
+            })
+          }},
+          {width: "1fr", height: viewportHeight, draw: (childX, childY, childWidth, childHeight) => {
+            div(surface, childX, childY, childWidth, childHeight, {
+              key: "elements-story-div-overflow-right",
+              children: "Правый контейнер показывает пересечение двух shaped clip scopes.",
+              style: {
+                overflow: "hidden",
+                background: toneFill(args.tone, 0.16),
+                borderColor: args.tone,
+                borderRadius: Math.max(4, args.radius - 8),
+                padding: 16,
+                color: "text",
+              },
+            })
+          }},
+        ],
+      })
+    },
+  })
+}
+
 function renderScrollDiv(
   surface: Parameters<typeof div>[0],
   args: PrimitiveStoryArgs,
@@ -179,17 +242,21 @@ function renderScrollDiv(
   variant: string,
 ): void {
   const horizontal = variant === "horizontal"
+  const both = variant === "both"
   const content = horizontal
     ? Array.from({length: 8}, (_, index) => `сегмент-${index + 1}`).join("     ")
-    : Array.from({length: 18}, (_, index) => `Строка ${String(index + 1).padStart(2, "0")} · сохранённое содержимое`).join("\n")
+    : Array.from({length: 18}, (_, index) => both
+      ? `Строка ${String(index + 1).padStart(2, "0")} · содержимое прокручивается по двум осям · длинный контрольный фрагмент`
+      : `Строка ${String(index + 1).padStart(2, "0")} · сохранённое содержимое`).join("\n")
   div(surface, x, y, width, 240, {
     key: `elements-story-div-scroll-${variant}`,
     children: content,
     style: {
-      overflowX: horizontal ? "auto" : "hidden",
+      overflowX: horizontal || both ? "auto" : "hidden",
       overflowY: horizontal ? "hidden" : "auto",
       background: toneFill(args.tone, 0.06),
       borderColor: args.tone,
+      borderWidth: 2,
       borderRadius: args.radius,
       padding: args.density === "compact" ? 16 : 24,
       color: "muted",
@@ -358,13 +425,24 @@ function primitiveSource(
   args: PrimitiveStoryArgs,
 ): string {
   if (options.component === "div") {
+    if (options.section === "overflow") return [
+      'import {div} from "@ui/elements/div"',
+      'import {flexRow} from "@layout/core/flex"',
+      "",
+      "div(surface, x, y, w, h, {",
+      `  style: {overflow: "hidden", borderWidth: 6, borderRadius: ${args.radius}},`,
+      "  children: ({viewportX, viewportY, viewportWidth, viewportHeight}) => {",
+      "    flexRow({x: viewportX, y: viewportY, w: viewportWidth, h: viewportHeight, items})",
+      "  },",
+      "})",
+    ].join("\n")
     if (options.section === "scroll") return [
       'import {div} from "@ui/elements/div"',
       "",
       "div(surface, x, y, w, h, {",
       '  key: "content",',
       "  children: content,",
-      `  style: {overflow${options.variant === "horizontal" ? "X" : "Y"}: "auto", borderRadius: ${args.radius}},`,
+      `  style: {${options.variant === "both" ? 'overflow: "auto"' : `overflow${options.variant === "horizontal" ? "X" : "Y"}: "auto"`}, borderRadius: ${args.radius}},`,
       "})",
     ].join("\n")
     const properties = [
