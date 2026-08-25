@@ -110,6 +110,63 @@ describe("UI repository boundaries", () => {
     }
   })
 
+  test("pins and registers every cold Pages dependency before the UI install", async () => {
+    const workflow = await Bun.file(join(repositoryRoot, ".github/workflows/pages.yml")).text()
+    for (const [repository, revision] of [
+      ["zavx0z/engine", "ae461b8ab622d391247c714f3937f18bd5b4ae45"],
+      ["zavx0z/layout", "c97bc83b935ae1299c3db304c35483bb30f6de80"],
+      ["zavx0z/highlighter", "a9f240b682a6ccec042ea04522220f153d3b53eb"],
+      ["zavx0z/storybook", "bbacaa721b9327dc771f348f017bd6e0a7cef3df"],
+    ] as const) {
+      expect(workflow).toContain(`repository: ${repository}\n          ref: ${revision}`)
+    }
+
+    const sharedCheckout = workflow.indexOf("Check out Storybook infrastructure dependency")
+    const engineLink = workflow.indexOf("Register Engine package")
+    const layoutLink = workflow.indexOf("Register Layout package")
+    const elementsLink = workflow.indexOf("Register UI Elements package")
+    const componentsLink = workflow.indexOf("Register UI Components package")
+    const highlighterInstall = workflow.indexOf("Install and verify Highlighter dependency")
+    const highlighterLink = workflow.indexOf("Register Highlighter package")
+    const sharedInstall = workflow.indexOf("Install Storybook infrastructure dependencies")
+    const sharedLink = workflow.indexOf("Register Storybook infrastructure package")
+    const layoutInstall = workflow.indexOf("Install Layout dependencies")
+    const uiInstall = workflow.indexOf("Install locked dependencies")
+    const uiCheck = workflow.indexOf("Verify and build static Storybook")
+    expect(sharedCheckout).toBeGreaterThan(-1)
+    const bootstrapOrder = [
+      engineLink,
+      layoutLink,
+      elementsLink,
+      componentsLink,
+      highlighterInstall,
+      highlighterLink,
+      sharedInstall,
+      sharedLink,
+      layoutInstall,
+      uiInstall,
+      uiCheck,
+    ]
+    expect(bootstrapOrder.every((position) => position >= 0)).toBeTrue()
+    expect(bootstrapOrder).toEqual([...bootstrapOrder].sort((left, right) => left - right))
+    expect(workflow.slice(sharedLink, uiInstall)).toContain("working-directory: storybook\n        run: bun link")
+    expect(workflow).toContain("working-directory: ui\n        run: bun install --frozen-lockfile")
+    for (const step of [
+      "Register Engine package",
+      "Register Layout package",
+      "Register UI Elements package",
+      "Register UI Components package",
+      "Register Highlighter package",
+      "Register Storybook infrastructure package",
+    ]) expect(workflow.indexOf(step), step).toBeLessThan(uiInstall)
+    expect(workflow.slice(sharedInstall, sharedLink)).toContain(
+      "working-directory: storybook\n        run: bun install --frozen-lockfile",
+    )
+
+    const lock = await Bun.file(join(repositoryRoot, "bun.lock")).text()
+    expect(lock).toContain('"@zavx0z/storybook": "link:@zavx0z/storybook"')
+  })
+
   test("keeps public attribution explicit without a runtime MetaFor dependency", async () => {
     for (const path of ["README.md", "ARCHITECTURE.md", "CONTRIBUTING.md"]) {
       const source = await Bun.file(join(repositoryRoot, path)).text()

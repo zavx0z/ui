@@ -47,6 +47,12 @@ bun run build
 
 The build emits `dist` for public base `/ui/`. Verify `index.html`, one shell for each mount, `404.html`, `.nojekyll`, revisioned `storybook-manifest.json`, the font, independently split browser assets, and `references/catalog.json`. Recovery restores only a route present in that manifest before its package entry reads the route; an unknown suffix remains `404`.
 
+The cold Pages workflow checks out public `zavx0z/storybook` at exact revision
+`bbacaa721b9327dc771f348f017bd6e0a7cef3df`, performs its frozen install after
+all peer owners are registered, and links it before the frozen Layout/UI
+installs and check. Engine, Layout, and Highlighter retain their own exact
+workflow pins; do not replace any owner with a path alias.
+
 Reference catalog metadata may load as a separate chunk. Image loaders must not run until a selected story requests comparison. A build is not owner visual acceptance.
 
 ## One stable background target

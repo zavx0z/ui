@@ -139,6 +139,10 @@ Components либо consumer.
     происходит до чтения route package entry. Build копирует один точный Engine
     font asset в общий `/ui/fonts/`, а каждый shell только объявляет этот URL
     через inert meta без preload.
+    Cold Pages workflow получает shared `@zavx0z/storybook` из точной immutable
+    revision, проверяет его frozen install и регистрирует через `bun link` до
+    frozen Layout/UI install/check, сохраняя отдельные exact pins Engine, Layout
+    и Highlighter.
 25. UI-owned reference catalog загружается отдельным lazy chunk. Shared V1
     предоставляет только immutable schema, validation и comparison planner; он
     не объявляет неисполняемый story-reference lifecycle. Descriptor хранит provenance,

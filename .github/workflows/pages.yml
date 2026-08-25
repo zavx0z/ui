@@ -25,14 +25,14 @@ jobs:
         uses: actions/checkout@v6
         with:
           repository: zavx0z/engine
-          ref: e02516423a529749119eaf5438f68a944491577e
+          ref: ae461b8ab622d391247c714f3937f18bd5b4ae45
           path: engine
 
       - name: Check out Layout dependency
         uses: actions/checkout@v6
         with:
           repository: zavx0z/layout
-          ref: 1856377275c4f601d784f85ca499c28e678942da
+          ref: c97bc83b935ae1299c3db304c35483bb30f6de80
           path: layout
 
       - name: Check out Highlighter dependency
@@ -41,6 +41,13 @@ jobs:
           repository: zavx0z/highlighter
           ref: a9f240b682a6ccec042ea04522220f153d3b53eb
           path: highlighter
+
+      - name: Check out Storybook infrastructure dependency
+        uses: actions/checkout@v6
+        with:
+          repository: zavx0z/storybook
+          ref: bbacaa721b9327dc771f348f017bd6e0a7cef3df
+          path: storybook
 
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
@@ -51,12 +58,16 @@ jobs:
         working-directory: engine/packages/core
         run: bun link
 
-      - name: Install Layout dependencies
-        working-directory: layout
-        run: bun install --frozen-lockfile
-
       - name: Register Layout package
         working-directory: layout/packages/core
+        run: bun link
+
+      - name: Register UI Elements package
+        working-directory: ui/packages/elements
+        run: bun link
+
+      - name: Register UI Components package
+        working-directory: ui/packages/components
         run: bun link
 
       - name: Install and verify Highlighter dependency
@@ -66,6 +77,18 @@ jobs:
       - name: Register Highlighter package
         working-directory: highlighter
         run: bun link
+
+      - name: Install Storybook infrastructure dependencies
+        working-directory: storybook
+        run: bun install --frozen-lockfile
+
+      - name: Register Storybook infrastructure package
+        working-directory: storybook
+        run: bun link
+
+      - name: Install Layout dependencies
+        working-directory: layout
+        run: bun install --frozen-lockfile
 
       - name: Install locked dependencies
         working-directory: ui
