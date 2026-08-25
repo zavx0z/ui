@@ -9,10 +9,14 @@ import {
 } from "@layout/core/text-input"
 import {
   createInputEditState,
+  clearReadOnlyTextParticipants,
   focusInput,
+  focusReadOnlyTextParticipant,
   handleInputKey,
   input,
   insertInputText,
+  registerReadOnlyTextParticipant,
+  unregisterReadOnlyTextParticipant,
   type InputEditState,
 } from "./input.ts"
 import {prepareSurfaceInputFocus} from "@layout/core/runtime"
@@ -193,6 +197,94 @@ describe("input editing", () => {
     focusInput(surface, "editor", createInputEditState("seed"))
     expect(prepareSurfaceInputFocus(surface, 80, 80)).toBeTrue()
     expect(surfaceHasActiveInput(surface)).toBeFalse()
+  })
+
+  test("gives a keyed read-only participant copy-only focus without a soft keyboard", () => {
+    const surface = new RecordingSurface()
+    let hasSelection = false
+    let copies = 0
+    registerReadOnlyTextParticipant(surface, "source", {
+      hasSelection: () => hasSelection,
+      copy: () => { copies++ },
+    })
+    focusReadOnlyTextParticipant(surface, "source")
+
+    expect(surfaceHasActiveInput(surface)).toBeFalse()
+    expect(insertActiveInputText(surface, "mutating text")).toBeFalse()
+    expect(handleActiveInputKey(surface, key("v", {metaKey: true}))).toBeFalse()
+    expect(handleActiveInputKey(surface, key("x", {ctrlKey: true}))).toBeFalse()
+    expect(handleActiveInputKey(surface, key("c", {metaKey: true}))).toBeFalse()
+    expect(copies).toBe(0)
+
+    hasSelection = true
+    let prevented = false
+    const copyKey = {
+      ...key("c", {ctrlKey: true}),
+      preventDefault: () => { prevented = true },
+    } as KeyboardEvent
+    expect(handleActiveInputKey(surface, copyKey)).toBeTrue()
+    expect(prevented).toBeTrue()
+    expect(copies).toBe(1)
+  })
+
+  test("removes stale read-only participants when a host replaces its subtree", () => {
+    const surface = new RecordingSurface()
+    let copies = 0
+    const register = (key: string) => registerReadOnlyTextParticipant(surface, key, {
+      hasSelection: () => true,
+      copy: () => { copies++ },
+    })
+
+    register("first")
+    focusReadOnlyTextParticipant(surface, "first")
+    unregisterReadOnlyTextParticipant(surface, "first")
+    expect(handleActiveInputKey(surface, key("c", {metaKey: true}))).toBeFalse()
+
+    register("second")
+    focusReadOnlyTextParticipant(surface, "second")
+    clearReadOnlyTextParticipants(surface)
+    expect(handleActiveInputKey(surface, key("c", {metaKey: true}))).toBeFalse()
+    expect(copies).toBe(0)
+  })
+
+  test("shares one controller between read-only text and an editable input", () => {
+    const submissions: string[] = []
+    const surface = new RecordingSurface()
+    registerReadOnlyTextParticipant(surface, "source", {
+      hasSelection: () => true,
+      copy() {},
+    })
+    input(surface, 0, 0, 100, 22, {
+      key: "field",
+      value: "seed",
+      onSubmit: (value) => submissions.push(value),
+    })
+
+    focusReadOnlyTextParticipant(surface, "source")
+    focusInput(surface, "field", createInputEditState("edited"))
+    expect(surfaceHasActiveInput(surface)).toBeTrue()
+    expect(insertActiveInputText(surface, "!")).toBeTrue()
+
+    focusReadOnlyTextParticipant(surface, "source")
+    expect(submissions).toEqual(["edited!"])
+    expect(surfaceHasActiveInput(surface)).toBeFalse()
+    expect(handleActiveInputKey(surface, key("c", {metaKey: true}))).toBeTrue()
+  })
+
+  test("preserves read-only focus on its exact hit and releases it outside", () => {
+    const surface = new HitSurface()
+    surface.hit(0, 0, 20, 20, () => {}, {key: "source"})
+    surface.hit(30, 0, 20, 20, () => {}, {key: "other"})
+    registerReadOnlyTextParticipant(surface, "source", {
+      hasSelection: () => true,
+      copy() {},
+    })
+    focusReadOnlyTextParticipant(surface, "source")
+
+    expect(prepareSurfaceInputFocus(surface, 10, 10)).toBeFalse()
+    expect(handleActiveInputKey(surface, key("c", {metaKey: true}))).toBeTrue()
+    expect(prepareSurfaceInputFocus(surface, 40, 10)).toBeTrue()
+    expect(handleActiveInputKey(surface, key("c", {metaKey: true}))).toBeFalse()
   })
 })
 

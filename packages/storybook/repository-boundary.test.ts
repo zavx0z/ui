@@ -62,6 +62,25 @@ describe("UI repository boundaries", () => {
       expect(manifest.dependencies["@engine/core"]).toBe("link:@engine/core")
       expect(manifest.dependencies["@layout/core"]).toBe("link:@layout/core")
     }
+
+    for (const path of ["package.json", "packages/elements/package.json", "packages/components/package.json"]) {
+      const manifest = await Bun.file(join(repositoryRoot, path)).json() as {
+        dependencies: Record<string, string>
+      }
+      expect(manifest.dependencies["@zavx0z/highlighter"]).toBe("link:@zavx0z/highlighter")
+    }
+  })
+
+  test("publishes code owners only through exact subpaths", async () => {
+    const elementsRoot = join(repositoryRoot, "packages/elements")
+    const componentsRoot = join(repositoryRoot, "packages/components")
+    const elements = await Bun.file(join(elementsRoot, "package.json")).json() as {exports: Record<string, string>}
+    const components = await Bun.file(join(componentsRoot, "package.json")).json() as {exports: Record<string, string>}
+    expect(elements.exports["./code"]).toBe("./code.ts")
+    expect(elements.exports["./text-selection"]).toBe("./text-selection.ts")
+    expect(components.exports["./code-editor"]).toBe("./code-editor.ts")
+    expect(await Bun.file(join(elementsRoot, "index.ts")).text()).not.toMatch(/code\.ts|text-selection\.ts/)
+    expect(await Bun.file(join(componentsRoot, "index.ts")).text()).not.toContain("code-editor.ts")
   })
 
   test("keeps public attribution explicit without a runtime MetaFor dependency", async () => {

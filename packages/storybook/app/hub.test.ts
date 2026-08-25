@@ -60,7 +60,7 @@ describe("central UI storybook hub", () => {
     ])
     expect(pages.every(({routeTree}) => routeTree !== null)).toBeTrue()
     expect(pages.find(({id}) => id === "elements")?.routeTree?.leaves).toHaveLength(45)
-    expect(pages.find(({id}) => id === "components")?.routeTree?.leaves).toHaveLength(80)
+    expect(pages.find(({id}) => id === "components")?.routeTree?.leaves).toHaveLength(81)
     expect(pages.find(({id}) => id === "storybook")?.routeTree?.leaves).toEqual(["overview", "details"])
     expect(pages.find(({id}) => id === "hud")?.routeTree?.leaves).toEqual([])
     expect(uiStorybookPageFiles("elements").body).toEqual({kind: "canvas", canvasId: "stage-canvas"})

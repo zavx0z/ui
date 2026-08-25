@@ -34,6 +34,7 @@
   "dependencies": {
     "@engine/core": "link:@engine/core",
     "@layout/core": "link:@layout/core",
+    "@zavx0z/highlighter": "link:@zavx0z/highlighter",
     "@ui/components": "workspace:*",
     "@ui/elements": "workspace:*",
     "@ui/hud": "workspace:*",

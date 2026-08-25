@@ -1,5 +1,6 @@
 import {type Object3D} from "@engine/core"
 import {Button} from "@ui/components/button"
+import {CodeEditor} from "@ui/components/code-editor"
 import {Pane} from "@ui/components/pane"
 import {TextField} from "@ui/components/text-field"
 import {Typography} from "@ui/components/typography"
@@ -173,7 +174,6 @@ type NormalizedStoryControl = Readonly<{
 
 type NormalizedStoryPanelOptions = Readonly<{
   source: string
-  sourceLines: readonly string[]
   controls: readonly NormalizedStoryControl[]
   events: readonly StorybookStoryEvent[]
   mode: StorybookStoryPanelMode
@@ -1302,35 +1302,15 @@ export class StorybookStoryPanelSurface extends RetainedStorybookSurface {
       return
     }
     if (key === SOURCE_BOX_OWNER) {
-      const sourceInset = uiShapeMetrics.tightGap * 2
-      const sourceLineHeight = uiShapeMetrics.compactFontPx + uiShapeMetrics.tightGap + uiShapeMetrics.separatorWidth
-      const sourceWidth = Math.max(
-        1,
-        ...this.#options.sourceLines.map((line) => this.measureText(line, uiShapeMetrics.compactFontPx)),
-      )
-      const sourceHeight = Math.max(1, this.#options.sourceLines.length * sourceLineHeight)
-      Pane(this, 0, 0, frame.w, frame.h, {
-        appearance: "box",
+      CodeEditor(this, 0, 0, frame.w, frame.h, {
         key: SOURCE_SCROLL_KEY,
-        scrollContentWidth: sourceWidth,
-        scrollContentHeight: sourceHeight,
-        children: ({scrollLeft, scrollTop, viewportWidth, viewportHeight, contentWidth}) => {
-          this.#options.onSourceScrollChange?.(Object.freeze({left: scrollLeft, top: scrollTop}))
-          for (const [index, line] of this.#options.sourceLines.entries()) {
-            const y = sourceInset + index * sourceLineHeight - scrollTop
-            if (y + sourceLineHeight < sourceInset || y > sourceInset + viewportHeight) continue
-            Typography(this, sourceInset - scrollLeft, y, Math.max(contentWidth, viewportWidth), sourceLineHeight, {
-              children: line,
-              variant: "caption",
-              color: index === 0 ? workbenchText : workbenchMuted,
-            })
-          }
-        },
-        sx: {
-          padding: sourceInset,
-          overflow: "auto",
-          scrollbarWidth: uiShapeMetrics.tightGap,
-        },
+        value: this.#options.source,
+        readOnly: true,
+        languageId: "typescript",
+        showLineNumbers: true,
+        fontPx: uiShapeMetrics.compactFontPx,
+        linePx: uiShapeMetrics.compactFontPx + uiShapeMetrics.tightGap + uiShapeMetrics.separatorWidth,
+        ...(this.#options.onSourceScrollChange === undefined ? {} : {onScrollChange: this.#options.onSourceScrollChange}),
       })
       return
     }
@@ -1537,7 +1517,6 @@ function normalizeStoryPanelOptions(options: StorybookStoryPanelOptions): Normal
   })
   return Object.freeze({
     source: options.source,
-    sourceLines: Object.freeze(options.source.replaceAll("\r\n", "\n").split("\n")),
     controls: Object.freeze(controls),
     events: Object.freeze(events),
     mode: options.mode,

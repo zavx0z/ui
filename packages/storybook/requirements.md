@@ -67,6 +67,10 @@ Components либо consumer.
     показывает variants выбранной story. Правая панель постоянно показывает
     сгенерированный TypeScript и действие копирования; ниже неё располагаются
     controls и события, не скрывая код.
+    TypeScript отображается exact production `@ui/components/code-editor` в
+    `readOnly: true`: Islands Dark syntax, фиксированный line-number gutter,
+    обе оси scroll и single selection с `Cmd/Ctrl+C`. Верхняя Copy action
+    продолжает копировать полный source независимо от selection.
 15. Все обращённые к человеку строки Workbench пишутся по-русски: навигация и
     поиск, описания preview, демонстрационные подписи, controls, events,
     состояния и статусы. Public API identifiers, import specifiers, route IDs и

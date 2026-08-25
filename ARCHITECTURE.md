@@ -19,6 +19,8 @@ Visual UI is a retained WebGPU interface stack. It does not translate components
     ↓
 @ui/hud
 
+@zavx0z/highlighter ─────────────> @ui/elements / @ui/components
+
 @ui/storybook ── dev-only consumer of the same production packages
 ```
 
@@ -37,6 +39,10 @@ The sibling [`@layout/core`](https://github.com/zavx0z/layout) package owns `UiR
 ### Components
 
 `@ui/components` owns reusable controlled controls and fields. Components receive an attached `UiSurface` directly from `@layout/core/surface` and never create a renderer, scene, or runtime. The same control can be used standalone, in HUD, or by the Nodes repository without acquiring node-specific semantics.
+
+The exact `@ui/components/code-editor` leaf composes Elements-owned token runs,
+selection and scroll with theme-neutral tokens from `@zavx0z/highlighter`.
+Interpreter file/debugger state and Storybook chrome remain consumer-owned.
 
 ### HUD
 

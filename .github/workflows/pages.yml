@@ -35,6 +35,13 @@ jobs:
           ref: 1856377275c4f601d784f85ca499c28e678942da
           path: layout
 
+      - name: Check out Highlighter dependency
+        uses: actions/checkout@v6
+        with:
+          repository: zavx0z/highlighter
+          ref: a9f240b682a6ccec042ea04522220f153d3b53eb
+          path: highlighter
+
       - name: Set up Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -50,6 +57,14 @@ jobs:
 
       - name: Register Layout package
         working-directory: layout/packages/core
+        run: bun link
+
+      - name: Install and verify Highlighter dependency
+        working-directory: highlighter
+        run: bun install --frozen-lockfile && bun run check
+
+      - name: Register Highlighter package
+        working-directory: highlighter
         run: bun link
 
       - name: Install locked dependencies

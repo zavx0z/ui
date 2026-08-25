@@ -94,6 +94,11 @@ type InputRuntimeConfig = {
   onNumericGesture: ((gesture: InputNumericGesture) => void) | undefined
 }
 
+export type ReadOnlyTextParticipant = Readonly<{
+  hasSelection: () => boolean
+  copy: () => boolean | void | Promise<boolean | void>
+}>
+
 type InputRuntimeState = {
   activeKey: string | null
   drag: {key: string; anchor: number} | null
@@ -109,6 +114,8 @@ type InputRuntimeState = {
   blinkTimer: ReturnType<typeof setInterval> | null
   values: Map<string, InputEditState>
   configs: Map<string, InputRuntimeConfig>
+  activeReadOnlyTextKey: string | null
+  readOnlyTextParticipants: Map<string, ReadOnlyTextParticipant>
 }
 
 const inputRuntime = new WeakMap<UiSurface, InputRuntimeState>()
@@ -178,7 +185,7 @@ function handleActiveInputKey(surface: UiSurface, event: KeyboardEvent): boolean
     surface.requestKeyedRender(key)
     return true
   }
-  if (runtime.activeKey === null) return false
+  if (runtime.activeKey === null) return handleReadOnlyTextParticipantKey(runtime, event)
   const key = runtime.activeKey
   const current = runtime.values.get(key)
   if (current === undefined) return false
@@ -203,6 +210,27 @@ function handleActiveInputKey(surface: UiSurface, event: KeyboardEvent): boolean
   return true
 }
 
+function handleReadOnlyTextParticipantKey(runtime: InputRuntimeState, event: KeyboardEvent): boolean {
+  const key = runtime.activeReadOnlyTextKey
+  if (key === null) return false
+  const participant = runtime.readOnlyTextParticipants.get(key)
+  if (participant === undefined) {
+    runtime.activeReadOnlyTextKey = null
+    return false
+  }
+  if (!(event.metaKey || event.ctrlKey) || event.key.toLowerCase() !== "c" || !participant.hasSelection()) return false
+
+  event.preventDefault()
+  try {
+    void Promise.resolve(participant.copy()).catch((error) => {
+      console.warn("read-only text clipboard copy failed:", error)
+    })
+  } catch (error) {
+    console.warn("read-only text clipboard copy failed:", error)
+  }
+  return true
+}
+
 function insertActiveInputText(surface: UiSurface, text: string): boolean {
   const runtime = inputRuntime.get(surface)
   if (runtime?.activeKey === null || runtime === undefined) return false
@@ -223,21 +251,72 @@ function surfaceHasActiveInput(surface: UiSurface): boolean {
 /** Commits and releases the active HTML-like input unless pointer focus stays on the same exact hit. */
 function blurActiveInput(surface: UiSurface, nextHitKey: string | null = null): boolean {
   const runtime = inputRuntime.get(surface)
-  const key = runtime?.activeKey ?? null
-  if (runtime === undefined || key === null || key === nextHitKey) return false
-  const state = runtime.values.get(key)
-  const config = runtime.configs.get(key)
-  releaseActiveInput(surface, runtime, key)
-  if (state !== undefined) config?.onSubmit?.(state.value, state)
-  return true
+  if (runtime === undefined) return false
+  let blurred = false
+  const key = runtime.activeKey
+  if (key !== null && key !== nextHitKey) {
+    const state = runtime.values.get(key)
+    const config = runtime.configs.get(key)
+    releaseActiveInput(surface, runtime, key)
+    if (state !== undefined) config?.onSubmit?.(state.value, state)
+    blurred = true
+  }
+  const readOnlyKey = runtime.activeReadOnlyTextKey
+  if (readOnlyKey !== null && readOnlyKey !== nextHitKey) {
+    runtime.activeReadOnlyTextKey = null
+    surface.requestKeyedRender(readOnlyKey)
+    blurred = true
+  }
+  return blurred
 }
 
 export function focusInput(surface: UiSurface, key: string, state?: InputEditState): void {
   const runtime = inputRuntimeFor(surface)
   blurActiveInput(surface, key)
+  clearReadOnlyTextFocus(surface, runtime)
   if (state !== undefined) runtime.values.set(key, clampInputState(state))
   runtime.activeKey = key
   resetInputBlink(surface, runtime, key)
+}
+
+/** Registers one non-editable keyed text owner with the Surface input controller. */
+export function registerReadOnlyTextParticipant(
+  surface: UiSurface,
+  key: string,
+  participant: ReadOnlyTextParticipant,
+): void {
+  const runtime = inputRuntimeFor(surface)
+  runtime.readOnlyTextParticipants.set(key, participant)
+  surface.registerRenderKey(key)
+}
+
+/** Gives keyboard-copy focus to a registered read-only text owner without opening a soft keyboard. */
+export function focusReadOnlyTextParticipant(surface: UiSurface, key: string): void {
+  const runtime = inputRuntimeFor(surface)
+  if (!runtime.readOnlyTextParticipants.has(key)) return
+  blurActiveInput(surface, null)
+  runtime.activeReadOnlyTextKey = key
+  surface.requestKeyedRender(key)
+}
+
+/** Removes one keyed read-only text owner and releases its keyboard-copy focus. */
+export function unregisterReadOnlyTextParticipant(surface: UiSurface, key: string): void {
+  const runtime = inputRuntime.get(surface)
+  if (runtime === undefined) return
+  runtime.readOnlyTextParticipants.delete(key)
+  if (runtime.activeReadOnlyTextKey !== key) return
+  runtime.activeReadOnlyTextKey = null
+  surface.requestKeyedRender(key)
+}
+
+/** Clears every read-only text owner before a host replaces its component subtree. */
+export function clearReadOnlyTextParticipants(surface: UiSurface): void {
+  const runtime = inputRuntime.get(surface)
+  if (runtime === undefined) return
+  const activeKey = runtime.activeReadOnlyTextKey
+  runtime.activeReadOnlyTextKey = null
+  runtime.readOnlyTextParticipants.clear()
+  if (activeKey !== null) surface.requestKeyedRender(activeKey)
 }
 
 export function input(surface: UiSurface, x: number, y: number, width: number, height: number, props: InputProps): void {
@@ -511,6 +590,8 @@ function inputRuntimeFor(surface: UiSurface): InputRuntimeState {
       blinkTimer: null,
       values: new Map(),
       configs: new Map(),
+      activeReadOnlyTextKey: null,
+      readOnlyTextParticipants: new Map(),
     }
     inputRuntime.set(surface, runtime)
     registerTextInputController(surface, {
@@ -787,6 +868,7 @@ function activateInputText(
   options: Readonly<{notifyPointerDown?: boolean; selectAll?: boolean}> = {},
 ): void {
   blurActiveInput(surface, key)
+  clearReadOnlyTextFocus(surface, runtime)
   const editing = runtime.activeKey === key || props.active === true
   const next = {...inputStateFor(runtime, key, initialValue, controlled, editing, props)}
   const style = mergeStyle(props)
@@ -811,6 +893,13 @@ function activateInputText(
   resetInputBlink(surface, runtime, key)
   props.onActivate?.()
   if (options.notifyPointerDown !== false) props.onPointerDown?.(localX, localY, event)
+  surface.requestKeyedRender(key)
+}
+
+function clearReadOnlyTextFocus(surface: UiSurface, runtime: InputRuntimeState): void {
+  const key = runtime.activeReadOnlyTextKey
+  if (key === null) return
+  runtime.activeReadOnlyTextKey = null
   surface.requestKeyedRender(key)
 }
 

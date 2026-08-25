@@ -118,6 +118,25 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
     submit-only adapter в uncontrolled input; uncontrolled default-value
     поведение остаётся отдельным явным режимом.
 
+## Code text foundation
+
+1. Exact leaves `@ui/elements/code` и `@ui/elements/text-selection` владеют
+   общими visual token runs и pure text selection/clipboard helpers. Они не
+   владеют editor document, file, debugger, Git, header либо scroll semantics.
+2. Code renderer принимает только нейтральные `Token` из
+   `@zavx0z/highlighter`: действующая Islands Dark category palette является
+   fallback, явный `Token.fg` сильнее category color, а `Token.bg` сохраняет
+   отдельный color-swatch callback. Editor aliases и compatibility re-exports
+   запрещены.
+3. Elements input runtime остаётся единственным controller одной Surface и
+   допускает keyed read-only text participant. Такой participant после pointer
+   focus обрабатывает только `Cmd/Ctrl+C` при непустом selection, не принимает
+   insert/paste/cut, не включает soft keyboard и при фокусе обычного `input`
+   освобождает свою active identity.
+   Host, заменяющий условный component subtree на той же Surface, очищает либо
+   unregister-ит его read-only participants; исчезнувший owner не сохраняет
+   скрытый `Cmd/Ctrl+C` handler.
+
 ## Layout consumer boundary
 
 Следующие retained-инварианты принадлежат `@layout/core`; здесь они являются

@@ -13,6 +13,8 @@
     "./div": "./div.ts",
     "./span": "./span.ts",
     "./text": "./text.ts",
+    "./code": "./code.ts",
+    "./text-selection": "./text-selection.ts",
     "./img": "./img.ts",
     "./input": "./input.ts",
     "./select": "./select.ts",
@@ -35,7 +37,8 @@
   },
   "dependencies": {
     "@engine/core": "link:@engine/core",
-    "@layout/core": "link:@layout/core"
+    "@layout/core": "link:@layout/core",
+    "@zavx0z/highlighter": "link:@zavx0z/highlighter"
   },
   "devDependencies": {
     "@ui/storybook": "workspace:*"
