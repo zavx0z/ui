@@ -1,5 +1,5 @@
 import {flexColumn, flexRow} from "@layout/core/flex"
-import {Z, type HitOptions, type UiClipShape, type UiSurface} from "@layout/core/surface"
+import {Z, type HitOptions, type TooltipHit, type UiClipShape, type UiSurface} from "@layout/core/surface"
 import {scrollbar} from "./scrollbar.ts"
 import {span} from "./span.ts"
 import {
@@ -34,6 +34,8 @@ export type DivProps = Omit<InteractiveElementProps, "children"> & {
   children?: ElementChildren | ((ctx: DivScrollContext) => void)
   scrollContentWidth?: number
   scrollContentHeight?: number
+  hitCursor?: string
+  tooltip?: TooltipHit
 }
 
 type DivScrollState = {
@@ -153,15 +155,17 @@ export function div(surface: UiSurface, x: number, y: number, width: number, hei
     props.onPointerLeave !== undefined ||
     props.onPointerDown !== undefined ||
     props.onPointerMove !== undefined ||
-    props.onPointerUp !== undefined
+    props.onPointerUp !== undefined ||
+    props.tooltip !== undefined
   ) {
-    const hit: HitOptions = {cursor: "pointer"}
+    const hit: HitOptions = {cursor: props.hitCursor ?? "pointer"}
     if (props.key !== undefined) hit.key = props.key
     if (props.onPointerEnter !== undefined) hit.onPointerEnter = props.onPointerEnter
     if (props.onPointerLeave !== undefined) hit.onPointerLeave = props.onPointerLeave
     if (props.onPointerDown !== undefined) hit.onPointerDown = props.onPointerDown
     if (props.onPointerMove !== undefined) hit.onPointerMove = props.onPointerMove
     if (props.onPointerUp !== undefined) hit.onPointerUp = props.onPointerUp
+    if (props.tooltip !== undefined) hit.tooltip = props.tooltip
     surface.withChildClip(clipShapeFor({x, y, w: width, h: height}, hitRadius), () => {
       surface.hit(x, y, width, height, props.onClick ?? (() => {}), hit)
     })

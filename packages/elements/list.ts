@@ -1,5 +1,5 @@
 import {div, type DivProps, type DivScrollContext} from "./div.ts"
-import {Z, type HitOptions, type UiSurface} from "@layout/core/surface"
+import {Z, type UiSurface} from "@layout/core/surface"
 import {boxPadding, mergeStyle, px, type ElementChildren, type InteractiveElementProps, type StyleProps} from "./style.ts"
 import {rgba8ToColor, resolveWidgetColors, type ResolvedWidgetColors} from "./theme-reference.ts"
 
@@ -58,10 +58,16 @@ export function ul(surface: UiSurface, x: number, y: number, width: number, heig
       background: null,
       borderColor: null,
       borderRadius: 0,
-      padding: 0,
       overflowY: "auto",
       zIndex: Z.CONTAINER,
       ...style,
+      padding: 0,
+      paddingX: 0,
+      paddingY: 0,
+      paddingTop: 0,
+      paddingRight: 0,
+      paddingBottom: 0,
+      paddingLeft: 0,
     },
   }
   if (props.key !== undefined) divProps.key = props.key
@@ -114,9 +120,25 @@ export function li(surface: UiSurface, x: number, y: number, width: number, heig
       if (typeof render === "function") render(state)
     }
     : props.children
-  div(surface, x, y, width, height, {
+  const disabled = props.disabled === true
+  const interactive =
+    props.onClick !== undefined ||
+    props.onPointerEnter !== undefined ||
+    props.onPointerLeave !== undefined ||
+    props.onPointerDown !== undefined ||
+    props.onPointerMove !== undefined ||
+    props.onPointerUp !== undefined ||
+    props.tooltip !== undefined
+  const hasPointerAction = !disabled && (
+    props.onClick !== undefined ||
+    props.onPointerDown !== undefined ||
+    props.onPointerMove !== undefined ||
+    props.onPointerUp !== undefined
+  )
+  const divProps: DivProps = {
     key,
     children,
+    hitCursor: hasPointerAction ? "pointer" : "default",
     style: {
       background: rgba8ToColor(colors.inner),
       borderColor: rgba8ToColor(colors.outline),
@@ -126,42 +148,28 @@ export function li(surface: UiSurface, x: number, y: number, width: number, heig
       zIndex: Z.ELEMENT,
       ...rawStyle,
     },
-  })
-
-  const interactive =
-    props.onClick !== undefined ||
-    props.onPointerEnter !== undefined ||
-    props.onPointerLeave !== undefined ||
-    props.onPointerDown !== undefined ||
-    props.onPointerMove !== undefined ||
-    props.onPointerUp !== undefined ||
-    props.tooltip !== undefined
-  if (!interactive) return
-  const disabled = props.disabled === true
-  const hasPointerAction = !disabled && (props.onClick !== undefined
-    || props.onPointerDown !== undefined
-    || props.onPointerMove !== undefined
-    || props.onPointerUp !== undefined)
-  const hitOptions: HitOptions = {
-    key,
-    cursor: hasPointerAction ? "pointer" : "default",
-    onPointerEnter: () => {
+  }
+  if (interactive) {
+    divProps.onClick = disabled ? (() => {}) : props.onClick ?? (() => {})
+    divProps.onPointerEnter = () => {
       if (!disabled) props.onPointerEnter?.()
       surface.requestKeyedRender(key)
-    },
-    onPointerLeave: () => {
+    }
+    divProps.onPointerLeave = () => {
       if (!disabled) props.onPointerLeave?.()
       surface.requestKeyedRender(key)
-    },
+    }
+    if (!disabled && props.onPointerDown !== undefined) divProps.onPointerDown = props.onPointerDown
+    if (!disabled && props.onPointerMove !== undefined) divProps.onPointerMove = props.onPointerMove
+    if (!disabled && props.onPointerUp !== undefined) divProps.onPointerUp = props.onPointerUp
+    if (props.tooltip !== undefined) {
+      divProps.tooltip = {label: props.tooltip, delayMs: props.tooltipDelayMs ?? 450}
+    }
   }
-  if (!disabled && props.onPointerDown !== undefined) hitOptions.onPointerDown = props.onPointerDown
-  if (!disabled && props.onPointerMove !== undefined) hitOptions.onPointerMove = props.onPointerMove
-  if (!disabled && props.onPointerUp !== undefined) hitOptions.onPointerUp = props.onPointerUp
+  div(surface, x, y, width, height, divProps)
   if (props.tooltip !== undefined) {
-    hitOptions.tooltip = {label: props.tooltip, delayMs: props.tooltipDelayMs ?? 450}
     surface.drawTooltipForHit(x, y, width, height, props.tooltip, {delayMs: props.tooltipDelayMs ?? 450})
   }
-  surface.hit(x, y, width, height, disabled ? (() => {}) : props.onClick ?? (() => {}), hitOptions)
 }
 
 function uiListItemRadius(height: number, roundness: number): number {

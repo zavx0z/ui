@@ -1,7 +1,7 @@
 import {describe, expect, test} from "bun:test"
 import type {UiSurface} from "@layout/core/surface"
 import {UiSurface as BaseUiSurface} from "@layout/core/surface"
-import {li, liY, ulContentHeight} from "./list.ts"
+import {li, liY, ul, ulContentHeight, type UlElementContext} from "./list.ts"
 import {rgba8ToColor, resolveWidgetColors} from "./theme-reference.ts"
 
 type HitCall = Parameters<UiSurface["hit"]>
@@ -12,6 +12,11 @@ class RecordingSurface extends BaseUiSurface {
   readonly roundedRects: RoundedRectCall[] = []
   override hit(...args: HitCall): void { this.hits.push(args) }
   override drawRoundedRect(...args: RoundedRectCall): void { this.roundedRects.push(args) }
+  protected render(): void {}
+}
+
+class ImmediateListSurface extends BaseUiSurface {
+  override drawRoundedRect(): void {}
   protected render(): void {}
 }
 
@@ -28,6 +33,23 @@ describe("ul/li layout helpers", () => {
     expect(liY(2, {startY: 8, itemHeight: 44, itemGap: 6})).toBe(108)
   })
 
+  test("applies explicit ul padding exactly once", () => {
+    const surface = new RecordingSurface()
+    let context: UlElementContext | null = null
+    ul(surface, 0, 0, 100, 80, {
+      style: {paddingX: 10, paddingY: 10},
+      children: (next) => { context = next },
+    })
+
+    expect(context).toMatchObject({
+      viewportX: 0,
+      viewportY: 0,
+      itemX: 10,
+      itemY: 10,
+      itemWidth: 80,
+    })
+  })
+
   test("uses pointer only for a real click or pointer action", () => {
     const tooltip = new RecordingSurface()
     li(tooltip, 0, 0, 100, 24, {tooltip: "Description"})
@@ -40,6 +62,14 @@ describe("ul/li layout helpers", () => {
     const clickable = new RecordingSurface()
     li(clickable, 0, 0, 100, 24, {onClick() {}})
     expect(clickable.hits[0]?.[5]).toMatchObject({cursor: "pointer"})
+  })
+
+  test("keeps a rounded li hit inside the same div shape", () => {
+    const surface = new ImmediateListSurface()
+    li(surface, 0, 0, 100, 40, {key: "rounded-li", onClick() {}})
+
+    expect(surface.pointerHitKey(1, 1)).toBeNull()
+    expect(surface.pointerHitKey(50, 20)).toBe("rounded-li")
   })
 
   test("maps hover, press, selection and disabled through listItem", () => {
