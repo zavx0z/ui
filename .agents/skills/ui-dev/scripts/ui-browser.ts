@@ -54,7 +54,7 @@ type ReadyMarker =
   | Readonly<{kind: "canvas"; selector: string; minBackingWidth: number}>
 type CanvasDescriptor = Readonly<{
   selector: string
-  capability: "webgpu" | "webgpu-diagnostic" | "none"
+  capability: "webgpu" | "none"
   touch: boolean
 }>
 type StorybookPageDescriptor = Readonly<{
@@ -642,22 +642,42 @@ async function readCanvasSnapshot(cdp: CdpConnection, selector: string): Promise
   return evaluate<RawCanvasSnapshot>(cdp, `(async () => {
     const canvas = document.querySelector(${JSON.stringify(selector)})
     if (!(canvas instanceof HTMLCanvasElement) || canvas.width < 1 || canvas.height < 1) {
-      return {dataUrl:null, probe:null}
+      return {dataUrl:null, probe:null, captureSource:"canvas-backing-fallback"}
     }
-    const dataUrl = canvas.toDataURL("image/png")
-    const bitmap = await createImageBitmap(await (await fetch(dataUrl)).blob())
+    const ownerCapture = globalThis.__uiStorybookCapturePresentedFrame
+    const hasOwnerCapture = typeof ownerCapture === "function"
+    const presentedBlob = hasOwnerCapture ? await ownerCapture() : null
+    if (hasOwnerCapture && presentedBlob === null) {
+      return {dataUrl:null, probe:null, captureSource:"engine-last-presented"}
+    }
+    const fallbackDataUrl = hasOwnerCapture ? null : canvas.toDataURL("image/png")
+    const blob = presentedBlob ?? await (await fetch(fallbackDataUrl)).blob()
+    const dataUrl = hasOwnerCapture
+      ? await new Promise((resolve, reject) => {
+          const reader = new FileReader()
+          reader.addEventListener("load", () => resolve(typeof reader.result === "string" ? reader.result : null), {once:true})
+          reader.addEventListener("error", () => reject(reader.error ?? new Error("presented frame PNG could not be encoded")), {once:true})
+          reader.readAsDataURL(presentedBlob)
+        })
+      : fallbackDataUrl
+    const bitmap = await createImageBitmap(blob)
     const probe = document.createElement("canvas")
     probe.width = Math.min(128, bitmap.width)
     probe.height = Math.min(128, bitmap.height)
     const context = probe.getContext("2d", {willReadFrequently:true})
     if (context === null) {
       bitmap.close()
-      return {dataUrl, probe:null}
+      return {
+        dataUrl,
+        probe:null,
+        captureSource:hasOwnerCapture ? "engine-last-presented" : "canvas-backing-fallback",
+      }
     }
     context.drawImage(bitmap, 0, 0, probe.width, probe.height)
     bitmap.close()
     return {
       dataUrl,
+      captureSource:hasOwnerCapture ? "engine-last-presented" : "canvas-backing-fallback",
       probe:{
         width:probe.width,
         height:probe.height,

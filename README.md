@@ -13,7 +13,7 @@ Visual UI is a retained, canvas-native interface stack for dense editors, spatia
 | [`@ui/elements`](packages/elements) | HTML-like visual primitives, controlled input behavior, widget appearance, theme, and icons. |
 | [`@ui/components`](packages/components) | Controlled fields and visual controls composed from Elements. |
 | [`@ui/hud`](packages/hud) | Heads-up display windows, frames, and timeline presentation. |
-| [`@ui/storybook`](packages/storybook) | Private UI catalog, routes, diagnostic fixture, lifecycle and Pages application using `@zavx0z/storybook`. |
+| [`@ui/storybook`](packages/storybook) | Private UI catalog, package routes, lifecycle and Pages application using `@zavx0z/storybook`. |
 
 Production dependencies flow upward from [`@engine/core`](https://github.com/zavx0z/engine) through [`@layout/core`](https://github.com/zavx0z/layout), Elements, and Components. `@zavx0z/storybook` and the private UI Storybook app remain development consumers and do not enter an application bundle unless imported explicitly.
 

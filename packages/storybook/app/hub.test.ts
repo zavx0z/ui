@@ -37,12 +37,11 @@ describe("central UI storybook hub", () => {
     }))).toEqual([
       {id: "elements", routePrefix: "/elements", defaultRoute: "/elements/", presentation: "webgpu"},
       {id: "components", routePrefix: "/components", defaultRoute: "/components/", presentation: "webgpu"},
-      {id: "storybook", routePrefix: "/storybook", defaultRoute: "/storybook/", presentation: "webgpu-diagnostic"},
       {id: "hud", routePrefix: "/hud", defaultRoute: "/hud/", presentation: "dom"},
     ])
     const hudBody = await Bun.file(join(hubRoot, "packages/hud/hud-storybook-body.html")).text()
     const hudEntry = await Bun.file(join(hubRoot, "packages/hud/hud-storybook.ts")).text()
-    expect(hudBody).toContain("Отдельный visual storybook для HUD пока не реализован")
+    expect(hudBody).toContain("Отдельная визуальная витрина Storybook для HUD пока не реализована")
     expect(hudBody).toContain("не создаёт UiRuntime")
     expect(hudBody).not.toContain("node-view")
     expect(hudEntry).not.toContain("представление нод")
@@ -50,20 +49,18 @@ describe("central UI storybook hub", () => {
     expect(hudEntry).not.toContain("canvas")
   })
 
-  test("registers one catalog and four independently built package pages", () => {
+  test("registers one catalog and three independently built package pages", () => {
     const app = createUiStorybookApp()
     const pages = createUiStorybookPages()
     expect(pages.map(({id, mountPath}) => [id, mountPath])).toEqual([
       ["catalog", "/"],
       ["elements", "/elements"],
       ["components", "/components"],
-      ["storybook", "/storybook"],
       ["hud", "/hud"],
     ])
     expect(pages.every(({manifest}) => manifest.routeTree !== null)).toBeTrue()
     expect(pages.find(({id}) => id === "elements")?.manifest.routeTree.leaves).toHaveLength(47)
     expect(pages.find(({id}) => id === "components")?.manifest.routeTree.leaves).toHaveLength(81)
-    expect(pages.find(({id}) => id === "storybook")?.manifest.routeTree.leaves).toEqual(["overview", "details"])
     expect(pages.find(({id}) => id === "hud")?.manifest.routeTree.leaves).toEqual([])
     expect(app.home.label).toBe("Главная")
     expect(app.footer).toEqual({
@@ -73,14 +70,12 @@ describe("central UI storybook hub", () => {
     })
     expect(uiStorybookPageFiles("elements").body).toEqual({kind: "canvas", canvasId: "stage-canvas"})
     expect(uiStorybookPageFiles("components").body).toEqual({kind: "canvas", canvasId: "stage-canvas"})
-    expect(uiStorybookPageFiles("storybook").body).toEqual({kind: "canvas", canvasId: "storybook-canvas"})
     expect(uiStorybookPageFiles("hud").body.kind).toBe("html")
   })
 
   test("keeps the existing Workbench mounted on overview and leaf routes", async () => {
     const elements = await Bun.file(join(storybookRoot, "../elements/storybook/entry.ts")).text()
     const components = await Bun.file(join(storybookRoot, "../components/storybook/entry.ts")).text()
-    const fixture = await Bun.file(join(storybookRoot, "fixtures/entry.ts")).text()
     const mounted = await Bun.file(join(hubRoot, "mounted-story-page.ts")).text()
 
     expect(elements).toContain('const ELEMENTS_MOUNT_PATH = storybookPublicPath("ui", "/elements")')
@@ -91,8 +86,6 @@ describe("central UI storybook hub", () => {
     expect(components).toContain("createMountedStoryRouter<ComponentsStoryRoute>")
     expect(components).toContain("runtime.addSurface(preview")
     expect(components).toContain("runtime.addSurface(storyPanel")
-    expect(fixture).toContain('const STORYBOOK_MOUNT_PATH = storybookPublicPath("ui", "/storybook")')
-    expect(fixture).toContain("new StorybookRouteTreeRouter(pageRouteTree")
     expect(mounted).toContain("new StorybookRouteTreeRouter(routeTree, {basePath})")
     expect(mounted).toContain("representativeDetailRoute")
     expect(mounted).not.toContain("StorybookOverviewSurface")
@@ -116,12 +109,12 @@ describe("central UI storybook hub", () => {
       expect(catalogHtml).toContain("<title>UI storybook</title>")
       expect(catalogHtml).toContain('<meta name="engine-default-font" content="/fonts/jetbrains-mono-bold.ttf">')
       expect(catalogHtml).toContain('id="ui-package-catalog"')
+      expect(catalogHtml).not.toContain("MetaFor · UI")
 
       for (const [path, location] of [
         ["/elements", "/elements/"],
         ["/elements/div", "/elements/div/"],
         ["/components", "/components/"],
-        ["/storybook", "/storybook/"],
         ["/hud", "/hud/"],
       ] as const) {
         const response = await fetch(`${origin}${path}`, {redirect: "manual"})
@@ -135,8 +128,6 @@ describe("central UI storybook hub", () => {
         ["/elements/div/basic/background", "@ui/elements", 'id="stage-canvas"', "elements"],
         ["/components/", "@ui/components", 'id="stage-canvas"', "components"],
         ["/components/button/basic/contained", "@ui/components", 'id="stage-canvas"', "components"],
-        ["/storybook/", "@zavx0z/storybook", 'id="storybook-canvas"', "storybook"],
-        ["/storybook/overview", "@zavx0z/storybook", 'id="storybook-canvas"', "storybook"],
         ["/hud/", "@ui/hud", 'id="ui-hud-overview"', "hud"],
       ] as const) {
         const response = await fetch(`${origin}${path}`)
@@ -156,12 +147,13 @@ describe("central UI storybook hub", () => {
         "/missing",
         "/elements/missing",
         "/components/button/missing",
-        "/storybook/missing",
+        "/storybook/",
+        "/storybook/overview",
         "/hud/missing",
       ]) expect(await fetch(`${origin}${path}`).then(({status}) => status), path).toBe(404)
 
-      const [catalogEntry, hudEntry, elementsEntry, componentsEntry, fixtureEntry] = await Promise.all(
-        ["catalog", "hud", "elements", "components", "storybook"].map(async (pageId) => {
+      const [catalogEntry, hudEntry, elementsEntry, componentsEntry] = await Promise.all(
+        ["catalog", "hud", "elements", "components"].map(async (pageId) => {
           const response = await fetch(`${origin}/@storybook-assets/${pageId}/entry.js`)
           expect(response.status, pageId).toBe(200)
           return response.text()
@@ -182,7 +174,6 @@ describe("central UI storybook hub", () => {
       expect(elementsEntry).toContain("elementsStorybook")
       expect(elementsEntry).not.toContain("componentsStorybook")
       expect(componentsEntry).toContain("componentsStorybook")
-      expect(fixtureEntry).toContain("storybookReady")
     } finally {
       server.stop(true)
     }

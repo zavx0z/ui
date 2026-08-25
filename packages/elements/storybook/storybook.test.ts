@@ -175,6 +175,15 @@ describe("@ui/elements package-owned Workbench stories", () => {
     expect(entry).toContain('title: "Варианты"')
     expect(entry).toContain("navigator.clipboard.writeText")
     expect(entry).toContain("runtime.handleResize()")
+    expect(entry).toContain("runtime.requestRender()")
+    expect(entry).toContain("runtime.renderer.captureLastPresentedFramePng()")
+    expect(entry).toContain("await waitForStorybookFrameBoundary()")
+    expect(entry.indexOf("await waitForStorybookFrameBoundary()")).toBeLessThan(
+      entry.indexOf('dataset.elementsStorybook = "ready"'),
+    )
+    expect(entry.indexOf("await waitForStorybookFrameBoundary()")).toBeLessThan(
+      entry.indexOf('dataset.uiStorybook = "ready"'),
+    )
     expect(entry).not.toContain("StorybookInfoSurface")
     expect(entry).not.toContain("elementsStorybookInfo")
     expect(entry).not.toContain("ElementsPreviewSurface")

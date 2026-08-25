@@ -1,59 +1,76 @@
 import {describe, expect, test} from "bun:test"
 import {join} from "node:path"
-import {fileURLToPath} from "node:url"
 
-const root = fileURLToPath(new URL(".", import.meta.url))
+const root = import.meta.dir
+const removedGenericFiles = Object.freeze([
+  "index.ts",
+  "router.ts",
+  "route-tree.ts",
+  "environment.ts",
+  "reference.ts",
+  "story.ts",
+  "layout.ts",
+  "surfaces.ts",
+  "theme.ts",
+  "server.ts",
+  "environment.test.ts",
+  "reference.test.ts",
+  "story.test.ts",
+  "layout.test.ts",
+  "route-tree.test.ts",
+  "router.test.ts",
+  "surfaces-retained.test.ts",
+  "server.test.ts",
+  "workbench-chrome.test.ts",
+  "workbench-hierarchy.test.ts",
+])
+const sharedSubpath = /^@zavx0z\/storybook\/(?:app|build|environment|references|route-tree|server|stories|workbench)$/
 
-describe("@ui/storybook package boundary", () => {
-  test("contains no consumer or product vocabulary", async () => {
-    const files = ["index.ts", "router.ts", "route-tree.ts", "layout.ts", "surfaces.ts", "theme.ts", "server.ts"]
-    const source = (await Promise.all(files.map((path) => Bun.file(join(root, path)).text()))).join("\n")
-    for (const forbidden of ["NodeEditor", "NodeCanvas", "Blender", "Socket", "Parameter", "Hamiltonian", "Bulk"]) {
-      expect(source).not.toContain(forbidden)
+describe("@ui/storybook private application boundary", () => {
+  test("has no public package exports or local generic implementation", async () => {
+    const manifest = await Bun.file(join(root, "package.json")).json() as Record<string, unknown>
+    expect("main" in manifest).toBeFalse()
+    expect("types" in manifest).toBeFalse()
+    expect("exports" in manifest).toBeFalse()
+
+    for (const path of removedGenericFiles) {
+      expect(await Bun.file(join(root, path)).exists(), path).toBeFalse()
     }
   })
 
-  test("exports reusable router, layout and shell surfaces", async () => {
-    const source = await Bun.file(join(root, "index.ts")).text()
-    expect(source).toContain("router.ts")
-    expect(source).toContain("story.ts")
-    expect(source).toContain("layout.ts")
-    expect(source).toContain("surfaces.ts")
+  test("imports shared contracts only through exact public subpaths", async () => {
+    const imports: string[] = []
+    for (const directory of ["app"]) {
+      const glob = new Bun.Glob("**/*.ts")
+      for await (const path of glob.scan({cwd: join(root, directory), onlyFiles: true})) {
+        const source = await Bun.file(join(root, directory, path)).text()
+        expect(source, `${directory}/${path}`).not.toMatch(/from ["']@ui\/storybook(?:["'/])/)
+        for (const match of source.matchAll(/from ["'](@zavx0z\/storybook(?:\/[^"']+)?)['"]/g)) {
+          imports.push(match[1]!)
+          expect(match[1], `${directory}/${path}`).toMatch(sharedSubpath)
+        }
+      }
+    }
+    expect(imports.length).toBeGreaterThan(0)
+    expect(imports).not.toContain("@zavx0z/storybook")
   })
 
-  test("builds one consumer without embedding package-specific vocabulary", async () => {
-    const fixtureSource = await Bun.file(join(root, "fixtures/entry.ts")).text()
-    const fixtureStory = await Bun.file(join(root, "fixtures/stories/button.ts")).text()
+  test("keeps the lazy reference catalog owned by the UI application", async () => {
+    const catalogPage = await Bun.file(join(root, "app/catalog/catalog-storybook.ts")).text()
+    const catalog = await Bun.file(join(root, "reference-catalog.ts")).text()
+    expect(catalogPage).toContain('from "../../reference-catalog.ts"')
+    expect(catalog).toContain('await import("./assets/references/catalog.json"')
+    expect(catalog).not.toContain("@zavx0z/storybook")
+  })
+
+  test("keeps shared package documentation out of the UI application", async () => {
     const pageRegistry = await Bun.file(join(root, "app/server/page-registry.ts")).text()
-    expect(fixtureSource).toContain("createRetainedParent")
-    expect(fixtureSource).toContain("storybookRetained")
-    expect(fixtureSource).toContain("defineStorybookRouteTree({leaves: pageRoutes})")
-    expect(fixtureSource).toContain("defineStorybookStories")
-    expect(fixtureSource).toContain("StorybookStoryPanelSurface")
-    expect(fixtureSource).toContain('import("./stories/button.ts")')
-    expect(fixtureStory).toContain('from "@ui/components/button"')
-    expect(fixtureStory).not.toContain('from "@ui/components"')
-    expect(pageRegistry).toContain("storybook: pageFiles({")
-    expect(pageRegistry).toContain('canvasId: "storybook-canvas"')
-    const build = await Bun.build({
-      entrypoints: [join(root, "fixtures/entry.ts")],
-      target: "browser",
-      format: "esm",
-      minify: true,
-      sourcemap: "none",
-      loader: {".wgsl": "text"},
-    })
-    expect(build.success, build.logs.map(({message}) => message).join("\n")).toBeTrue()
-    const source = await build.outputs[0]!.text()
-    expect(source).toContain("StorybookNavigationSurface")
-    for (const forbidden of ["NodeEditor", "BlenderSocket", "Hamiltonian", "Bulk"]) expect(source).not.toContain(forbidden)
-  })
-
-  test("lets a consumer add exact static assets without owning server mechanics", async () => {
-    const source = await Bun.file(join(root, "server.ts")).text()
-    expect(source).toContain("staticFiles")
-    expect(source).toContain("staticRoutes")
-    expect(source).toContain("development: {hmr: false}")
-    expect(source).toContain("splitting: true")
+    expect(pageRegistry).toContain('from "@zavx0z/storybook/app"')
+    expect(pageRegistry).toContain('from "@zavx0z/storybook/server"')
+    expect(pageRegistry).not.toContain('id: "storybook"')
+    expect(pageRegistry).not.toContain("fixtures/")
+    for (const path of ["fixtures/entry.ts", "fixtures/style.css", "fixtures/stories/button.ts"]) {
+      expect(await Bun.file(join(root, path)).exists(), path).toBeFalse()
+    }
   })
 })

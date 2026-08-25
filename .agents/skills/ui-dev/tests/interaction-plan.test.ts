@@ -203,6 +203,7 @@ describe("ui-dev data-only interaction plans", () => {
       path: "/tmp/rejected.png",
       bytes: 0,
       attempts: 1,
+      captureSource: "engine-last-presented",
       rendererActivity: null,
       rejected: [],
       probe: {width: 1, height: 1, pixels: 1, nonBlackPixels: 0, maxRgb: 0, black: true},

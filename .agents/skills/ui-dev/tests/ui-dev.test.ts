@@ -65,7 +65,6 @@ describe("central ui-dev registry", () => {
     expect(registry.selectors.ui?.pages?.map(({mountPath}) => mountPath)).toEqual([
       "/elements",
       "/components",
-      "/storybook",
       "/hud",
       "/",
     ])
@@ -103,6 +102,11 @@ describe("central ui-dev registry", () => {
     expect(source).toContain("await validateRegistryRoute(config.targetUrl)")
     expect(source).toContain('document.querySelector("[data-storybook-home]")')
     expect(source).toContain('canvas.toDataURL("image/png")')
+    expect(source).toContain("globalThis.__uiStorybookCapturePresentedFrame")
+    expect(source).toContain("presentedBlob ??")
+    expect(source).toContain('captureSource:"engine-last-presented"')
+    expect(source).toContain('"canvas-backing-fallback"')
+    expect(source).toContain("hasOwnerCapture && presentedBlob === null")
     expect(source).toContain('"Page.captureScreenshot"')
     expect(source).toContain('action === "page"')
     expect(source).toContain("nativeMetricsRestored")

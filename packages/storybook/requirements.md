@@ -114,11 +114,11 @@ Components либо consumer.
     не выбирает случайный fallback story: server и browser tooling отклоняют
     его fail-closed.
 21. Семейство UI запускается одним Bun process на одном origin
-    `http://127.0.0.1:4017`. Главная `/` перечисляет `@ui/elements`,
-    `@ui/components`, integration page `@zavx0z/storybook` и `@ui/hud`,
-    объясняет ответственность владельца и содержание dev-страницы. Mounts —
-    соответственно
-    `/elements/`, `/components/`, `/storybook/` и `/hud/`; отдельные
+    `http://127.0.0.1:4017`. Главная `/` перечисляет только принадлежащие UI
+    `@ui/elements`, `@ui/components` и `@ui/hud` и объясняет ответственность
+    владельца каждой dev-страницы. Shared package документирует себя в
+    собственном Storybook и не изображается UI package. Mounts —
+    соответственно `/elements/`, `/components/` и `/hud/`; отдельные
     package-серверы и порты не являются вторым способом запуска.
 22. Один browser target этого origin переходит между package mounts. Каждая
     страница остаётся отдельным browser bundle и загружает только свой
@@ -130,7 +130,7 @@ Components либо consumer.
     принадлежит server shell, находится поверх DOM/SVG/WebGPU page и не требует
     consumer renderer либо ручного изменения адресной строки. На самой главной
     `/` этот control отсутствует.
-24. Static build материализует те же пять page shells под public base `/ui/`,
+24. Static build материализует те же четыре page shells под public base `/ui/`,
     сохраняет отдельные browser graphs и lazy chunks, публикует `.nojekyll`,
     schema-version-1 manifest и fail-closed deep-link recovery. Manifest
     фиксирует source/dependency revisions и dirty state, page routes,
@@ -151,11 +151,20 @@ Components либо consumer.
 27. Каждая public Storybook page показывает ненавязчивый structured footer
     `Создано для MetaFor · переиспользуемая WebGPU-инфраструктура UI`, не
     превращая MetaFor в runtime dependency reusable UI packages. HTML string
-    replacement, плавающий header и badge поверх рабочей области отсутствуют.
+    replacement, дублирующий brand header и badge поверх рабочей области
+    отсутствуют. На DOM page footer остаётся после content и не перекрывает его.
+28. Canvas page ставит общий ready marker только после того, как её owner
+    запланировал первый render и дождался общей frame boundary из
+    `@zavx0z/storybook/environment`. Эта browser boundary не заменяет отдельную
+    non-black GPU evidence. UI browser evidence читает сохранённый последний
+    кадр через public Engine renderer capture, а не полагается на непостоянный
+    WebGPU canvas backing buffer. Evidence сохраняет источник capture; если
+    owner bridge существует, но кадр недоступен, проверка завершается ошибкой и
+    не переходит на backing buffer молча.
 
-## Migration state
+## Граница private application
 
-Прежняя generic реализация внутри private `@ui/storybook` временно остаётся
-настоящим кодом для прямых Node и MetaFor consumers. UI application импортирует
-только `@zavx0z/storybook/*`. После миграции остальных consumers старый слой
-удаляется целиком без alias, wrapper или compatibility re-export.
+Private `@ui/storybook` содержит только принадлежащие UI catalog, mounts,
+preview state, reference catalog, lifecycle и static build.
+У package нет public exports: переиспользуемые контракты импортируются напрямую
+из точных subpaths `@zavx0z/storybook/*`, а production packages их не импортируют.

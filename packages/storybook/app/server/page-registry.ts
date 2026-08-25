@@ -48,11 +48,6 @@ const PAGE_FILES: Readonly<Record<UiStorybookPageId, PageFiles>> = Object.freeze
     stylePath: join(uiRoot, "components/storybook/style.css"),
     body: {kind: "canvas", canvasId: "stage-canvas"},
   }),
-  storybook: pageFiles({
-    entrypoint: join(storybookRoot, "fixtures/entry.ts"),
-    stylePath: join(storybookRoot, "fixtures/style.css"),
-    body: {kind: "canvas", canvasId: "storybook-canvas"},
-  }),
   hud: pageFiles({
     entrypoint: join(storybookRoot, "app/packages/hud/hud-storybook.ts"),
     stylePath: join(storybookRoot, "app/packages/hud/hud-storybook.css"),
@@ -61,7 +56,6 @@ const PAGE_FILES: Readonly<Record<UiStorybookPageId, PageFiles>> = Object.freeze
 })
 
 const CATALOG_ROUTE_TREE = defineStorybookRouteTree({leaves: [] as const})
-const FIXTURE_ROUTE_TREE = defineStorybookRouteTree({leaves: ["overview", "details"] as const})
 const HUD_ROUTE_TREE = defineStorybookRouteTree({leaves: [] as const})
 
 /** Один UI-owned manifest для dev server, static build и lifecycle checks. */
@@ -112,7 +106,7 @@ export function createUiStorybookApp(options: UiStorybookPagesOptions = {}): Sto
   })
 }
 
-/** Compatibility-free convenience for focused page tests inside the UI app. */
+/** Creates the UI-owned pages used by focused application tests. */
 export function createUiStorybookPages(options: UiStorybookPagesOptions = {}): readonly StorybookPage[] {
   const app = createUiStorybookApp(options)
   return Object.freeze(app.pages.map((page) => createStorybookPage(app, page)))
@@ -125,13 +119,11 @@ export function uiStorybookPageFiles(id: UiStorybookPageId): PageFiles {
 function routeTreeFor(id: UiPackageStorybookId) {
   if (id === "elements") return ELEMENT_STORIES.routeTree
   if (id === "components") return COMPONENT_STORIES.routeTree
-  if (id === "storybook") return FIXTURE_ROUTE_TREE
   return HUD_ROUTE_TREE
 }
 
 function capabilityFor(id: UiPackageStorybookId): StorybookCapability {
   if (id === "hud") return "dom"
-  if (id === "storybook") return "webgpu-diagnostic"
   return "webgpu"
 }
 

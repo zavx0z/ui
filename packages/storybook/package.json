@@ -1,23 +1,9 @@
 {
   "name": "@ui/storybook",
   "version": "0.0.1",
-  "description": "Static visual WebGPU Storybook and comparison workbench. Built for MetaFor and reusable with the UI packages.",
+  "description": "Private UI catalog, package routes, lifecycle and static WebGPU Storybook application. Built for MetaFor.",
   "type": "module",
   "private": true,
-  "main": "index.ts",
-  "types": "index.ts",
-  "exports": {
-    ".": "./index.ts",
-    "./router": "./router.ts",
-    "./route-tree": "./route-tree.ts",
-    "./environment": "./environment.ts",
-    "./references": "./reference.ts",
-    "./reference-catalog": "./reference-catalog.ts",
-    "./stories": "./story.ts",
-    "./layout": "./layout.ts",
-    "./surfaces": "./surfaces.ts",
-    "./server": "./server.ts"
-  },
   "scripts": {
     "storybook": "bun app/server.ts",
     "build": "bun build.ts",

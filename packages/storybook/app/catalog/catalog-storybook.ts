@@ -28,7 +28,7 @@ for (const entry of UI_PACKAGE_CATALOG) {
   meta.textContent = `${entry.presentation.toUpperCase()} · ${entry.defaultRoute}`
   const link = document.createElement("a")
   link.href = storybookPublicPath("ui", entry.defaultRoute)
-  link.textContent = "Открыть страницу package"
+  link.textContent = "Открыть страницу пакета"
   link.setAttribute("aria-label", `Открыть страницу ${entry.packageName}`)
 
   article.append(heading, title, summary, storybook, meta, link)

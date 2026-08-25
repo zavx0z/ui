@@ -7,10 +7,13 @@ export type RawCanvasProbe = Readonly<{
   rgba: readonly number[]
 }>
 
+export type CanvasCaptureSource = "engine-last-presented" | "canvas-backing-fallback"
+
 /** Exact encoded-canvas acceptance shared by centralized package pages. */
 export type RawCanvasSnapshot = Readonly<{
   dataUrl: string | null
   probe: RawCanvasProbe | null
+  captureSource: CanvasCaptureSource
 }>
 
 export type CanvasPixelEvidence = Readonly<{
@@ -25,6 +28,7 @@ export type CanvasPixelEvidence = Readonly<{
 type RejectedCanvasAttempt = Readonly<{
   attempt: 1 | 2
   kind: "starting-or-idle-black"
+  captureSource: CanvasCaptureSource
   probe: CanvasPixelEvidence
 }>
 
@@ -34,6 +38,7 @@ export type AcceptedCanvasEvidence = Readonly<{
   path: string
   bytes: number
   attempts: 1 | 2
+  captureSource: CanvasCaptureSource
   rendererActivity: "same-route-navigation" | null
   rejected: readonly RejectedCanvasAttempt[]
   probe: CanvasPixelEvidence
@@ -45,6 +50,7 @@ export type RejectedCanvasEvidence = Readonly<{
   path: string
   bytes: 0
   attempts: 1 | 2
+  captureSource: CanvasCaptureSource
   rendererActivity: "same-route-navigation" | null
   rejected: readonly RejectedCanvasAttempt[]
   probe: CanvasPixelEvidence
@@ -102,10 +108,15 @@ export async function acceptCanvasEvidence(options: Readonly<{
 
   for (let attempt = 1; attempt <= maximumAttempts; attempt++) {
     const snapshot = await options.snapshot()
-    if (snapshot.probe === null) throw new Error("canvas pixel probe is unavailable")
+    if (snapshot.probe === null) throw new Error(`${snapshot.captureSource} pixel probe is unavailable`)
     const probe = classifyCanvasPixels(snapshot.probe)
     if (probe.black) {
-      rejected.push({attempt: attempt as 1 | 2, kind: "starting-or-idle-black", probe})
+      rejected.push({
+        attempt: attempt as 1 | 2,
+        kind: "starting-or-idle-black",
+        captureSource: snapshot.captureSource,
+        probe,
+      })
       if (attempt === 1 && options.retryAfterBlack !== undefined) {
         await options.retryAfterBlack()
         rendererActivity = "same-route-navigation"
@@ -117,6 +128,7 @@ export async function acceptCanvasEvidence(options: Readonly<{
         path: destination,
         bytes: 0,
         attempts: attempt as 1 | 2,
+        captureSource: snapshot.captureSource,
         rendererActivity,
         rejected,
         probe,
@@ -131,6 +143,7 @@ export async function acceptCanvasEvidence(options: Readonly<{
       path: destination,
       bytes: bytes.length,
       attempts: attempt as 1 | 2,
+      captureSource: snapshot.captureSource,
       rendererActivity,
       rejected,
       probe,

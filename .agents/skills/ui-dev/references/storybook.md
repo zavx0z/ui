@@ -11,7 +11,6 @@ The executable registry is `scripts/storybooks.json` and contains only selector 
 | `/` | DOM catalog | none |
 | `/elements/` | WebGPU story tree | `#stage-canvas` |
 | `/components/` | WebGPU story tree | `#stage-canvas` |
-| `/storybook/` | shared-infrastructure integration tree | `#storybook-canvas` |
 | `/hud/` | DOM package inventory | none |
 
 ## Lifecycle and source freshness
@@ -71,6 +70,6 @@ Each nested page must expose `data-storybook-home` with text `Главная` an
 
 `interact` requires selector `ui`, an explicit canonical route, an explicit existing target ID, and a versioned JSON data plan. It never evaluates supplied JavaScript. Use pointer and key steps plus checkpoints exactly as described by the tests for `scripts/interaction-plan.ts`.
 
-`viewports` and `profile` are available only on the current route's WebGPU canvas. Viewport emulation and background focus emulation are restored in `finally`. Canvas capture rejects two consecutive black snapshots and never writes a rejected artifact.
+`viewports` and `profile` are available only on the current route's WebGPU canvas. Viewport emulation and background focus emulation are restored in `finally`. UI pages expose their Engine-owned last presented frame to evidence tooling. The result records `engine-last-presented`; a missing owner frame fails instead of silently accepting canvas backing pixels. `canvas-backing-fallback` is used only when an inspected page has no owner bridge. Canvas capture rejects two consecutive black snapshots and never writes a rejected artifact.
 
 Automated DOM, canvas, input, profile, and static-build evidence remains route-specific and is not owner acceptance.

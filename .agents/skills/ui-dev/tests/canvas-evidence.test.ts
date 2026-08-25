@@ -38,6 +38,7 @@ describe("canvas pixel evidence", () => {
         kind: "starting-or-idle-black",
         written: false,
         attempts: 1,
+        captureSource: "canvas-backing-fallback",
         rendererActivity: null,
       })
       expect(await Bun.file(destination).exists()).toBe(false)
@@ -84,8 +85,9 @@ describe("canvas pixel evidence", () => {
         kind: "exact-canvas-png",
         written: true,
         attempts: 2,
+        captureSource: "canvas-backing-fallback",
         rendererActivity: "same-route-navigation",
-        rejected: [{attempt: 1, kind: "starting-or-idle-black"}],
+        rejected: [{attempt: 1, kind: "starting-or-idle-black", captureSource: "canvas-backing-fallback"}],
         probe: {black: false, nonBlackPixels: 1},
       })
       expect([...await readFile(destination)]).toEqual([137, 80, 78, 71, 13, 10, 26, 10, 1, 2, 3])
@@ -113,10 +115,11 @@ describe("canvas pixel evidence", () => {
         kind: "starting-or-idle-black",
         written: false,
         attempts: 2,
+        captureSource: "canvas-backing-fallback",
         rendererActivity: "same-route-navigation",
         rejected: [
-          {attempt: 1, kind: "starting-or-idle-black"},
-          {attempt: 2, kind: "starting-or-idle-black"},
+          {attempt: 1, kind: "starting-or-idle-black", captureSource: "canvas-backing-fallback"},
+          {attempt: 2, kind: "starting-or-idle-black", captureSource: "canvas-backing-fallback"},
         ],
       })
       expect(await Bun.file(destination).exists()).toBe(false)
@@ -124,11 +127,41 @@ describe("canvas pixel evidence", () => {
       await rm(root, {recursive: true, force: true})
     }
   })
+
+  test("records Engine capture provenance and rejects an unavailable owner frame", async () => {
+    const root = await mkdtemp(join(tmpdir(), "ui-canvas-evidence-"))
+    try {
+      const accepted = await acceptCanvasEvidence({
+        destination: join(root, "engine.png"),
+        snapshot: async () => snapshot([0, 4, 0, 255], "engine-last-presented"),
+      })
+      expect(accepted).toMatchObject({
+        kind: "exact-canvas-png",
+        captureSource: "engine-last-presented",
+        attempts: 1,
+      })
+
+      await expect(acceptCanvasEvidence({
+        destination: join(root, "unavailable.png"),
+        snapshot: async () => ({
+          dataUrl: null,
+          probe: null,
+          captureSource: "engine-last-presented",
+        }),
+      })).rejects.toThrow("engine-last-presented pixel probe is unavailable")
+    } finally {
+      await rm(root, {recursive: true, force: true})
+    }
+  })
 })
 
-function snapshot(rgba: readonly number[]): RawCanvasSnapshot {
+function snapshot(
+  rgba: readonly number[],
+  captureSource: RawCanvasSnapshot["captureSource"] = "canvas-backing-fallback",
+): RawCanvasSnapshot {
   return {
     dataUrl: png,
     probe: {width: 1, height: 1, rgba},
+    captureSource,
   }
 }

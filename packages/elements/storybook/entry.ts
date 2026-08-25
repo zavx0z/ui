@@ -8,7 +8,10 @@ import {
   type StorybookStoryPanelMode,
   type StorybookStoryPanelOptions,
 } from "@zavx0z/storybook/workbench"
-import {storybookPublicPath} from "@zavx0z/storybook/environment"
+import {
+  storybookPublicPath,
+  waitForStorybookFrameBoundary,
+} from "@zavx0z/storybook/environment"
 import type {StorybookStoryArgs, StorybookStoryModule} from "@zavx0z/storybook/stories"
 import {
   ELEMENT_STORIES,
@@ -37,6 +40,7 @@ export type ElementsStorybookObserver = Readonly<{
 declare global {
   var __elementsStorybookObserver: ElementsStorybookObserver | undefined
   var __elementsStoryControlBridge: ((key: string, value: unknown) => void) | undefined
+  var __uiStorybookCapturePresentedFrame: (() => Promise<Blob | null>) | undefined
 }
 
 async function startElementsStorybook(): Promise<void> {
@@ -49,6 +53,7 @@ async function startElementsStorybook(): Promise<void> {
     const runtime = await UiRuntime.create(canvas, {
       virtualDisplay: {initial: "near", surfaceDisplay: true, grid: false},
     })
+    globalThis.__uiStorybookCapturePresentedFrame = () => runtime.renderer.captureLastPresentedFramePng()
     runtime.handleResize()
 
     const router = createMountedStoryRouter<ElementsStoryRoute>(ELEMENT_STORIES, ELEMENTS_MOUNT_PATH)
@@ -245,6 +250,8 @@ async function startElementsStorybook(): Promise<void> {
     }).observe(canvas)
     runtime.handleResize()
     publish()
+    runtime.requestRender()
+    await waitForStorybookFrameBoundary()
     document.documentElement.dataset.elementsStorybook = "ready"
     document.documentElement.dataset.uiStorybook = "ready"
   } catch (error) {

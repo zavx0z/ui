@@ -39,7 +39,6 @@ Read [references/blender-reference.md](references/blender-reference.md) before c
 | catalog | `/` | DOM package catalog |
 | `@ui/elements` | `/elements/` | WebGPU story catalog |
 | `@ui/components` | `/components/` | WebGPU story catalog |
-| `@zavx0z/storybook` integration | `/storybook/` | diagnostic WebGPU fixture |
 | `@ui/hud` | `/hud/` | honest DOM package inventory |
 
 Every story prefix is an overview with trailing `/`; an exact story leaf has no trailing `/`. Every nested page exposes `Главная` back to `/`. Unknown suffixes are rejected instead of opening a fallback story. Static Pages output uses the same routes below `/ui/`.
@@ -76,11 +75,11 @@ bun "$SKILL/scripts/ui-browser.ts" page "$PWD" ui \
 
 Run `targets` first. Open `/` only when the origin has no target; multiple targets are explicit ambiguity. Route operations navigate an existing target in place and never focus an OS window. DOM routes reject canvas, touch, and profile actions. `page` captures the complete rendered viewport without browser chrome or focus changes. The helper preflights the exact route, rejects noncanonical redirects and unknown paths, and selects the page-owned canvas descriptor.
 
-Automated browser operations are background-only. They never call `Page.bringToFront`, focus or window endpoints, AI macOS, or OS screenshot services. Exact canvas evidence decodes the target canvas PNG and rejects starting or idle black pixels. Emulation is cleared before handoff.
+Automated browser operations are background-only. They never call `Page.bringToFront`, focus or window endpoints, AI macOS, or OS screenshot services. Exact UI canvas evidence reads the Engine-owned last presented frame, reports that provenance, and rejects an unavailable or black result. Raw canvas backing pixels are only an explicit fallback for pages without the owner bridge. Emulation is cleared before handoff.
 
 ## Static and reference evidence
 
-`bun run build` must produce a self-contained `dist` for Pages base `/ui/`, including all five page shells, split lazy chunks, known-route-only deep-link recovery, the font, reference metadata, and schema-version-1 manifest with exact revisions and asset SHA-256. Story implementations stay lazy. A reference records exact provenance, viewport, DPR, compatibility, and acceptance; automated captures remain candidates until the owner accepts them.
+`bun run build` must produce a self-contained `dist` for Pages base `/ui/`, including all four page shells, split lazy chunks, known-route-only deep-link recovery, the font, reference metadata, and schema-version-1 manifest with exact revisions and asset SHA-256. Story implementations stay lazy. A reference records exact provenance, viewport, DPR, compatibility, and acceptance; automated captures remain candidates until the owner accepts them.
 
 GitHub Pages deployment is manual and owner-gated. Never dispatch
 `.github/workflows/pages.yml`, run `gh workflow run`, change repository Pages

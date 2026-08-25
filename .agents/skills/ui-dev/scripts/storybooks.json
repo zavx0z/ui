@@ -17,7 +17,6 @@
       "pages": [
         {"mountPath": "/elements", "canvas": {"selector": "#stage-canvas", "capability": "webgpu", "touch": false}},
         {"mountPath": "/components", "canvas": {"selector": "#stage-canvas", "capability": "webgpu", "touch": false}},
-        {"mountPath": "/storybook", "canvas": {"selector": "#storybook-canvas", "capability": "webgpu-diagnostic", "touch": false}},
         {"mountPath": "/hud", "canvas": {"selector": "canvas", "capability": "none", "touch": false}},
         {"mountPath": "/", "canvas": {"selector": "canvas", "capability": "none", "touch": false}}
       ],

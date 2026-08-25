@@ -6,7 +6,7 @@
 
 ## Set up the workspace
 
-Use sibling `engine`, `layout`, and `ui` checkouts. Register `@engine/core` and `@layout/core` with `bun link` from their owning package directories before installing UI. The UI manifests intentionally use `link:@engine/core` and `link:@layout/core`; do not replace them with file paths, TypeScript aliases, or compatibility packages.
+Use sibling `engine`, `layout`, `storybook`, and `ui` checkouts. Register `@engine/core`, `@layout/core`, and `@zavx0z/storybook` with `bun link` from their owners before installing UI. The UI manifests intentionally use exact global links; do not replace them with file paths, TypeScript aliases, or compatibility packages.
 
 ```bash
 bun install
@@ -28,7 +28,9 @@ bun run build
 - Put HTML-like visual primitives, controlled edit behavior, theme roles, and universal icons in `packages/elements`.
 - Put controlled fields and composed visual controls in `packages/components`.
 - Put heads-up presentation in `packages/hud`, without product commands or state ownership.
-- Put stories, comparison evidence, dev lifecycle, and static-site code in `packages/storybook`.
+- Keep Elements descriptors and previews in `packages/elements/storybook`.
+- Keep Components descriptors and previews in `packages/components/storybook`.
+- Put only the UI catalog, comparison evidence, dev lifecycle, and static-site code in `packages/storybook`.
 
 Dependencies must continue to point upward from Engine to Layout to Elements, Components, and HUD. Production packages must not import Storybook.
 
@@ -36,7 +38,7 @@ Dependencies must continue to point upward from Engine to Layout to Elements, Co
 
 Public identifiers, routes, package names, data attributes, and user-facing copy use neutral semantic names. A source product name belongs only in provenance, exact source paths, or owner-facing evidence. Do not add aliases or re-exports when renaming a public owner.
 
-Use lowercase semantic directories recognized by the repository tooling: `packages`, `components`, `elements`, `storybook`, `assets`, `icons`, `fixtures`, `scripts`, `tests`, and `.github/workflows`. Every TypeScript source and test filename is lowercase kebab-case; exported TypeScript symbols retain their semantic language casing.
+Use lowercase semantic directories recognized by the repository tooling: `packages`, `components`, `elements`, `storybook`, `assets`, `icons`, `scripts`, `tests`, and `.github/workflows`. Every TypeScript source and test filename is lowercase kebab-case; exported TypeScript symbols retain their semantic language casing.
 
 ## Add or update a story
 

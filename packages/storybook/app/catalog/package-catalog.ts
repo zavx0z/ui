@@ -1,9 +1,9 @@
-export type UiPackageStorybookId = "elements" | "components" | "storybook" | "hud"
-export type UiStorybookPresentation = "dom" | "webgpu" | "webgpu-diagnostic"
+export type UiPackageStorybookId = "elements" | "components" | "hud"
+export type UiStorybookPresentation = "dom" | "webgpu"
 
 export type UiPackageCatalogEntry = Readonly<{
   id: UiPackageStorybookId
-  packageName: `@ui/${string}` | "@zavx0z/storybook"
+  packageName: `@ui/${string}`
   title: string
   summary: string
   storybook: string
@@ -17,8 +17,8 @@ export const UI_PACKAGE_CATALOG: readonly UiPackageCatalogEntry[] = Object.freez
     id: "elements",
     packageName: "@ui/elements",
     title: "Элементы UI",
-    summary: "WebGPU-примитивы, controlled input, прокрутка, widget appearance и тема поверх Layout.",
-    storybook: "Сохраняет все принадлежащие Elements сценарии и их точные production imports.",
+    summary: "WebGPU-примитивы, управляемый ввод, прокрутка, внешний вид виджетов и тема поверх Layout.",
+    storybook: "Хранит все сценарии Elements и их точные импорты рабочего кода.",
     routePrefix: "/elements",
     defaultRoute: "/elements/",
     presentation: "webgpu",
@@ -27,28 +27,18 @@ export const UI_PACKAGE_CATALOG: readonly UiPackageCatalogEntry[] = Object.freez
     id: "components",
     packageName: "@ui/components",
     title: "Компоненты UI",
-    summary: "Универсальные controls и Fields, составленные из Elements.",
-    storybook: "Сохраняет полный каталог сценариев Components, controls, исходник и retained preview.",
+    summary: "Универсальные элементы управления и Fields, собранные из Elements.",
+    storybook: "Хранит полный каталог сценариев Components, параметры, исходник и сохранённое превью.",
     routePrefix: "/components",
     defaultRoute: "/components/",
     presentation: "webgpu",
   }),
   Object.freeze({
-    id: "storybook",
-    packageName: "@zavx0z/storybook",
-    title: "Интеграция общей Storybook-инфраструктуры",
-    summary: "Типизированные маршруты, пятипанельный Workbench и no-HMR delivery подключены как private dev dependency.",
-    storybook: "UI-owned diagnostic fixture проверяет интеграцию, не передавая shared package владение UI stories.",
-    routePrefix: "/storybook",
-    defaultRoute: "/storybook/",
-    presentation: "webgpu-diagnostic",
-  }),
-  Object.freeze({
     id: "hud",
     packageName: "@ui/hud",
     title: "HUD",
-    summary: "HUD-панели, визуальные controls, взаимодействие с рамкой и timeline.",
-    storybook: "Честная DOM-страница состава package: отдельного visual stand сейчас нет.",
+    summary: "HUD-панели, визуальные элементы управления, рамка и временная шкала.",
+    storybook: "Честная DOM-страница состава пакета: отдельной визуальной витрины пока нет.",
     routePrefix: "/hud",
     defaultRoute: "/hud/",
     presentation: "dom",

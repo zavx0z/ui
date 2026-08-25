@@ -1,10 +1,9 @@
 import {describe, expect, test} from "bun:test"
 import {join, resolve} from "node:path"
 
-const repositoryRoot = resolve(import.meta.dir, "../../..")
+const repositoryRoot = resolve(import.meta.dir, "../..")
 const visibleOwnerRoots = [
   "packages/storybook/app",
-  "packages/storybook/fixtures",
   "packages/components/storybook",
   "packages/elements/storybook",
 ] as const
@@ -47,7 +46,6 @@ const forbiddenVisiblePhrases = [
 ] as const
 
 const requiredLocalizedPhrases = [
-  "Рабочий компонент, текущие параметры и копируемый TypeScript используют один сценарий.",
   "Рабочий компонент, параметры и TypeScript используют один сценарий.",
   "Рабочий элемент, параметры и TypeScript используют один сценарий.",
   'label: "Сценарий"',
