@@ -176,7 +176,7 @@ describe("UI repository boundaries", () => {
     const server = await Bun.file(join(repositoryRoot, "packages/storybook/app/server.ts")).text()
     const registry = await Bun.file(join(repositoryRoot, "packages/storybook/app/server/page-registry.ts")).text()
     expect(server).not.toContain("data-storybook-brand")
-    expect(server).toContain("startStorybookHubServer")
+    expect(server).toContain("startStorybookPackageServer")
     expect(registry).toContain('lead: "Создано для"')
     expect(registry).toContain('owner: {label: "MetaFor", href: "https://github.com/zavx0z/metafor"}')
     expect(registry).toContain('detail: "переиспользуемая WebGPU-инфраструктура UI"')

@@ -247,7 +247,7 @@ describe("@ui/elements package-owned Workbench stories", () => {
     const port = await freePort()
     const process = Bun.spawn(["bun", "app/server.ts"], {
       cwd: fileURLToPath(new URL("../../storybook", import.meta.url)),
-      env: {...Bun.env, UI_STORYBOOK_PORT: String(port)},
+      env: {...Bun.env, STORYBOOK_PORT: String(port)},
       stdout: "pipe",
       stderr: "pipe",
     })

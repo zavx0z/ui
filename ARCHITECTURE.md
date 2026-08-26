@@ -52,7 +52,7 @@ Interpreter file/debugger state and Storybook chrome remain consumer-owned.
 
 ### Storybook
 
-`@zavx0z/storybook` owns typed route trees, lazy story contracts, comparison planning, the retained five-region Workbench and generic no-HMR/static delivery. The private `@ui/storybook` application owns the UI catalog, package mounts, preview state, lifecycle on `4017`, `/ui/` Pages output and acceptance. The shared package documents itself in its own repository instead of appearing as a fake UI package. Each UI package page is compiled independently so opening Elements does not eagerly materialize the Components or HUD browser graph.
+`@zavx0z/storybook` owns typed route trees, lazy story contracts, comparison planning, the retained five-region Workbench and generic package-name lifecycle/browser/static delivery. The private `@ui/storybook` application owns the UI catalog, package mounts, preview state, `/ui/` Pages output and acceptance; its local port is allocated by the operating system and is not a contract. The shared package documents itself in its own repository instead of appearing as a fake UI package. Each UI package page is compiled independently so opening Elements does not eagerly materialize the Components or HUD browser graph.
 
 Reference metadata records provenance, viewport, revision, compatibility, and acceptance. Large image assets are loaded only after the selected story requests comparison. The comparison planner chooses side-by-side or top-to-bottom placement by whichever produces the larger common scale, preserving meaningful pixel inspection for both wide and tall controls.
 

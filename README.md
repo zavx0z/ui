@@ -42,14 +42,10 @@ cd ../../../layout/packages/core && bun link
 cd ../../../storybook && bun link
 cd ../../../ui
 bun install
-bun run storybook
 ```
 
-The local Storybook listens on `http://127.0.0.1:4017`. Its static build is mounted at `/ui/` for GitHub Pages:
-
-```bash
-bun run build
-```
+Use `$storybook ensure @ui/storybook` for the local runtime and
+`$storybook build @ui/storybook` for the `/ui/` static artifact.
 
 References are metadata-first and image-lazy. Catalog metadata can remain in the initial bundle, while raster evidence is requested only for the selected comparison. Automated captures are candidates; acceptance remains an explicit owner decision.
 

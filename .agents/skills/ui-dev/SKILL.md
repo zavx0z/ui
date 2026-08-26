@@ -1,11 +1,11 @@
 ---
 name: ui-dev
-description: "Develop and verify the standalone Visual UI repository, its Elements, Components, HUD, and centralized static WebGPU Storybook. Use nodes-dev for node-specific UI and metafor-dev for product runtime."
+description: "Develop and verify the standalone Visual UI repository, its Elements, Components, HUD, visual references, and production contracts. Use the global storybook skill for @ui/storybook and nodes-dev for node-specific UI."
 ---
 
 # UI development
 
-Use the exact UI checkout supplied for the task. Preserve its branch or detached HEAD, unrelated changes, listeners, and browser targets. `@ui/storybook` owns one no-HMR process, one origin, and one target; package isolation comes from routes and separate browser bundles rather than extra servers.
+Use the exact UI checkout supplied for the task. Preserve its branch or detached HEAD, unrelated changes, listeners, and browser targets. `@ui/storybook` owns the UI catalog and package pages; the global `$storybook` owns their package-named lifecycle and exact browser target.
 
 Before changing a contract, read the repository `ARCHITECTURE.md`, the affected package requirements, public types, and focused tests. A new law is written in the owning requirements before its implementation.
 
@@ -43,50 +43,17 @@ Read [references/blender-reference.md](references/blender-reference.md) before c
 
 Every story prefix is an overview with trailing `/`; an exact story leaf has no trailing `/`. Every nested page exposes `Главная` back to `/`. Unknown suffixes are rejected instead of opening a fallback story. Static Pages output uses the same routes below `/ui/`.
 
-Read [references/storybook.md](references/storybook.md) before lifecycle, browser, interaction, static build, or source-freshness work. Read [references/profiling.md](references/profiling.md) only for CPU, frame, heap, or external WebGPU Inspector evidence.
+## Storybook boundary
 
-## One lifecycle command
+Use the single global `$storybook` with exact package `@ui/storybook` for
+lifecycle, automatic origin, static build, exact-route browser evidence,
+interaction and profiling. This skill contains no lifecycle/browser scripts,
+selector, port, process state or copied Storybook rules.
 
-```bash
-SKILL=.agents/skills/ui-dev
-"$SKILL/scripts/ui-dev.sh" status  "$PWD"
-"$SKILL/scripts/ui-dev.sh" ensure  "$PWD"
-"$SKILL/scripts/ui-dev.sh" restart "$PWD"
-```
+UI remains the semantic owner of its package catalog, Blender-compatible visual
+reference, preview behavior, accepted rasters and route-specific expectations.
+Those laws stay in package requirements and `references/blender-reference.md`;
+generic Storybook mechanics stay only in `$storybook`.
 
-Run read-only `status` first and `ensure` before the first lifecycle or browser operation. `ensure`, `start`, and `restart` may remain foreground owners of the exact Bun child, so retain their long-lived PTY. Foreign listeners are never adopted or stopped.
-
-For an explicitly isolated request that must not inspect the real browser, run only tests, typechecks, the static build, and an ephemeral HTTP server. `UI_DEV_TEST_MODE` isolates the lifecycle port but does not isolate CDP: do not call `ui-browser.ts` unless `UI_DEV_CDP_PORT` names a separately owned test browser.
-
-After an applicable source change, finish a stable source checkpoint, restart the running UI selector, and explicitly reload every route required for evidence. Route-only navigation on fresh source may reuse the same process and target.
-
-## Route-aware browser evidence
-
-```bash
-bun "$SKILL/scripts/ui-browser.ts" targets "$PWD" ui
-bun "$SKILL/scripts/ui-browser.ts" reload "$PWD" ui \
-  --route /elements/div/ --target-id "$target_id"
-bun "$SKILL/scripts/ui-browser.ts" canvas "$PWD" ui \
-  --route /components/button/basic/contained --target-id "$target_id" \
-  --output /tmp/ui-components.png
-bun "$SKILL/scripts/ui-browser.ts" page "$PWD" ui \
-  --route /hud/ --target-id "$target_id" --output /tmp/ui-hud.png
-```
-
-Run `targets` first. Open `/` only when the origin has no target; multiple targets are explicit ambiguity. Route operations navigate an existing target in place and never focus an OS window. DOM routes reject canvas, touch, and profile actions. `page` captures the complete rendered viewport without browser chrome or focus changes. The helper preflights the exact route, rejects noncanonical redirects and unknown paths, and selects the page-owned canvas descriptor.
-
-Automated browser operations are background-only. They never call `Page.bringToFront`, focus or window endpoints, AI macOS, or OS screenshot services. Exact UI canvas evidence reads the Engine-owned last presented frame, reports that provenance, and rejects an unavailable or black result. Raw canvas backing pixels are only an explicit fallback for pages without the owner bridge. Emulation is cleared before handoff.
-
-## Static and reference evidence
-
-`bun run build` must produce a self-contained `dist` for Pages base `/ui/`, including all four page shells, split lazy chunks, known-route-only deep-link recovery, the font, reference metadata, and schema-version-1 manifest with exact revisions and asset SHA-256. Story implementations stay lazy. A reference records exact provenance, viewport, DPR, compatibility, and acceptance; automated captures remain candidates until the owner accepts them.
-
-GitHub Pages deployment is manual and owner-gated. Never dispatch
-`.github/workflows/pages.yml`, run `gh workflow run`, change repository Pages
-settings, or deploy an artifact unless the owner explicitly requests deployment
-in the current task. `bun run build` and checks verify `dist`; they do not
-authorize publishing it.
-
-Tests and typechecks prove contracts. DOM and console evidence prove one exact route and target. Page PNG proves the rendered viewport; Canvas PNG proves exact canvas pixels. Neither includes browser chrome. Synthetic interaction, emulation, profiling, and external GPU capture do not become physical-device proof or owner acceptance.
-
-At handoff report checkout and commit, selector, process ownership and PID, exact route and target, checks, static build, console, visual evidence where applicable, restored native metrics, and every remaining integration or owner gate.
+At handoff report affected UI owners, focused and repository checks, reference
+compatibility where applicable, and every remaining product or owner gate.

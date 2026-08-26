@@ -9,11 +9,9 @@
     "packages/*"
   ],
   "scripts": {
-    "storybook": "bun run --cwd packages/storybook storybook",
-    "build": "bun run --cwd packages/storybook build",
-    "test": "bun test packages && bun run --cwd packages/storybook test:skill",
+    "test": "bun test packages",
     "typecheck": "tsc --project tsconfig.json --pretty false",
-    "check": "bun run typecheck && bun run test && bun run build"
+    "check": "bun run typecheck && bun run test && bun run --cwd packages/storybook build"
   },
   "repository": {
     "type": "git",

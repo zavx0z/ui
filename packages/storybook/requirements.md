@@ -113,8 +113,8 @@ Components либо consumer.
     быть только совместимым redirect на канонический адрес. Неизвестный suffix
     не выбирает случайный fallback story: server и browser tooling отклоняют
     его fail-closed.
-21. Семейство UI запускается одним Bun process на одном origin
-    `http://127.0.0.1:4017`. Главная `/` перечисляет только принадлежащие UI
+21. Семейство UI запускается одним package-named Bun process на одном
+    automatic origin. Главная `/` перечисляет только принадлежащие UI
     `@ui/elements`, `@ui/components` и `@ui/hud` и объясняет ответственность
     владельца каждой dev-страницы. Shared package документирует себя в
     собственном Storybook и не изображается UI package. Mounts —
@@ -123,8 +123,8 @@ Components либо consumer.
 22. Один browser target этого origin переходит между package mounts. Каждая
     страница остаётся отдельным browser bundle и загружает только свой
     production graph; DOM page не получает WebGPU runtime, а WebGPU page создаёт
-    ровно один `UiRuntime`. `$ui-dev` владеет одним selector `ui`, одним process
-    и одним target, а package выбирается exact route.
+    ровно один `UiRuntime`. Глобальный `$storybook` владеет exact
+    `@ui/storybook` process и target, а UI package page выбирается exact route.
 23. Каждая вложенная package, prefix-overview и detail page имеет общий
     видимый DOM-control `Главная`, ведущий на `/` текущего storybook origin. Он
     принадлежит server shell, находится поверх DOM/SVG/WebGPU page и не требует

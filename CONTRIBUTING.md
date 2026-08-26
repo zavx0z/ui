@@ -16,11 +16,12 @@ bun run check
 Useful focused commands:
 
 ```bash
-bun run storybook
 bun run typecheck
 bun run test
-bun run build
 ```
+
+Use `$storybook ensure @ui/storybook` and `$storybook check @ui/storybook`
+for the private catalog.
 
 ## Choose the owning package
 

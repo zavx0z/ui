@@ -1,4 +1,4 @@
 interface:
   display_name: "UI Development"
-  short_description: "Develop the centralized UI storybook"
-  default_prompt: "Use $ui-dev to run and verify the centralized UI catalog and its exact package routes without stealing browser focus."
+  short_description: "Develop Visual UI packages and contracts"
+  default_prompt: "Use $ui-dev to develop and verify exact Visual UI package contracts."

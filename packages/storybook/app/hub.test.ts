@@ -179,10 +179,11 @@ describe("central UI storybook hub", () => {
     }
   }, 30_000)
 
-  test("keeps the runnable hub fixed to the one adopted port", async () => {
+  test("keeps the runnable hub package-named with an automatic port", async () => {
     const source = await Bun.file(join(hubRoot, "server.ts")).text()
-    expect(source).toContain("UI_STORYBOOK_PORT ?? 4017")
-    expect(source).toContain("startStorybookHubServer")
+    expect(source).toContain("startStorybookPackageServer")
+    expect(source).not.toContain("port:")
+    expect(source).not.toMatch(/UI_STORYBOOK_(?:HOST|PORT)/u)
     expect(source).not.toContain("7901")
     expect(source).not.toContain("4192")
   })
@@ -197,6 +198,7 @@ describe("central UI storybook hub", () => {
     const elements = await Bun.file(join(storybookRoot, "../elements/package.json")).json() as {scripts?: Record<string, string>}
     const components = await Bun.file(join(storybookRoot, "../components/package.json")).json() as {scripts?: Record<string, string>}
     expect(manifest.scripts?.storybook).toBe("bun app/server.ts")
+    expect(manifest.scripts?.check).toBe("bun run typecheck && bun run test && bun run build")
     expect(elements.scripts?.storybook).toBeUndefined()
     expect(components.scripts?.storybook).toBeUndefined()
   })

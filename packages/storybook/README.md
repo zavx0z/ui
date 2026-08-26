@@ -3,7 +3,7 @@
 Private UI Storybook application built on `@zavx0z/storybook`.
 
 UI owns the package catalog, `/elements/`, `/components/` and `/hud/` mounts,
-package previews, reference metadata, process `4017`, static
+package previews, reference metadata, package-named automatic-port process, static
 `/ui/` output and acceptance. Generic routing, Workbench, server and build
 contracts are imported through exact shared subpaths:
 
@@ -18,5 +18,5 @@ catalog, package mounts, reference catalog, lifecycle and static
 build. Reusable contracts come directly from exact `@zavx0z/storybook/*`
 subpaths, while production UI packages do not import Storybook.
 
-Run `bun run storybook` from the repository root. Prefix overviews end in `/`,
+Run `$storybook ensure @ui/storybook`. Prefix overviews end in `/`,
 exact leaves do not, and unknown suffixes fail closed.
