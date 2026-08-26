@@ -2,26 +2,36 @@
 
 > **[Built for MetaFor](https://github.com/zavx0z/metafor)** as a reusable static WebGPU workbench.
 
-Private `@ui/storybook` владеет единым dev-каталогом семейства UI, package
-mounts, preview state, lifecycle, `/ui/` static output и acceptance.
+Private `@ui/storybook` владеет единым dev-каталогом семейства UI,
+одним Workbench, preview state, lifecycle, `/ui/` static output и acceptance.
 Переиспользуемые route, Workbench, server и build contracts принадлежат
 `@zavx0z/storybook`. Ни один из них не владеет production semantics UI
 Components либо consumer.
 
 ## Законы
 
-1. Pathname является иерархией каталогов. Mount пакета открывается как
+1. Pathname является иерархией каталогов. Owner prefix открывается как
    `/package/`, каждый непустой префикс story route является самостоятельным
    overview (`/package/component/`, затем `/package/component/section/`), а
    только полный путь фиксирует exact detail story в pathname. Overview показывает всех
    непосредственных детей текущего уровня в существующих catalog/sections/dock
    regions; выбор ребёнка углубляет тот же pathname на один уровень. Overview
    не заменяет historical five-panel Workbench отдельной пустой страницей:
-   preview, source, controls и events остаются на месте и используют
-   детерминированный первый detail descendant текущего префикса. Общая typed
+   preview, source, controls и events остаются на месте. Overview рендерит
+   собственный aggregate owner module со всеми непосредственными детьми;
+   первый detail descendant может быть только navigation representative и не
+   подменяет overview content. Общая typed
    declaration строит root, все префиксы и leaves из одних package-owned
    descriptors; consumer не выбирает hash/path mode или параллельную схему
    адресов.
+   Aggregate primary и secondary overview рендерит реальные lazy
+   `StorybookStoryModule` непосредственных детей в отдельных
+   `UiSurface` instances одного `UiRuntime`; retained parent не является
+   изоляцией surface-global input и keyed state. Каждый detail route получает
+   одну bounded cached Surface, которая не переиспользуется для другого
+   module. Labels-only route cards не заменяют production UI в
+   preview; package namespace overview может оставаться информационным,
+   поскольку он не является semantic primary row.
 2. Общий shell состоит из catalog, sections, preview, dock и info. Он является
    desktop-only рабочей средой, сохраняет historical five-panel geometry и
    занимает весь доступный canvas с небольшим внешним отступом; искусственный
@@ -114,24 +124,34 @@ Components либо consumer.
     не выбирает случайный fallback story: server и browser tooling отклоняют
     его fail-closed.
 21. Семейство UI запускается одним package-named Bun process на одном
-    automatic origin. Главная `/` перечисляет только принадлежащие UI
-    `@ui/elements`, `@ui/components` и `@ui/hud` и объясняет ответственность
-    владельца каждой dev-страницы. Shared package документирует себя в
-    собственном Storybook и не изображается UI package. Mounts —
-    соответственно `/elements/`, `/components/` и `/hud/`; отдельные
-    package-серверы и порты не являются вторым способом запуска.
-22. Один browser target этого origin переходит между package mounts. Каждая
-    страница остаётся отдельным browser bundle и загружает только свой
-    production graph; DOM page не получает WebGPU runtime, а WebGPU page создаёт
-    ровно один `UiRuntime`. Глобальный `$storybook` владеет exact
-    `@ui/storybook` process и target, а UI package page выбирается exact route.
-23. Каждая вложенная package, prefix-overview и detail page имеет общий
-    видимый DOM-control `Главная`, ведущий на `/` текущего storybook origin. Он
-    принадлежит server shell, находится поверх DOM/SVG/WebGPU page и не требует
-    consumer renderer либо ручного изменения адресной строки. На самой главной
-    `/` этот control отсутствует.
-24. Static build материализует те же четыре page shells под public base `/ui/`,
-    сохраняет отдельные browser graphs и lazy chunks, публикует `.nojekyll`,
+    automatic origin и имеет ровно один HTML document, canvas, `UiRuntime`, Router
+    и Workbench. `/` сразу открывает Workbench; landing page, package cards,
+    кнопки `Открыть страницу пакета` и package-specific shell отсутствуют.
+    `@ui/elements`, `@ui/components` и `@ui/hud` являются route owners одного
+    tree под `/elements/**`, `/components/**` и `/hud/**`, а не строками
+    первого уровня навигации.
+22. Один browser target этого origin переходит между всеми owner-разделами
+    одним `router.go()` без reload, `location.assign`, нового canvas, runtime,
+    process или target. Root entry eager-загружает только Workbench и metadata;
+    production story implementations остаются exact lazy chunks владельцев.
+23. Главная панель имеет disclosure groups `Элементы`,
+    `Компоненты` и `HUD`. Внутри них находятся открываемые
+    category rows из package descriptors: `Примитивы / Стили / События`,
+    `Основные / Ввод / Данные` и `Основные` HUD. Package group header
+    сам не является route item. Вторая панель показывает semantic
+    components выбранной category; dock показывает exact scenarios
+    выбранного component и при необходимости включает section label.
+    External detail route хранит всю иерархию
+    `/package/category/component/section/variant`. Root `/` показывает
+    aggregate overview первой category; category и component overview показывают
+    всех непосредственных детей до выбора exact scenario.
+    `Button` — явное исключение: `Кнопка` поднята в главную
+    панель внутри group `Компоненты` и удалена из adjacent-списка
+    category `Основные`. Для неё вторая панель показывает Button
+    sections, а dock — variants выбранного section; дубль `Кнопка` в
+    `Основные` отсутствует.
+24. Static build материализует один page shell под public base `/ui/`,
+    сохраняет owner/story lazy chunks, публикует `.nojekyll`,
     schema-version-1 manifest и fail-closed deep-link recovery. Manifest
     фиксирует source/dependency revisions и dirty state, page routes,
     capabilities/readiness, entry/chunks и SHA-256 emitted assets без local

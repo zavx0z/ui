@@ -52,7 +52,7 @@ Interpreter file/debugger state and Storybook chrome remain consumer-owned.
 
 ### Storybook
 
-`@zavx0z/storybook` owns typed route trees, lazy story contracts, comparison planning, the retained five-region Workbench and generic package-name lifecycle/browser/static delivery. The private `@ui/storybook` application owns the UI catalog, package mounts, preview state, `/ui/` Pages output and acceptance; its local port is allocated by the operating system and is not a contract. The shared package documents itself in its own repository instead of appearing as a fake UI package. Each UI package page is compiled independently so opening Elements does not eagerly materialize the Components or HUD browser graph.
+`@zavx0z/storybook` owns typed route trees, lazy story contracts, comparison planning, the retained five-region Workbench and generic package-name lifecycle/browser/static delivery. The private `@ui/storybook` application owns one UI catalog, one canvas/Router/Runtime, category/component/scenario navigation, preview state, `/ui/` Pages output and acceptance; its local port is allocated by the operating system and is not a contract. The shared package documents itself in its own repository instead of appearing as a fake UI package. Elements, Components and HUD retain package-owned route namespaces, groups, metadata and lazy implementations: package names are disclosure headers, package categories are primary rows, semantic components occupy the adjacent panel, and exact scenarios occupy the dock.
 
 Reference metadata records provenance, viewport, revision, compatibility, and acceptance. Large image assets are loaded only after the selected story requests comparison. The comparison planner chooses side-by-side or top-to-bottom placement by whichever produces the larger common scale, preserving meaningful pixel inspection for both wide and tall controls.
 
@@ -110,7 +110,7 @@ parent corners is not conformance.
 
 ## Static delivery
 
-The shared static builder emits UI-owned package shells, independently split browser bundles, reference metadata, known-route-only deep-link recovery, and a revisioned manifest below `/ui/`. UI provides exact Engine font and reference assets; shared infrastructure owns neither.
+The shared static builder emits one UI-owned shell, independently split owner/story chunks, reference metadata, known-route-only deep-link recovery, and a revisioned manifest below `/ui/`. UI provides exact Engine font and reference assets; shared infrastructure owns neither.
 
 GitHub Pages uses the checked workflow artifact as its publishing source, but
 the workflow runs only through an explicit owner dispatch. A green build or a

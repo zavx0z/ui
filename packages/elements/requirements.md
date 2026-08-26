@@ -118,6 +118,27 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
     submit-only adapter в uncontrolled input; uncontrolled default-value
     поведение остаётся отдельным явным режимом.
 
+## Status bar
+
+1. Exact leaf `@ui/elements/status-bar` владеет пассивной нижней
+   `statusBar(...)`: владелец передаёт только `start`/`end` segments со stable
+   `id`, готовым `text` и optional `highlighted`. Element не знает Collection, scene statistics,
+   selection, version или product state, не регистрирует hit и не
+   создаёт второй state owner.
+2. Owner-supplied Blender 4.5.5 crop `3840×72` даёт bounded visual law
+   только нижней строки: `24` logical px height, `2` px top band,
+   `12` px right inset,
+   `11` px project font и literal separator ` | `. Верхняя editor/timeline полоса
+   из crop не является частью StatusBar.
+   Side/bottom outline и bottom radius из crop принадлежат macOS window chrome:
+   StatusBar их не рисует и не публикует для них props.
+3. `uiTheme.statusBar` явно хранит measured `back #181818`,
+   `top #161616`, `text #878787` и тёмную тень текста.
+   StatusBar не выводит эти roles из generic `menu`, `box` или product palette.
+4. Обе стороны собираются без мутации items, прижимаются к своим
+   краям и клампятся внутри caller rect. Parent передаёт exact
+   `x/y/width/height`; Element не позиционирует siblings.
+
 ## Code text foundation
 
 1. Exact leaves `@ui/elements/code` и `@ui/elements/text-selection` владеют

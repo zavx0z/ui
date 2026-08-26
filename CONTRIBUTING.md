@@ -29,9 +29,9 @@ for the private catalog.
 - Put HTML-like visual primitives, controlled edit behavior, theme roles, and universal icons in `packages/elements`.
 - Put controlled fields and composed visual controls in `packages/components`.
 - Put heads-up presentation in `packages/hud`, without product commands or state ownership.
-- Keep Elements descriptors and previews in `packages/elements/storybook`.
-- Keep Components descriptors and previews in `packages/components/storybook`.
-- Put only the UI catalog, comparison evidence, dev lifecycle, and static-site code in `packages/storybook`.
+- Keep Elements story descriptors and implementations in `packages/elements/storybook`.
+- Keep Components story descriptors and implementations in `packages/components/storybook`.
+- Put the one root Workbench, owner adapters, comparison evidence, dev lifecycle, and static-site code in `packages/storybook`.
 
 Dependencies must continue to point upward from Engine to Layout to Elements, Components, and HUD. Production packages must not import Storybook.
 
@@ -43,7 +43,7 @@ Use lowercase semantic directories recognized by the repository tooling: `packag
 
 ## Add or update a story
 
-Story descriptors own their route, searchable metadata, controls, source generator, production import, and lazy implementation loader. Keep the initial package page limited to metadata. If a story has external visual evidence, register a lazy reference loader and record:
+Story descriptors own their route, searchable metadata, controls, source generator, production import, and lazy implementation loader. Keep the root Workbench entry limited to metadata; package implementations stay in lazy chunks. If a story has external visual evidence, register a lazy reference loader and record:
 
 - exact source version and revision;
 - SHA-256 of the lossless asset;
