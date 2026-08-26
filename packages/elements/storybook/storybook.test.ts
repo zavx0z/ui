@@ -1,11 +1,7 @@
-import {beforeAll, describe, expect, test} from "bun:test"
+import {describe, expect, test} from "bun:test"
 import {basename, join} from "node:path"
 import {fileURLToPath} from "node:url"
-import type {TrueTypeFont} from "@engine/core"
-import {loadSharedFont} from "@engine/core/default-font"
-import {defineStorybookStoryModule} from "@zavx0z/storybook/stories"
 import {planStorybookShell} from "@zavx0z/storybook/workbench"
-import type {UiRuntime} from "@layout/core/runtime"
 import {
   ELEMENT_STORIES,
   ELEMENT_STORY_ROUTES,
@@ -13,17 +9,10 @@ import {
   elementSectionItems,
   elementVariantItems,
 } from "./stories.ts"
-import {ElementsStoryPreviewSurface} from "./story-preview.ts"
 import {uiShapeMetrics} from "../shape.ts"
 import {UI_STORYBOOK_RESPONSIVE_POLICY} from "../../storybook/app/workbench-policy.ts"
 
 const storybookRoot = fileURLToPath(new URL(".", import.meta.url))
-let font: TrueTypeFont
-
-beforeAll(async () => {
-  font = await loadSharedFont(import.meta.resolve("@engine/core/fonts/jetbrains-mono-bold.ttf"))
-})
-
 describe("@ui/elements package-owned Workbench stories", () => {
   test("derives package and prefix overviews from every exact story leaf", () => {
     expect(ELEMENT_STORIES.routeTree.find("")).toMatchObject({kind: "overview", path: ""})
@@ -45,6 +34,7 @@ describe("@ui/elements package-owned Workbench stories", () => {
       "popover",
       "img",
       "list",
+      "status-bar",
       "css",
       "theme",
       "pointer",
@@ -58,11 +48,13 @@ describe("@ui/elements package-owned Workbench stories", () => {
       "Всплывающий слой",
       "Изображение",
       "Список",
+      "Строка состояния",
       "CSS-свойства",
       "Тема",
       "Указатель",
     ])
     expect(catalog.map(({group}) => group?.label)).toEqual([
+      "Примитивы",
       "Примитивы",
       "Примитивы",
       "Примитивы",
@@ -128,6 +120,11 @@ describe("@ui/elements package-owned Workbench stories", () => {
     expect(events.source(events.defaultArgs)).toContain('from "@ui/elements/button"')
     expect(events.defaultArgs).toMatchObject({state: "click", clicks: 1})
 
+    const status = await ELEMENT_STORIES.load("status-bar/content/statistics")
+    expect(status.source(status.defaultArgs)).toContain('from "@ui/elements/status-bar"')
+    expect(status.source(status.defaultArgs)).toContain("Collection")
+    expect(status.defaultArgs).toMatchObject({"highlight-version": false})
+
     const nestedOverflow = await ELEMENT_STORIES.load("div/overflow/nested")
     expect(nestedOverflow.source(nestedOverflow.defaultArgs)).toContain('from "@layout/core/flex"')
     expect(nestedOverflow.source(nestedOverflow.defaultArgs)).toContain('overflow: "hidden"')
@@ -136,7 +133,7 @@ describe("@ui/elements package-owned Workbench stories", () => {
   })
 
   test("loads every published detail story with non-empty exact code", async () => {
-    expect(ELEMENT_STORY_ROUTES).toHaveLength(47)
+    expect(ELEMENT_STORY_ROUTES).toHaveLength(48)
     for (const route of ELEMENT_STORY_ROUTES) {
       const module = await ELEMENT_STORIES.load(route)
       const source = module.source(module.defaultArgs)
@@ -145,55 +142,30 @@ describe("@ui/elements package-owned Workbench stories", () => {
     }
   })
 
-  test("keeps one retained production preview owner across story arg changes", () => {
-    const module = defineStorybookStoryModule({
-      defaultArgs: {value: 1},
-      render() {},
-      source: (args) => `const value = ${args.value}`,
-    })
-    const index = ELEMENT_STORIES.find("div/basic/background")!
-    const surface = new ElementsStoryPreviewSurface()
-    try {
-      surface.attachCanvas(createFakeRuntime())
-      surface.setStory(index, module, module.defaultArgs)
-      surface.setRect({x: 0, y: 0, w: 1024, h: 720}, 0.001, font)
-      expect(surface.diagnostics).toEqual({route: "div/basic/background", layoutPlans: 1, materializations: 1})
-      surface.setArgs({value: 2})
-      surface.flushPendingRender()
-      expect(surface.diagnostics).toEqual({route: "div/basic/background", layoutPlans: 1, materializations: 2})
-    } finally {
-      surface.dispose()
-    }
-  })
-
-  test("replaces manual route and info ownership with the shared interaction panel", async () => {
-    const entry = await Bun.file(join(storybookRoot, "entry.ts")).text()
-    expect(entry).toContain("ELEMENT_STORIES")
+  test("mounts Elements metadata in the one-root shared interaction panel", async () => {
+    const entry = await Bun.file(join(storybookRoot, "../../storybook/app/entry.ts")).text()
+    const stories = await Bun.file(join(storybookRoot, "../../storybook/app/stories.ts")).text()
+    expect(stories).toContain("ELEMENT_STORIES")
     expect(entry).toContain("StorybookStoryPanelSurface")
-    expect(entry).toContain("ElementsStoryPreviewSurface")
-    expect(entry).toContain('title: "Элементы UI"')
-    expect(entry).toContain('title: "Варианты"')
+    expect(entry).toContain("UiStoryPreviewSurface")
+    expect(entry).toContain('title: "UI"')
     expect(entry).toContain("navigator.clipboard.writeText")
     expect(entry).toContain("runtime.handleResize()")
-    expect(entry).toContain("runtime.requestRender()")
     expect(entry).toContain("runtime.renderer.captureLastPresentedFramePng()")
     expect(entry).toContain("await waitForStorybookFrameBoundary()")
-    expect(entry.indexOf("await waitForStorybookFrameBoundary()")).toBeLessThan(
-      entry.indexOf('dataset.elementsStorybook = "ready"'),
-    )
     expect(entry.indexOf("await waitForStorybookFrameBoundary()")).toBeLessThan(
       entry.indexOf('dataset.uiStorybook = "ready"'),
     )
     expect(entry).not.toContain("StorybookInfoSurface")
     expect(entry).not.toContain("elementsStorybookInfo")
-    expect(entry).not.toContain("ElementsPreviewSurface")
+    expect(entry).not.toContain("location.assign")
     for (const forbidden of ["NodeEditor", "BlenderSocket", "NodeSystemSurface", "Hamiltonian", "Bulk"]) {
       expect(entry).not.toContain(forbidden)
     }
   })
 
   test("story modules import production Elements only through exact public leaves", async () => {
-    const storyFiles = ["primitives.ts", "popover.ts", "style.ts", "events.ts"]
+    const storyFiles = ["primitives.ts", "popover.ts", "style.ts", "events.ts", "status-bar.ts"]
     const sources = await Promise.all(storyFiles.map((name) => Bun.file(join(storybookRoot, "stories", name)).text()))
     for (const source of sources) {
       expect(source).not.toMatch(/from ["']@ui\/elements["']/)
@@ -209,11 +181,12 @@ describe("@ui/elements package-owned Workbench stories", () => {
     expect(sources[1]).toContain('from "@ui/elements/popover"')
     expect(sources[2]).toContain('from "@ui/elements/theme"')
     expect(sources[3]).toContain('from "@ui/elements/button"')
+    expect(sources[4]).toContain('from "@ui/elements/status-bar"')
   })
 
   test("keeps story implementations out of the initial split entry", async () => {
     const build = await Bun.build({
-      entrypoints: [join(storybookRoot, "entry.ts")],
+      entrypoints: [join(storybookRoot, "../../storybook/app/entry.ts")],
       target: "browser",
       format: "esm",
       splitting: true,
@@ -233,10 +206,12 @@ describe("@ui/elements package-owned Workbench stories", () => {
     expect(entry!.source).not.toContain("function createStyleStory")
     expect(entry!.source).not.toContain("function createEventStory")
     expect(entry!.source).not.toContain("function createPopoverStory")
+    expect(entry!.source).not.toContain("function createStatusBarStory")
     expect(outputs.some(({source}) => source.includes("function createPrimitiveStory"))).toBeTrue()
     expect(outputs.some(({source}) => source.includes("function createStyleStory"))).toBeTrue()
     expect(outputs.some(({source}) => source.includes("function createEventStory"))).toBeTrue()
     expect(outputs.some(({source}) => source.includes("function createPopoverStory"))).toBeTrue()
+    expect(outputs.some(({source}) => source.includes("function createStatusBarStory"))).toBeTrue()
   })
 
   test("serves detail paths through the central no-HMR UI hub and full desktop shell", async () => {
@@ -252,14 +227,14 @@ describe("@ui/elements package-owned Workbench stories", () => {
       stderr: "pipe",
     })
     try {
-      const html = await waitForText(`http://127.0.0.1:${port}/elements/div/basic/background`)
-      expect(html).toContain("<title>UI storybook · @ui/elements</title>")
-      expect(html).toContain('<canvas id="stage-canvas"></canvas>')
-      expect(html).toContain('data-storybook-home href="/"')
-      const entry = await fetch(`http://127.0.0.1:${port}/@storybook-assets/elements/entry.js`)
+      const html = await waitForText(`http://127.0.0.1:${port}/elements/primitives/div/basic/background`)
+      expect(html).toContain("<title>UI storybook</title>")
+      expect(html).toContain('<canvas id="ui-storybook-canvas"></canvas>')
+      expect(html).not.toContain("data-storybook-home")
+      const entry = await fetch(`http://127.0.0.1:${port}/@storybook-assets/workbench/entry.js`)
       const source = await entry.text()
       expect(entry.status).toBe(200)
-      expect(source).toContain("elementsStorybook")
+      expect(source).toContain("uiStorybook")
       expect(source).toContain("import(")
       expect(source).not.toContain("function createPrimitiveStory")
     } finally {
@@ -268,20 +243,6 @@ describe("@ui/elements package-owned Workbench stories", () => {
     }
   }, 30000)
 })
-
-function createFakeRuntime(): UiRuntime {
-  return {
-    canvas: {style: {}},
-    renderer: {pixelRatio: 1, invalidateGeometry() {}},
-    requestRender() {},
-    uiRectToFramebufferClipBounds: (
-      xMin: number,
-      yMin: number,
-      xMax: number,
-      yMax: number,
-    ) => [xMin, yMin, xMax, yMax],
-  } as unknown as UiRuntime
-}
 
 async function freePort(): Promise<number> {
   const server = Bun.serve({hostname: "127.0.0.1", port: 0, fetch: () => new Response("probe")})

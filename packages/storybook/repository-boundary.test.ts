@@ -78,6 +78,7 @@ describe("UI repository boundaries", () => {
     const components = await Bun.file(join(componentsRoot, "package.json")).json() as {exports: Record<string, string>}
     expect(elements.exports["./code"]).toBe("./code.ts")
     expect(elements.exports["./text-selection"]).toBe("./text-selection.ts")
+    expect(elements.exports["./status-bar"]).toBe("./status-bar.ts")
     expect(components.exports["./code-editor"]).toBe("./code-editor.ts")
     expect(await Bun.file(join(elementsRoot, "index.ts")).text()).not.toMatch(/code\.ts|text-selection\.ts/)
     expect(await Bun.file(join(componentsRoot, "index.ts")).text()).not.toContain("code-editor.ts")
@@ -181,5 +182,7 @@ describe("UI repository boundaries", () => {
     expect(registry).toContain('owner: {label: "MetaFor", href: "https://github.com/zavx0z/metafor"}')
     expect(registry).toContain('detail: "переиспользуемая WebGPU-инфраструктура UI"')
     expect(registry).not.toContain("Built for MetaFor")
+    expect(registry).toContain('canvasId: "ui-storybook-canvas"')
+    expect(registry).toContain("UI_STORY_ROUTE_TREE")
   })
 })

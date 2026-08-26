@@ -133,6 +133,15 @@ export type UiThemeSpaceText = Readonly<{
   cursor: Rgba8
 }>
 
+/** Measured lower status-bar roles from the owner-supplied 4.5.5 reference crop. */
+export type UiThemeStatusBar = Readonly<{
+  back: Rgba8
+  top: Rgba8
+  text: Rgba8
+  textHighlight: Rgba8
+  textShadow: Rgba8
+}>
+
 export type UiTheme = Readonly<{
   widgets: Readonly<Record<WidgetClass, WidgetColorSet>>
   state: UiThemeStateColors
@@ -140,6 +149,7 @@ export type UiTheme = Readonly<{
   axes: UiThemeAxes
   spaceNode: UiThemeSpaceNode
   spaceText: UiThemeSpaceText
+  statusBar: UiThemeStatusBar
 }>
 
 type MutableRgba8 = [number, number, number, number]
@@ -364,6 +374,13 @@ export const uiTheme: UiTheme = Object.freeze({
     text: rgba8(0xe6, 0xe6, 0xe6, 0xff),
     selection: rgba8(0x4d, 0x4d, 0x4d, 0xe6),
     cursor: rgba8(0x71, 0xa8, 0xff, 0xff),
+  }),
+  statusBar: Object.freeze({
+    back: rgba8(0x18, 0x18, 0x18, 0xff),
+    top: rgba8(0x16, 0x16, 0x16, 0xff),
+    text: rgba8(0x87, 0x87, 0x87, 0xff),
+    textHighlight: rgba8(0xff, 0xff, 0xff, 0xff),
+    textShadow: rgba8(0x00, 0x00, 0x00, 0xbf),
   }),
 })
 

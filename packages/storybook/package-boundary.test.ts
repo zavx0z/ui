@@ -56,9 +56,9 @@ describe("@ui/storybook private application boundary", () => {
   })
 
   test("keeps the lazy reference catalog owned by the UI application", async () => {
-    const catalogPage = await Bun.file(join(root, "app/catalog/catalog-storybook.ts")).text()
+    const rootEntry = await Bun.file(join(root, "app/entry.ts")).text()
     const catalog = await Bun.file(join(root, "reference-catalog.ts")).text()
-    expect(catalogPage).toContain('from "../../reference-catalog.ts"')
+    expect(rootEntry).toContain('import("../reference-catalog.ts")')
     expect(catalog).toContain('await import("./assets/references/catalog.json"')
     expect(catalog).not.toContain("@zavx0z/storybook")
   })
@@ -66,7 +66,7 @@ describe("@ui/storybook private application boundary", () => {
   test("keeps shared package documentation out of the UI application", async () => {
     const pageRegistry = await Bun.file(join(root, "app/server/page-registry.ts")).text()
     expect(pageRegistry).toContain('from "@zavx0z/storybook/app"')
-    expect(pageRegistry).toContain('from "@zavx0z/storybook/server"')
+    expect(pageRegistry).toContain("UI_STORY_ROUTE_TREE")
     expect(pageRegistry).not.toContain('id: "storybook"')
     expect(pageRegistry).not.toContain("fixtures/")
     for (const path of ["fixtures/entry.ts", "fixtures/style.css", "fixtures/stories/button.ts"]) {

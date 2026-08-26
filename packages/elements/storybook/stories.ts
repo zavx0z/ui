@@ -40,6 +40,11 @@ const loadPopoverStory = (
   return createPopoverStory(variant)
 }
 
+const loadStatusBarStory = async (): Promise<StorybookStoryModule> => {
+  const {createStatusBarStory} = await import("./stories/status-bar.ts")
+  return createStatusBarStory()
+}
+
 export const ELEMENT_STORIES = defineStorybookStories({
   groups: [
     {
@@ -185,6 +190,22 @@ export const ELEMENT_STORIES = defineStorybookStories({
               {id: "interactive", label: "Интерактивный", title: "ul / li · Интерактивный", load: loadPrimitiveStory("list", "mode", "interactive")},
               {id: "scroll", label: "С прокруткой", title: "ul / li · С прокруткой", load: loadPrimitiveStory("list", "mode", "scroll")},
             ],
+          }],
+        },
+        {
+          id: "status-bar",
+          label: "Строка состояния",
+          apiName: "statusBar",
+          tags: ["status", "statistics", "version", "footer"],
+          sections: [{
+            id: "content",
+            label: "Содержимое",
+            variants: [{
+              id: "statistics",
+              label: "Статистика",
+              title: "Строка состояния · Статистика",
+              load: loadStatusBarStory,
+            }],
           }],
         },
       ],

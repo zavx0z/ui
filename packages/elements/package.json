@@ -21,6 +21,7 @@
     "./popover": "./popover.ts",
     "./list": "./list.ts",
     "./scrollbar": "./scrollbar.ts",
+    "./status-bar": "./status-bar.ts",
     "./style": "./style.ts",
     "./shape": "./shape.ts",
     "./theme": "./theme.ts",

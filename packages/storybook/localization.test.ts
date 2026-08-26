@@ -46,8 +46,8 @@ const forbiddenVisiblePhrases = [
 ] as const
 
 const requiredLocalizedPhrases = [
-  "Рабочий компонент, параметры и TypeScript используют один сценарий.",
-  "Рабочий элемент, параметры и TypeScript используют один сценарий.",
+  "общая информация до выбора точного сценария",
+  "Визуальная витрина ещё не принята",
   'label: "Сценарий"',
 ] as const
 

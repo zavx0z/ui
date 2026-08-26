@@ -129,6 +129,16 @@ describe("source-backed UI theme", () => {
     })
   })
 
+  test("preserves the measured status-bar roles", () => {
+    expect(Object.fromEntries(Object.entries(uiTheme.statusBar).map(([key, value]) => [key, hex(value)]))).toEqual({
+      back: "#181818ff",
+      top: "#161616ff",
+      text: "#878787ff",
+      textHighlight: "#ffffffff",
+      textShadow: "#000000bf",
+    })
+  })
+
   test("uses the exact generic alpha-factor truth table before state copy", () => {
     expect(resolveWidgetColors("regular", {searchNoMatch: true}).inner[3]).toBe(127)
     expect(resolveWidgetColors("regular", {disabled: true}).inner[3]).toBe(127)
