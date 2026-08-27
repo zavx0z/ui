@@ -8,6 +8,7 @@ import {
   type StorybookStoryArgs,
   type StorybookStoryModule,
 } from "@zavx0z/storybook/stories"
+import {elementStorySource} from "../style-source.ts"
 
 type StatusBarStoryArgs = StorybookStoryArgs & Readonly<{
   "highlight-version": boolean
@@ -28,7 +29,7 @@ export function createStatusBarStory(): StorybookStoryModule {
       })
     },
     source(args) {
-      return [
+      const typescript = [
         'import {statusBar} from "@ui/elements/status-bar"',
         "",
         "const items = [",
@@ -41,8 +42,9 @@ export function createStatusBarStory(): StorybookStoryModule {
         `  {id: "version", text: "4.5.5", highlighted: ${args["highlight-version"]}},`,
         "] as const",
         "",
-        "statusBar(surface, x, y, width, 24, {end: items})",
+        "statusBar(surface, x, y, width, 24, {end: items, style})",
       ].join("\n")
+      return elementStorySource({component: "status-bar", section: "content", variant: "statistics"}, args, typescript)
     },
   })
 }

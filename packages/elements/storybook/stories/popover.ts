@@ -8,6 +8,7 @@ import {
   type StorybookStoryArgs,
   type StorybookStoryModule,
 } from "@zavx0z/storybook/stories"
+import {elementStorySource} from "../style-source.ts"
 
 type PopoverStoryArgs = StorybookStoryArgs & Readonly<{
   open: boolean
@@ -46,7 +47,7 @@ export function createPopoverStory(variant: "closed" | "open"): StorybookStoryMo
         },
         content(rect) {
           div(surface, rect.x, rect.y, rect.w, rect.h, {
-            style: {background: "bgPanel", borderColor: "borderRule", borderRadius: uiShapeMetrics.lowRadius},
+            style: {background: "bgPanel", borderColor: "borderRule", borderRadius: 4},
           })
           span(surface, rect.x + 10, rect.y + 24, rect.w - 20, 24, {
             children: `Popover · ${rect.side}`,
@@ -56,7 +57,7 @@ export function createPopoverStory(variant: "closed" | "open"): StorybookStoryMo
       })
     },
     source(args) {
-      return [
+      const typescript = [
         'import {button} from "@ui/elements/button"',
         'import {div} from "@ui/elements/div"',
         'import {popover} from "@ui/elements/popover"',
@@ -67,10 +68,11 @@ export function createPopoverStory(variant: "closed" | "open"): StorybookStoryMo
         "  open,",
         "  contentSize: {width: 180, height: 72},",
         "  onOpenChange: setOpen,",
-        "  trigger: ({toggle}) => button(surface, x, y, width, height, {children: \"Открыть\", onClick: toggle}),",
-        "  content: (rect) => div(surface, rect.x, rect.y, rect.w, rect.h),",
+        "  trigger: ({toggle}) => button(surface, x, y, width, height, {children: \"Открыть\", onClick: toggle, style: style[\"& .trigger\"]}),",
+        "  content: (rect) => div(surface, rect.x, rect.y, rect.w, rect.h, {style: style[\"& .content\"]}),",
         "})",
       ].join("\n")
+      return elementStorySource({component: "popover", section: "state", variant}, args, typescript)
     },
   })
 }

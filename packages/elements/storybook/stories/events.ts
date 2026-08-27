@@ -6,6 +6,7 @@ import {
   type StorybookStoryArgs,
   type StorybookStoryModule,
 } from "@zavx0z/storybook/stories"
+import {elementStorySource} from "../style-source.ts"
 
 type EventStoryArgs = StorybookStoryArgs & Readonly<{
   label: string
@@ -75,7 +76,7 @@ export function createEventStory(variant: string): StorybookStoryModule {
       })
     },
     source(args) {
-      return [
+      const typescript = [
         'import {button} from "@ui/elements/button"',
         "",
         "button(surface, x, y, w, h, {",
@@ -86,8 +87,10 @@ export function createEventStory(variant: string): StorybookStoryModule {
         "  onPointerDown: () => setState(\"press\"),",
         "  onPointerUp: () => setState(\"release\"),",
         "  onClick: () => setState(\"click\"),",
+        "  style,",
         "})",
       ].join("\n")
+      return elementStorySource({component: "pointer", section: "state", variant}, args, typescript)
     },
   })
 }

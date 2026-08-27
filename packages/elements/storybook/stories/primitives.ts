@@ -15,12 +15,12 @@ import {
   type StorybookStoryModule,
 } from "@zavx0z/storybook/stories"
 import type {PrimitiveStoryComponent} from "../stories.ts"
+import {elementStorySource} from "../style-source.ts"
 
 type PrimitiveStoryArgs = StorybookStoryArgs & Readonly<{
   label: string
   tone: "cyan" | "green" | "orange" | "red"
   density: "regular" | "compact"
-  radius: number
   disabled: boolean
   active: boolean
   open: boolean
@@ -48,7 +48,7 @@ export function createPrimitiveStory(options: Readonly<{
       renderPrimitiveStory(surface, args, frame, options)
     },
     source(args) {
-      return primitiveSource(options, args)
+      return elementStorySource(options, args, primitiveSource(options, args))
     },
   })
 }
@@ -71,20 +71,18 @@ function renderPrimitiveStory(
       renderNestedOverflowDiv(surface, args, x, centerY - 120, width)
       return
     }
-    const radius = options.variant === "z-index" ? 18 : args.radius
     const border = options.variant === "border" ? args.tone : "rgba(214, 231, 255, 0.18)"
     div(surface, x, centerY - 100, width, 200, {
       style: {
         background: toneFill(args.tone, options.variant === "background" ? 0.18 : 0.08),
         borderColor: border,
         borderWidth: options.variant === "border" ? 2 : 1,
-        borderRadius: radius,
         padding: options.variant === "padding" ? (args.density === "compact" ? 18 : 34) : 18,
         zIndex: options.variant === "z-index" ? 0.08 : 0,
       },
     })
     div(surface, x + 34, centerY - 66, width - 68, 132, {
-      style: {background: "rgba(255, 255, 255, 0.055)", borderColor: args.tone, borderRadius: Math.max(8, radius - 8)},
+      style: {background: "rgba(255, 255, 255, 0.055)", borderColor: args.tone, borderRadius: 4},
     })
     span(surface, x + 58, centerY - 12, width - 116, 28, {
       children: args.label,
@@ -94,7 +92,7 @@ function renderPrimitiveStory(
   }
   if (options.component === "span") {
     div(surface, x, centerY - 68, width, 136, {
-      style: {background: "rgba(255, 255, 255, 0.035)", borderColor: "rgba(214, 231, 255, 0.16)", borderRadius: args.radius},
+      style: {background: "rgba(255, 255, 255, 0.035)", borderColor: "rgba(214, 231, 255, 0.16)", borderRadius: 4},
     })
     span(surface, x + 30, centerY - 20, width - 60, 40, {
       children: args.label,
@@ -113,7 +111,6 @@ function renderPrimitiveStory(
         globalThis.__elementsStoryControlBridge?.("clicks", args.clicks + 1)
         globalThis.__elementsStoryControlBridge?.("state", "click")
       },
-      style: {borderRadius: args.radius},
     })
     return
   }
@@ -126,7 +123,6 @@ function renderPrimitiveStory(
       active: args.active,
       disabled: args.disabled,
       onChange: (value) => globalThis.__elementsStoryControlBridge?.("label", value),
-      style: {borderRadius: args.radius},
     })
     return
   }
@@ -157,13 +153,12 @@ function renderPrimitiveStory(
         globalThis.__elementsStoryControlBridge?.("clicks", args.clicks + 1)
         globalThis.__elementsStoryControlBridge?.("state", "click")
       },
-      style: {borderRadius: args.radius},
     })
     return
   }
   if (options.component === "img") {
     div(surface, x, centerY - 150, width, 300, {
-      style: {background: "rgba(4, 8, 14, 0.52)", borderColor: "rgba(214, 231, 255, 0.14)", borderRadius: args.radius},
+      style: {background: "rgba(4, 8, 14, 0.52)", borderColor: "rgba(214, 231, 255, 0.14)", borderRadius: 4},
     })
     img(surface, x + 18, centerY - 132, width - 36, 264, {
       src: artworkUrl(),
@@ -189,7 +184,6 @@ function renderNestedOverflowDiv(
       background: toneFill(args.tone, 0.08),
       borderColor: args.tone,
       borderWidth: 6,
-      borderRadius: args.radius,
     },
     children: ({viewportX, viewportY, viewportWidth, viewportHeight}) => {
       flexRow({
@@ -207,7 +201,7 @@ function renderNestedOverflowDiv(
                 overflow: "hidden",
                 background: "rgba(255, 255, 255, 0.08)",
                 borderColor: "rgba(255, 255, 255, 0.24)",
-                borderRadius: Math.max(4, args.radius - 8),
+                borderRadius: 4,
                 padding: 16,
                 color: "text",
               },
@@ -221,7 +215,7 @@ function renderNestedOverflowDiv(
                 overflow: "hidden",
                 background: toneFill(args.tone, 0.16),
                 borderColor: args.tone,
-                borderRadius: Math.max(4, args.radius - 8),
+                borderRadius: 4,
                 padding: 16,
                 color: "text",
               },
@@ -257,7 +251,6 @@ function renderScrollDiv(
       background: toneFill(args.tone, 0.06),
       borderColor: args.tone,
       borderWidth: 2,
-      borderRadius: args.radius,
       padding: args.density === "compact" ? 16 : 24,
       color: "muted",
       fontSize: 12,
@@ -299,7 +292,6 @@ function renderList(
     style: {
       background: "rgba(4, 8, 14, 0.38)",
       borderColor: args.tone,
-      borderRadius: args.radius,
       overflowY: args.mode === "scroll" ? "auto" : "hidden",
     },
     children: (context) => {
@@ -308,11 +300,17 @@ function renderList(
         const rowY = liY(index, {startY: context.itemY, itemHeight, itemGap})
         const props: LiElementProps = {
           key: `elements-story-list-row-${index}`,
-          style: (state) => ({
-            background: state.hovered && args.mode === "interactive" ? toneFill(args.tone, 0.1) : null,
-            borderColor: state.pressed && args.mode === "interactive" ? args.tone : null,
-            borderRadius: 12,
-          }),
+          style: {
+            borderRadius: 4,
+          },
+          stateStyles: {
+            hover: {
+              background: args.mode === "interactive" ? toneFill(args.tone, 0.1) : null,
+            },
+            active: {
+              borderColor: args.mode === "interactive" ? args.tone : null,
+            },
+          },
           children: () => {
             span(surface, context.itemX + 16, rowY + 4, context.itemWidth - 32, 20, {
               children: row[0],
@@ -353,7 +351,6 @@ function primitiveControls(
         {value: "red", label: "Красный"},
       ],
     },
-    {key: "radius", label: "Скругление", group: "Внешний вид", kind: "number", interactive: false},
   ]
   if (component === "div") return [
     ...common,
@@ -382,7 +379,6 @@ function primitiveControls(
       interactive: true,
       options: [{value: "cover", label: "Заполнение"}, {value: "contain", label: "Целиком"}],
     },
-    {key: "radius", label: "Скругление", group: "Внешний вид", kind: "number", interactive: false},
   ]
   return [
     {
@@ -411,7 +407,6 @@ function primitiveArgs(options: Readonly<{
     label: options.component === "span" ? "Текстовый элемент" : options.component === "input" ? "Значение" : options.component === "select" ? "Умножение" : "Элемент UI",
     tone: "cyan",
     density: "regular",
-    radius: options.component === "button" || options.component === "input" || options.component === "select" ? uiShapeMetrics.lowRadius : 28,
     disabled: options.variant === "disabled",
     active: options.variant === "active",
     open: options.variant === "open" || options.variant === "header" || options.variant === "flipped",
@@ -434,7 +429,7 @@ function primitiveSource(
       'import {flexRow} from "@layout/core/flex"',
       "",
       "div(surface, x, y, w, h, {",
-      `  style: {overflow: "hidden", borderWidth: 6, borderRadius: ${args.radius}},`,
+      "  style,",
       "  children: ({viewportX, viewportY, viewportWidth, viewportHeight}) => {",
       "    flexRow({x: viewportX, y: viewportY, w: viewportWidth, h: viewportHeight, items})",
       "  },",
@@ -446,29 +441,20 @@ function primitiveSource(
       "div(surface, x, y, w, h, {",
       '  key: "content",',
       "  children: content,",
-      `  style: {${options.variant === "both" ? 'overflow: "auto"' : `overflow${options.variant === "horizontal" ? "X" : "Y"}: "auto"`}, borderRadius: ${args.radius}},`,
+      "  style,",
       "})",
     ].join("\n")
-    const properties = [
-      `    background: ${JSON.stringify(toneFill(args.tone, options.variant === "background" ? 0.18 : 0.08))},`,
-      `    borderRadius: ${options.variant === "z-index" ? 18 : args.radius},`,
-    ]
-    if (options.variant === "border") properties.push(`    borderColor: ${JSON.stringify(args.tone)},`, "    borderWidth: 2,")
-    if (options.variant === "padding") properties.push(`    padding: ${args.density === "compact" ? 18 : 34},`)
-    if (options.variant === "z-index") properties.push("    zIndex: 0.08,")
     return [
       'import {div} from "@ui/elements/div"',
       "",
       "div(surface, x, y, w, h, {",
-      "  style: {",
-      ...properties,
-      "  },",
+      "  style,",
       "})",
     ].join("\n")
   }
-  if (options.component === "span") return `import {span} from "@ui/elements/span"\n\nspan(surface, x, y, w, h, {children: ${JSON.stringify(args.label)}, style: {textAlign: ${JSON.stringify(args.align)}, color: ${JSON.stringify(args.tone)}}})`
-  if (options.component === "button") return `import {button} from "@ui/elements/button"\n\nbutton(surface, x, y, w, h, {children: ${JSON.stringify(args.label)}, disabled: ${args.disabled}, onClick})`
-  if (options.component === "input") return `import {input} from "@ui/elements/input"\n\ninput(surface, x, y, w, h, {key: "value", value: ${JSON.stringify(args.label)}, active: ${args.active}, disabled: ${args.disabled}, onChange: setValue})`
+  if (options.component === "span") return `import {span} from "@ui/elements/span"\n\nspan(surface, x, y, w, h, {children: ${JSON.stringify(args.label)}, style})`
+  if (options.component === "button") return `import {button} from "@ui/elements/button"\n\nbutton(surface, x, y, w, h, {children: ${JSON.stringify(args.label)}, disabled: ${args.disabled}, onClick, style})`
+  if (options.component === "input") return `import {input} from "@ui/elements/input"\n\ninput(surface, x, y, w, h, {key: "value", value: ${JSON.stringify(args.label)}, active: ${args.active}, disabled: ${args.disabled}, onChange: setValue, style})`
   if (options.component === "select") return [
     'import {select, type SelectElementOption} from "@ui/elements/select"',
     "",
@@ -479,12 +465,12 @@ function primitiveSource(
     '  {value: "Деление", label: "Деление", disabled: true},',
     "]",
     "",
-    `select(surface, x, y, w, h, {key: "value", value: ${JSON.stringify(args.label)}, options, open: ${args.open}, active: ${args.active}, disabled: ${args.disabled},${options.variant === "header" || options.variant === "flipped" ? ' popupLabel: "Операция",' : ""} onChange: setValue, onOpenChange: setOpen})`,
+    `select(surface, x, y, w, h, {key: "value", value: ${JSON.stringify(args.label)}, options, open: ${args.open}, active: ${args.active}, disabled: ${args.disabled},${options.variant === "header" || options.variant === "flipped" ? ' popupLabel: "Операция",' : ""} onChange: setValue, onOpenChange: setOpen, style})`,
   ].join("\n")
-  if (options.component === "img") return `import {img} from "@ui/elements/img"\n\nimg(surface, x, y, w, h, {src: artworkUrl, fit: ${JSON.stringify(args.fit)}})`
+  if (options.component === "img") return `import {img} from "@ui/elements/img"\n\nimg(surface, x, y, w, h, {src: artworkUrl, fit: ${JSON.stringify(args.fit)}, style})`
   const listOptions = [
     `  dense: ${args.mode === "dense"},`,
-    ...(args.mode === "scroll" ? ['  style: {overflowY: "auto"},'] : []),
+    "  style,",
   ]
   return [
     'import {li, liY, ul} from "@ui/elements/list"',

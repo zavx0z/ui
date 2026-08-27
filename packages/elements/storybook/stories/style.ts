@@ -8,6 +8,7 @@ import {
   type StorybookStoryModule,
 } from "@zavx0z/storybook/stories"
 import type {StyleStoryComponent} from "../stories.ts"
+import {elementStorySource} from "../style-source.ts"
 
 type StyleStoryArgs = StorybookStoryArgs & Readonly<{
   tone: "cyan" | "green" | "orange" | "red"
@@ -51,7 +52,7 @@ export function createStyleStory(options: Readonly<{
       renderStyleStory(surface, args, frame, options)
     },
     source(args) {
-      return styleSource(options, args)
+      return elementStorySource(options, args, styleSource(options, args))
     },
   })
 }
@@ -159,42 +160,25 @@ function styleSource(
     'import {palette} from "@ui/elements/theme"',
     "",
     "div(surface, x, y, w, h, {",
-    `  style: {background: palette.${args.tone}, borderRadius: ${args.radius}, opacity: ${args.opacity}},`,
+    "  style,",
     "})",
   ].join("\n")
   if (options.section === "typography") return [
     'import {h1, h2, p} from "@ui/elements/text"',
     "",
-    'h1(surface, x, y, w, 44, {children: "Главный заголовок"})',
+    'h1(surface, x, y, w, 44, {children: "Главный заголовок", style})',
     'h2(surface, x, y + 64, w, 36, {children: "Заголовок раздела"})',
     'p(surface, x, y + 116, w, 42, {children: "Основной текст"})',
   ].join("\n")
   if (options.section === "flex") return [
-    'import type {StyleProps} from "@ui/elements/style"',
+    'import {div} from "@ui/elements/div"',
     "",
-    "const style: StyleProps = {",
-    '  display: "flex",',
-    "  gap: 16,",
-    '  alignItems: "center",',
-    '  justifyContent: "space-between",',
-    "}",
+    "div(surface, x, y, w, h, {style})",
   ].join("\n")
-  const properties = [
-    `  background: ${JSON.stringify(args.tone)},`,
-    `  opacity: ${args.opacity},`,
-  ]
-  if (options.section === "padding") properties.push(`  padding: ${args.padding},`)
-  if (options.section === "border") properties.push(
-    `  borderRadius: ${args.radius},`,
-    `  borderColor: ${JSON.stringify(args.tone)},`,
-    "  borderWidth: 2,",
-  )
   return [
-    'import type {StyleProps} from "@ui/elements/style"',
+    'import {div} from "@ui/elements/div"',
     "",
-    "const style: StyleProps = {",
-    ...properties,
-    "}",
+    "div(surface, x, y, w, h, {style})",
   ].join("\n")
 }
 

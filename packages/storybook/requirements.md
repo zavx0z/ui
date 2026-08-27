@@ -17,7 +17,7 @@ Components либо consumer.
    непосредственных детей текущего уровня в существующих catalog/sections/dock
    regions; выбор ребёнка углубляет тот же pathname на один уровень. Overview
    не заменяет historical five-panel Workbench отдельной пустой страницей:
-   preview, source, controls и events остаются на месте. Overview рендерит
+   preview, три source editors, controls и events остаются на месте. Overview рендерит
    собственный aggregate owner module со всеми непосредственными детьми;
    первый detail descendant может быть только navigation representative и не
    подменяет overview content. Общая typed
@@ -70,27 +70,27 @@ Components либо consumer.
     Enter/Space вызывают текущий route callback. Видимое перемещение focus
     материализует только прежний и новый item owner; disabled item пропускается.
 12. Масштабируемый catalog строится из package-owned typed story descriptors.
-    Один descriptor связывает component identity, section, variant, args,
-    production render, source generator и controls; route,
-    поиск, preview, dock, копируемый код и render test не получают отдельных
-    расходящихся описаний.
+    Один descriptor связывает component identity, section, variant, internal
+    args, production render, raw HTML, raw CSS, exact TypeScript, controls и events;
+    route, поиск, preview, dock, копируемый код и render test не получают
+    отдельных расходящихся описаний.
 13. Catalog и sections поддерживают большой индекс через поиск, сворачиваемые
     группы и виртуализированное отображение. Initial bundle содержит metadata
     index; story implementation загружается lazy factory только после выбора.
     Точный production import contract принадлежит package owner, а не
     storybook.
 14. Preview всегда использует production UI на текущем Engine/UiRuntime. Dock
-    показывает variants выбранной story. Правая панель постоянно показывает
-    сгенерированный TypeScript и действие копирования; ниже неё располагаются
-    controls и события, не скрывая код. В V1 только `boolean` и `select`
-    являются interactive; `number`, `text`, `color` и `custom` обязаны явно
-    объявлять `interactive: false` и отображаются честно disabled.
-    TypeScript отображается exact production `@ui/components/code-editor` в
-    `readOnly: true`: Islands Dark syntax, фиксированный line-number gutter,
-    обе оси scroll и single selection с `Cmd/Ctrl+C`. Верхняя Copy action
-    продолжает копировать полный source независимо от selection.
+    показывает variants выбранной story. Правая панель одновременно показывает
+    три independent production `CodeEditor`: raw HTML, raw CSS и exact
+    TypeScript. У каждого свой title, language, scroll, selection и Copy action;
+    все три соответствуют одному preview и одним args. Ниже сохраняются controls
+    для быстрого изменения тех же args и Events как наблюдаемый output; будущая
+    editable версия редакторов становится дополнительным authoring path, а не
+    основанием удалить controls. Каждый редактор работает в `readOnly: true` с
+    фиксированным line-number gutter, обеими осями scroll и single selection с
+    `Cmd/Ctrl+C`; Copy копирует полный exact документ независимо от selection.
 15. Все обращённые к человеку строки Workbench пишутся по-русски: навигация и
-    поиск, описания preview, демонстрационные подписи, controls, events,
+    поиск, описания preview, демонстрационные подписи, editor titles, controls, events,
     состояния и статусы. Public API identifiers, import specifiers, route IDs и
     TypeScript-код сохраняют точное исходное написание; имена Blender и API
     остаются точными только там, где являются именем reference либо
@@ -100,7 +100,11 @@ Components либо consumer.
 16. Workbench сам следует глобальной Blender composition/form law: компактные
     editor headers, row navigation, thin separators и low-radius panels вместо
     oversized pill stacks и больших rounded islands. Five-panel semantic regions
-    сохраняются, но их visible chrome не является исключением из UI shape law.
+    сохраняются и соответствуют Blender `ScrArea`: exact Workbench owner
+    задаёт `borderRadius: 6` непосредственно в CSS-like style editor-region, а
+    nested accordion/panel/box owner задаёт `borderRadius: 4`. Общий radius
+    token/config отсутствует; caller `style` может явно переопределить owner
+    default.
     Palette/material states следуют adopted 5.2 mapping. HTML shell один раз
     объявляет Engine-owned default font URL; package pages и stories не передают
     его в `UiRuntime`, а custom runtime font полностью обходит default request.
@@ -112,12 +116,13 @@ Components либо consumer.
     header/body получают отдельные raw ThemeSpace roles даже при совпадающих
     default bytes. Keyboard focus не заменяет route selection или disclosure;
     accordion header/body не схлопываются в один локальный fill alias.
-19. Source box использует общий scrollable `Pane`, а не обрезает массив строк.
-    При переполнении по соответствующей оси появляются независимые vertical и
-    horizontal scrollbar; wheel axis-lock, track click и thumb drag принадлежат
-    общему `div` scroll primitive. Source update сохраняет допустимую позицию и
-    клампит её к новым bounds, а title, copy, tabs и detail owners не
-    материализуются из-за прокрутки кода.
+19. Каждый из трёх source editors использует общий scrollable `Pane`, а не
+    обрезает массив строк. При переполнении по соответствующей оси появляются
+    независимые vertical и horizontal scrollbar; wheel axis-lock, track click и
+    thumb drag принадлежат общему `div` scroll primitive. Update одного
+    документа сохраняет допустимую позицию и клампит её к новым bounds, а два
+    других editors, titles, copy и detail owners не материализуются из-за его
+    прокрутки.
 20. Канонический адрес package overview и любого prefix overview оканчивается
     `/`, а exact detail leaf — нет. Входной адрес в противоположной форме может
     быть только совместимым redirect на канонический адрес. Неизвестный suffix

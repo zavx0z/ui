@@ -9,7 +9,6 @@ import {
   elementSectionItems,
   elementVariantItems,
 } from "./stories.ts"
-import {uiShapeMetrics} from "../shape.ts"
 import {UI_STORYBOOK_RESPONSIVE_POLICY} from "../../storybook/app/workbench-policy.ts"
 
 const storybookRoot = fileURLToPath(new URL(".", import.meta.url))
@@ -86,50 +85,49 @@ describe("@ui/elements package-owned Workbench stories", () => {
 
   test("loads lazy stories through exact public subpaths and keeps source driven by args", async () => {
     const primitive = await ELEMENT_STORIES.load("button/state/clickable")
-    expect(primitive.source(primitive.defaultArgs)).toContain('from "@ui/elements/button"')
+    expect(primitive.source(primitive.defaultArgs).typescript).toContain('from "@ui/elements/button"')
     expect(primitive.defaultArgs).toMatchObject({disabled: false, state: "clickable", clicks: 0})
-    expect(primitive.source({...primitive.defaultArgs, label: "Запуск", disabled: true})).toContain('children: "Запуск"')
-    expect(primitive.source({...primitive.defaultArgs, label: "Запуск", disabled: true})).toContain("disabled: true")
-    expect(primitive.defaultArgs).toMatchObject({radius: uiShapeMetrics.lowRadius})
+    expect(primitive.source({...primitive.defaultArgs, label: "Запуск", disabled: true}).typescript).toContain('children: "Запуск"')
+    expect(primitive.source({...primitive.defaultArgs, label: "Запуск", disabled: true}).typescript).toContain("disabled: true")
+    expect(primitive.defaultArgs).not.toHaveProperty("radius")
+    expect(primitive.controls.map(({key}) => key)).not.toContain("radius")
 
     const input = await ELEMENT_STORIES.load("input/state/inactive")
-    expect(input.defaultArgs).toMatchObject({radius: uiShapeMetrics.lowRadius})
+    expect(input.defaultArgs).not.toHaveProperty("radius")
+    expect(input.controls.map(({key}) => key)).not.toContain("radius")
 
     const select = await ELEMENT_STORIES.load("select/state/open")
-    expect(select.source(select.defaultArgs)).toContain('from "@ui/elements/select"')
-    expect(select.defaultArgs).toMatchObject({label: "Умножение", open: true, radius: uiShapeMetrics.lowRadius})
-    expect(select.source(select.defaultArgs)).toContain("options")
+    expect(select.source(select.defaultArgs).typescript).toContain('from "@ui/elements/select"')
+    expect(select.defaultArgs).toMatchObject({label: "Умножение", open: true})
+    expect(select.defaultArgs).not.toHaveProperty("radius")
+    expect(select.controls.map(({key}) => key)).not.toContain("radius")
+    expect(select.source(select.defaultArgs).typescript).toContain("options")
     const selectHeader = await ELEMENT_STORIES.load("select/state/header")
     expect(selectHeader.defaultArgs).toMatchObject({open: true, state: "header"})
-    expect(selectHeader.source(selectHeader.defaultArgs)).toContain('popupLabel: "Операция"')
+    expect(selectHeader.source(selectHeader.defaultArgs).typescript).toContain('popupLabel: "Операция"')
     const selectFlipped = await ELEMENT_STORIES.load("select/state/flipped")
     expect(selectFlipped.defaultArgs).toMatchObject({open: true, state: "flipped"})
     const popover = await ELEMENT_STORIES.load("popover/state/open")
-    expect(popover.source(popover.defaultArgs)).toContain('from "@ui/elements/popover"')
+    expect(popover.source(popover.defaultArgs).typescript).toContain('from "@ui/elements/popover"')
     expect(popover.defaultArgs).toMatchObject({open: true})
-    for (const route of ["button/state/default", "input/state/inactive", "select/state/inactive"] as const) {
-      const control = await ELEMENT_STORIES.load(route)
-      expect(control.source(control.defaultArgs)).not.toContain("borderColor")
-    }
-
     const style = await ELEMENT_STORIES.load("theme/tone/green")
-    expect(style.source(style.defaultArgs)).toContain('from "@ui/elements/theme"')
+    expect(style.source(style.defaultArgs).typescript).toContain('from "@ui/elements/theme"')
     expect(style.defaultArgs).toMatchObject({tone: "green"})
 
     const events = await ELEMENT_STORIES.load("pointer/state/click")
-    expect(events.source(events.defaultArgs)).toContain('from "@ui/elements/button"')
+    expect(events.source(events.defaultArgs).typescript).toContain('from "@ui/elements/button"')
     expect(events.defaultArgs).toMatchObject({state: "click", clicks: 1})
 
     const status = await ELEMENT_STORIES.load("status-bar/content/statistics")
-    expect(status.source(status.defaultArgs)).toContain('from "@ui/elements/status-bar"')
-    expect(status.source(status.defaultArgs)).toContain("Collection")
+    expect(status.source(status.defaultArgs).typescript).toContain('from "@ui/elements/status-bar"')
+    expect(status.source(status.defaultArgs).typescript).toContain("Collection")
     expect(status.defaultArgs).toMatchObject({"highlight-version": false})
 
     const nestedOverflow = await ELEMENT_STORIES.load("div/overflow/nested")
-    expect(nestedOverflow.source(nestedOverflow.defaultArgs)).toContain('from "@layout/core/flex"')
-    expect(nestedOverflow.source(nestedOverflow.defaultArgs)).toContain('overflow: "hidden"')
+    expect(nestedOverflow.source(nestedOverflow.defaultArgs).typescript).toContain('from "@layout/core/flex"')
+    expect(nestedOverflow.source(nestedOverflow.defaultArgs).typescript).toContain("style,")
     const bothAxes = await ELEMENT_STORIES.load("div/scroll/both")
-    expect(bothAxes.source(bothAxes.defaultArgs)).toContain('overflow: "auto"')
+    expect(bothAxes.source(bothAxes.defaultArgs).css).toContain("overflow: auto;")
   })
 
   test("loads every published detail story with non-empty exact code", async () => {
@@ -137,8 +135,33 @@ describe("@ui/elements package-owned Workbench stories", () => {
     for (const route of ELEMENT_STORY_ROUTES) {
       const module = await ELEMENT_STORIES.load(route)
       const source = module.source(module.defaultArgs)
-      expect(source.length).toBeGreaterThan(24)
-      expect(source).toContain("@ui/elements/")
+      expect(source.html.length).toBeGreaterThan(12)
+      expect(source.css.length).toBeGreaterThan(24)
+      expect(source.typescript.length).toBeGreaterThan(24)
+      expect(source.typescript).toContain("@ui/elements/")
+      expect(source.html).not.toContain("html`")
+      expect(source.css).not.toContain("const style")
+    }
+  })
+
+  test("shows the complete owner style chain and every state branch on every detail route", async () => {
+    for (const route of ELEMENT_STORY_ROUTES) {
+      const index = ELEMENT_STORIES.find(route)
+      expect(index).toBeDefined()
+      const module = await ELEMENT_STORIES.load(route)
+      const source = module.source(module.defaultArgs).css
+      const expectedOwners = elementSourceOwners(index!.componentId, index!.sectionId)
+      let ownerPosition = -1
+      for (const owner of expectedOwners) {
+        const nextPosition = source.indexOf(owner, ownerPosition + 1)
+        expect(nextPosition).toBeGreaterThan(ownerPosition)
+        ownerPosition = nextPosition
+      }
+      expect(source).toContain("/* Полная CSS-цепочка:")
+      expect(source).toMatch(/^\.[a-z-]+ \{/)
+      expect(source).toContain("Задано в")
+      expect(source).not.toContain("Preview frame")
+      assertElementStateBranches(source, expectedOwners)
     }
   })
 
@@ -243,6 +266,54 @@ describe("@ui/elements package-owned Workbench stories", () => {
     }
   }, 30000)
 })
+
+function elementSourceOwners(componentId: string, sectionId: string): readonly string[] {
+  if (componentId === "div") return ["@ui/elements/div"]
+  if (componentId === "span") return ["@ui/elements/span"]
+  if (componentId === "button" || componentId === "pointer") return ["@ui/elements/div", "@ui/elements/button"]
+  if (componentId === "input") return ["@ui/elements/div", "@ui/elements/input"]
+  if (componentId === "select") return ["@ui/elements/div", "@ui/elements/button", "@ui/elements/select"]
+  if (componentId === "popover") return ["@ui/elements/div", "@ui/elements/button"]
+  if (componentId === "img") return ["@ui/elements/img"]
+  if (componentId === "list") return ["@ui/elements/div", "@ui/elements/list#ul", "@ui/elements/list#li"]
+  if (componentId === "status-bar") return ["@ui/elements/status-bar"]
+  if (componentId === "theme") return ["@ui/elements/div"]
+  if (componentId === "css" && sectionId === "typography") {
+    return [
+      "@ui/elements/span",
+      "@ui/elements/text#h1",
+    ]
+  }
+  return ["@ui/elements/div"]
+}
+
+function assertElementStateBranches(source: string, owners: readonly string[]): void {
+  const expected = new Set<string>()
+  if (owners.includes("@ui/elements/button")) {
+    for (const state of ["idle", "hover", "active", "disabled"]) expected.add(state)
+  }
+  if (owners.includes("@ui/elements/input")) {
+    for (const state of ["idle", "hover", "active", "disabled"]) expected.add(state)
+  }
+  if (owners.includes("@ui/elements/select")) expected.add("open")
+  if (owners.includes("@ui/elements/list#li")) {
+    for (const state of ["idle", "hover", "active", "selected", "disabled"]) expected.add(state)
+  }
+  if (owners.includes("@ui/elements/status-bar")) {
+    for (const state of ["default", "highlighted"]) expected.add(state)
+  }
+  for (const state of expected) expect(source).toContain(stateCssSelector(state))
+}
+
+function stateCssSelector(state: string): string {
+  if (state === "hover") return "&:hover {"
+  if (state === "active") return "&:active {"
+  if (state === "disabled") return "&:disabled,"
+  if (state === "open") return '&[aria-expanded="true"]'
+  if (state === "selected") return '&[aria-selected="true"]'
+  if (state === "highlighted") return '&[data-highlighted="true"]'
+  return `&[data-state="${state}"]`
+}
 
 async function freePort(): Promise<number> {
   const server = Bun.serve({hostname: "127.0.0.1", port: 0, fetch: () => new Response("probe")})

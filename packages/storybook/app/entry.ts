@@ -5,8 +5,9 @@ import {
   StorybookNavigationSurface,
   StorybookStoryPanelSurface,
   planStorybookShell,
-  type StorybookStoryPanelMode,
+  type StorybookStoryPanelCategory,
   type StorybookStoryPanelOptions,
+  type StorybookStorySourceKind,
 } from "@zavx0z/storybook/workbench"
 import {
   StorybookRouteTreeRouter,
@@ -73,7 +74,7 @@ try {
   let descriptor: UiStoryDescriptor = uiStoryDescriptor(route)
   let story: UiStoryModule = await loadUiStory(route)
   let args: StorybookStoryArgs = Object.freeze({...story.defaultArgs})
-  let panelMode: StorybookStoryPanelMode = "controls"
+  let panelCategory: StorybookStoryPanelCategory = "source"
   let catalogQuery = ""
   let collapsedCatalogGroups = new Set<string>()
   let controlChanges = 0
@@ -104,6 +105,7 @@ try {
     source: story.source(args),
     args,
     controls: story.controls,
+    contextLabel: descriptor.component.label,
     events: [
       {id: "route", label: "Сценарий", value: route},
       {id: "category", label: "Раздел", value: descriptor.category.label},
@@ -112,22 +114,29 @@ try {
       {id: "changes", label: "Изменения", value: String(controlChanges)},
       ...ownerEvents(),
     ],
-    mode: panelMode,
-    onModeChange(mode) {
-      panelMode = mode
+    category: panelCategory,
+    onCategoryChange(category) {
+      panelCategory = category
       storyPanel.setOptions(panelOptions())
       publish()
     },
     onControlChange(key, value) {
       updateControl(key, value)
     },
-    async onCopy(source) {
+    async onCopy(kind, source) {
       try {
         await navigator.clipboard.writeText(source)
         document.documentElement.dataset.uiStorybookCopy = "copied"
+        document.documentElement.dataset.uiStorybookCopyKind = kind
       } catch {
         document.documentElement.dataset.uiStorybookCopy = "error"
       }
+    },
+    onSourceScrollChange(kind, position) {
+      publishSourceScroll(kind, position)
+    },
+    onSourceSelectionChange(kind, selection) {
+      document.documentElement.dataset.uiStorybookSourceSelection = JSON.stringify({kind, selection})
     },
   })
   storyPanel = new StorybookStoryPanelSurface(panelOptions())
@@ -227,6 +236,7 @@ try {
     document.documentElement.dataset.uiStorybookComponent = descriptor.component.id
     document.documentElement.dataset.uiStorybookPackage = descriptor.owner.id
     document.documentElement.dataset.uiStorybookArgs = JSON.stringify(args)
+    document.documentElement.dataset.uiStorybookPanelCategory = panelCategory
   }
 
   function syncStoryPresentation(): void {
@@ -294,6 +304,13 @@ try {
       title: descriptor.title,
       description: `${descriptor.component.label} · ${descriptor.apiName}`,
     }
+  }
+
+  function publishSourceScroll(
+    kind: StorybookStorySourceKind,
+    position: Readonly<{left: number; top: number}>,
+  ): void {
+    document.documentElement.dataset.uiStorybookSourceScroll = JSON.stringify({kind, position})
   }
 
   router.subscribe((node) => {

@@ -31,14 +31,14 @@ describe("UI Storybook route presentations", () => {
       expect(module.entries, route).toHaveLength(count)
       expect(module.entries.every(({module: child}) => typeof child.render === "function"), route).toBeTrue()
     }
-    expect((await loadUiStory("components/foundation/button/basic")).source({}))
+    expect((await loadUiStory("components/foundation/button/basic")).source({}).typescript)
       .toContain("@ui/components/button")
     const foundation = await loadUiStory("components/foundation")
     if (!isUiAggregateStoryModule(foundation)) throw new Error("Expected Components foundation aggregate")
     expect(foundation.entries.map(({label}) => label)).not.toContain("Кнопка")
     const namespace = await loadUiStory("components")
     expect(isUiAggregateStoryModule(namespace)).toBeFalse()
-    expect(namespace.source({})).toContain("sections")
+    expect(namespace.source({}).typescript).toContain("sections")
   })
 
   test("maps groups, categories, components and flattened scenarios", () => {

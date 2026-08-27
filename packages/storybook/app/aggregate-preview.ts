@@ -34,7 +34,7 @@ export class UiAggregateTileSurface extends UiSurface {
     if (signature === this.#signature) return
     this.materializeRetainedParent(this.#contentParent, () => {
       entry.module.render(this, entry.module.defaultArgs, {x: 0, y: 0, w: this.rectW, h: this.rectH})
-      Pane(this, 0, 0, this.rectW, 28, {variant: "filled", sx: {borderRadius: 4}})
+      Pane(this, 0, 0, this.rectW, 28, {variant: "filled"})
       Typography(this, 10, 4, Math.max(0, this.rectW - 20), 20, {
         children: entry.label,
         variant: "caption",

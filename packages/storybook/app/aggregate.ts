@@ -2,6 +2,7 @@ import type {
   StorybookStoryArgs,
   StorybookStoryControl,
   StorybookStoryModule,
+  StorybookStorySource,
 } from "@zavx0z/storybook/stories"
 
 export type UiAggregateStoryEntry = Readonly<{
@@ -32,13 +33,25 @@ export function createUiAggregateStory(input: Readonly<{
     entries,
     render() {},
     source() {
-      return entries.flatMap(({label, route, module}) => [
-        `// ${label} · /${route}`,
-        module.source(module.defaultArgs),
-        "",
-      ]).join("\n").trimEnd()
+      return Object.freeze({
+        html: aggregateSource(entries, "html", (label, route) => `<!-- ${label} · /${route} -->`),
+        css: aggregateSource(entries, "css", (label, route) => `/* ${label} · /${route} */`),
+        typescript: aggregateSource(entries, "typescript", (label, route) => `// ${label} · /${route}`),
+      })
     },
   })
+}
+
+function aggregateSource(
+  entries: readonly UiAggregateStoryEntry[],
+  kind: keyof StorybookStorySource,
+  heading: (label: string, route: string) => string,
+): string {
+  return entries.flatMap(({label, route, module}) => [
+    heading(label, route),
+    module.source(module.defaultArgs)[kind],
+    "",
+  ]).join("\n").trimEnd()
 }
 
 export function isUiAggregateStoryModule(

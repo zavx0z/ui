@@ -70,7 +70,7 @@ describe("one-root UI Storybook", () => {
     })
     expect(uiStoryDescriptor("components/foundation/button")).toMatchObject({kind: "overview"})
     expect(uiStoryDescriptor("components/foundation/button/basic/contained")).toMatchObject({kind: "detail"})
-    expect((await loadUiStory("components/foundation/button")).source({})).toContain("@ui/components/button")
+    expect((await loadUiStory("components/foundation/button")).source({}).typescript).toContain("@ui/components/button")
   })
 
   test("keeps one complete prefixed route tree without a landing page", () => {
@@ -91,7 +91,7 @@ describe("one-root UI Storybook", () => {
       body: {kind: "canvas", canvasId: "ui-storybook-canvas"},
       canvas: {id: "ui-storybook-canvas", evidence: "non-black"},
     })
-    expect(app.pages[0]?.routeTree.leaves).toHaveLength(132)
+    expect(app.pages[0]?.routeTree.leaves).toHaveLength(133)
   })
 
   test("serves every category through the same no-HMR Workbench page", async () => {
@@ -115,6 +115,7 @@ describe("one-root UI Storybook", () => {
         "/components/",
         "/components/foundation/",
         "/components/foundation/button/basic/contained",
+        "/components/data/inspector/basic/default",
         "/hud/",
         "/hud/foundation/timeline/inventory/default",
       ]) {
