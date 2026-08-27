@@ -4,6 +4,7 @@ import {UiSurface as BaseUiSurface} from "@layout/core/surface"
 import {button, type ButtonElementAppearance, type ButtonElementLayout} from "./button.ts"
 import {rgba8ToColor, resolveWidgetColors, type WidgetClass} from "./theme-reference.ts"
 import {uiShapeMetrics} from "./shape.ts"
+import {palette} from "./theme.ts"
 
 type RoundedRectCall = Parameters<UiSurface["drawRoundedRect"]>
 type CenteredTextCall = Parameters<UiSurface["drawTextCentered"]>
@@ -61,7 +62,7 @@ describe("button visible geometry", () => {
     const [x, y, width, height, chrome] = surface.roundedRects[0]!
     expect({x, y, width, height}).toEqual({x: 10, y: 29, width: 100, height: uiShapeMetrics.controlHeight})
     expect({radius: chrome.radius, borderWidth: chrome.borderWidth}).toEqual({
-      radius: uiShapeMetrics.lowRadius,
+      radius: 4,
       borderWidth: uiShapeMetrics.borderWidth,
     })
     expect(chrome.border).toEqual(expectedColor(resolveWidgetColors("regular").outline))
@@ -260,6 +261,29 @@ describe("button visible geometry", () => {
       borderWidth: 2,
     })
     expect(surface.centeredTexts[0]?.[3]).toMatchObject({fontPx: 13, maxWidthPx: 76})
+  })
+
+  test("applies the pre-resolved caller state table after owner defaults", () => {
+    class StateSurface extends RecordingSurface {
+      constructor(readonly state: Readonly<{hovered: boolean; pressed: boolean}>) { super() }
+      override hitState(): {hovered: boolean; pressed: boolean} { return {...this.state} }
+    }
+    const stateStyles = {
+      idle: {background: "cyan"},
+      hover: {background: "green"},
+      active: {background: "orange"},
+      disabled: {background: "red"},
+    } as const
+    for (const entry of [
+      {hit: {hovered: false, pressed: false}, props: {}, fill: palette.cyan},
+      {hit: {hovered: true, pressed: false}, props: {}, fill: palette.green},
+      {hit: {hovered: true, pressed: true}, props: {}, fill: palette.orange},
+      {hit: {hovered: false, pressed: false}, props: {disabled: true}, fill: palette.red},
+    ] as const) {
+      const surface = new StateSurface(entry.hit)
+      button(surface, 0, 0, 100, 22, {...entry.props, stateStyles})
+      expect(surface.roundedRects[0]?.[4].fill).toEqual(entry.fill)
+    }
   })
 
   test("gives custom content the Elements-planned visible and padded rects", () => {

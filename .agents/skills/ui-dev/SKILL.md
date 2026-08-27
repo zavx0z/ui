@@ -55,5 +55,17 @@ reference, preview behavior, accepted rasters and route-specific expectations.
 Those laws stay in package requirements and `references/blender-reference.md`;
 generic Storybook mechanics stay only in `$storybook`.
 
+Consumer UI is authored as `@zavx0z/template` HTML plus CSS/Nested Style and
+resolved by target-neutral `@zavx0z/renderer`. The WebXR backend compiles that
+DSL once into flat typed rect/part/state inputs; Elements, Components and
+FlexBox never parse selector strings or cascade objects in render paths.
+Internal function APIs may keep efficient typed props and numeric geometry.
+Do not add `sx`; caller flat `style` remains the direct implementation override.
+Package-owned Storybook shows three independent documents for one fixed story:
+raw HTML, raw CSS with the full inherited owner/part/state chain, and exact
+TypeScript imports/props/internal calls. Existing Controls and Events remain
+bound to the same story args; future editor mutation is an additional authoring
+path rather than a replacement for them.
+
 At handoff report affected UI owners, focused and repository checks, reference
 compatibility where applicable, and every remaining product or owner gate.

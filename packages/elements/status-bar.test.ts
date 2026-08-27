@@ -1,4 +1,5 @@
 import {describe, expect, test} from "bun:test"
+import {Color} from "@engine/core"
 import {UiSurface, Z} from "@layout/core/surface"
 import {rgba8ToColor, uiTheme} from "./theme-reference.ts"
 import {
@@ -91,5 +92,41 @@ describe("StatusBar element", () => {
     expect(surface.texts).toEqual([])
     statusBar(surface, 0, 0, 0, 24, {end: referenceItems})
     expect(surface.roundedRects).toHaveLength(2)
+  })
+
+  test("applies caller CSS-like style after its status defaults", () => {
+    const surface = new StatusBarSurface()
+    const fill = new Color(0.1, 0.2, 0.3, 1)
+    const border = new Color(0.4, 0.5, 0.6, 1)
+    const text = new Color(0.7, 0.8, 0.9, 1)
+
+    statusBar(surface, 5, 6, 240, 24, {
+      start: [{id: "mode", text: "Готово", highlighted: true}],
+      style: {
+        background: fill,
+        borderColor: border,
+        borderRadius: 4,
+        borderWidth: 3,
+        color: text,
+        fontSize: 13,
+        opacity: 0.5,
+        paddingX: 7,
+        zIndex: 8,
+      },
+    })
+
+    expect(surface.roundedRects[0]?.[4]).toMatchObject({radius: 4, fill, opacity: 0.5, z: 8})
+    expect(surface.roundedRects[1]).toMatchObject([5, 6, 240, 3, {fill: border, opacity: 0.5, z: 8.02}])
+    const main = surface.texts.filter((call) => call[3].z === 8.1)
+    expect(main).toHaveLength(1)
+    expect(main[0]?.[1]).toBe(12)
+    expect(main[0]?.[3]).toMatchObject({fontPx: 13, material: {color: text}})
+  })
+
+  test("plans start, end and token sibling slots through Flex", async () => {
+    const source = await Bun.file(new URL("./status-bar.ts", import.meta.url)).text()
+    expect(source).toContain('import {flexRow} from "@layout/core/flex"')
+    expect(source).toContain("allocateStatusBarTokens")
+    expect(source).not.toContain("let cursor = left")
   })
 })

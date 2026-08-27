@@ -279,7 +279,7 @@ type DivScrollLayout = {
 
 function resolveDivBox(x: number, y: number, width: number, height: number, style: StyleProps, hasBorder: boolean): DivBox {
   const half = Math.max(0, Math.min(width, height) / 2)
-  const outerRadius = clamp(finiteNonNegative(px(style.borderRadius, Math.min(32, half))), 0, half)
+  const outerRadius = clamp(finiteNonNegative(px(style.borderRadius, 4)), 0, half)
   const borderWidth = hasBorder
     ? clamp(finiteNonNegative(px(style.borderWidth, 1)), 0, half)
     : 0

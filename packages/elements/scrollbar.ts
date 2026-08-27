@@ -1,6 +1,7 @@
 import type {Color} from "@engine/core"
 import {rgba8ToColor, resolveScrollbarColors} from "./theme-reference.ts"
 import {Z, type UiSurface} from "@layout/core/surface"
+import {backgroundColor, cssColor, mergeStyle, px, type StyleProps} from "./style.ts"
 
 export type ScrollbarOpts = {
   /** Current scroll offset in px. */
@@ -22,6 +23,7 @@ export type ScrollbarOpts = {
   thumbWidth?: number
   /** Pressed/dragged thumb state. Hover alone does not change the reference material. */
   pressed?: boolean
+  style?: StyleProps
 }
 
 const DEFAULT_THUMB = rgba8ToColor(resolveScrollbarColors(false).thumb)
@@ -34,25 +36,41 @@ export function scrollbarThumbCross(trackWidth: number, thumbWidth?: number): nu
 export function scrollbar(surface: UiSurface, x: number, y: number, h: number, opts: ScrollbarOpts): void {
   if (opts.total <= opts.visible) return
   const axis = opts.axis ?? opts.orientation ?? "vertical"
-  const tw = opts.trackWidth ?? 4
-  const minThumb = opts.minThumbHeight ?? 16
   const colors = resolveScrollbarColors(opts.pressed === true)
-  const trackColor = opts.trackColor ?? rgba8ToColor(colors.track)
-  const thumbColor = opts.thumbColor ?? (opts.pressed === true ? DEFAULT_ACTIVE_THUMB : DEFAULT_THUMB)
-  const outline = rgba8ToColor(colors.outline)
+  const style = mergeStyle({
+    style: {
+      background: opts.trackColor ?? rgba8ToColor(colors.track),
+      borderColor: rgba8ToColor(colors.outline),
+      borderWidth: 1,
+      color: opts.thumbColor ?? (opts.pressed === true ? DEFAULT_ACTIVE_THUMB : DEFAULT_THUMB),
+      opacity: 1,
+      scrollbarWidth: opts.trackWidth ?? 4,
+      ...opts.style,
+    },
+  })
+  const tw = px(style.scrollbarWidth, 4)
+  const minThumb = opts.minThumbHeight ?? 16
   const thumbCross = scrollbarThumbCross(tw, opts.thumbWidth)
   const crossOffset = (tw - thumbCross) / 2
+  const radius = px(style.borderRadius, thumbCross / 2)
+  const borderWidth = px(style.borderWidth, 1)
+  const trackFill = scrollbarTrackFill(style)
+  const thumbFill = cssColor(style.scrollbarColor ?? style.color ?? "transparent")
+  const outline = style.borderColor === null ? null : cssColor(style.borderColor ?? "transparent")
+  const trackZ = style.zIndex ?? Z.SEPARATOR
+  const thumbZ = style.zIndex === undefined ? Z.TEXT : style.zIndex + 0.01
 
   const trackX = axis === "horizontal" ? x : x + crossOffset
   const trackY = axis === "horizontal" ? y + crossOffset : y
   const trackW = axis === "horizontal" ? h : thumbCross
   const trackH = axis === "horizontal" ? thumbCross : h
   surface.drawRoundedRect(trackX, trackY, trackW, trackH, {
-    radius: thumbCross / 2,
-    fill: trackColor,
+    radius,
+    fill: trackFill,
     border: outline,
-    borderWidth: 1,
-    z: Z.SEPARATOR,
+    borderWidth,
+    opacity: style.opacity ?? 1,
+    z: trackZ,
   })
 
   const ratio = opts.visible / opts.total
@@ -65,10 +83,16 @@ export function scrollbar(surface: UiSurface, x: number, y: number, h: number, o
   const thumbW = axis === "horizontal" ? thumbLength : thumbCross
   const thumbH = axis === "horizontal" ? thumbCross : thumbLength
   surface.drawRoundedRect(thumbX, thumbY, thumbW, thumbH, {
-    radius: thumbCross / 2,
-    fill: thumbColor,
+    radius,
+    fill: thumbFill,
     border: outline,
-    borderWidth: 1,
-    z: Z.TEXT,
+    borderWidth,
+    opacity: style.opacity ?? 1,
+    z: thumbZ,
   })
+}
+
+function scrollbarTrackFill(style: StyleProps): Color | null {
+  if (style.scrollbarTrackColor !== undefined) return cssColor(style.scrollbarTrackColor)
+  return backgroundColor(style)
 }

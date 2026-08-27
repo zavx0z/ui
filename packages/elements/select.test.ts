@@ -86,7 +86,7 @@ describe("select element", () => {
       y: 29,
       width: 146,
       height: uiShapeMetrics.controlHeight,
-      radius: uiShapeMetrics.lowRadius,
+      radius: 4,
       borderWidth: uiShapeMetrics.borderWidth,
     })
     const colors = resolveWidgetColors("menu")
@@ -287,7 +287,7 @@ describe("select element", () => {
     const visible = visibleRoundedRects(surface)
     const menu = visible[1]?.[4]
     const rows = visible.slice(2).map((call) => call[4])
-    expect(menu).toMatchObject({radius: uiShapeMetrics.lowRadius, borderWidth: uiShapeMetrics.borderWidth})
+    expect(menu).toMatchObject({radius: 4, borderWidth: uiShapeMetrics.borderWidth})
     expect(menu?.border).toEqual(rgba8ToColor(resolveWidgetColors("menuBack").outline))
     expect(rows.map(({radius, border}) => ({radius, border}))).toEqual([
       {radius: 0, border: null},
@@ -343,5 +343,29 @@ describe("select element", () => {
       style: {borderColor: "orange"},
     })
     expect(surface.roundedRects[0]?.[4].border).toEqual(palette.orange)
+  })
+
+  test("applies explicit flat parts and pre-resolved state tables last", () => {
+    const surface = new RecordingSurface()
+    select(surface, 0, 0, 146, 22, {
+      key: "styled-parts",
+      value: "multiply",
+      options,
+      open: true,
+      triggerStyles: {active: {borderColor: "orange"}},
+      popupStyle: {background: "cyan", borderRadius: 7},
+      optionStyles: {
+        idle: {background: "green"},
+        selected: {background: "blue"},
+        disabled: {background: "red"},
+      },
+    })
+
+    const visible = visibleRoundedRects(surface)
+    expect(visible[0]?.[4].border).toEqual(palette.orange)
+    expect(visible[1]?.[4]).toMatchObject({fill: palette.cyan, radius: 7})
+    expect(visible[2]?.[4].fill).toEqual(palette.green)
+    expect(visible[3]?.[4].fill).toEqual(palette.blue)
+    expect(visible[5]?.[4].fill).toEqual(palette.red)
   })
 })

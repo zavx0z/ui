@@ -1,7 +1,6 @@
 import type {UiSurface} from "@layout/core/surface"
 import {Z} from "@layout/core/surface"
 import {backgroundColor, cssColor, px, type StyleProps} from "./style.ts"
-import {uiShapeMetrics} from "./shape.ts"
 
 export type GroupedCellCorners = Readonly<{
   topLeft: boolean
@@ -32,7 +31,7 @@ export function drawGroupedCellChrome(
   const fill = hasBackground ? backgroundColor(style) : null
   const border = style.borderColor === null || style.borderColor === undefined ? null : cssColor(style.borderColor)
   if (fill === null && border === null) return
-  const radius = Math.min(uiShapeMetrics.lowRadius, rect.width / 2, rect.height / 2)
+  const radius = Math.min(px(style.borderRadius, 4), rect.width / 2, rect.height / 2)
   const corners = appearance.corners
   surface.drawRoundedRect(rect.x, rect.y, rect.width, rect.height, {
     radius: {
@@ -51,7 +50,7 @@ export function drawGroupedCellChrome(
 
 export function groupedCellCornerRadii(
   appearance: GroupedCellAppearance | null,
-  radius = uiShapeMetrics.lowRadius,
+  radius = 4,
 ): Readonly<{tl: number; tr: number; br: number; bl: number}> {
   if (appearance === null) return {tl: radius, tr: radius, br: radius, bl: radius}
   return {

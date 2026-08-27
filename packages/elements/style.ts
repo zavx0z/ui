@@ -52,14 +52,15 @@ export type StyleProps = {
   zIndex?: number
 }
 
+/** Pre-resolved flat styles indexed by an owner-specific runtime state. */
+export type StyleStateTable<State extends string> = Readonly<Partial<Record<State, StyleProps>>>
+
 export type ElementChildren = string | number | false | null | undefined | (() => void)
 
 export type ElementBaseProps = {
   children?: ElementChildren
   key?: string
   style?: StyleProps
-  /** @deprecated Use style in @ui/elements. sx is reserved for @ui/components. */
-  sx?: StyleProps
 }
 
 export type InteractiveElementProps = ElementBaseProps & {
@@ -70,8 +71,6 @@ export type InteractiveElementProps = ElementBaseProps & {
   onPointerMove?: (localX?: number, localY?: number, event?: MouseEvent) => void
   onPointerUp?: (event?: MouseEvent) => void
 }
-
-export type SxProps = StyleProps
 
 export const visionGlass = new Color(0.055, 0.075, 0.11, 0.58)
 export const visionGlassTint = new Color(0.65, 0.91, 1, 1)
@@ -98,8 +97,8 @@ export function cssColor(value: CssColor): Color {
   return palette.text
 }
 
-export function mergeStyle(props: {style?: StyleProps; sx?: StyleProps}): StyleProps {
-  return {...props.sx, ...props.style}
+export function mergeStyle(props: {style?: StyleProps | undefined}): StyleProps {
+  return {...props.style}
 }
 
 export function backgroundColor(style: StyleProps): Color | null {

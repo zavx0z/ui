@@ -2,7 +2,8 @@ import {Color} from "@engine/core"
 import {IconButton, type ButtonVariant} from "@ui/components/button"
 import {Pane} from "@ui/components/pane"
 import {uiIcons} from "@ui/elements/icons"
-import {palette, radii, type Tone} from "@ui/elements/theme"
+import {type StyleProps, type StyleStateTable} from "@ui/elements/style"
+import {palette, type Tone} from "@ui/elements/theme"
 import {Z, type UiSurface} from "@layout/core/surface"
 import {type UiSurfaceRect} from "@layout/core/runtime"
 import {flexColumn, flexRow} from "@layout/core/flex"
@@ -46,8 +47,9 @@ export type HudWindowProps = HudWindowTitleBarProps & HudPaneFrameInteractionPro
   fill?: Color | null
   border?: Color | null
   borderWidth?: number
-  radius?: number
   frameZ?: number
+  style?: StyleProps
+  stateStyles?: StyleStateTable<"idle" | "active">
   bodyInsetX?: number
   bodyTopGap?: number
   bodyBottomInset?: number
@@ -61,16 +63,19 @@ export function HudWindow(host: UiSurface, x: number, y: number, w: number, h: n
   const bodyTopGap = props.bodyTopGap ?? 6
   const bodyBottomInset = props.bodyBottomInset ?? 6
   const border = props.border ?? (props.active === true ? palette.windowActiveBorder : palette.borderDim)
+  const state = props.active === true ? "active" : "idle"
+  const style: StyleProps = {
+    background: props.fill ?? palette.bgPanelDim,
+    borderColor: border,
+    borderWidth: props.borderWidth ?? (border === null ? 0 : 1),
+    padding: 0,
+    zIndex: props.frameZ ?? Z.CONTAINER,
+    ...props.style,
+    ...props.stateStyles?.[state],
+  }
   Pane(host, x, y, w, h, {
     variant: "outlined",
-    sx: {
-      background: props.fill ?? palette.bgPanelDim,
-      borderColor: border,
-      borderWidth: props.borderWidth ?? (border === null ? 0 : 1),
-      borderRadius: props.radius ?? radii.pane,
-      padding: 0,
-      zIndex: props.frameZ ?? Z.CONTAINER,
-    },
+    style,
   })
 
   HudPaneFrameInteractions(host, props)
@@ -129,7 +134,6 @@ export function HudWindowTitleBar(host: UiSurface, x: number, y: number, w: numb
             label: props.minimizeLabel ?? "Свернуть",
             iconSrc: uiIcons.minus,
             variant: "text",
-            radius: 7,
             action: props.onMinimize,
           })
           left += buttonSize + buttonGap
@@ -186,7 +190,6 @@ function drawTitleBarActions(host: UiSurface, actions: readonly HudWindowTitleBa
         tone: action.tone ?? "neutral",
         ...(action.disabled === undefined ? {} : {disabled: action.disabled}),
         variant,
-        radius: 7,
         action: action.action ?? (() => {}),
         ...(action.onHover === undefined ? {} : {onHover: action.onHover}),
         ...(action.onLeave === undefined ? {} : {onLeave: action.onLeave}),

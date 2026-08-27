@@ -2,10 +2,10 @@ import type {HitOptions, UiSurface} from "@layout/core/surface"
 import {Z} from "@layout/core/surface"
 import {div} from "./div.ts"
 import {controlChromePadding} from "./control-shape.ts"
-import {mergeStyle, px, textMaterial, type ElementChildren, type InteractiveElementProps, type StyleProps} from "./style.ts"
+import {px, textMaterial, type ElementChildren, type InteractiveElementProps, type StyleProps, type StyleStateTable} from "./style.ts"
 import {uiShapeMetrics} from "./shape.ts"
 import {drawGroupedCellChrome, type GroupedCellAppearance} from "./grouped-cell.ts"
-import {planButtonSize, type ButtonElementSize} from "./button-size.ts"
+import {buttonSizeMetrics, planButtonSize, type ButtonElementSize} from "./button-size.ts"
 import {buttonHitRect, type ButtonInternalProps} from "./button-internal.ts"
 import {drawWidgetEmboss, widgetEmbossVisible} from "./widget-emboss.ts"
 import {
@@ -35,7 +35,8 @@ export type ButtonElementLayout = Readonly<{
 export type ButtonElementChildren = ElementChildren | ((state: ButtonElementState, layout: ButtonElementLayout) => void)
 export type ButtonElementProps = Omit<InteractiveElementProps, "children" | "style"> & {
   children?: ButtonElementChildren
-  style?: StyleProps | ((state: ButtonElementState) => StyleProps)
+  style?: StyleProps
+  stateStyles?: StyleStateTable<ButtonElementState>
   disabled?: boolean
   selected?: boolean
   /** Compatibility inference to the source `activeDefault`; not a proven keyboard-focus mapping. */
@@ -52,20 +53,8 @@ export function button(surface: UiSurface, x: number, y: number, width: number, 
   surface.registerRenderKey(key)
   const hit = surface.hitState(x, y, width, height, key)
   const state: ButtonElementState = props.disabled === true ? "disabled" : hit.pressed ? "active" : hit.hovered ? "hover" : "idle"
-  const colors = resolveWidgetColors(buttonWidgetClass(props.appearance), {
-    hovered: hit.hovered,
-    pressed: hit.pressed,
-    selected: props.selected === true,
-    activeDefault: props.focused === true,
-    disabled: props.disabled === true,
-  })
-  const rawStyle = typeof props.style === "function" ? props.style(state) : props.style
-  const styleInput: {sx?: StyleProps; style?: StyleProps} = {}
-  if (props.sx !== undefined) styleInput.sx = props.sx
-  if (rawStyle !== undefined) styleInput.style = rawStyle
-  const style = mergeStyle(styleInput)
-  const border = rgba8ToColor(colors.outline)
-  const fill = rgba8ToColor(colors.inner)
+  const colors = buttonColors(props, state)
+  const style: StyleProps = {...buttonDefaultStyle(props, state), ...props.style, ...props.stateStyles?.[state]}
   const sizePlan = props.groupedCell === undefined
     ? planButtonSize(x, y, width, height, props.size, style)
     : null
@@ -90,9 +79,9 @@ export function button(surface: UiSurface, x: number, y: number, width: number, 
 
   const chromeStyle: StyleProps = {
     ...style,
-    background: style.background === undefined ? fill : style.background,
+    background: style.background === undefined ? rgba8ToColor(colors.inner) : style.background,
     borderColor: props.groupedCell === undefined
-      ? style.borderColor === undefined ? border : style.borderColor
+      ? style.borderColor === undefined ? rgba8ToColor(colors.outline) : style.borderColor
       : null,
     borderRadius: sizePlan?.radius ?? (style.borderRadius ?? 0),
     borderWidth: props.groupedCell === undefined
@@ -180,9 +169,41 @@ export function button(surface: UiSurface, x: number, y: number, width: number, 
     const maxWidth = Math.max(1, content.width)
     surface.drawTextCentered(String(props.children), content.x + content.width / 2, content.y + content.height / 2, {
       fontPx,
-      material: textMaterial(surface, style.color ?? rgba8ToColor(colors.text)),
+      material: textMaterial(surface, style.color),
       maxWidthPx: maxWidth,
     })
+  }
+}
+
+function buttonDefaultStyle(props: ButtonElementProps, state: ButtonElementState): StyleProps {
+  const size = buttonSizeMetrics[props.size ?? "medium"]
+  return {
+    borderRadius: size.radius,
+    borderWidth: size.borderWidth,
+    fontSize: size.fontPx,
+    gap: size.gap,
+    height: size.height,
+    paddingX: size.paddingX,
+    zIndex: Z.ELEMENT,
+    ...buttonColorStyle(buttonColors(props, state)),
+  }
+}
+
+function buttonColors(props: ButtonElementProps, state: ButtonElementState): ResolvedWidgetColors {
+  return resolveWidgetColors(buttonWidgetClass(props.appearance), {
+    hovered: state === "hover" || state === "active",
+    pressed: state === "active",
+    selected: props.selected === true,
+    activeDefault: props.focused === true,
+    disabled: state === "disabled",
+  })
+}
+
+function buttonColorStyle(colors: ResolvedWidgetColors): StyleProps {
+  return {
+    background: rgba8ToColor(colors.inner),
+    borderColor: rgba8ToColor(colors.outline),
+    color: rgba8ToColor(colors.text),
   }
 }
 

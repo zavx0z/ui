@@ -23,6 +23,7 @@ import {prepareSurfaceInputFocus} from "@layout/core/runtime"
 import {rgba8ToColor, uiTheme, resolveNumericZoneColors, resolveWidgetColors} from "./theme-reference.ts"
 import {uiShapeMetrics} from "./shape.ts"
 import {uiIcons} from "./icons.ts"
+import {palette} from "./theme.ts"
 
 type RoundedRectCall = Parameters<UiSurface["drawRoundedRect"]>
 type RectCall = Parameters<UiSurface["drawRect"]>
@@ -296,7 +297,7 @@ describe("input visible geometry", () => {
     const [x, y, width, height, chrome] = surface.roundedRects[0]!
     expect({x, y, width, height}).toEqual({x: 10, y: 29, width: 100, height: uiShapeMetrics.controlHeight})
     expect({radius: chrome.radius, borderWidth: chrome.borderWidth}).toEqual({
-      radius: uiShapeMetrics.lowRadius,
+      radius: 4,
       borderWidth: uiShapeMetrics.borderWidth,
     })
     expect(chrome.border).toEqual(rgba8ToColor(resolveWidgetColors("text").outline))
@@ -541,6 +542,29 @@ describe("input visible geometry", () => {
     })
     expect(surface.texts[0]?.slice(0, 3)).toEqual(["Text", 22, 33.5])
     expect(surface.texts[0]?.[3]).toMatchObject({fontPx: 13})
+  })
+
+  test("applies pre-resolved idle, hover, active and disabled styles", () => {
+    class StateSurface extends RecordingSurface {
+      constructor(readonly state: Readonly<{hovered: boolean; pressed: boolean}>) { super() }
+      override hitState(): {hovered: boolean; pressed: boolean} { return {...this.state} }
+    }
+    const stateStyles = {
+      idle: {background: "cyan"},
+      hover: {background: "green"},
+      active: {background: "orange"},
+      disabled: {background: "red"},
+    } as const
+    for (const entry of [
+      {hit: {hovered: false, pressed: false}, props: {}, fill: palette.cyan},
+      {hit: {hovered: true, pressed: false}, props: {}, fill: palette.green},
+      {hit: {hovered: true, pressed: true}, props: {}, fill: palette.orange},
+      {hit: {hovered: false, pressed: false}, props: {disabled: true}, fill: palette.red},
+    ] as const) {
+      const surface = new StateSurface(entry.hit)
+      input(surface, 0, 0, 100, 22, {value: "1", ...entry.props, stateStyles})
+      expect(surface.roundedRects[0]?.[4].fill).toEqual(entry.fill)
+    }
   })
 })
 

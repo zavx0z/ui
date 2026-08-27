@@ -32,12 +32,21 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
 4. Screen-space hit target может быть больше visible geometry, но не увеличивает
    control radius, row height, gap, icon или text. Accessibility не является
    основанием менять видимую Blender-пропорцию.
-5. Control height/radius/gap/border, row rhythm, panel/header metrics и
-   separators имеют одного shared Elements owner. Components и Workbench не
-   вводят собственные несовместимые regular/compact shape tokens.
-   Generic `GroupedCellAppearance` одинаково маскирует Input и Button: cell
-   заполняет caller rect без inset, а radius остаётся только на отмеченных
-   внешних corners; middle cells всегда прямоугольные.
+5. Каждый public Element владеет собственными CSS-like default styles и всеми
+   state-ветками этих styles непосредственно в своей реализации. `sx` и
+   `SxProps` запрещены; внешний flat `style` применяется последним. HTML/CSS
+   `NestedStyle` принадлежит upstream `@zavx0z/template` +
+   `@zavx0z/renderer`: WebXR backend один раз компилирует selectors `& .part`
+   и `&:state` в готовые typed part/state tables. Element получает только
+   нормализованные числа, цвета, rect и прямой индексированный state branch;
+   строковый selector parsing, object traversal и CSS cascade внутри render
+   запрещены. Удобные implementation props допустимы и не являются вторым DSL.
+   Значения по умолчанию фиксируют действующую Blender-compatible форму, а не
+   читаются из новой theme/config системы. Generic
+   `GroupedCellAppearance` одинаково
+   маскирует Input и Button: cell заполняет caller rect без inset, а radius
+   остаётся только на отмеченных внешних corners; middle cells всегда
+   прямоугольные.
 6. Заранее разрешены ровно два project divergence: выбранный composition root font и
    ортогональная route geometry Links. Switcher, округлённая Node header и иные
    прежние отличия автоматически не сохраняются. Link thickness/colors,
@@ -81,15 +90,18 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
     alpha factors. Compatibility palette aliases допустимы только после
     resolver и не становятся владельцем поведения.
 14. Material owner отдельно хранит widget emboss, menu shadow, editor
-    border/outline, checker colors/size и class roundness. Standard radius
-    вычисляется из `.2 × widget unit/actual rect`; scroll/panel/popup не получают
-    тот же radius без собственного source law.
+    border/outline и checker colors/size. Exact visual owner записывает
+    подтверждённый radius непосредственно в собственный default style;
+    shared `lowRadius`, `panelRadius`, `editorAreaRadius` либо theme/config
+    parameter не существует.
     Widget emboss рисуется одним сдвинутым на logical pixel analytical quad под
     standalone Button/Input; joined ControlGroup владеет ровно одним outer
     emboss, а aligned-down/grouped cells не дублируют его. Scrollbar использует
     raw `scroll` track/outline/item и повышает RGB thumb на пять только при
-    press/drag, не на обычном hover. Source panel radius доказывается отдельно
-    как `.4 × widget_unit(20) × .5 = 4`.
+    press/drag, не на обычном hover. Source panel owner записывает
+    `borderRadius: 4`; outer editor-region owner по закону `ScrArea`
+    записывает `borderRadius: 6`. Generic `div` также владеет своим
+    `borderRadius: 4`; совпадающие числа не образуют общий token.
 15. Resolver precedence детерминирован и повторяет source order. Generic class
     сначала получает list-item override и alpha, затем selected/pressed либо
     active-default/hover; menu item использует собственную mutually-exclusive
@@ -231,8 +243,8 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
 
 1. Elements package page `/elements/` является desktop consumer общего Workbench
    `@ui/storybook`. Package-owned typed stories владеют metadata, concrete
-   component/section/variant stories, lazy exact public imports, preview, source
-   и controls; package не копирует общий shell и не передаёт ему Elements
+   component/section/variant stories, lazy exact public imports, preview, raw
+   HTML/CSS, exact TypeScript, controls и events; package не копирует общий shell и не передаёт ему Elements
    vocabulary. Mount `/elements/` и каждый route prefix открывают overview
    непосредственных детей и оканчиваются `/`, а полный detail pathname — нет.
    Overview сохраняет полный five-panel Workbench и использует первый detail
@@ -240,15 +252,23 @@ widget appearance, theme и icons. `@layout/core` отдельно владее�
 2. Catalog явно разделяет primitives, style и events; Layout stories принадлежат
    отдельному `@layout/storybook`. Вторая панель
    выбирает реальные sections одного Element, dock — его variants, а справа
-   постоянно видны exact TypeScript/copy и controls/events. Статический Info и
-   aggregate inventory не заменяют detail story.
+   одновременно видны raw HTML, raw CSS и exact TypeScript с независимыми Copy;
+   controls меняют те же args, events остаются observable output.
+   Статический Info и aggregate inventory не заменяют detail story.
 3. Consumer preview владеет одним устойчивым retained parent. Выбранная story,
-   её args, production rendering и копируемый TypeScript являются одним
-   состоянием; изменение args не перестраивает Workbench shell.
-4. Видимые catalog, sections, variants и controls пишутся по-русски; public API
+   её args, production rendering, три копируемых документа, controls и events
+   являются одним состоянием; изменение args не перестраивает Workbench shell.
+4. Видимые catalog, sections, variants, controls и editor/event labels пишутся по-русски; public API
    identifiers, exact subpaths, pathname routes и TypeScript не переводятся.
    Исторические public storybook paths нормализуются в действующие detail
    routes, а не открывают параллельный старый interface.
+5. Три code editors каждой detail story показывают raw consumer HTML, raw
+   CSS/Nested Style и exact internal TypeScript. CSS раскрывает полную цепочку
+   от базового Element до выбранного owner: каждый inherited/default/override
+   block подписывает exact public owner, stateful owner показывает все state
+   branches, а явный story style располагается последним. TypeScript сохраняет
+   реальные imports, typed props и renderer calls. Preview-only декоративная
+   обвязка в документы target owner не входит.
 
 ## Layout-provided мягкая rounded shadow
 

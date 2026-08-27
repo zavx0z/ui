@@ -1,6 +1,6 @@
 import {div, type DivProps, type DivScrollContext} from "./div.ts"
 import {Z, type UiSurface} from "@layout/core/surface"
-import {boxPadding, mergeStyle, px, type ElementChildren, type InteractiveElementProps, type StyleProps} from "./style.ts"
+import {boxPadding, mergeStyle, px, type ElementChildren, type InteractiveElementProps, type StyleProps, type StyleStateTable} from "./style.ts"
 import {rgba8ToColor, resolveWidgetColors, type ResolvedWidgetColors} from "./theme-reference.ts"
 
 export type UlElementContext = DivScrollContext & {
@@ -39,7 +39,8 @@ export type LiElementChildren = ElementChildren | ((state: LiElementState) => vo
 
 export type LiElementProps = Omit<InteractiveElementProps, "children" | "style"> & {
   children?: LiElementChildren
-  style?: StyleProps | ((state: LiElementState) => StyleProps)
+  style?: StyleProps
+  stateStyles?: StyleStateTable<"idle" | "hover" | "active" | "selected" | "disabled">
   tooltip?: string
   tooltipDelayMs?: number
   selected?: boolean
@@ -113,7 +114,20 @@ export function li(surface: UiSurface, x: number, y: number, width: number, heig
     disabled: props.disabled === true,
     colors,
   }
-  const rawStyle = typeof props.style === "function" ? props.style(state) : props.style
+  const styleState = props.disabled === true
+    ? "disabled"
+    : hit.pressed
+      ? "active"
+      : hit.hovered
+        ? "hover"
+        : props.selected === true
+          ? "selected"
+          : "idle"
+  const style: StyleProps = {
+    ...liDefaultStyle(height, props, styleState, hit),
+    ...props.style,
+    ...props.stateStyles?.[styleState],
+  }
   const children = typeof props.children === "function"
     ? () => {
       const render = props.children
@@ -139,15 +153,7 @@ export function li(surface: UiSurface, x: number, y: number, width: number, heig
     key,
     children,
     hitCursor: hasPointerAction ? "pointer" : "default",
-    style: {
-      background: rgba8ToColor(colors.inner),
-      borderColor: rgba8ToColor(colors.outline),
-      borderRadius: uiListItemRadius(height, colors.roundness),
-      borderWidth: 1,
-      padding: 0,
-      zIndex: Z.ELEMENT,
-      ...rawStyle,
-    },
+    style,
   }
   if (interactive) {
     divProps.onClick = disabled ? (() => {}) : props.onClick ?? (() => {})
@@ -169,6 +175,43 @@ export function li(surface: UiSurface, x: number, y: number, width: number, heig
   div(surface, x, y, width, height, divProps)
   if (props.tooltip !== undefined) {
     surface.drawTooltipForHit(x, y, width, height, props.tooltip, {delayMs: props.tooltipDelayMs ?? 450})
+  }
+}
+
+function liDefaultStyle(
+  height: number,
+  props: LiElementProps,
+  state: "idle" | "hover" | "active" | "selected" | "disabled",
+  hit: Readonly<{hovered: boolean; pressed: boolean}>,
+): StyleProps {
+  const colors = liColors(props, state, hit)
+  return {
+    borderRadius: uiListItemRadius(height, colors.roundness),
+    borderWidth: 1,
+    padding: 0,
+    zIndex: Z.ELEMENT,
+    ...liColorStyle(colors),
+  }
+}
+
+function liColors(
+  props: LiElementProps,
+  state: "idle" | "hover" | "active" | "selected" | "disabled",
+  hit: Readonly<{hovered: boolean; pressed: boolean}> = {hovered: false, pressed: false},
+): ResolvedWidgetColors {
+  return resolveWidgetColors("listItem", {
+    hovered: state === "disabled" ? hit.hovered : state === "hover" || state === "active",
+    pressed: state === "disabled" ? hit.pressed : state === "active",
+    selected: state === "selected" || props.selected === true,
+    disabled: state === "disabled",
+    listItem: true,
+  })
+}
+
+function liColorStyle(colors: ResolvedWidgetColors): StyleProps {
+  return {
+    background: rgba8ToColor(colors.inner),
+    borderColor: rgba8ToColor(colors.outline),
   }
 }
 

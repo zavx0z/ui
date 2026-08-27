@@ -3,6 +3,7 @@ import type {UiSurface} from "@layout/core/surface"
 import {UiSurface as BaseUiSurface} from "@layout/core/surface"
 import {li, liY, ul, ulContentHeight, type UlElementContext} from "./list.ts"
 import {rgba8ToColor, resolveWidgetColors} from "./theme-reference.ts"
+import {palette} from "./theme.ts"
 
 type HitCall = Parameters<UiSurface["hit"]>
 type RoundedRectCall = Parameters<UiSurface["drawRoundedRect"]>
@@ -93,6 +94,31 @@ describe("ul/li layout helpers", () => {
         border: rgba8ToColor(colors.outline),
       })
       if (entry.props.disabled === true) expect(surface.hits[0]?.[5]).toMatchObject({cursor: "default"})
+    }
+  })
+
+  test("applies pre-resolved idle, hover, active, selected and disabled styles", () => {
+    class StateSurface extends RecordingSurface {
+      constructor(readonly state: Readonly<{hovered: boolean; pressed: boolean}>) { super() }
+      override hitState(): {hovered: boolean; pressed: boolean} { return {...this.state} }
+    }
+    const stateStyles = {
+      idle: {background: "cyan"},
+      hover: {background: "green"},
+      active: {background: "orange"},
+      selected: {background: "blue"},
+      disabled: {background: "red"},
+    } as const
+    for (const entry of [
+      {hit: {hovered: false, pressed: false}, props: {}, fill: palette.cyan},
+      {hit: {hovered: true, pressed: false}, props: {}, fill: palette.green},
+      {hit: {hovered: true, pressed: true}, props: {}, fill: palette.orange},
+      {hit: {hovered: false, pressed: false}, props: {selected: true}, fill: palette.blue},
+      {hit: {hovered: false, pressed: false}, props: {disabled: true}, fill: palette.red},
+    ] as const) {
+      const surface = new StateSurface(entry.hit)
+      li(surface, 0, 0, 100, 24, {...entry.props, stateStyles})
+      expect(surface.roundedRects[0]?.[4].fill).toEqual(entry.fill)
     }
   })
 })

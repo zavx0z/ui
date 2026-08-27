@@ -21,4 +21,19 @@ describe("icon image tint", () => {
     drawIcon(surface, "icon.svg", 1, 2, 12, {tint})
     expect(surface.images[1]![5]!.tint).toBe(tint)
   })
+
+  test("applies caller style after legacy image options", () => {
+    const surface = new RecordingSurface()
+    const legacyTint = new Color(0.1, 0.2, 0.3, 1)
+    const styleTint = new Color(0.7, 0.6, 0.5, 1)
+
+    drawIcon(surface, "icon.svg", 1, 2, 12, {
+      opacity: 0.2,
+      tint: legacyTint,
+      z: 3,
+      style: {color: styleTint, opacity: 0.6, zIndex: 7},
+    })
+
+    expect(surface.images[0]?.[5]).toMatchObject({tint: styleTint, opacity: 0.6, z: 7})
+  })
 })

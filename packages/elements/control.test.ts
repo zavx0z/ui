@@ -25,7 +25,7 @@ describe("control visible geometry", () => {
     const [x, y, width, height, chrome] = surface.roundedRects[0]!
     expect({x, y, width, height}).toEqual({x: 10, y: 29, width: 100, height: uiShapeMetrics.controlHeight})
     expect(chrome).toMatchObject({
-      radius: uiShapeMetrics.lowRadius,
+      radius: 4,
       borderWidth: uiShapeMetrics.borderWidth,
       fill: palette.bgInput,
       border: palette.borderDim,

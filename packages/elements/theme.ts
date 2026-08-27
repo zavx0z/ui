@@ -5,7 +5,6 @@
 
 import {Color, TextMaterial} from "@engine/core"
 import islandsDarkTheme from "./themes/islands-dark.color-theme.json"
-import {uiShapeMetrics} from "./shape.ts"
 import {uiTheme} from "./theme-reference.ts"
 
 export * from "./theme-reference.ts"
@@ -208,12 +207,6 @@ export const activeSyntaxThemeName = activeVscodeSyntaxTheme.name ?? "Islands Da
  * editor/highlighter и server-side scanner в pkg/interpreter/src/syntax.ts.
  */
 export const syntaxTokens = resolveVscodeSyntaxTokens(activeVscodeSyntaxTheme)
-
-export const radii = {
-  control: uiShapeMetrics.lowRadius,
-  pane: 14,
-  paneLarge: 18,
-} as const
 
 export type Tone = "neutral" | "live" | "paused" | "warn"
 

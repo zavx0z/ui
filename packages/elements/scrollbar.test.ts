@@ -1,4 +1,5 @@
 import {describe, expect, test} from "bun:test"
+import {Color} from "@engine/core"
 import {UiSurface, type UiSurface as UiSurfaceType} from "@layout/core/surface"
 import {rgba8ToColor, resolveScrollbarColors} from "./theme-reference.ts"
 import {scrollbar} from "./scrollbar.ts"
@@ -38,5 +39,48 @@ describe("Blender scrollbar material", () => {
         borderWidth: 1,
       })
     }
+  })
+
+  test("applies caller style after legacy scrollbar colors", () => {
+    const surface = new RecordingSurface()
+    const track = new Color(0.1, 0.2, 0.3, 1)
+    const thumb = new Color(0.4, 0.5, 0.6, 1)
+    const border = new Color(0.7, 0.8, 0.9, 1)
+
+    scrollbar(surface, 0, 0, 100, {
+      offset: 20,
+      visible: 50,
+      total: 100,
+      trackColor: new Color(1, 0, 0, 1),
+      thumbColor: new Color(0, 1, 0, 1),
+      trackWidth: 8,
+      style: {
+        borderColor: border,
+        borderRadius: 3,
+        borderWidth: 2,
+        opacity: 0.5,
+        scrollbarColor: thumb,
+        scrollbarTrackColor: track,
+        scrollbarWidth: 10,
+        zIndex: 7,
+      },
+    })
+
+    expect(surface.roundedRects[0]?.[4]).toMatchObject({
+      radius: 3,
+      fill: track,
+      border,
+      borderWidth: 2,
+      opacity: 0.5,
+      z: 7,
+    })
+    expect(surface.roundedRects[1]?.[4]).toMatchObject({
+      radius: 3,
+      fill: thumb,
+      border,
+      borderWidth: 2,
+      opacity: 0.5,
+      z: 7.01,
+    })
   })
 })

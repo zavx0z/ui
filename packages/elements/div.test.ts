@@ -56,6 +56,13 @@ class ImmediateDivSurface extends UiSurface {
 }
 
 describe("div shaped overflow composition", () => {
+  test("uses its hardcoded Blender-like radius by default", () => {
+    const surface = new DivRecordingSurface()
+    div(surface, 10, 20, 100, 80)
+
+    expect(surface.roundedRects[0]?.call[4].radius).toBe(4)
+  })
+
   test("derives the inner child shape from the effective border and clips its own rounded hit", () => {
     const surface = new DivRecordingSurface()
     let context: DivScrollContext | null = null

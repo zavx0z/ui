@@ -20,7 +20,7 @@ export function control(
   const chromeStyle: StyleProps = {
     ...style,
     borderColor: style.borderColor === undefined ? "borderDim" : style.borderColor,
-    borderRadius: style.borderRadius ?? uiShapeMetrics.lowRadius,
+    borderRadius: style.borderRadius ?? 4,
     borderWidth: style.borderWidth ?? uiShapeMetrics.borderWidth,
     color: style.color ?? "text",
     fontSize: style.fontSize ?? uiShapeMetrics.compactFontPx,
@@ -28,6 +28,5 @@ export function control(
   }
   if (style.background === undefined && style.backgroundColor === undefined) chromeStyle.background = "bgInput"
   const chromeProps: DivProps = {...props, style: chromeStyle}
-  delete chromeProps.sx
   div(surface, chrome.x, chrome.y, chrome.width, chrome.height, chromeProps)
 }

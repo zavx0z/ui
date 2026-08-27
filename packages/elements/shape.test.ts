@@ -1,6 +1,5 @@
 import {describe, expect, test} from "bun:test"
-import {radii, uiShapeMetrics as publicUiShapeMetrics} from "./index.ts"
-import {uiTheme} from "./theme-reference.ts"
+import * as publicElements from "./index.ts"
 import {uiShapeMetrics} from "./shape.ts"
 
 describe("shared UI shape metrics", () => {
@@ -8,7 +7,6 @@ describe("shared UI shape metrics", () => {
     expect(uiShapeMetrics).toEqual({
       controlHeight: 22,
       rowHeight: 24,
-      lowRadius: 4,
       borderWidth: 1,
       separatorWidth: 1,
       tightGap: 3,
@@ -19,9 +17,11 @@ describe("shared UI shape metrics", () => {
       panelSectionGap: 3,
     })
     expect(Object.isFrozen(uiShapeMetrics)).toBeTrue()
-    expect(publicUiShapeMetrics).toBe(uiShapeMetrics)
-    expect(radii.control).toBe(uiShapeMetrics.lowRadius)
-    expect(uiTheme.material.panelRoundness * 20 * 0.5).toBe(uiShapeMetrics.lowRadius)
+    expect(publicElements.uiShapeMetrics).toBe(uiShapeMetrics)
+    expect("radii" in publicElements).toBeFalse()
+    expect("lowRadius" in uiShapeMetrics).toBeFalse()
+    expect("panelRadius" in uiShapeMetrics).toBeFalse()
+    expect("editorAreaRadius" in uiShapeMetrics).toBeFalse()
   })
 
   test("keeps dense controls inside their shared row and rule rhythm", () => {
@@ -29,7 +29,6 @@ describe("shared UI shape metrics", () => {
     expect(uiShapeMetrics.iconActionSlot).toBeLessThanOrEqual(uiShapeMetrics.rowHeight)
     expect(uiShapeMetrics.iconGlyphSize).toBeLessThan(uiShapeMetrics.iconActionSlot)
     expect(uiShapeMetrics.compactFontPx).toBeLessThan(uiShapeMetrics.controlHeight)
-    expect(uiShapeMetrics.lowRadius * 2).toBeLessThan(uiShapeMetrics.controlHeight)
     expect(uiShapeMetrics.borderWidth).toBe(uiShapeMetrics.separatorWidth)
     expect(uiShapeMetrics.separatorWidth).toBeLessThanOrEqual(uiShapeMetrics.tightGap)
     expect(uiShapeMetrics.tightGap).toBeLessThan(uiShapeMetrics.controlHeight)

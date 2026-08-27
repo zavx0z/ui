@@ -2,7 +2,7 @@ import type {HitOptions, UiSurface} from "@layout/core/surface"
 import {registerTextInputController} from "@layout/core/text-input"
 import {div, type DivProps} from "./div.ts"
 import {controlChromePadding, controlChromeRect} from "./control-shape.ts"
-import {mergeStyle, px, textMaterial, type CssTextAlign, type StyleProps} from "./style.ts"
+import {mergeStyle, px, textMaterial, type CssTextAlign, type StyleProps, type StyleStateTable} from "./style.ts"
 import {uiShapeMetrics} from "./shape.ts"
 import {Z} from "@layout/core/surface"
 import {drawIconCentered} from "./icon.ts"
@@ -77,6 +77,7 @@ export type InputProps = DivProps & {
   fontPx?: number
   appearance?: InputAppearance
   type?: InputType
+  stateStyles?: StyleStateTable<"idle" | "hover" | "active" | "disabled">
   onActivate?: () => void
   onNumericGesture?: (gesture: InputNumericGesture) => void
   onChange?: (value: string, state: InputEditState) => void
@@ -320,15 +321,9 @@ export function clearReadOnlyTextParticipants(surface: UiSurface): void {
 }
 
 export function input(surface: UiSurface, x: number, y: number, width: number, height: number, props: InputProps): void {
-  const style = mergeStyle(props)
   const disabled = props.disabled === true
   const groupedAppearance = isGroupedCellAppearance(props.appearance) ? props.appearance : null
   const groupedCell = groupedAppearance !== null
-  const fontPx = props.fontPx ?? px(style.fontSize, uiShapeMetrics.compactFontPx)
-  const chrome = groupedAppearance === null
-    ? controlChromeRect(x, y, width, height, style)
-    : {x, y, width, height}
-  const padding = controlChromePadding(style)
   const runtime = inputRuntimeFor(surface)
   const key = props.key ?? inputKeyFor(x, y, width, height)
   surface.registerRenderKey(key)
@@ -337,6 +332,23 @@ export function input(surface: UiSurface, x: number, y: number, width: number, h
   const active = (props.active ?? runtime.activeKey === key) && !disabled
   const controlled = props.controlled ?? (props.onChange !== undefined)
   const state = inputStateFor(runtime, key, initialValue, controlled, active, props)
+  const visualState: "idle" | "hover" | "active" | "disabled" = disabled
+    ? "disabled"
+    : active || hitState.pressed
+      ? "active"
+      : hitState.hovered
+        ? "hover"
+        : "idle"
+  const style: StyleProps = {
+    ...inputDefaultStyle(props, groupedCell, visualState),
+    ...props.style,
+    ...props.stateStyles?.[visualState],
+  }
+  const fontPx = px(style.fontSize, props.fontPx ?? uiShapeMetrics.compactFontPx)
+  const chrome = groupedAppearance === null
+    ? controlChromeRect(x, y, width, height, style)
+    : {x, y, width, height}
+  const padding = controlChromePadding(style)
   const widgetClass = inputWidgetClass(props.type)
   const widgetState: WidgetState = {
     hovered: hitState.hovered,
@@ -368,11 +380,6 @@ export function input(surface: UiSurface, x: number, y: number, width: number, h
   const chromeStyle: StyleProps = {
     ...style,
     borderColor: style.borderColor === undefined ? groupedCell ? null : rgba8ToColor(colors.outline) : style.borderColor,
-    borderRadius: style.borderRadius ?? (groupedCell ? 0 : uiShapeMetrics.lowRadius),
-    borderWidth: style.borderWidth ?? (groupedCell ? 0 : uiShapeMetrics.borderWidth),
-  }
-  if (style.background === undefined && style.backgroundColor === undefined) {
-    chromeStyle.background = groupedCell ? active ? rgba8ToColor(colors.inner) : null : rgba8ToColor(colors.inner)
   }
   const chromeProps: DivProps = {style: chromeStyle}
   chromeProps.key = key
@@ -382,7 +389,7 @@ export function input(surface: UiSurface, x: number, y: number, width: number, h
     drawWidgetEmboss(
       surface,
       chrome,
-      px(style.borderRadius, uiShapeMetrics.lowRadius),
+      px(style.borderRadius, 4),
       widgetEmbossVisible(chromeStyle),
       (chromeStyle.zIndex ?? Z.ELEMENT) - 0.01,
     )
@@ -799,16 +806,51 @@ function drawInputSelection(
   const start = Math.max(layout.start, Math.min(anchor, cursor))
   const end = Math.max(start, Math.max(anchor, cursor))
   if (end <= layout.start) return
-  const sx = layout.originX + surface.measureText(value.slice(layout.start, start), fontPx)
+  const selectionX = layout.originX + surface.measureText(value.slice(layout.start, start), fontPx)
   const sw = surface.measureText(value.slice(start, end), fontPx)
   if (sw <= 0) return
-  surface.drawRect(sx, y + 4, sw, Math.max(1, h - 8), color, Z.ELEMENT + 0.01)
+  surface.drawRect(selectionX, y + 4, sw, Math.max(1, h - 8), color, Z.ELEMENT + 0.01)
 }
 
 function inputWidgetClass(type: InputType | undefined): "text" | "number" | "numberSlider" {
   if (type === "number") return "number"
   if (type === "range") return "numberSlider"
   return "text"
+}
+
+function inputDefaultStyle(
+  props: InputProps,
+  grouped: boolean,
+  state: "idle" | "hover" | "active" | "disabled",
+): StyleProps {
+  const style: StyleProps = {
+    borderRadius: 4,
+    borderWidth: grouped ? 0 : uiShapeMetrics.borderWidth,
+    fontSize: props.fontPx ?? uiShapeMetrics.compactFontPx,
+    height: uiShapeMetrics.controlHeight,
+    ...inputStateStyle(props, state, grouped),
+  }
+  if (grouped) style.borderColor = null
+  return style
+}
+
+function inputStateStyle(
+  props: InputProps,
+  state: "idle" | "hover" | "active" | "disabled",
+  grouped: boolean,
+): StyleProps {
+  const colors = resolveWidgetColors(inputWidgetClass(props.type), {
+    hovered: state === "hover" || state === "active",
+    pressed: state === "active",
+    selected: state === "active",
+    disabled: state === "disabled",
+    textInput: state === "active",
+  })
+  return {
+    background: grouped && state !== "active" ? null : rgba8ToColor(colors.inner),
+    borderColor: grouped ? null : rgba8ToColor(colors.outline),
+    color: rgba8ToColor(colors.text),
+  }
 }
 
 function inputNumericZone(
