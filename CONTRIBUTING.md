@@ -6,7 +6,10 @@
 
 ## Set up the workspace
 
-Use sibling `engine`, `layout`, `storybook`, and `ui` checkouts. Register `@engine/core`, `@layout/core`, and `@zavx0z/storybook` with `bun link` from their owners before installing UI. The UI manifests intentionally use exact global links; do not replace them with file paths, TypeScript aliases, or compatibility packages.
+Use sibling `renderer`, `engine`, `highlighter`, `storybook`, and `ui`
+checkouts. Register their exact package owners before installing UI. Do not
+replace them with file paths, TypeScript aliases, barrels or compatibility
+packages.
 
 ```bash
 bun install
@@ -25,25 +28,33 @@ for the private catalog.
 
 ## Choose the owning package
 
-- Put runtime, surfaces, targets, FlexBox, popover ownership, text-input dispatch, virtual input, and generic geometry in [`zavx0z/layout`](https://github.com/zavx0z/layout), not this repository.
-- Put HTML-like visual primitives, controlled edit behavior, theme roles, and universal icons in `packages/elements`.
-- Put controlled fields and composed visual controls in `packages/components`.
-- Put heads-up presentation in `packages/hud`, without product commands or state ownership.
-- Keep Elements story descriptors and implementations in `packages/elements/storybook`.
-- Keep Components story descriptors and implementations in `packages/components/storybook`.
-- Put the one root Workbench, owner adapters, comparison evidence, dev lifecycle, and static-site code in `packages/storybook`.
+- Put DOM interfaces and state in [`zavx0z/renderer`](https://github.com/zavx0z/renderer)'s `@zavx0z/dom` package.
+- Put cascade, layout, display lists, hit projection and renderer adapters in
+  [`zavx0z/renderer`](https://github.com/zavx0z/renderer), not this repository.
+- Put semantic Field, Inspector, CodeEditor and HUD compositions, CSS, icons and
+  syntax theme in `packages/components`.
+- Put private story modules, the one root Workbench, comparison evidence,
+  lifecycle and static-site code in `packages/storybook`.
 
-Dependencies must continue to point upward from Engine to Layout to Elements, Components, and HUD. Production packages must not import Storybook.
+Production Components depend only on DOM and explicit semantic helpers.
+Production packages must not import Storybook, Engine, Layout, WebGPU or the
+retired Elements/HUD packages.
 
 ## Naming and source evidence
 
 Public identifiers, routes, package names, data attributes, and user-facing copy use neutral semantic names. A source product name belongs only in provenance, exact source paths, or owner-facing evidence. Do not add aliases or re-exports when renaming a public owner.
 
-Use lowercase semantic directories recognized by the repository tooling: `packages`, `components`, `elements`, `storybook`, `assets`, `icons`, `scripts`, `tests`, and `.github/workflows`. Every TypeScript source and test filename is lowercase kebab-case; exported TypeScript symbols retain their semantic language casing.
+Use lowercase semantic directories recognized by the repository tooling:
+`packages`, `components`, `storybook`, `assets`, `icons`, `scripts`, and
+`tests`. Every TypeScript source and test filename is lowercase kebab-case;
+exported TypeScript symbols retain their semantic language casing.
 
 ## Add or update a story
 
-Story descriptors own their route, searchable metadata, controls, source generator, production import, and lazy implementation loader. Keep the root Workbench entry limited to metadata; package implementations stay in lazy chunks. If a story has external visual evidence, register a lazy reference loader and record:
+Private story modules own their route presentation, controls, source generator
+and exact natural production import. They are imported by `@ui/storybook`
+through repository-private relative paths and are never package exports. If a
+story has external visual evidence, register a lazy reference loader and record:
 
 - exact source version and revision;
 - SHA-256 of the lossless asset;

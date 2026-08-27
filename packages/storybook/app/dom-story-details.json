@@ -1,0 +1,5285 @@
+{
+  "version": 1,
+  "details": [
+    {
+      "route": "dom/interfaces/node/hierarchy/default",
+      "title": "Node · Иерархия",
+      "apiName": "Node",
+      "searchText": "Node Node Базовый узел дерева",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "node",
+        "label": "Node",
+        "route": "dom/interfaces/node"
+      },
+      "section": {
+        "id": "hierarchy",
+        "label": "Иерархия",
+        "route": "dom/interfaces/node/hierarchy"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/element/attributes/default",
+      "title": "Element · Атрибуты",
+      "apiName": "Element",
+      "searchText": "Element Element Узел с attributes и selectors",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "element",
+        "label": "Element",
+        "route": "dom/interfaces/element"
+      },
+      "section": {
+        "id": "attributes",
+        "label": "Атрибуты",
+        "route": "dom/interfaces/element/attributes"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-element/title/default",
+      "title": "HTMLElement · title",
+      "apiName": "HTMLElement",
+      "searchText": "HTMLElement HTMLElement Глобальные HTML attributes и title",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-element",
+        "label": "HTMLElement",
+        "route": "dom/interfaces/html-element"
+      },
+      "section": {
+        "id": "title",
+        "label": "title",
+        "route": "dom/interfaces/html-element/title"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-button-element/activation/default",
+      "title": "HTMLButtonElement · Активация",
+      "apiName": "HTMLButtonElement",
+      "searchText": "HTMLButtonElement HTMLButtonElement Кнопка и обычные DOM events",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-button-element",
+        "label": "HTMLButtonElement",
+        "route": "dom/interfaces/html-button-element"
+      },
+      "section": {
+        "id": "activation",
+        "label": "Активация",
+        "route": "dom/interfaces/html-button-element/activation"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-input-element/value/default",
+      "title": "HTMLInputElement · Значение",
+      "apiName": "HTMLInputElement",
+      "searchText": "HTMLInputElement HTMLInputElement Live input state",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-input-element",
+        "label": "HTMLInputElement",
+        "route": "dom/interfaces/html-input-element"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "dom/interfaces/html-input-element/value"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-select-element/selection/default",
+      "title": "HTMLSelectElement · Выбор",
+      "apiName": "HTMLSelectElement",
+      "searchText": "HTMLSelectElement HTMLSelectElement Select и Option selectedness",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-select-element",
+        "label": "HTMLSelectElement",
+        "route": "dom/interfaces/html-select-element"
+      },
+      "section": {
+        "id": "selection",
+        "label": "Выбор",
+        "route": "dom/interfaces/html-select-element/selection"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-text-area-element/value/default",
+      "title": "HTMLTextAreaElement · Значение",
+      "apiName": "HTMLTextAreaElement",
+      "searchText": "HTMLTextAreaElement HTMLTextAreaElement Многострочное live value",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-text-area-element",
+        "label": "HTMLTextAreaElement",
+        "route": "dom/interfaces/html-text-area-element"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "dom/interfaces/html-text-area-element/value"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-progress-element/value/default",
+      "title": "HTMLProgressElement · Прогресс",
+      "apiName": "HTMLProgressElement",
+      "searchText": "HTMLProgressElement HTMLProgressElement Determinate и indeterminate progress",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-progress-element",
+        "label": "HTMLProgressElement",
+        "route": "dom/interfaces/html-progress-element"
+      },
+      "section": {
+        "id": "value",
+        "label": "Прогресс",
+        "route": "dom/interfaces/html-progress-element/value"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-meter-element/value/default",
+      "title": "HTMLMeterElement · Диапазон",
+      "apiName": "HTMLMeterElement",
+      "searchText": "HTMLMeterElement HTMLMeterElement Нормализованный scalar meter",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-meter-element",
+        "label": "HTMLMeterElement",
+        "route": "dom/interfaces/html-meter-element"
+      },
+      "section": {
+        "id": "value",
+        "label": "Диапазон",
+        "route": "dom/interfaces/html-meter-element/value"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/event-target/listeners/default",
+      "title": "EventTarget · Слушатели",
+      "apiName": "EventTarget",
+      "searchText": "EventTarget EventTarget capture target bubble addEventListener dispatchEvent",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "event-target",
+        "label": "EventTarget",
+        "route": "dom/interfaces/event-target"
+      },
+      "section": {
+        "id": "listeners",
+        "label": "Слушатели",
+        "route": "dom/interfaces/event-target/listeners"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/document/tree/default",
+      "title": "Document · Дерево",
+      "apiName": "Document",
+      "searchText": "Document Document root mutation transaction query",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "document",
+        "label": "Document",
+        "route": "dom/interfaces/document"
+      },
+      "section": {
+        "id": "tree",
+        "label": "Дерево",
+        "route": "dom/interfaces/document/tree"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/document-fragment/mutation/default",
+      "title": "DocumentFragment · Мутация",
+      "apiName": "DocumentFragment",
+      "searchText": "DocumentFragment DocumentFragment detached tree mutation query",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "document-fragment",
+        "label": "DocumentFragment",
+        "route": "dom/interfaces/document-fragment"
+      },
+      "section": {
+        "id": "mutation",
+        "label": "Мутация",
+        "route": "dom/interfaces/document-fragment/mutation"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/character-data/data/default",
+      "title": "CharacterData · Данные",
+      "apiName": "CharacterData",
+      "searchText": "CharacterData CharacterData live data length mutation",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "character-data",
+        "label": "CharacterData",
+        "route": "dom/interfaces/character-data"
+      },
+      "section": {
+        "id": "data",
+        "label": "Данные",
+        "route": "dom/interfaces/character-data/data"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/text/data/default",
+      "title": "Text · Данные",
+      "apiName": "Text",
+      "searchText": "Text Text CharacterData textContent appendData",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "text",
+        "label": "Text",
+        "route": "dom/interfaces/text"
+      },
+      "section": {
+        "id": "data",
+        "label": "Данные",
+        "route": "dom/interfaces/text/data"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/comment/anchors/default",
+      "title": "Comment · Якоря",
+      "apiName": "Comment",
+      "searchText": "Comment Comment invisible anchor CharacterData",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "comment",
+        "label": "Comment",
+        "route": "dom/interfaces/comment"
+      },
+      "section": {
+        "id": "anchors",
+        "label": "Якоря",
+        "route": "dom/interfaces/comment/anchors"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/node-list/snapshot/default",
+      "title": "NodeList · Snapshot",
+      "apiName": "NodeList",
+      "searchText": "NodeList NodeList static query snapshot item iterator",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "node-list",
+        "label": "NodeList",
+        "route": "dom/interfaces/node-list"
+      },
+      "section": {
+        "id": "snapshot",
+        "label": "Snapshot",
+        "route": "dom/interfaces/node-list/snapshot"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/dom-token-list/classes/default",
+      "title": "DOMTokenList · Классы",
+      "apiName": "DOMTokenList",
+      "searchText": "DOMTokenList DOMTokenList classList reflected tokens add remove toggle",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "dom-token-list",
+        "label": "DOMTokenList",
+        "route": "dom/interfaces/dom-token-list"
+      },
+      "section": {
+        "id": "classes",
+        "label": "Классы",
+        "route": "dom/interfaces/dom-token-list/classes"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-div-element/container/default",
+      "title": "HTMLDivElement · Контейнер",
+      "apiName": "HTMLDivElement",
+      "searchText": "HTMLDivElement HTMLDivElement exact div prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-div-element",
+        "label": "HTMLDivElement",
+        "route": "dom/interfaces/html-div-element"
+      },
+      "section": {
+        "id": "container",
+        "label": "Контейнер",
+        "route": "dom/interfaces/html-div-element/container"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-span-element/inline/default",
+      "title": "HTMLSpanElement · Строка",
+      "apiName": "HTMLSpanElement",
+      "searchText": "HTMLSpanElement HTMLSpanElement exact span prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-span-element",
+        "label": "HTMLSpanElement",
+        "route": "dom/interfaces/html-span-element"
+      },
+      "section": {
+        "id": "inline",
+        "label": "Строка",
+        "route": "dom/interfaces/html-span-element/inline"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-image-element/attributes/default",
+      "title": "HTMLImageElement · Атрибуты",
+      "apiName": "HTMLImageElement",
+      "searchText": "HTMLImageElement HTMLImageElement src alt width height reflected author attributes",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-image-element",
+        "label": "HTMLImageElement",
+        "route": "dom/interfaces/html-image-element"
+      },
+      "section": {
+        "id": "attributes",
+        "label": "Атрибуты",
+        "route": "dom/interfaces/html-image-element/attributes"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-option-element/selectedness/default",
+      "title": "HTMLOptionElement · Выбор",
+      "apiName": "HTMLOptionElement",
+      "searchText": "HTMLOptionElement HTMLOptionElement value label disabled selectedness",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-option-element",
+        "label": "HTMLOptionElement",
+        "route": "dom/interfaces/html-option-element"
+      },
+      "section": {
+        "id": "selectedness",
+        "label": "Выбор",
+        "route": "dom/interfaces/html-option-element/selectedness"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-label-element/control/default",
+      "title": "HTMLLabelElement · Control",
+      "apiName": "HTMLLabelElement",
+      "searchText": "HTMLLabelElement HTMLLabelElement htmlFor control resolution",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-label-element",
+        "label": "HTMLLabelElement",
+        "route": "dom/interfaces/html-label-element"
+      },
+      "section": {
+        "id": "control",
+        "label": "Control",
+        "route": "dom/interfaces/html-label-element/control"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-field-set-element/disabled/default",
+      "title": "HTMLFieldSetElement · Disabled",
+      "apiName": "HTMLFieldSetElement",
+      "searchText": "HTMLFieldSetElement HTMLFieldSetElement disabled name bounded descendant state",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-field-set-element",
+        "label": "HTMLFieldSetElement",
+        "route": "dom/interfaces/html-field-set-element"
+      },
+      "section": {
+        "id": "disabled",
+        "label": "Disabled",
+        "route": "dom/interfaces/html-field-set-element/disabled"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-legend-element/caption/default",
+      "title": "HTMLLegendElement · Заголовок",
+      "apiName": "HTMLLegendElement",
+      "searchText": "HTMLLegendElement HTMLLegendElement fieldset caption exact prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-legend-element",
+        "label": "HTMLLegendElement",
+        "route": "dom/interfaces/html-legend-element"
+      },
+      "section": {
+        "id": "caption",
+        "label": "Заголовок",
+        "route": "dom/interfaces/html-legend-element/caption"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-u-list-element/list/default",
+      "title": "HTMLUListElement · Список",
+      "apiName": "HTMLUListElement",
+      "searchText": "HTMLUListElement HTMLUListElement exact ul prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-u-list-element",
+        "label": "HTMLUListElement",
+        "route": "dom/interfaces/html-u-list-element"
+      },
+      "section": {
+        "id": "list",
+        "label": "Список",
+        "route": "dom/interfaces/html-u-list-element/list"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-li-element/item/default",
+      "title": "HTMLLIElement · Элемент",
+      "apiName": "HTMLLIElement",
+      "searchText": "HTMLLIElement HTMLLIElement exact li prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-li-element",
+        "label": "HTMLLIElement",
+        "route": "dom/interfaces/html-li-element"
+      },
+      "section": {
+        "id": "item",
+        "label": "Элемент",
+        "route": "dom/interfaces/html-li-element/item"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-heading-element/heading/default",
+      "title": "HTMLHeadingElement · Заголовок",
+      "apiName": "HTMLHeadingElement",
+      "searchText": "HTMLHeadingElement HTMLHeadingElement h1 h2 h3 h4 h5 h6 exact prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-heading-element",
+        "label": "HTMLHeadingElement",
+        "route": "dom/interfaces/html-heading-element"
+      },
+      "section": {
+        "id": "heading",
+        "label": "Заголовок",
+        "route": "dom/interfaces/html-heading-element/heading"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-paragraph-element/text/default",
+      "title": "HTMLParagraphElement · Текст",
+      "apiName": "HTMLParagraphElement",
+      "searchText": "HTMLParagraphElement HTMLParagraphElement exact p prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-paragraph-element",
+        "label": "HTMLParagraphElement",
+        "route": "dom/interfaces/html-paragraph-element"
+      },
+      "section": {
+        "id": "text",
+        "label": "Текст",
+        "route": "dom/interfaces/html-paragraph-element/text"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-table-element/table/default",
+      "title": "HTMLTableElement · Таблица",
+      "apiName": "HTMLTableElement",
+      "searchText": "HTMLTableElement HTMLTableElement exact table prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-table-element",
+        "label": "HTMLTableElement",
+        "route": "dom/interfaces/html-table-element"
+      },
+      "section": {
+        "id": "table",
+        "label": "Таблица",
+        "route": "dom/interfaces/html-table-element/table"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-table-section-element/section/default",
+      "title": "HTMLTableSectionElement · Секция",
+      "apiName": "HTMLTableSectionElement",
+      "searchText": "HTMLTableSectionElement HTMLTableSectionElement thead tbody tfoot exact prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-table-section-element",
+        "label": "HTMLTableSectionElement",
+        "route": "dom/interfaces/html-table-section-element"
+      },
+      "section": {
+        "id": "section",
+        "label": "Секция",
+        "route": "dom/interfaces/html-table-section-element/section"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-table-row-element/row/default",
+      "title": "HTMLTableRowElement · Строка",
+      "apiName": "HTMLTableRowElement",
+      "searchText": "HTMLTableRowElement HTMLTableRowElement exact tr prototype",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-table-row-element",
+        "label": "HTMLTableRowElement",
+        "route": "dom/interfaces/html-table-row-element"
+      },
+      "section": {
+        "id": "row",
+        "label": "Строка",
+        "route": "dom/interfaces/html-table-row-element/row"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/html-table-cell-element/cell/default",
+      "title": "HTMLTableCellElement · Ячейка",
+      "apiName": "HTMLTableCellElement",
+      "searchText": "HTMLTableCellElement HTMLTableCellElement th td colSpan rowSpan scope reflections",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "html-table-cell-element",
+        "label": "HTMLTableCellElement",
+        "route": "dom/interfaces/html-table-cell-element"
+      },
+      "section": {
+        "id": "cell",
+        "label": "Ячейка",
+        "route": "dom/interfaces/html-table-cell-element/cell"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/event/propagation/default",
+      "title": "Event · Распространение",
+      "apiName": "Event",
+      "searchText": "Event Event bubbles cancelable composed propagation cancellation",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "event",
+        "label": "Event",
+        "route": "dom/interfaces/event"
+      },
+      "section": {
+        "id": "propagation",
+        "label": "Распространение",
+        "route": "dom/interfaces/event/propagation"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/custom-event/detail/default",
+      "title": "CustomEvent · Detail",
+      "apiName": "CustomEvent",
+      "searchText": "CustomEvent CustomEvent detail Event propagation",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "custom-event",
+        "label": "CustomEvent",
+        "route": "dom/interfaces/custom-event"
+      },
+      "section": {
+        "id": "detail",
+        "label": "Detail",
+        "route": "dom/interfaces/custom-event/detail"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/toggle-event/states/default",
+      "title": "ToggleEvent · Состояния",
+      "apiName": "ToggleEvent",
+      "searchText": "ToggleEvent ToggleEvent oldState newState source",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "toggle-event",
+        "label": "ToggleEvent",
+        "route": "dom/interfaces/toggle-event"
+      },
+      "section": {
+        "id": "states",
+        "label": "Состояния",
+        "route": "dom/interfaces/toggle-event/states"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/ui-event/detail/default",
+      "title": "UIEvent · Detail",
+      "apiName": "UIEvent",
+      "searchText": "UIEvent UIEvent view detail",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "ui-event",
+        "label": "UIEvent",
+        "route": "dom/interfaces/ui-event"
+      },
+      "section": {
+        "id": "detail",
+        "label": "Detail",
+        "route": "dom/interfaces/ui-event/detail"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/focus-event/related-target/default",
+      "title": "FocusEvent · Related target",
+      "apiName": "FocusEvent",
+      "searchText": "FocusEvent FocusEvent relatedTarget UIEvent",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "focus-event",
+        "label": "FocusEvent",
+        "route": "dom/interfaces/focus-event"
+      },
+      "section": {
+        "id": "related-target",
+        "label": "Related target",
+        "route": "dom/interfaces/focus-event/related-target"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/mouse-event/pointer/default",
+      "title": "MouseEvent · Указатель",
+      "apiName": "MouseEvent",
+      "searchText": "MouseEvent MouseEvent coordinates buttons modifiers",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "mouse-event",
+        "label": "MouseEvent",
+        "route": "dom/interfaces/mouse-event"
+      },
+      "section": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "dom/interfaces/mouse-event/pointer"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/pointer-event/samples/default",
+      "title": "PointerEvent · Samples",
+      "apiName": "PointerEvent",
+      "searchText": "PointerEvent PointerEvent pointerId pressure type coalesced predicted",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "pointer-event",
+        "label": "PointerEvent",
+        "route": "dom/interfaces/pointer-event"
+      },
+      "section": {
+        "id": "samples",
+        "label": "Samples",
+        "route": "dom/interfaces/pointer-event/samples"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/wheel-event/delta/default",
+      "title": "WheelEvent · Delta",
+      "apiName": "WheelEvent",
+      "searchText": "WheelEvent WheelEvent deltaX deltaY deltaZ deltaMode",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "wheel-event",
+        "label": "WheelEvent",
+        "route": "dom/interfaces/wheel-event"
+      },
+      "section": {
+        "id": "delta",
+        "label": "Delta",
+        "route": "dom/interfaces/wheel-event/delta"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/keyboard-event/key/default",
+      "title": "KeyboardEvent · Клавиша",
+      "apiName": "KeyboardEvent",
+      "searchText": "KeyboardEvent KeyboardEvent key code location modifiers repeat composing",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "keyboard-event",
+        "label": "KeyboardEvent",
+        "route": "dom/interfaces/keyboard-event"
+      },
+      "section": {
+        "id": "key",
+        "label": "Клавиша",
+        "route": "dom/interfaces/keyboard-event/key"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/input-event/data/default",
+      "title": "InputEvent · Данные",
+      "apiName": "InputEvent",
+      "searchText": "InputEvent InputEvent data inputType composing",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "input-event",
+        "label": "InputEvent",
+        "route": "dom/interfaces/input-event"
+      },
+      "section": {
+        "id": "data",
+        "label": "Данные",
+        "route": "dom/interfaces/input-event/data"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "dom/interfaces/composition-event/data/default",
+      "title": "CompositionEvent · Данные",
+      "apiName": "CompositionEvent",
+      "searchText": "CompositionEvent CompositionEvent composition data",
+      "owner": {
+        "id": "dom",
+        "label": "DOM",
+        "route": "dom"
+      },
+      "category": {
+        "id": "interfaces",
+        "label": "Интерфейсы",
+        "route": "dom/interfaces"
+      },
+      "component": {
+        "id": "composition-event",
+        "label": "CompositionEvent",
+        "route": "dom/interfaces/composition-event"
+      },
+      "section": {
+        "id": "data",
+        "label": "Данные",
+        "route": "dom/interfaces/composition-event/data"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "elements/primitives/div/basic/background",
+      "title": "div · Фон",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div оформление фон div · фон box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Оформление",
+        "route": "elements/primitives/div/basic"
+      },
+      "variant": {
+        "id": "background",
+        "label": "Фон"
+      }
+    },
+    {
+      "route": "elements/primitives/div/basic/border",
+      "title": "div · Граница",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div оформление граница div · граница box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Оформление",
+        "route": "elements/primitives/div/basic"
+      },
+      "variant": {
+        "id": "border",
+        "label": "Граница"
+      }
+    },
+    {
+      "route": "elements/primitives/div/basic/padding",
+      "title": "div · Отступы",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div оформление отступы div · отступы box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Оформление",
+        "route": "elements/primitives/div/basic"
+      },
+      "variant": {
+        "id": "padding",
+        "label": "Отступы"
+      }
+    },
+    {
+      "route": "elements/primitives/div/basic/z-index",
+      "title": "div · Слои",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div оформление слои div · слои box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Оформление",
+        "route": "elements/primitives/div/basic"
+      },
+      "variant": {
+        "id": "z-index",
+        "label": "Слои"
+      }
+    },
+    {
+      "route": "elements/primitives/div/overflow/nested",
+      "title": "div · Вложенная скруглённая обрезка",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div обрезка содержимого вложенная скруглённая div · вложенная скруглённая обрезка box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "overflow",
+        "label": "Обрезка содержимого",
+        "route": "elements/primitives/div/overflow"
+      },
+      "variant": {
+        "id": "nested",
+        "label": "Вложенная скруглённая"
+      }
+    },
+    {
+      "route": "elements/primitives/div/scroll/vertical",
+      "title": "div · Вертикальная прокрутка",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div прокрутка вертикальная div · вертикальная прокрутка box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "scroll",
+        "label": "Прокрутка",
+        "route": "elements/primitives/div/scroll"
+      },
+      "variant": {
+        "id": "vertical",
+        "label": "Вертикальная"
+      }
+    },
+    {
+      "route": "elements/primitives/div/scroll/horizontal",
+      "title": "div · Горизонтальная прокрутка",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div прокрутка горизонтальная div · горизонтальная прокрутка box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "scroll",
+        "label": "Прокрутка",
+        "route": "elements/primitives/div/scroll"
+      },
+      "variant": {
+        "id": "horizontal",
+        "label": "Горизонтальная"
+      }
+    },
+    {
+      "route": "elements/primitives/div/scroll/both",
+      "title": "div · Прокрутка по двум осям",
+      "apiName": "div",
+      "searchText": "примитивы контейнер div прокрутка по двум осям div · прокрутка по двум осям box container scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "div",
+        "label": "Контейнер",
+        "route": "elements/primitives/div"
+      },
+      "section": {
+        "id": "scroll",
+        "label": "Прокрутка",
+        "route": "elements/primitives/div/scroll"
+      },
+      "variant": {
+        "id": "both",
+        "label": "По двум осям"
+      }
+    },
+    {
+      "route": "elements/primitives/span/content/left",
+      "title": "span · Слева",
+      "apiName": "span",
+      "searchText": "примитивы строка текста span выравнивание слева span · слева text align",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "span",
+        "label": "Строка текста",
+        "route": "elements/primitives/span"
+      },
+      "section": {
+        "id": "content",
+        "label": "Выравнивание",
+        "route": "elements/primitives/span/content"
+      },
+      "variant": {
+        "id": "left",
+        "label": "Слева"
+      }
+    },
+    {
+      "route": "elements/primitives/span/content/center",
+      "title": "span · По центру",
+      "apiName": "span",
+      "searchText": "примитивы строка текста span выравнивание по центру span · по центру text align",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "span",
+        "label": "Строка текста",
+        "route": "elements/primitives/span"
+      },
+      "section": {
+        "id": "content",
+        "label": "Выравнивание",
+        "route": "elements/primitives/span/content"
+      },
+      "variant": {
+        "id": "center",
+        "label": "По центру"
+      }
+    },
+    {
+      "route": "elements/primitives/span/content/right",
+      "title": "span · Справа",
+      "apiName": "span",
+      "searchText": "примитивы строка текста span выравнивание справа span · справа text align",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "span",
+        "label": "Строка текста",
+        "route": "elements/primitives/span"
+      },
+      "section": {
+        "id": "content",
+        "label": "Выравнивание",
+        "route": "elements/primitives/span/content"
+      },
+      "variant": {
+        "id": "right",
+        "label": "Справа"
+      }
+    },
+    {
+      "route": "elements/primitives/button/state/default",
+      "title": "button · Обычная",
+      "apiName": "button",
+      "searchText": "примитивы кнопка button состояние обычная button · обычная action pointer disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "elements/primitives/button"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/button/state"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Обычная"
+      }
+    },
+    {
+      "route": "elements/primitives/button/state/disabled",
+      "title": "button · Недоступная",
+      "apiName": "button",
+      "searchText": "примитивы кнопка button состояние недоступная button · недоступная action pointer disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "elements/primitives/button"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/button/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступная"
+      }
+    },
+    {
+      "route": "elements/primitives/button/state/clickable",
+      "title": "button · Интерактивная",
+      "apiName": "button",
+      "searchText": "примитивы кнопка button состояние интерактивная button · интерактивная action pointer disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "elements/primitives/button"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/button/state"
+      },
+      "variant": {
+        "id": "clickable",
+        "label": "Интерактивная"
+      }
+    },
+    {
+      "route": "elements/primitives/input/state/inactive",
+      "title": "input · Неактивный",
+      "apiName": "input",
+      "searchText": "примитивы текстовый ввод input состояние неактивный input · неактивный keyboard value placeholder",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "input",
+        "label": "Текстовый ввод",
+        "route": "elements/primitives/input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/input/state"
+      },
+      "variant": {
+        "id": "inactive",
+        "label": "Неактивный"
+      }
+    },
+    {
+      "route": "elements/primitives/input/state/active",
+      "title": "input · Активный",
+      "apiName": "input",
+      "searchText": "примитивы текстовый ввод input состояние активный input · активный keyboard value placeholder",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "input",
+        "label": "Текстовый ввод",
+        "route": "elements/primitives/input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/input/state"
+      },
+      "variant": {
+        "id": "active",
+        "label": "Активный"
+      }
+    },
+    {
+      "route": "elements/primitives/input/state/disabled",
+      "title": "input · Недоступный",
+      "apiName": "input",
+      "searchText": "примитивы текстовый ввод input состояние недоступный input · недоступный keyboard value placeholder",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "input",
+        "label": "Текстовый ввод",
+        "route": "elements/primitives/input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/input/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступный"
+      }
+    },
+    {
+      "route": "elements/primitives/select/state/inactive",
+      "title": "select · Неактивный",
+      "apiName": "select",
+      "searchText": "примитивы выбор значения select состояние неактивный select · неактивный value options dropdown disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "select",
+        "label": "Выбор значения",
+        "route": "elements/primitives/select"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/select/state"
+      },
+      "variant": {
+        "id": "inactive",
+        "label": "Неактивный"
+      }
+    },
+    {
+      "route": "elements/primitives/select/state/active",
+      "title": "select · Активный",
+      "apiName": "select",
+      "searchText": "примитивы выбор значения select состояние активный select · активный value options dropdown disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "select",
+        "label": "Выбор значения",
+        "route": "elements/primitives/select"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/select/state"
+      },
+      "variant": {
+        "id": "active",
+        "label": "Активный"
+      }
+    },
+    {
+      "route": "elements/primitives/select/state/open",
+      "title": "select · Раскрытый",
+      "apiName": "select",
+      "searchText": "примитивы выбор значения select состояние раскрытый select · раскрытый value options dropdown disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "select",
+        "label": "Выбор значения",
+        "route": "elements/primitives/select"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/select/state"
+      },
+      "variant": {
+        "id": "open",
+        "label": "Раскрытый"
+      }
+    },
+    {
+      "route": "elements/primitives/select/state/header",
+      "title": "select · Заголовок popup",
+      "apiName": "select",
+      "searchText": "примитивы выбор значения select состояние с заголовком select · заголовок popup value options dropdown disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "select",
+        "label": "Выбор значения",
+        "route": "elements/primitives/select"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/select/state"
+      },
+      "variant": {
+        "id": "header",
+        "label": "С заголовком"
+      }
+    },
+    {
+      "route": "elements/primitives/select/state/flipped",
+      "title": "select · Popup сверху",
+      "apiName": "select",
+      "searchText": "примитивы выбор значения select состояние сверху select · popup сверху value options dropdown disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "select",
+        "label": "Выбор значения",
+        "route": "elements/primitives/select"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/select/state"
+      },
+      "variant": {
+        "id": "flipped",
+        "label": "Сверху"
+      }
+    },
+    {
+      "route": "elements/primitives/select/state/disabled",
+      "title": "select · Недоступный",
+      "apiName": "select",
+      "searchText": "примитивы выбор значения select состояние недоступный select · недоступный value options dropdown disabled",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "select",
+        "label": "Выбор значения",
+        "route": "elements/primitives/select"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/select/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступный"
+      }
+    },
+    {
+      "route": "elements/primitives/popover/state/closed",
+      "title": "popover · Закрыт",
+      "apiName": "popover",
+      "searchText": "примитивы всплывающий слой popover состояние закрыт popover · закрыт popup overlay outside escape flip",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "popover",
+        "label": "Всплывающий слой",
+        "route": "elements/primitives/popover"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/popover/state"
+      },
+      "variant": {
+        "id": "closed",
+        "label": "Закрыт"
+      }
+    },
+    {
+      "route": "elements/primitives/popover/state/open",
+      "title": "popover · Открыт",
+      "apiName": "popover",
+      "searchText": "примитивы всплывающий слой popover состояние открыт popover · открыт popup overlay outside escape flip",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "popover",
+        "label": "Всплывающий слой",
+        "route": "elements/primitives/popover"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/primitives/popover/state"
+      },
+      "variant": {
+        "id": "open",
+        "label": "Открыт"
+      }
+    },
+    {
+      "route": "elements/primitives/img/fit/cover",
+      "title": "img · Заполнение",
+      "apiName": "img",
+      "searchText": "примитивы изображение img вписывание заполнение img · заполнение image cover contain",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "img",
+        "label": "Изображение",
+        "route": "elements/primitives/img"
+      },
+      "section": {
+        "id": "fit",
+        "label": "Вписывание",
+        "route": "elements/primitives/img/fit"
+      },
+      "variant": {
+        "id": "cover",
+        "label": "Заполнение"
+      }
+    },
+    {
+      "route": "elements/primitives/img/fit/contain",
+      "title": "img · Целиком",
+      "apiName": "img",
+      "searchText": "примитивы изображение img вписывание целиком img · целиком image cover contain",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "img",
+        "label": "Изображение",
+        "route": "elements/primitives/img"
+      },
+      "section": {
+        "id": "fit",
+        "label": "Вписывание",
+        "route": "elements/primitives/img/fit"
+      },
+      "variant": {
+        "id": "contain",
+        "label": "Целиком"
+      }
+    },
+    {
+      "route": "elements/primitives/list/mode/regular",
+      "title": "ul / li · Обычный",
+      "apiName": "ul / li",
+      "searchText": "примитивы список ul / li режим обычный ul / li · обычный list rows scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "list",
+        "label": "Список",
+        "route": "elements/primitives/list"
+      },
+      "section": {
+        "id": "mode",
+        "label": "Режим",
+        "route": "elements/primitives/list/mode"
+      },
+      "variant": {
+        "id": "regular",
+        "label": "Обычный"
+      }
+    },
+    {
+      "route": "elements/primitives/list/mode/dense",
+      "title": "ul / li · Плотный",
+      "apiName": "ul / li",
+      "searchText": "примитивы список ul / li режим плотный ul / li · плотный list rows scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "list",
+        "label": "Список",
+        "route": "elements/primitives/list"
+      },
+      "section": {
+        "id": "mode",
+        "label": "Режим",
+        "route": "elements/primitives/list/mode"
+      },
+      "variant": {
+        "id": "dense",
+        "label": "Плотный"
+      }
+    },
+    {
+      "route": "elements/primitives/list/mode/interactive",
+      "title": "ul / li · Интерактивный",
+      "apiName": "ul / li",
+      "searchText": "примитивы список ul / li режим интерактивный ul / li · интерактивный list rows scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "list",
+        "label": "Список",
+        "route": "elements/primitives/list"
+      },
+      "section": {
+        "id": "mode",
+        "label": "Режим",
+        "route": "elements/primitives/list/mode"
+      },
+      "variant": {
+        "id": "interactive",
+        "label": "Интерактивный"
+      }
+    },
+    {
+      "route": "elements/primitives/list/mode/scroll",
+      "title": "ul / li · С прокруткой",
+      "apiName": "ul / li",
+      "searchText": "примитивы список ul / li режим с прокруткой ul / li · с прокруткой list rows scroll",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "list",
+        "label": "Список",
+        "route": "elements/primitives/list"
+      },
+      "section": {
+        "id": "mode",
+        "label": "Режим",
+        "route": "elements/primitives/list/mode"
+      },
+      "variant": {
+        "id": "scroll",
+        "label": "С прокруткой"
+      }
+    },
+    {
+      "route": "elements/primitives/status-bar/content/statistics",
+      "title": "Строка состояния · Статистика",
+      "apiName": "statusBar",
+      "searchText": "примитивы строка состояния statusbar содержимое статистика строка состояния · статистика status statistics version footer",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "primitives",
+        "label": "Примитивы",
+        "route": "elements/primitives"
+      },
+      "component": {
+        "id": "status-bar",
+        "label": "Строка состояния",
+        "route": "elements/primitives/status-bar"
+      },
+      "section": {
+        "id": "content",
+        "label": "Содержимое",
+        "route": "elements/primitives/status-bar/content"
+      },
+      "variant": {
+        "id": "statistics",
+        "label": "Статистика"
+      }
+    },
+    {
+      "route": "elements/style/css/padding/default",
+      "title": "StyleProps · Отступы",
+      "apiName": "StyleProps",
+      "searchText": "стили css-свойства styleprops отступы основной styleprops · отступы style padding border typography",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "css",
+        "label": "CSS-свойства",
+        "route": "elements/style/css"
+      },
+      "section": {
+        "id": "padding",
+        "label": "Отступы",
+        "route": "elements/style/css/padding"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "elements/style/css/flex/default",
+      "title": "StyleProps · Flex",
+      "apiName": "StyleProps",
+      "searchText": "стили css-свойства styleprops flex основной styleprops · flex style padding border typography",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "css",
+        "label": "CSS-свойства",
+        "route": "elements/style/css"
+      },
+      "section": {
+        "id": "flex",
+        "label": "Flex",
+        "route": "elements/style/css/flex"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "elements/style/css/border/rounded",
+      "title": "StyleProps · Скруглённая граница",
+      "apiName": "StyleProps",
+      "searchText": "стили css-свойства styleprops граница скруглённая styleprops · скруглённая граница style padding border typography",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "css",
+        "label": "CSS-свойства",
+        "route": "elements/style/css"
+      },
+      "section": {
+        "id": "border",
+        "label": "Граница",
+        "route": "elements/style/css/border"
+      },
+      "variant": {
+        "id": "rounded",
+        "label": "Скруглённая"
+      }
+    },
+    {
+      "route": "elements/style/css/border/capsule",
+      "title": "StyleProps · Капсула",
+      "apiName": "StyleProps",
+      "searchText": "стили css-свойства styleprops граница капсула styleprops · капсула style padding border typography",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "css",
+        "label": "CSS-свойства",
+        "route": "elements/style/css"
+      },
+      "section": {
+        "id": "border",
+        "label": "Граница",
+        "route": "elements/style/css/border"
+      },
+      "variant": {
+        "id": "capsule",
+        "label": "Капсула"
+      }
+    },
+    {
+      "route": "elements/style/css/color/default",
+      "title": "StyleProps · Цвет",
+      "apiName": "StyleProps",
+      "searchText": "стили css-свойства styleprops цвет палитра styleprops · цвет style padding border typography",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "css",
+        "label": "CSS-свойства",
+        "route": "elements/style/css"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "elements/style/css/color"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Палитра"
+      }
+    },
+    {
+      "route": "elements/style/css/typography/default",
+      "title": "StyleProps · Типографика",
+      "apiName": "StyleProps",
+      "searchText": "стили css-свойства styleprops типографика иерархия styleprops · типографика style padding border typography",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "css",
+        "label": "CSS-свойства",
+        "route": "elements/style/css"
+      },
+      "section": {
+        "id": "typography",
+        "label": "Типографика",
+        "route": "elements/style/css/typography"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Иерархия"
+      }
+    },
+    {
+      "route": "elements/style/theme/tone/cyan",
+      "title": "Тема · Голубой",
+      "apiName": "palette",
+      "searchText": "стили тема palette акцент голубой тема · голубой theme tokens color",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "theme",
+        "label": "Тема",
+        "route": "elements/style/theme"
+      },
+      "section": {
+        "id": "tone",
+        "label": "Акцент",
+        "route": "elements/style/theme/tone"
+      },
+      "variant": {
+        "id": "cyan",
+        "label": "Голубой"
+      }
+    },
+    {
+      "route": "elements/style/theme/tone/green",
+      "title": "Тема · Зелёный",
+      "apiName": "palette",
+      "searchText": "стили тема palette акцент зелёный тема · зелёный theme tokens color",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "theme",
+        "label": "Тема",
+        "route": "elements/style/theme"
+      },
+      "section": {
+        "id": "tone",
+        "label": "Акцент",
+        "route": "elements/style/theme/tone"
+      },
+      "variant": {
+        "id": "green",
+        "label": "Зелёный"
+      }
+    },
+    {
+      "route": "elements/style/theme/tone/orange",
+      "title": "Тема · Оранжевый",
+      "apiName": "palette",
+      "searchText": "стили тема palette акцент оранжевый тема · оранжевый theme tokens color",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "theme",
+        "label": "Тема",
+        "route": "elements/style/theme"
+      },
+      "section": {
+        "id": "tone",
+        "label": "Акцент",
+        "route": "elements/style/theme/tone"
+      },
+      "variant": {
+        "id": "orange",
+        "label": "Оранжевый"
+      }
+    },
+    {
+      "route": "elements/style/theme/tone/red",
+      "title": "Тема · Красный",
+      "apiName": "palette",
+      "searchText": "стили тема palette акцент красный тема · красный theme tokens color",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "style",
+        "label": "Стили",
+        "route": "elements/style"
+      },
+      "component": {
+        "id": "theme",
+        "label": "Тема",
+        "route": "elements/style/theme"
+      },
+      "section": {
+        "id": "tone",
+        "label": "Акцент",
+        "route": "elements/style/theme/tone"
+      },
+      "variant": {
+        "id": "red",
+        "label": "Красный"
+      }
+    },
+    {
+      "route": "elements/events/pointer/state/idle",
+      "title": "События · Ожидание",
+      "apiName": "InteractiveElementProps",
+      "searchText": "события указатель interactiveelementprops состояние ожидание события · ожидание pointer hover press click",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "events",
+        "label": "События",
+        "route": "elements/events"
+      },
+      "component": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "elements/events/pointer"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/events/pointer/state"
+      },
+      "variant": {
+        "id": "idle",
+        "label": "Ожидание"
+      }
+    },
+    {
+      "route": "elements/events/pointer/state/hover",
+      "title": "События · Наведение",
+      "apiName": "InteractiveElementProps",
+      "searchText": "события указатель interactiveelementprops состояние наведение события · наведение pointer hover press click",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "events",
+        "label": "События",
+        "route": "elements/events"
+      },
+      "component": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "elements/events/pointer"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/events/pointer/state"
+      },
+      "variant": {
+        "id": "hover",
+        "label": "Наведение"
+      }
+    },
+    {
+      "route": "elements/events/pointer/state/press",
+      "title": "События · Нажатие",
+      "apiName": "InteractiveElementProps",
+      "searchText": "события указатель interactiveelementprops состояние нажатие события · нажатие pointer hover press click",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "events",
+        "label": "События",
+        "route": "elements/events"
+      },
+      "component": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "elements/events/pointer"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/events/pointer/state"
+      },
+      "variant": {
+        "id": "press",
+        "label": "Нажатие"
+      }
+    },
+    {
+      "route": "elements/events/pointer/state/release",
+      "title": "События · Отпускание",
+      "apiName": "InteractiveElementProps",
+      "searchText": "события указатель interactiveelementprops состояние отпускание события · отпускание pointer hover press click",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "events",
+        "label": "События",
+        "route": "elements/events"
+      },
+      "component": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "elements/events/pointer"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/events/pointer/state"
+      },
+      "variant": {
+        "id": "release",
+        "label": "Отпускание"
+      }
+    },
+    {
+      "route": "elements/events/pointer/state/click",
+      "title": "События · Клик",
+      "apiName": "InteractiveElementProps",
+      "searchText": "события указатель interactiveelementprops состояние клик события · клик pointer hover press click",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "events",
+        "label": "События",
+        "route": "elements/events"
+      },
+      "component": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "elements/events/pointer"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/events/pointer/state"
+      },
+      "variant": {
+        "id": "click",
+        "label": "Клик"
+      }
+    },
+    {
+      "route": "elements/events/pointer/state/disabled",
+      "title": "События · Недоступно",
+      "apiName": "InteractiveElementProps",
+      "searchText": "события указатель interactiveelementprops состояние недоступно события · недоступно pointer hover press click",
+      "owner": {
+        "id": "elements",
+        "label": "Элементы",
+        "route": "elements"
+      },
+      "category": {
+        "id": "events",
+        "label": "События",
+        "route": "elements/events"
+      },
+      "component": {
+        "id": "pointer",
+        "label": "Указатель",
+        "route": "elements/events/pointer"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "elements/events/pointer/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступно"
+      }
+    },
+    {
+      "route": "components/foundation/button/basic/text",
+      "title": "Кнопка · Текстовая",
+      "apiName": "Button",
+      "searchText": "основные кнопка button текстовая кнопка · текстовая action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основные",
+        "route": "components/foundation/button/basic"
+      },
+      "variant": {
+        "id": "text",
+        "label": "Текстовая"
+      }
+    },
+    {
+      "route": "components/foundation/button/basic/contained",
+      "title": "Кнопка · Заполненная",
+      "apiName": "Button",
+      "searchText": "основные кнопка button заполненная кнопка · заполненная action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основные",
+        "route": "components/foundation/button/basic"
+      },
+      "variant": {
+        "id": "contained",
+        "label": "Заполненная"
+      }
+    },
+    {
+      "route": "components/foundation/button/basic/outlined",
+      "title": "Кнопка · Контурная",
+      "apiName": "Button",
+      "searchText": "основные кнопка button контурная кнопка · контурная action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основные",
+        "route": "components/foundation/button/basic"
+      },
+      "variant": {
+        "id": "outlined",
+        "label": "Контурная"
+      }
+    },
+    {
+      "route": "components/foundation/button/icon/svg",
+      "title": "Кнопка · SVG-иконка",
+      "apiName": "Button",
+      "searchText": "основные кнопка button иконка svg кнопка · svg-иконка action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "icon",
+        "label": "Иконка",
+        "route": "components/foundation/button/icon"
+      },
+      "variant": {
+        "id": "svg",
+        "label": "SVG"
+      }
+    },
+    {
+      "route": "components/foundation/button/icon-label/left",
+      "title": "Кнопка · Иконка слева",
+      "apiName": "Button",
+      "searchText": "основные кнопка button иконка и подпись слева кнопка · иконка слева action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "icon-label",
+        "label": "Иконка и подпись",
+        "route": "components/foundation/button/icon-label"
+      },
+      "variant": {
+        "id": "left",
+        "label": "Слева"
+      }
+    },
+    {
+      "route": "components/foundation/button/icon-label/right",
+      "title": "Кнопка · Иконка справа",
+      "apiName": "Button",
+      "searchText": "основные кнопка button иконка и подпись справа кнопка · иконка справа action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "icon-label",
+        "label": "Иконка и подпись",
+        "route": "components/foundation/button/icon-label"
+      },
+      "variant": {
+        "id": "right",
+        "label": "Справа"
+      }
+    },
+    {
+      "route": "components/foundation/button/sizes/small",
+      "title": "Кнопка · Маленькая",
+      "apiName": "Button",
+      "searchText": "основные кнопка button размер маленькая кнопка · маленькая action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "sizes",
+        "label": "Размер",
+        "route": "components/foundation/button/sizes"
+      },
+      "variant": {
+        "id": "small",
+        "label": "Маленькая"
+      }
+    },
+    {
+      "route": "components/foundation/button/sizes/medium",
+      "title": "Кнопка · Средняя",
+      "apiName": "Button",
+      "searchText": "основные кнопка button размер средняя кнопка · средняя action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "sizes",
+        "label": "Размер",
+        "route": "components/foundation/button/sizes"
+      },
+      "variant": {
+        "id": "medium",
+        "label": "Средняя"
+      }
+    },
+    {
+      "route": "components/foundation/button/sizes/large",
+      "title": "Кнопка · Большая",
+      "apiName": "Button",
+      "searchText": "основные кнопка button размер большая кнопка · большая action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "sizes",
+        "label": "Размер",
+        "route": "components/foundation/button/sizes"
+      },
+      "variant": {
+        "id": "large",
+        "label": "Большая"
+      }
+    },
+    {
+      "route": "components/foundation/button/color/primary",
+      "title": "Кнопка · Основной цвет",
+      "apiName": "Button",
+      "searchText": "основные кнопка button цвет основной кнопка · основной цвет action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "components/foundation/button/color"
+      },
+      "variant": {
+        "id": "primary",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/foundation/button/color/success",
+      "title": "Кнопка · Успех",
+      "apiName": "Button",
+      "searchText": "основные кнопка button цвет успех кнопка · успех action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "components/foundation/button/color"
+      },
+      "variant": {
+        "id": "success",
+        "label": "Успех"
+      }
+    },
+    {
+      "route": "components/foundation/button/color/warning",
+      "title": "Кнопка · Предупреждение",
+      "apiName": "Button",
+      "searchText": "основные кнопка button цвет предупреждение кнопка · предупреждение action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "components/foundation/button/color"
+      },
+      "variant": {
+        "id": "warning",
+        "label": "Предупреждение"
+      }
+    },
+    {
+      "route": "components/foundation/button/color/error",
+      "title": "Кнопка · Ошибка",
+      "apiName": "Button",
+      "searchText": "основные кнопка button цвет ошибка кнопка · ошибка action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "components/foundation/button/color"
+      },
+      "variant": {
+        "id": "error",
+        "label": "Ошибка"
+      }
+    },
+    {
+      "route": "components/foundation/button/color/neutral",
+      "title": "Кнопка · Нейтральный",
+      "apiName": "Button",
+      "searchText": "основные кнопка button цвет нейтральный кнопка · нейтральный action действие icon",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "button",
+        "label": "Кнопка",
+        "route": "components/foundation/button"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "components/foundation/button/color"
+      },
+      "variant": {
+        "id": "neutral",
+        "label": "Нейтральный"
+      }
+    },
+    {
+      "route": "components/foundation/pane/variants/glass",
+      "title": "Панель · Стекло",
+      "apiName": "Pane",
+      "searchText": "основные панель pane варианты стекло панель · стекло surface container",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "pane",
+        "label": "Панель",
+        "route": "components/foundation/pane"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Варианты",
+        "route": "components/foundation/pane/variants"
+      },
+      "variant": {
+        "id": "glass",
+        "label": "Стекло"
+      }
+    },
+    {
+      "route": "components/foundation/pane/variants/outlined",
+      "title": "Панель · Контурная",
+      "apiName": "Pane",
+      "searchText": "основные панель pane варианты контурная панель · контурная surface container",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "pane",
+        "label": "Панель",
+        "route": "components/foundation/pane"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Варианты",
+        "route": "components/foundation/pane/variants"
+      },
+      "variant": {
+        "id": "outlined",
+        "label": "Контурная"
+      }
+    },
+    {
+      "route": "components/foundation/pane/variants/filled",
+      "title": "Панель · Заполненная",
+      "apiName": "Pane",
+      "searchText": "основные панель pane варианты заполненная панель · заполненная surface container",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "pane",
+        "label": "Панель",
+        "route": "components/foundation/pane"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Варианты",
+        "route": "components/foundation/pane/variants"
+      },
+      "variant": {
+        "id": "filled",
+        "label": "Заполненная"
+      }
+    },
+    {
+      "route": "components/foundation/badge/basic/default",
+      "title": "Метка · Основная",
+      "apiName": "Badge",
+      "searchText": "основные метка badge основная основной метка · основная",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "badge",
+        "label": "Метка",
+        "route": "components/foundation/badge"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основная",
+        "route": "components/foundation/badge/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/foundation/typography/variants/default",
+      "title": "Типографика · Начертания",
+      "apiName": "Typography",
+      "searchText": "основные типографика typography начертания основной типографика · начертания",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "typography",
+        "label": "Типографика",
+        "route": "components/foundation/typography"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Начертания",
+        "route": "components/foundation/typography/variants"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/foundation/divider/variants/full-width",
+      "title": "Разделитель · На всю ширину",
+      "apiName": "Divider",
+      "searchText": "основные разделитель divider отступ на всю ширину разделитель · на всю ширину",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "divider",
+        "label": "Разделитель",
+        "route": "components/foundation/divider"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Отступ",
+        "route": "components/foundation/divider/variants"
+      },
+      "variant": {
+        "id": "full-width",
+        "label": "На всю ширину"
+      }
+    },
+    {
+      "route": "components/foundation/divider/variants/inset",
+      "title": "Разделитель · С отступом",
+      "apiName": "Divider",
+      "searchText": "основные разделитель divider отступ с отступом разделитель · с отступом",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "divider",
+        "label": "Разделитель",
+        "route": "components/foundation/divider"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Отступ",
+        "route": "components/foundation/divider/variants"
+      },
+      "variant": {
+        "id": "inset",
+        "label": "С отступом"
+      }
+    },
+    {
+      "route": "components/foundation/divider/variants/middle",
+      "title": "Разделитель · По центру",
+      "apiName": "Divider",
+      "searchText": "основные разделитель divider отступ по центру разделитель · по центру",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "components/foundation"
+      },
+      "component": {
+        "id": "divider",
+        "label": "Разделитель",
+        "route": "components/foundation/divider"
+      },
+      "section": {
+        "id": "variants",
+        "label": "Отступ",
+        "route": "components/foundation/divider/variants"
+      },
+      "variant": {
+        "id": "middle",
+        "label": "По центру"
+      }
+    },
+    {
+      "route": "components/inputs/control-group/basic/default",
+      "title": "ControlGroup · Соединённые строки",
+      "apiName": "ControlGroup",
+      "searchText": "ввод группа контролов controlgroup основная три строки controlgroup · соединённые строки input group joined grid",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "control-group",
+        "label": "Группа контролов",
+        "route": "components/inputs/control-group"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основная",
+        "route": "components/inputs/control-group/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Три строки"
+      }
+    },
+    {
+      "route": "components/inputs/field/text/default",
+      "title": "Field · Текст",
+      "apiName": "Field",
+      "searchText": "ввод поле field текст основное field · текст input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "text",
+        "label": "Текст",
+        "route": "components/inputs/field/text"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основное"
+      }
+    },
+    {
+      "route": "components/inputs/field/number/input",
+      "title": "Field · Числовой ввод",
+      "apiName": "Field",
+      "searchText": "ввод поле field число field · числовой ввод input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "number",
+        "label": "Число",
+        "route": "components/inputs/field/number"
+      },
+      "variant": {
+        "id": "input",
+        "label": "Ввод"
+      }
+    },
+    {
+      "route": "components/inputs/field/number/slider",
+      "title": "Field · Числовой слайдер",
+      "apiName": "Field",
+      "searchText": "ввод поле field число слайдер field · числовой слайдер input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "number",
+        "label": "Число",
+        "route": "components/inputs/field/number"
+      },
+      "variant": {
+        "id": "slider",
+        "label": "Слайдер"
+      }
+    },
+    {
+      "route": "components/inputs/field/integer/input",
+      "title": "Field · Целое",
+      "apiName": "Field",
+      "searchText": "ввод поле field целое iterations field · целое input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "integer",
+        "label": "Целое",
+        "route": "components/inputs/field/integer"
+      },
+      "variant": {
+        "id": "input",
+        "label": "Iterations"
+      }
+    },
+    {
+      "route": "components/inputs/field/boolean/switch",
+      "title": "Field · Переключатель",
+      "apiName": "Field",
+      "searchText": "ввод поле field переключатель switcher field · переключатель input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "boolean",
+        "label": "Переключатель",
+        "route": "components/inputs/field/boolean"
+      },
+      "variant": {
+        "id": "switch",
+        "label": "Switcher"
+      }
+    },
+    {
+      "route": "components/inputs/field/enum/default",
+      "title": "Field · Выбор",
+      "apiName": "Field",
+      "searchText": "ввод поле field выбор основной field · выбор input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "enum",
+        "label": "Выбор",
+        "route": "components/inputs/field/enum"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/inputs/field/color/input",
+      "title": "Field · Цвет",
+      "apiName": "Field",
+      "searchText": "ввод поле field цвет rgba field · цвет input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "color",
+        "label": "Цвет",
+        "route": "components/inputs/field/color"
+      },
+      "variant": {
+        "id": "input",
+        "label": "RGBA"
+      }
+    },
+    {
+      "route": "components/inputs/field/vector/default",
+      "title": "Field · Вектор",
+      "apiName": "Field",
+      "searchText": "ввод поле field вектор xyz field · вектор input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "vector",
+        "label": "Вектор",
+        "route": "components/inputs/field/vector"
+      },
+      "variant": {
+        "id": "default",
+        "label": "XYZ"
+      }
+    },
+    {
+      "route": "components/inputs/field/rotation/default",
+      "title": "Field · Вращение",
+      "apiName": "Field",
+      "searchText": "ввод поле field вращение xyz field · вращение input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "rotation",
+        "label": "Вращение",
+        "route": "components/inputs/field/rotation"
+      },
+      "variant": {
+        "id": "default",
+        "label": "XYZ"
+      }
+    },
+    {
+      "route": "components/inputs/field/matrix/default",
+      "title": "Field · Матрица",
+      "apiName": "Field",
+      "searchText": "ввод поле field матрица 2×2 field · матрица input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "matrix",
+        "label": "Матрица",
+        "route": "components/inputs/field/matrix"
+      },
+      "variant": {
+        "id": "default",
+        "label": "2×2"
+      }
+    },
+    {
+      "route": "components/inputs/field/reference/default",
+      "title": "Field · Ссылка",
+      "apiName": "Field",
+      "searchText": "ввод поле field ссылка ресурс field · ссылка input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "reference",
+        "label": "Ссылка",
+        "route": "components/inputs/field/reference"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Ресурс"
+      }
+    },
+    {
+      "route": "components/inputs/field/collection/default",
+      "title": "Field · Коллекция",
+      "apiName": "Field",
+      "searchText": "ввод поле field коллекция элементы field · коллекция input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "collection",
+        "label": "Коллекция",
+        "route": "components/inputs/field/collection"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Элементы"
+      }
+    },
+    {
+      "route": "components/inputs/field/path/default",
+      "title": "Field · Путь",
+      "apiName": "Field",
+      "searchText": "ввод поле field путь файл field · путь input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "path",
+        "label": "Путь",
+        "route": "components/inputs/field/path"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Файл"
+      }
+    },
+    {
+      "route": "components/inputs/field/readonly/default",
+      "title": "Field · Только чтение",
+      "apiName": "Field",
+      "searchText": "ввод поле field только чтение результат field · только чтение input controlled universal",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "field",
+        "label": "Поле",
+        "route": "components/inputs/field"
+      },
+      "section": {
+        "id": "readonly",
+        "label": "Только чтение",
+        "route": "components/inputs/field/readonly"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Результат"
+      }
+    },
+    {
+      "route": "components/inputs/text-field/basic/default",
+      "title": "TextField · Основной",
+      "apiName": "TextField",
+      "searchText": "ввод текстовый ввод textfield основной textfield · основной",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "text-field",
+        "label": "Текстовый ввод",
+        "route": "components/inputs/text-field"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/text-field/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/inputs/number-input/basic/default",
+      "title": "NumberInput · Основной",
+      "apiName": "NumberInput",
+      "searchText": "ввод числовой ввод numberinput основной numberinput · основной",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "number-input",
+        "label": "Числовой ввод",
+        "route": "components/inputs/number-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/number-input/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/inputs/integer-input/basic/value",
+      "title": "IntegerInput · Значение",
+      "apiName": "IntegerInput",
+      "searchText": "ввод целочисленный ввод integerinput основной значение integerinput · значение",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "integer-input",
+        "label": "Целочисленный ввод",
+        "route": "components/inputs/integer-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/integer-input/basic"
+      },
+      "variant": {
+        "id": "value",
+        "label": "Значение"
+      }
+    },
+    {
+      "route": "components/inputs/integer-input/basic/labeled",
+      "title": "IntegerInput · Iterations",
+      "apiName": "IntegerInput",
+      "searchText": "ввод целочисленный ввод integerinput основной с подписью integerinput · iterations",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "integer-input",
+        "label": "Целочисленный ввод",
+        "route": "components/inputs/integer-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/integer-input/basic"
+      },
+      "variant": {
+        "id": "labeled",
+        "label": "С подписью"
+      }
+    },
+    {
+      "route": "components/inputs/integer-input/state/disabled",
+      "title": "IntegerInput · Недоступен",
+      "apiName": "IntegerInput",
+      "searchText": "ввод целочисленный ввод integerinput состояние недоступен integerinput · недоступен",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "integer-input",
+        "label": "Целочисленный ввод",
+        "route": "components/inputs/integer-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/integer-input/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступен"
+      }
+    },
+    {
+      "route": "components/inputs/integer-input/state/readonly",
+      "title": "IntegerInput · Только чтение",
+      "apiName": "IntegerInput",
+      "searchText": "ввод целочисленный ввод integerinput состояние только чтение integerinput · только чтение",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "integer-input",
+        "label": "Целочисленный ввод",
+        "route": "components/inputs/integer-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/integer-input/state"
+      },
+      "variant": {
+        "id": "readonly",
+        "label": "Только чтение"
+      }
+    },
+    {
+      "route": "components/inputs/color-input/basic/color-input",
+      "title": "ColorInput · Закрытый picker",
+      "apiName": "ColorInput",
+      "searchText": "ввод ввод цвета colorinput основной закрыт colorinput · закрытый picker",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "color-input",
+        "label": "Ввод цвета",
+        "route": "components/inputs/color-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/color-input/basic"
+      },
+      "variant": {
+        "id": "color-input",
+        "label": "Закрыт"
+      }
+    },
+    {
+      "route": "components/inputs/color-input/state/open",
+      "title": "ColorInput · Открытый picker",
+      "apiName": "ColorInput",
+      "searchText": "ввод ввод цвета colorinput состояние открыт colorinput · открытый picker",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "color-input",
+        "label": "Ввод цвета",
+        "route": "components/inputs/color-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/color-input/state"
+      },
+      "variant": {
+        "id": "open",
+        "label": "Открыт"
+      }
+    },
+    {
+      "route": "components/inputs/color-input/presentation/expanded",
+      "title": "ColorInput · Развёрнутый",
+      "apiName": "ColorInput",
+      "searchText": "ввод ввод цвета colorinput представление развёрнут colorinput · развёрнутый",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "color-input",
+        "label": "Ввод цвета",
+        "route": "components/inputs/color-input"
+      },
+      "section": {
+        "id": "presentation",
+        "label": "Представление",
+        "route": "components/inputs/color-input/presentation"
+      },
+      "variant": {
+        "id": "expanded",
+        "label": "Развёрнут"
+      }
+    },
+    {
+      "route": "components/inputs/vector-input/basic/default",
+      "title": "VectorInput · Вектор XYZ",
+      "apiName": "VectorInput",
+      "searchText": "ввод ввод вектора vectorinput основной xyz vectorinput · вектор xyz input vector 2d 3d 4d",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "vector-input",
+        "label": "Ввод вектора",
+        "route": "components/inputs/vector-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/vector-input/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "XYZ"
+      }
+    },
+    {
+      "route": "components/inputs/matrix-input/basic/default",
+      "title": "MatrixInput · Матрица 2×2",
+      "apiName": "MatrixInput",
+      "searchText": "ввод ввод матрицы matrixinput основной 2×2 matrixinput · матрица 2×2 input matrix 3×3 4×4",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "matrix-input",
+        "label": "Ввод матрицы",
+        "route": "components/inputs/matrix-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/matrix-input/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "2×2"
+      }
+    },
+    {
+      "route": "components/inputs/reference-input/basic/default",
+      "title": "ReferenceInput · Выбор ресурса",
+      "apiName": "ReferenceInput",
+      "searchText": "ввод выбор ссылки referenceinput основной ресурс referenceinput · выбор ресурса input reference ссылка ресурс выбор",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "reference-input",
+        "label": "Выбор ссылки",
+        "route": "components/inputs/reference-input"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/reference-input/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Ресурс"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/presentation/cycle",
+      "title": "EnumInput · Циклический выбор",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput представление цикл enuminput · циклический выбор input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "presentation",
+        "label": "Представление",
+        "route": "components/inputs/enum-input/presentation"
+      },
+      "variant": {
+        "id": "cycle",
+        "label": "Цикл"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/presentation/expanded",
+      "title": "EnumInput · Варианты в строке",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput представление развёрнуто enuminput · варианты в строке input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "presentation",
+        "label": "Представление",
+        "route": "components/inputs/enum-input/presentation"
+      },
+      "variant": {
+        "id": "expanded",
+        "label": "Развёрнуто"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/value/selected-description",
+      "title": "EnumInput · Описание выбранного значения",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput значение с описанием enuminput · описание выбранного значения input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/enum-input/value"
+      },
+      "variant": {
+        "id": "selected-description",
+        "label": "С описанием"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/value/header-icons",
+      "title": "EnumInput · Заголовок и иконки",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput значение заголовок и иконки enuminput · заголовок и иконки input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/enum-input/value"
+      },
+      "variant": {
+        "id": "header-icons",
+        "label": "Заголовок и иконки"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/value/mixed-icons",
+      "title": "EnumInput · Общая колонка иконок",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput значение смешанные иконки enuminput · общая колонка иконок input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/enum-input/value"
+      },
+      "variant": {
+        "id": "mixed-icons",
+        "label": "Смешанные иконки"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/value/invalid-legacy",
+      "title": "EnumInput · Неизвестное устаревшее значение",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput значение неизвестное enuminput · неизвестное устаревшее значение input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/enum-input/value"
+      },
+      "variant": {
+        "id": "invalid-legacy",
+        "label": "Неизвестное"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/exception/no-items",
+      "title": "EnumInput · No Items",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput исключения нет вариантов enuminput · no items input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "exception",
+        "label": "Исключения",
+        "route": "components/inputs/enum-input/exception"
+      },
+      "variant": {
+        "id": "no-items",
+        "label": "Нет вариантов"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/exception/menu-undefined",
+      "title": "EnumInput · Menu Undefined",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput исключения не определено enuminput · menu undefined input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "exception",
+        "label": "Исключения",
+        "route": "components/inputs/enum-input/exception"
+      },
+      "variant": {
+        "id": "menu-undefined",
+        "label": "Не определено"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/exception/menu-error",
+      "title": "EnumInput · Menu Error",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput исключения ошибка enuminput · menu error input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "exception",
+        "label": "Исключения",
+        "route": "components/inputs/enum-input/exception"
+      },
+      "variant": {
+        "id": "menu-error",
+        "label": "Ошибка"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/state/disabled",
+      "title": "EnumInput · Недоступно",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput состояние недоступно enuminput · недоступно input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/enum-input/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступно"
+      }
+    },
+    {
+      "route": "components/inputs/enum-input/state/readonly",
+      "title": "EnumInput · Только чтение",
+      "apiName": "EnumInput",
+      "searchText": "ввод выбор значения enuminput состояние только чтение enuminput · только чтение input enum выбор цикл варианты",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "enum-input",
+        "label": "Выбор значения",
+        "route": "components/inputs/enum-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/enum-input/state"
+      },
+      "variant": {
+        "id": "readonly",
+        "label": "Только чтение"
+      }
+    },
+    {
+      "route": "components/inputs/collection-input/value/selected",
+      "title": "CollectionInput · Выбранный элемент",
+      "apiName": "CollectionInput",
+      "searchText": "ввод редактор коллекции collectioninput значение выбрано collectioninput · выбранный элемент input collection список выбор добавление удаление",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "collection-input",
+        "label": "Редактор коллекции",
+        "route": "components/inputs/collection-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/collection-input/value"
+      },
+      "variant": {
+        "id": "selected",
+        "label": "Выбрано"
+      }
+    },
+    {
+      "route": "components/inputs/collection-input/value/empty",
+      "title": "CollectionInput · Пустая коллекция",
+      "apiName": "CollectionInput",
+      "searchText": "ввод редактор коллекции collectioninput значение пусто collectioninput · пустая коллекция input collection список выбор добавление удаление",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "collection-input",
+        "label": "Редактор коллекции",
+        "route": "components/inputs/collection-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/collection-input/value"
+      },
+      "variant": {
+        "id": "empty",
+        "label": "Пусто"
+      }
+    },
+    {
+      "route": "components/inputs/collection-input/state/disabled",
+      "title": "CollectionInput · Недоступно",
+      "apiName": "CollectionInput",
+      "searchText": "ввод редактор коллекции collectioninput состояние недоступно collectioninput · недоступно input collection список выбор добавление удаление",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "collection-input",
+        "label": "Редактор коллекции",
+        "route": "components/inputs/collection-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/collection-input/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступно"
+      }
+    },
+    {
+      "route": "components/inputs/collection-input/state/readonly",
+      "title": "CollectionInput · Только чтение",
+      "apiName": "CollectionInput",
+      "searchText": "ввод редактор коллекции collectioninput состояние только чтение collectioninput · только чтение input collection список выбор добавление удаление",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "collection-input",
+        "label": "Редактор коллекции",
+        "route": "components/inputs/collection-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/collection-input/state"
+      },
+      "variant": {
+        "id": "readonly",
+        "label": "Только чтение"
+      }
+    },
+    {
+      "route": "components/inputs/collection-input/density/compact",
+      "title": "CollectionInput · Компактная плотность",
+      "apiName": "CollectionInput",
+      "searchText": "ввод редактор коллекции collectioninput плотность компактная collectioninput · компактная плотность input collection список выбор добавление удаление",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "collection-input",
+        "label": "Редактор коллекции",
+        "route": "components/inputs/collection-input"
+      },
+      "section": {
+        "id": "density",
+        "label": "Плотность",
+        "route": "components/inputs/collection-input/density"
+      },
+      "variant": {
+        "id": "compact",
+        "label": "Компактная"
+      }
+    },
+    {
+      "route": "components/inputs/path-input/value/path",
+      "title": "PathInput · Путь к файлу",
+      "apiName": "PathInput",
+      "searchText": "ввод ввод пути pathinput значение путь pathinput · путь к файлу input path путь файл выбор",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "path-input",
+        "label": "Ввод пути",
+        "route": "components/inputs/path-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/path-input/value"
+      },
+      "variant": {
+        "id": "path",
+        "label": "Путь"
+      }
+    },
+    {
+      "route": "components/inputs/path-input/value/empty",
+      "title": "PathInput · Пустой путь",
+      "apiName": "PathInput",
+      "searchText": "ввод ввод пути pathinput значение пусто pathinput · пустой путь input path путь файл выбор",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "path-input",
+        "label": "Ввод пути",
+        "route": "components/inputs/path-input"
+      },
+      "section": {
+        "id": "value",
+        "label": "Значение",
+        "route": "components/inputs/path-input/value"
+      },
+      "variant": {
+        "id": "empty",
+        "label": "Пусто"
+      }
+    },
+    {
+      "route": "components/inputs/path-input/state/disabled",
+      "title": "PathInput · Недоступно",
+      "apiName": "PathInput",
+      "searchText": "ввод ввод пути pathinput состояние недоступно pathinput · недоступно input path путь файл выбор",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "path-input",
+        "label": "Ввод пути",
+        "route": "components/inputs/path-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/path-input/state"
+      },
+      "variant": {
+        "id": "disabled",
+        "label": "Недоступно"
+      }
+    },
+    {
+      "route": "components/inputs/path-input/state/readonly",
+      "title": "PathInput · Только чтение",
+      "apiName": "PathInput",
+      "searchText": "ввод ввод пути pathinput состояние только чтение pathinput · только чтение input path путь файл выбор",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "path-input",
+        "label": "Ввод пути",
+        "route": "components/inputs/path-input"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/path-input/state"
+      },
+      "variant": {
+        "id": "readonly",
+        "label": "Только чтение"
+      }
+    },
+    {
+      "route": "components/inputs/path-input/density/compact",
+      "title": "PathInput · Компактная плотность",
+      "apiName": "PathInput",
+      "searchText": "ввод ввод пути pathinput плотность компактная pathinput · компактная плотность input path путь файл выбор",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "path-input",
+        "label": "Ввод пути",
+        "route": "components/inputs/path-input"
+      },
+      "section": {
+        "id": "density",
+        "label": "Плотность",
+        "route": "components/inputs/path-input/density"
+      },
+      "variant": {
+        "id": "compact",
+        "label": "Компактная"
+      }
+    },
+    {
+      "route": "components/inputs/checkbox/state/unchecked",
+      "title": "Checkbox · Выключен",
+      "apiName": "Checkbox",
+      "searchText": "ввод флажок checkbox состояние выключен checkbox · выключен",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "checkbox",
+        "label": "Флажок",
+        "route": "components/inputs/checkbox"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/checkbox/state"
+      },
+      "variant": {
+        "id": "unchecked",
+        "label": "Выключен"
+      }
+    },
+    {
+      "route": "components/inputs/checkbox/state/checked",
+      "title": "Checkbox · Включён",
+      "apiName": "Checkbox",
+      "searchText": "ввод флажок checkbox состояние включён checkbox · включён",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "checkbox",
+        "label": "Флажок",
+        "route": "components/inputs/checkbox"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/checkbox/state"
+      },
+      "variant": {
+        "id": "checked",
+        "label": "Включён"
+      }
+    },
+    {
+      "route": "components/inputs/switcher/state/off",
+      "title": "Switcher · Выключен",
+      "apiName": "Switcher",
+      "searchText": "ввод переключатель switcher состояние выключен switcher · выключен",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "switcher",
+        "label": "Переключатель",
+        "route": "components/inputs/switcher"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/switcher/state"
+      },
+      "variant": {
+        "id": "off",
+        "label": "Выключен"
+      }
+    },
+    {
+      "route": "components/inputs/switcher/state/on",
+      "title": "Switcher · Включён",
+      "apiName": "Switcher",
+      "searchText": "ввод переключатель switcher состояние включён switcher · включён",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "switcher",
+        "label": "Переключатель",
+        "route": "components/inputs/switcher"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/inputs/switcher/state"
+      },
+      "variant": {
+        "id": "on",
+        "label": "Включён"
+      }
+    },
+    {
+      "route": "components/inputs/progress-checkbox/progress/default",
+      "title": "ProgressCheckbox · Прогресс",
+      "apiName": "ProgressCheckbox",
+      "searchText": "ввод флажок прогресса progresscheckbox прогресс основной progresscheckbox · прогресс",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "progress-checkbox",
+        "label": "Флажок прогресса",
+        "route": "components/inputs/progress-checkbox"
+      },
+      "section": {
+        "id": "progress",
+        "label": "Прогресс",
+        "route": "components/inputs/progress-checkbox/progress"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/inputs/slider-control/basic/default",
+      "title": "SliderControl · Основной",
+      "apiName": "SliderControl",
+      "searchText": "ввод слайдер slidercontrol основной slidercontrol · основной",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "inputs",
+        "label": "Ввод",
+        "route": "components/inputs"
+      },
+      "component": {
+        "id": "slider-control",
+        "label": "Слайдер",
+        "route": "components/inputs/slider-control"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/inputs/slider-control/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/data/inspector/basic/default",
+      "title": "Inspector · Панель свойств",
+      "apiName": "Inspector",
+      "searchText": "данные инспектор inspector основной панель inspector · панель свойств editor panel sections search",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "data",
+        "label": "Данные",
+        "route": "components/data"
+      },
+      "component": {
+        "id": "inspector",
+        "label": "Инспектор",
+        "route": "components/data/inspector"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/data/inspector/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Панель"
+      }
+    },
+    {
+      "route": "components/data/code-editor/state/read-only",
+      "title": "CodeEditor · Только чтение",
+      "apiName": "CodeEditor",
+      "searchText": "данные редактор кода codeeditor состояние только чтение codeeditor · только чтение code source syntax read-only",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "data",
+        "label": "Данные",
+        "route": "components/data"
+      },
+      "component": {
+        "id": "code-editor",
+        "label": "Редактор кода",
+        "route": "components/data/code-editor"
+      },
+      "section": {
+        "id": "state",
+        "label": "Состояние",
+        "route": "components/data/code-editor/state"
+      },
+      "variant": {
+        "id": "read-only",
+        "label": "Только чтение"
+      }
+    },
+    {
+      "route": "components/data/list/basic/default",
+      "title": "List · Основной",
+      "apiName": "List",
+      "searchText": "данные список list основной list · основной",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "data",
+        "label": "Данные",
+        "route": "components/data"
+      },
+      "component": {
+        "id": "list",
+        "label": "Список",
+        "route": "components/data/list"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основной",
+        "route": "components/data/list/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/data/table/basic/default",
+      "title": "Table · Основная",
+      "apiName": "Table",
+      "searchText": "данные таблица table основная основной table · основная",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "data",
+        "label": "Данные",
+        "route": "components/data"
+      },
+      "component": {
+        "id": "table",
+        "label": "Таблица",
+        "route": "components/data/table"
+      },
+      "section": {
+        "id": "basic",
+        "label": "Основная",
+        "route": "components/data/table/basic"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/data/scrollbar/vertical/default",
+      "title": "Scrollbar · Вертикальная",
+      "apiName": "scrollbar",
+      "searchText": "данные полоса прокрутки scrollbar вертикальная основной scrollbar · вертикальная",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "data",
+        "label": "Данные",
+        "route": "components/data"
+      },
+      "component": {
+        "id": "scrollbar",
+        "label": "Полоса прокрутки",
+        "route": "components/data/scrollbar"
+      },
+      "section": {
+        "id": "vertical",
+        "label": "Вертикальная",
+        "route": "components/data/scrollbar/vertical"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Основной"
+      }
+    },
+    {
+      "route": "components/data/noti/status/unavailable",
+      "title": "Noti · Нет рабочего экспорта",
+      "apiName": "Noti",
+      "searchText": "данные уведомления noti статус не реализован noti · нет рабочего экспорта",
+      "owner": {
+        "id": "components",
+        "label": "Компоненты",
+        "route": "components"
+      },
+      "category": {
+        "id": "data",
+        "label": "Данные",
+        "route": "components/data"
+      },
+      "component": {
+        "id": "noti",
+        "label": "Уведомления",
+        "route": "components/data/noti"
+      },
+      "section": {
+        "id": "status",
+        "label": "Статус",
+        "route": "components/data/noti/status"
+      },
+      "variant": {
+        "id": "unavailable",
+        "label": "Не реализован"
+      }
+    },
+    {
+      "route": "hud/foundation/window/inventory/default",
+      "title": "HUD-окно · Состав пакета",
+      "apiName": "HUD",
+      "searchText": "HUD-окно HUD HUD-окно и боковые вкладки",
+      "owner": {
+        "id": "hud",
+        "label": "HUD",
+        "route": "hud"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "hud/foundation"
+      },
+      "component": {
+        "id": "window",
+        "label": "HUD-окно",
+        "route": "hud/foundation/window"
+      },
+      "section": {
+        "id": "inventory",
+        "label": "Состав пакета",
+        "route": "hud/foundation/window/inventory"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Обзор API"
+      }
+    },
+    {
+      "route": "hud/foundation/frame/inventory/default",
+      "title": "Рамка · Состав пакета",
+      "apiName": "HUDFrame",
+      "searchText": "Рамка HUDFrame Перемещение, изменение размера и docking рамки",
+      "owner": {
+        "id": "hud",
+        "label": "HUD",
+        "route": "hud"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "hud/foundation"
+      },
+      "component": {
+        "id": "frame",
+        "label": "Рамка",
+        "route": "hud/foundation/frame"
+      },
+      "section": {
+        "id": "inventory",
+        "label": "Состав пакета",
+        "route": "hud/foundation/frame/inventory"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Обзор API"
+      }
+    },
+    {
+      "route": "hud/foundation/timeline/inventory/default",
+      "title": "Временная шкала · Состав пакета",
+      "apiName": "Timeline",
+      "searchText": "Временная шкала Timeline Read-only Timeline без product commands и domain state",
+      "owner": {
+        "id": "hud",
+        "label": "HUD",
+        "route": "hud"
+      },
+      "category": {
+        "id": "foundation",
+        "label": "Основные",
+        "route": "hud/foundation"
+      },
+      "component": {
+        "id": "timeline",
+        "label": "Временная шкала",
+        "route": "hud/foundation/timeline"
+      },
+      "section": {
+        "id": "inventory",
+        "label": "Состав пакета",
+        "route": "hud/foundation/timeline/inventory"
+      },
+      "variant": {
+        "id": "default",
+        "label": "Обзор API"
+      }
+    }
+  ]
+}

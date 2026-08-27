@@ -6,8 +6,9 @@
   profiling.
 - Before changing behavior, read `ARCHITECTURE.md`, the affected package
   `requirements.md`, public types, implementation, and focused tests.
-- `@layout/core` owns generic runtime and layout mechanics. UI packages own
-  visual primitives and components; node-specific composition belongs to the
+- `@zavx0z/dom` owns the semantic tree and standard events;
+  `@zavx0z/renderer` owns cascade, layout, display and hit mechanics. UI owns
+  only DOM/CSS components and assets; node-specific composition belongs to the
   Node repository. Import exact owners directly without aliases or re-exports.
 - Preserve the supplied checkout, unrelated changes, linked dependency
   identity, listeners, and browser targets. Use the skill-owned background

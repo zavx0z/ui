@@ -24,7 +24,7 @@ const removedGenericFiles = Object.freeze([
   "workbench-chrome.test.ts",
   "workbench-hierarchy.test.ts",
 ])
-const sharedSubpath = /^@zavx0z\/storybook\/(?:app|build|environment|references|route-tree|server|stories|workbench)$/
+const sharedSubpath = /^@zavx0z\/storybook\/(?:app|build|catalog|environment|references|route-tree|server|stories|workbench)$/
 
 describe("@ui/storybook private application boundary", () => {
   test("has no public package exports or local generic implementation", async () => {
@@ -32,6 +32,20 @@ describe("@ui/storybook private application boundary", () => {
     expect("main" in manifest).toBeFalse()
     expect("types" in manifest).toBeFalse()
     expect("exports" in manifest).toBeFalse()
+    const dependencies = manifest.dependencies as Record<string, string>
+    expect(dependencies["@layout/core"]).toBeUndefined()
+    expect(dependencies["@ui/elements"]).toBeUndefined()
+
+    const build = await Bun.file(join(root, "build.ts")).text()
+    for (const forbidden of ["@layout/", "@ui/elements", "UiSurface", "UiRuntime"]) {
+      expect(build).not.toContain(forbidden)
+    }
+    for (const owner of [
+      "@zavx0z/dom",
+      "@zavx0z/renderer",
+      "@zavx0z/renderer-browser",
+      "@zavx0z/renderer-webgpu",
+    ]) expect(build).toContain(`import.meta.resolve("${owner}")`)
 
     for (const path of removedGenericFiles) {
       expect(await Bun.file(join(root, path)).exists(), path).toBeFalse()
@@ -56,11 +70,25 @@ describe("@ui/storybook private application boundary", () => {
   })
 
   test("keeps the lazy reference catalog owned by the UI application", async () => {
-    const rootEntry = await Bun.file(join(root, "app/entry.ts")).text()
+    const rootEntry = await Bun.file(join(root, "app/dom-entry.ts")).text()
     const catalog = await Bun.file(join(root, "reference-catalog.ts")).text()
     expect(rootEntry).toContain('import("../reference-catalog.ts")')
     expect(catalog).toContain('await import("./assets/references/catalog.json"')
     expect(catalog).not.toContain("@zavx0z/storybook")
+  })
+
+  test("contains no retained Workbench fallback", async () => {
+    for (const path of [
+      "app/entry.ts",
+      "app/preview.ts",
+      "app/overview.ts",
+      "app/aggregate.ts",
+      "app/aggregate-preview.ts",
+      "app/hud-story.ts",
+      "app/stories.ts",
+    ]) expect(await Bun.file(join(root, path)).exists(), path).toBeFalse()
+    const bootstrap = await Bun.file(join(root, "app/bootstrap.ts")).text()
+    expect(bootstrap).toBe('await import("./dom-entry.ts")\n')
   })
 
   test("keeps shared package documentation out of the UI application", async () => {

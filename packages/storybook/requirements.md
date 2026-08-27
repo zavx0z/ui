@@ -1,211 +1,84 @@
-# Требования UI Storybook application
+# Требования `@ui/storybook`
 
-> **[Built for MetaFor](https://github.com/zavx0z/metafor)** as a reusable static WebGPU workbench.
+`@ui/storybook` — private catalog application для одного semantic
+`@zavx0z/dom` Document, одного canvas и одного DOM→CPU renderer→WebGPU
+presentation pipeline. Package не является production dependency UI и не
+публикует exports.
 
-Private `@ui/storybook` владеет единым dev-каталогом семейства UI,
-одним Workbench, preview state, lifecycle, `/ui/` static output и acceptance.
-Переиспользуемые route, Workbench, server и build contracts принадлежат
-`@zavx0z/storybook`. Ни один из них не владеет production semantics UI
-Components либо consumer.
+## `UI-STORYBOOK-DOM-001` — one document pipeline
 
-## Законы
+1. `app/bootstrap.ts` загружает только `app/dom-entry.ts`. Retained fallback,
+   `UiRuntime`, `UiSurface`, `@layout/core` и `@ui/elements` отсутствуют в
+   runtime source, build provenance, manifest и browser output. Navigation
+   metadata использует только `@zavx0z/storybook/workbench`; desktop-only
+   test policy является package-local structural data без legacy import.
+2. `createDocumentCanvasRuntime()` является единственным browser host. Один
+   `Document`, Workbench root, CPU renderer, retained WebGPU backend и Engine
+   overlay живут до `pagehide`; cleanup идемпотентен.
+3. DOM listeners являются единственным author-facing event API. Stories не
+   регистрируют callbacks на boxes, surfaces или Engine objects.
+4. Story factories являются repository-private modules и импортируются
+   `app/dom-entry.ts` по relative paths. `@ui/components` публикует только
+   natural production subpaths; `@ui/components/dom/*` и story exports
+   запрещены.
 
-1. Pathname является иерархией каталогов. Owner prefix открывается как
-   `/package/`, каждый непустой префикс story route является самостоятельным
-   overview (`/package/component/`, затем `/package/component/section/`), а
-   только полный путь фиксирует exact detail story в pathname. Overview показывает всех
-   непосредственных детей текущего уровня в существующих catalog/sections/dock
-   regions; выбор ребёнка углубляет тот же pathname на один уровень. Overview
-   не заменяет historical five-panel Workbench отдельной пустой страницей:
-   preview, три source editors, controls и events остаются на месте. Overview рендерит
-   собственный aggregate owner module со всеми непосредственными детьми;
-   первый detail descendant может быть только navigation representative и не
-   подменяет overview content. Общая typed
-   declaration строит root, все префиксы и leaves из одних package-owned
-   descriptors; consumer не выбирает hash/path mode или параллельную схему
-   адресов.
-   Aggregate primary и secondary overview рендерит реальные lazy
-   `StorybookStoryModule` непосредственных детей в отдельных
-   `UiSurface` instances одного `UiRuntime`; retained parent не является
-   изоляцией surface-global input и keyed state. Каждый detail route получает
-   одну bounded cached Surface, которая не переиспользуется для другого
-   module. Labels-only route cards не заменяют production UI в
-   preview; package namespace overview может оставаться информационным,
-   поскольку он не является semantic primary row.
-2. Общий shell состоит из catalog, sections, preview, dock, info и нижней
-   retained StatusBar. Пять рабочих панелей сохраняют historical five-panel
-   geometry над шестой semantic region; StatusBar занимает отдельную
-   full-width строку и не перекрывает siblings. Shell занимает весь доступный
-   canvas с небольшим внешним отступом рабочих панелей; искусственный
-   `maxWidth`/`maxHeight` не оставляет вокруг них пустую рамку.
-3. Shell layout исполняет
-   [`UI-COMPOSITION-001..004`](../../ARCHITECTURE.md#ui-composition-law) и
-   вычисляется прямым `@layout/core/flex-css` по `LAYOUT-SLOT-001` и
-   `LAYOUT-FLEX-001`. CSS-style `%`/`fr`/`grow` является способом описания той
-   же системы, а не отдельным layout.
-4. Generic surfaces получают readonly descriptors и callbacks. Они не содержат
-   Node/Field/Socket либо product switch.
-5. Consumer preview является отдельной Surface; package не копирует и не
-   адаптирует её renderer.
-6. Shared server helper отключает HMR, собирает browser entry по запросу и не
-   владеет persistent runtime process. UI app передаёт exact page title,
-   capability, readiness и structured Russian shell strings одним typed app
-   manifest.
-7. Storybook package не входит production bundle consumer без его прямого
-   import.
-8. Navigation, dock и info используют один retained root `@layout/core/surface`
-   и устойчивые exact engine parents, keyed generic descriptor-ами. Изменение размера либо списка
-   повторяет локальный FlexBox plan и reconciliate-ит parents; active, disabled,
-   title, line и status state материализуют только изменённый owner. Transform
-   выше чистого retained root сохраняет plan/materialization counters, child и
-   geometry identity.
-9. Retained materialization одного storybook owner атомарна, а remove и
-   dispose рекурсивно очищают его subtree. Диагностика dev-пакета хранит только
-   текущие bounded owner keys и накопительные counters, не создаёт второй graph
-   и не становится production dependency.
-10. Статический backdrop остаётся осознанно flat: у него нет изменяемого
-    descriptor state, независимого transform либо пользы от partial
-    materialization. Нижняя `StorybookStatusBarSurface` получает immutable
-    package attribution из typed app manifest и вызывает production
-    `@ui/elements/status-bar` без локальной копии primitive или hit state.
-    Consumer preview остаётся отдельной consumer-owned Surface и может иметь
-    один retained parent без переноса consumer vocabulary в shell.
-11. Navigation и dock хранят один детерминированный focus среди enabled item:
-    pointer, Arrow Up/Down/Left/Right и Home/End меняют одно keyed состояние,
-    Enter/Space вызывают текущий route callback. Видимое перемещение focus
-    материализует только прежний и новый item owner; disabled item пропускается.
-12. Масштабируемый catalog строится из package-owned typed story descriptors.
-    Один descriptor связывает component identity, section, variant, internal
-    args, production render, raw HTML, raw CSS, exact TypeScript, controls и events;
-    route, поиск, preview, dock, копируемый код и render test не получают
-    отдельных расходящихся описаний.
-13. Catalog и sections поддерживают большой индекс через поиск, сворачиваемые
-    группы и виртуализированное отображение. Initial bundle содержит metadata
-    index; story implementation загружается lazy factory только после выбора.
-    Точный production import contract принадлежит package owner, а не
-    storybook.
-14. Preview всегда использует production UI на текущем Engine/UiRuntime. Dock
-    показывает variants выбранной story. Правая панель одновременно показывает
-    три independent production `CodeEditor`: raw HTML, raw CSS и exact
-    TypeScript. У каждого свой title, language, scroll, selection и Copy action;
-    все три соответствуют одному preview и одним args. Ниже сохраняются controls
-    для быстрого изменения тех же args и Events как наблюдаемый output; будущая
-    editable версия редакторов становится дополнительным authoring path, а не
-    основанием удалить controls. Каждый редактор работает в `readOnly: true` с
-    фиксированным line-number gutter, обеими осями scroll и single selection с
-    `Cmd/Ctrl+C`; Copy копирует полный exact документ независимо от selection.
-15. Все обращённые к человеку строки Workbench пишутся по-русски: навигация и
-    поиск, описания preview, демонстрационные подписи, editor titles, controls, events,
-    состояния и статусы. Public API identifiers, import specifiers, route IDs и
-    TypeScript-код сохраняют точное исходное написание; имена Blender и API
-    остаются точными только там, где являются именем reference либо
-    контракта, а не обычной подписью. Внешний Blender catalog используется
-    только как reference при выборе собственных Elements, Components и Node UI;
-    его ноды, assets и примеры не импортируются в storybook.
-16. Workbench сам следует глобальной Blender composition/form law: компактные
-    editor headers, row navigation, thin separators и low-radius panels вместо
-    oversized pill stacks и больших rounded islands. Пять исторических panel
-    regions и шестая нижняя StatusBar сохраняются как один Workbench; панели
-    соответствуют Blender `ScrArea`, а exact Workbench owner
-    задаёт `borderRadius: 6` непосредственно в CSS-like style editor-region, а
-    nested accordion/panel/box owner задаёт `borderRadius: 4`. Общий radius
-    token/config отсутствует; caller `style` может явно переопределить owner
-    default.
-    Palette/material states следуют adopted 5.2 mapping. HTML shell один раз
-    объявляет Engine-owned default font URL; package pages и stories не передают
-    его в `UiRuntime`, а custom runtime font полностью обходит default request.
-17. Preview выбирает available size, позволяющий equal-scale сравнение control с
-    local Blender reference. Он не растягивает input на большую часть desktop
-    только ради заполнения центральной панели; свободное место остаётся рабочей
-    областью editor, а не причиной менять форму control.
-18. Workbench различает outer editor region border и focus outline, а panel
-    header/body получают отдельные raw ThemeSpace roles даже при совпадающих
-    default bytes. Keyboard focus не заменяет route selection или disclosure;
-    accordion header/body не схлопываются в один локальный fill alias.
-19. Каждый из трёх source editors использует общий scrollable `Pane`, а не
-    обрезает массив строк. При переполнении по соответствующей оси появляются
-    независимые vertical и horizontal scrollbar; wheel axis-lock, track click и
-    thumb drag принадлежат общему `div` scroll primitive. Update одного
-    документа сохраняет допустимую позицию и клампит её к новым bounds, а два
-    других editors, titles, copy и detail owners не материализуются из-за его
-    прокрутки.
-20. Канонический адрес package overview и любого prefix overview оканчивается
-    `/`, а exact detail leaf — нет. Входной адрес в противоположной форме может
-    быть только совместимым redirect на канонический адрес. Неизвестный suffix
-    не выбирает случайный fallback story: server и browser tooling отклоняют
-    его fail-closed.
-21. Семейство UI запускается одним package-named Bun process на одном
-    automatic origin и имеет ровно один HTML document, canvas, `UiRuntime`, Router
-    и Workbench. `/` сразу открывает Workbench; landing page, package cards,
-    кнопки `Открыть страницу пакета` и package-specific shell отсутствуют.
-    `@ui/elements`, `@ui/components` и `@ui/hud` являются route owners одного
-    tree под `/elements/**`, `/components/**` и `/hud/**`, а не строками
-    первого уровня навигации.
-22. Один browser target этого origin переходит между всеми owner-разделами
-    одним `router.go()` без reload, `location.assign`, нового canvas, runtime,
-    process или target. Root entry eager-загружает только Workbench и metadata;
-    production story implementations остаются exact lazy chunks владельцев.
-23. Главная панель имеет disclosure groups `Элементы`,
-    `Компоненты` и `HUD`. Внутри них находятся открываемые
-    category rows из package descriptors: `Примитивы / Стили / События`,
-    `Основные / Ввод / Данные` и `Основные` HUD. Package group header
-    сам не является route item. Вторая панель показывает semantic
-    components выбранной category; dock показывает exact scenarios
-    выбранного component и при необходимости включает section label.
-    External detail route хранит всю иерархию
-    `/package/category/component/section/variant`. Root `/` показывает
-    aggregate overview первой category; category и component overview показывают
-    всех непосредственных детей до выбора exact scenario.
-    `Button` — явное исключение: `Кнопка` поднята в главную
-    панель внутри group `Компоненты` и удалена из adjacent-списка
-    category `Основные`. Для неё вторая панель показывает Button
-    sections, а dock — variants выбранного section; дубль `Кнопка` в
-    `Основные` отсутствует.
-24. Static build материализует один page shell под public base `/ui/`,
-    сохраняет owner/story lazy chunks, публикует `.nojekyll`,
-    schema-version-1 manifest и fail-closed deep-link recovery. Manifest
-    фиксирует source/dependency revisions и dirty state, page routes,
-    capabilities/readiness, entry/chunks и SHA-256 emitted assets без local
-    realpaths. Восстановление прямого detail URL
-    происходит до чтения route package entry. Build копирует один точный Engine
-    font asset в общий `/ui/fonts/`, а каждый shell только объявляет этот URL
-    через inert meta без preload.
-    Cold Pages workflow получает shared `@zavx0z/storybook` из точной immutable
-    revision, проверяет его frozen install и регистрирует через `bun link` до
-    frozen Layout/UI install/check, сохраняя отдельные exact pins Engine, Layout
-    и Highlighter.
-25. UI-owned reference catalog загружается отдельным lazy chunk. Shared V1
-    предоставляет только immutable schema, validation и comparison planner; он
-    не объявляет неисполняемый story-reference lifecycle. Descriptor хранит provenance,
-    SHA-256, viewport/DPR, `compatible | changed | unverified` и
-    `candidate | accepted | superseded`. Capture не становится accepted без
-    решения владельца.
-26. Comparison layout выбирает side-by-side либо top-to-bottom по максимальному
-    общему scale subject/reference. Оба кадра используют один scale; wide и tall
-    controls не получают один навязанный split.
-27. Каждая public Storybook page показывает ненавязчивую attribution
-    `Создано для MetaFor · переиспользуемая WebGPU-инфраструктура UI`, не
-    превращая MetaFor в runtime dependency reusable UI packages. На canvas page
-    shared server передаёт три manifest-owned text value через inert meta, а
-    no-argument `StorybookStatusBarSurface` показывает их внутри зарезервированной
-    нижней строки production `@ui/elements/status-bar`; fixed DOM footer поверх
-    WebGPU Workbench отсутствует. На DOM page structured footer остаётся после
-    content и не перекрывает его. HTML string replacement, дублирующий brand
-    header и badge поверх рабочей области отсутствуют.
-28. Canvas page ставит общий ready marker только после того, как её owner
-    запланировал первый render и дождался общей frame boundary из
-    `@zavx0z/storybook/environment`. Эта browser boundary не заменяет отдельную
-    non-black GPU evidence. UI browser evidence читает сохранённый последний
-    кадр через public Engine renderer capture, а не полагается на непостоянный
-    WebGPU canvas backing buffer. Evidence сохраняет источник capture; если
-    owner bridge существует, но кадр недоступен, проверка завершается ошибкой и
-    не переходит на backing buffer молча. Background browser tooling включает
-    focus emulation до navigation/readiness и обязательно снимает её после
-    evidence, не меняя OS focus.
+## `UI-STORYBOOK-ROUTES-001` — complete exact route tree
 
-## Граница private application
+1. `dom-story-details.json` содержит 176 detail descriptors без loader
+   functions. `dom-story-navigation.ts` выводит из них все owner/category/
+   component/section overviews и exact shared route tree.
+2. `dom-routes.ts` регистрирует все 391 допустимых overview/detail paths.
+   Неизвестный path fail-closed на server/router boundary.
+3. Каждый overview является собственной semantic `section/h2/p/ul/li`
+   presentation. Он не загружает первый detail descendant как скрытый fallback.
+4. Detail routes создают standard Node/Element/HTMLElement/HTML*Element trees.
+   Product-specific compound stories также состоят только из одного DOM realm
+   и flat executable CSS.
 
-Private `@ui/storybook` содержит только принадлежащие UI catalog, mounts,
-preview state, reference catalog, lifecycle и static build.
-У package нет public exports: переиспользуемые контракты импортируются напрямую
-из точных subpaths `@zavx0z/storybook/*`, а production packages их не импортируют.
+## `UI-STORYBOOK-WORKBENCH-001` — six addressed regions
+
+Shared `@zavx0z/storybook/workbench` владеет одним stable semantic tree с
+catalog, secondary navigation, preview, scenarios, source inspector и status.
+Каждый region меняется через addressed `update(address, value)` и сохраняет
+неизменённые Node/Text identities. Active navigation может быть `null` на
+настоящем overview; неизвестный non-null id запрещён.
+
+Source inspector показывает три live documents:
+
+- HTML сериализуется из фактического semantic tree;
+- CSS является exact stylesheet, переданным renderer;
+- TypeScript использует direct `createDocument`/`createElement`, properties и
+  standard listeners без старых surface factories.
+
+## `UI-STORYBOOK-PLATFORM-001` — supported HTML/CSS surface
+
+Catalog документирует exact prototype hierarchy
+`EventTarget → Node → Element → HTMLElement → HTML*Element`. `title` находится
+на `HTMLElement` и advisory tooltip рисуется renderer-owned UA fragments.
+
+Interface catalog содержит ровно 43 runtime interfaces, перечисленные как
+implemented в canonical `@zavx0z/dom` `SUPPORT.md`: tree/data/collections,
+Element/HTMLElement, все текущие exact HTML prototypes и Event families.
+Каждый detail имеет отдельный `dom/interfaces/...` descriptor/route, exact
+hierarchy и sample только на реализованных members. `Not implemented yet`
+members не появляются как stubs, controls или обещания поддержки.
+
+Поддержанные stories используют block/inline/Flex, box model, overflow/scroll,
+scrollbar-width, text-align, flex-item z-index, standard form controls,
+Popover top layer, gauges и `HTMLImageElement` с bounded cover/contain image
+projection. Неподдержанная browser platform возможность не заменяется fake
+callback или параллельным UI element contract.
+
+## `UI-STORYBOOK-ACCEPTANCE-001` — package and browser evidence
+
+После stable source checkpoint выполняются exact package `typecheck`, tests и
+static build через `$storybook check @ui/storybook`. Route acceptance требует:
+
+- readiness `uiStorybook=ready` и exact `uiStorybookRoute`;
+- `uiStorybookPipeline=dom-webgpu`;
+- console error count `0`;
+- exact canvas PNG с non-black evidence;
+- визуальное соответствие ожидаемому route state.
+
+Server использует automatic port protocol shared Storybook. Build/lifecycle не
+разрешают commit, push, Pages deploy или workflow dispatch.

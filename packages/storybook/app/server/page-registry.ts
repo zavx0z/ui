@@ -1,6 +1,6 @@
 import {join} from "node:path"
 import {defineStorybookApp, type StorybookAppManifest} from "@zavx0z/storybook/app"
-import {UI_STORY_ROUTE_TREE} from "../stories.ts"
+import {UI_STORY_ROUTE_TREE} from "../dom-story-navigation.ts"
 
 export type UiStorybookAppOptions = Readonly<{
   publicBasePath?: string
@@ -27,7 +27,7 @@ export function createUiStorybookApp(options: UiStorybookAppOptions = {}): Story
       id: "workbench",
       title: "UI storybook",
       mountPath: "/",
-      entrypoint: join(import.meta.dir, "../entry.ts"),
+      entrypoint: join(import.meta.dir, "../bootstrap.ts"),
       stylePath: join(import.meta.dir, "../style.css"),
       body: {kind: "canvas", canvasId: "ui-storybook-canvas"},
       capability: "webgpu",

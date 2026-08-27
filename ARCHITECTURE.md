@@ -1,129 +1,161 @@
 # Architecture
 
-> **[Built for MetaFor](https://github.com/zavx0z/metafor)**, with package contracts that remain reusable outside the product.
+> **[Built for MetaFor](https://github.com/zavx0z/metafor)**, with reusable
+> document UI contracts.
 
-Visual UI is a retained WebGPU interface stack. It does not translate components into DOM nodes: one application-owned Layout runtime attaches surfaces to its Engine Space, and those surfaces materialize stable engine objects only when layout or visual state changes.
+UI authoring is standard HTML, CSS and DOM event code. The semantic tree is
+rendered by the document engine; a component never receives a Surface, Engine
+object, manual rectangle or WebGPU resource.
 
-[Project overview](README.md) · [Contribution guide](CONTRIBUTING.md) · [Static Storybook](https://zavx0z.github.io/ui/)
-
-## Dependency direction
+## Final dependency direction
 
 ```text
-@engine/core
-    ↓
-@layout/core
-    ↓
-@ui/elements
-    ↓
-@ui/components
-    ↓
-@ui/hud
+@zavx0z/template ───────┐
+                       ↓
+@ui/components ──→ @zavx0z/dom
+                       ↓
+                 @zavx0z/renderer
+                       ↓
+            @zavx0z/renderer-webgpu
+                       ↓
+                  @engine/core
 
-@zavx0z/highlighter ─────────────> @ui/elements / @ui/components
+@zavx0z/highlighter ──→ @ui/components/code-editor
 
-@zavx0z/storybook ── shared dev-only infrastructure
-          ↓
-@ui/storybook ────── private UI application and catalog owner
+@zavx0z/storybook/* ─────┐
+private UI story modules ┼─→ @ui/storybook (development only)
+document pipeline ───────┘
 ```
 
-Lower layers never import higher layers. Exact lowercase package subpaths point directly to their source owner; aliases, compatibility barrels, and generated copies are not part of the contract.
+The DOM is the only public UI tree. Computed style, layout boxes, display
+items, hit records and Engine resources are derived projections with separate
+compact identities.
 
-## Package ownership
+## Final package ownership
 
-### Layout boundary
+### `@ui/components`
 
-The sibling [`@layout/core`](https://github.com/zavx0z/layout) package owns `UiRuntime`, `UiSurface`, spatial targets, FlexBox, popover chains, text-input dispatch, virtual input, and polyline geometry. UI consumers import those exact subpaths directly. `@ui/elements` does not re-export them or retain compatibility copies.
+Components owns only semantic compositions, controlled widget state, theme
+CSS, icons/assets and component-specific controllers. A primitive button,
+input, span or container is the corresponding standard HTML element rather
+than an `@ui/elements` wrapper.
 
-### Elements
+Complex widgets may remain functions because a function is an authoring
+factory, not a runtime type hierarchy. For example,
+`createInspector(document, props)` creates one stable standard DOM subtree and
+subsequent updates mutate addressed attributes, Text and children. The DOM
+prototype chain itself remains class-based and standard-named.
 
-`@ui/elements` owns HTML-like visual primitives, widget appearance, theme material states, icons, and controlled edit behavior. Its input implementation registers one controller with `@layout/core/text-input`; the Layout runtime remains the sole keyboard, composition, blur, and native-input dispatcher.
+Components does not import Engine, renderer, WebGPU, Layout or Elements.
 
-### Components
+### `@ui/storybook`
 
-`@ui/components` owns reusable controlled controls and fields. Components receive an attached `UiSurface` directly from `@layout/core/surface` and never create a renderer, scene, or runtime. The same control can be used standalone, in HUD, or by the Nodes repository without acquiring node-specific semantics.
+The private Storybook application owns UI routes, examples, controls and
+acceptance. Natural shared `@zavx0z/storybook/{stories,catalog,workbench}`
+subpaths own the semantic Workbench and story controller. The exact story
+preview, Workbench and source panels belong
+to the same `@zavx0z/dom` realm and render through the same CPU/WebGPU pipeline.
 
-The exact `@ui/components/code-editor` leaf composes Elements-owned token runs,
-selection and scroll with theme-neutral tokens from `@zavx0z/highlighter`.
-Interpreter file/debugger state and Storybook chrome remain consumer-owned.
+Source documents are derived from executable DOM/CSS/TypeScript rather than a
+parallel illustrative string. Production packages never import Storybook.
 
-### HUD
+### Retired boundaries
 
-`@ui/hud` owns heads-up presentation only. Product commands and domain state stay with the integrating application.
+- `@ui/elements` has no final owner role. Standard elements and DOM state move
+  to `@zavx0z/dom`; visual rules and assets remain in UI; paint realization
+  belongs to the renderer backend.
+- `@layout/core` has no final UI runtime role. Cascade, layout, scrolling,
+  clipping and hit projection are internal stages of `@zavx0z/renderer`.
+- `@ui/hud` is not a separate layer. Reusable Window/Timeline compositions
+  belong to Components; product reticles and commands belong to consumers;
+  camera/world presentation belongs to the WebGPU/Engine adapter.
 
-### Storybook
+These packages remain in the checkout only while legacy consumers still
+import them. They receive no compatibility aliases in the new graph.
 
-`@zavx0z/storybook` owns typed route trees, lazy story contracts, comparison planning, the retained five-region Workbench and generic package-name lifecycle/browser/static delivery. The private `@ui/storybook` application owns one UI catalog, one canvas/Router/Runtime, category/component/scenario navigation, preview state, `/ui/` Pages output and acceptance; its local port is allocated by the operating system and is not a contract. The shared package documents itself in its own repository instead of appearing as a fake UI package. Elements, Components and HUD retain package-owned route namespaces, groups, metadata and lazy implementations: package names are disclosure headers, package categories are primary rows, semantic components occupy the adjacent panel, and exact scenarios occupy the dock.
+## Authoring laws
 
-Reference metadata records provenance, viewport, revision, compatibility, and acceptance. Large image assets are loaded only after the selected story requests comparison. The comparison planner chooses side-by-side or top-to-bottom placement by whichever produces the larger common scale, preserving meaningful pixel inspection for both wide and tall controls.
+### One standard tree
 
-## Runtime invariants
+Every imperative API, Template binding and optional framework renderer mutates
+the same DOM. No component or template creates a parallel resolved tree.
 
-- A product creates one `@layout/core/runtime` `UiRuntime` for a canvas and scene.
-- The HTML composition root declares one Engine-owned default font URL. Runtime
-  creation fetches it lazily only without an explicit `font` or `fontUrl`;
-  Elements, Components, HUD, and story modules never own that route.
-- Surfaces are attached by the runtime owner and are disposed recursively.
-- Layout uses parent-owned slots; children draw only inside the rectangle they receive.
-- Controlled values come from the consumer. Local editing buffers are temporary interaction state, not a second source of truth.
-- Story metadata may be eager, but production implementations and reference images remain lazy.
-- Production exports do not import `@ui/storybook` or `@zavx0z/storybook`;
-  package-owned `storybook/**` sources use the shared package only in the
-  repository development application.
+```ts
+const button = document.createElement("button")
+button.title = "Output"
+button.addEventListener("click", showOutput)
+toolbar.appendChild(button)
+```
 
-## UI composition law
+### CSS owns geometry
 
-The mechanical owner is the
-[`@layout/core` composition contract](https://github.com/zavx0z/layout/blob/main/packages/core/requirements.md).
-UI packages add semantic consumer policy without copying Layout runtime,
-retained ownership, clipping, or Flex implementations.
+Parents define semantic structure and CSS. Components do not calculate sibling
+coordinates. Flex, block/inline flow, intrinsic size, scrolling and clipping
+are renderer mechanics derived from computed style.
 
-### `UI-COMPOSITION-001` — parent-owned semantic slots
+### Controlled state uses DOM state
 
-The immediate parent is the sole owner of every semantic child slot. When a
-parent has two or more sibling UI slots, it obtains all their rectangles from
-one `flexRow`, `flexColumn`, `flexRowCss`, or `flexColumnCss` plan under
-`LAYOUT-SLOT-001` and `LAYOUT-FLEX-001`. A child draws and registers input only
-inside the rectangle it receives; it never reconstructs a sibling offset.
+Attributes and live control properties are the observable state boundary:
+`aria-pressed`, `aria-expanded`, `disabled`, `hidden`, `HTMLInputElement.value`
+and ordinary bubbling events. A controller may hold temporary interaction
+state but may not create another semantic owner tree.
 
-### `UI-COMPOSITION-002` — consumer-owned retained subtree
+### `title` is generic user-agent behavior
 
-An independently dirty composite subtree is materialized under one stable
-consumer-owned retained parent according to `LAYOUT-RETAINED-001`. Function-
-based Elements and Components do not create component classes, parallel scene
-graphs, or their own retained parents. Their visual children, hit, wheel, and
-clip records are staged under the exact parent of the current transaction.
+Advisory text is `HTMLElement.title`, including nearest-ancestor inheritance
+and the explicit empty-string override. Hit testing and delayed viewport-bound
+tooltip presentation belong to the renderer. Components and the WebGPU backend
+contain no tooltip-specific API.
 
-### `UI-COMPOSITION-003` — primitive geometry exception
+## Retained and performance laws
 
-Local coordinate arithmetic is allowed inside one assigned slot for primitive
-text, icons, borders, radii, caret, selection, mesh vertices, positioned scene
-objects, exact Socket centres, and Link routes. It must not be used to place
-semantic sibling UI slots or duplicate their parent transform.
+- DOM nodes keep identity across updates.
+- A visual fragment is retained by `(semantic node, fragment key)`; array
+  position is never identity.
+- Rare attributes, listeners and control state allocate lazily.
+- A clean render returns the exact previous immutable frame.
+- GPU objects, geometry and materials remain stable when their resolved visual
+  fragment is unchanged.
+- Removal detaches listeners and invalidates renderer-owned GPU resources.
+- One application must resolve exactly one DOM realm and one Engine identity.
 
-### `UI-COMPOSITION-004` — structural proof
+## Current migration checkpoint
 
-Every new composite UI system has a focused structural test proving the exact
-Flex planner at page/region, component, and nested-control boundaries. Rounded
-parent clipping adopts `LAYOUT-CLIP-001`: descendant pixels, hit, wheel, and
-scrollbars must share the same shaped clip. A consumer workaround that redraws
-parent corners is not conformance.
+The final public `@ui/components` surface contains only the natural exact
+subpaths `field`, `inspector`, `code-editor`, `hud`, `icons` and
+`syntax-theme`. They point directly to DOM/CSS implementations and publish no
+`dom/*`, Storybook or compatibility exports. UI Storybook is entirely on the
+document pipeline; its story factories are repository-private modules.
 
-## Static delivery
+The separate retained `@ui/hud` and `@ui/elements` packages are removed.
+The former staged legacy Component snapshot remains recoverable only in the Git
+index; the working tree and every buildable package contain the final DOM
+owners exclusively. Generic Layout has no UI production consumer.
 
-The shared static builder emits one UI-owned shell, independently split owner/story chunks, reference metadata, known-route-only deep-link recovery, and a revisioned manifest below `/ui/`. UI provides exact Engine font and reference assets; shared infrastructure owns neither.
+## Removal gates
 
-GitHub Pages uses the checked workflow artifact as its publishing source, but
-the workflow runs only through an explicit owner dispatch. A green build or a
-push to `main` does not deploy by itself.
+Old Layout, Elements, HUD and Renderer experiment code can be removed only
+after all of these are true:
+
+1. shipping source has zero imports of `UiSurface`, `@layout/core`,
+   `@ui/elements` and the old renderer API;
+2. Components and HUD replacements author only DOM/CSS;
+3. Storybook exact routes run through DOM → CPU renderer → WebGPU and pass
+   route readiness, console and non-black canvas checks;
+4. semantic, event, layout, visual, resource cleanup, bundle identity and
+   performance gates pass;
+5. Node, MetaFor, Interpreter, demo and shared Storybook consumers have moved;
+6. no dirty linked checkout is described as accepted integration.
 
 ## Cross-repository map
 
-| Repository | Contract |
-| --- | --- |
-| [`engine`](https://github.com/zavx0z/engine) | WebGPU object model and renderer exposed as `@engine/core`. |
-| [`layout`](https://github.com/zavx0z/layout) | Retained runtime, surfaces, targets, layout, and generic interaction plumbing exposed as `@layout/core`. |
-| [`ui`](https://github.com/zavx0z/ui) | Universal visual primitives, components, HUD, Storybook, and UI evidence. |
-| [`node`](https://github.com/zavx0z/node) | Graph model, editor commands, layout, and node-specific composition. |
-| [`metafor`](https://github.com/zavx0z/metafor) | Product integration, exact revisions, lifecycle, and release ownership. |
-
-This direction lets each library evolve independently without hiding the product it serves: **[Built for MetaFor](https://github.com/zavx0z/metafor)**.
+| Repository | Final contract |
+|---|---|
+| `renderer` | `@zavx0z/dom`, CPU document renderer and Engine/WebGPU backend |
+| `engine` | WebGPU device, scene/object model, materials and GPU resources |
+| `template` | Addressed compilation into the shared DOM |
+| `ui` | DOM/CSS components, assets and private visual catalog |
+| `storybook` | Shared DOM Workbench, routes, lifecycle and delivery |
+| `layout` | Historical runtime removed after zero-import cutover |
+| `node` | Graph/editor semantics composed from UI DOM components |
+| `metafor` | Product integration, lifecycle and release ownership |

@@ -4,8 +4,6 @@ import {join, resolve} from "node:path"
 const repositoryRoot = resolve(import.meta.dir, "../..")
 const visibleOwnerRoots = [
   "packages/storybook/app",
-  "packages/components/storybook",
-  "packages/elements/storybook",
 ] as const
 
 const forbiddenVisiblePhrases = [
@@ -46,9 +44,9 @@ const forbiddenVisiblePhrases = [
 ] as const
 
 const requiredLocalizedPhrases = [
-  "общая информация до выбора точного сценария",
-  "Визуальная витрина ещё не принята",
-  'label: "Сценарий"',
+  "Семантических DOM-разделов",
+  "Исходный код",
+  "Сценарии",
 ] as const
 
 describe("Workbench visible localization", () => {

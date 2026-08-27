@@ -1,7 +1,7 @@
 {
   "name": "@ui/workspace",
   "version": "0.1.0",
-  "description": "Visual UI primitives, components, HUD surfaces, and a static WebGPU Storybook. Built for MetaFor and reusable in immersive interfaces.",
+  "description": "DOM and CSS components with a private WebGPU Storybook. Built for MetaFor and reusable in immersive interfaces.",
   "type": "module",
   "private": true,
   "packageManager": "bun@1.4.0",
@@ -30,12 +30,7 @@
     "metafor"
   ],
   "dependencies": {
-    "@engine/core": "link:@engine/core",
-    "@layout/core": "link:@layout/core",
-    "@zavx0z/highlighter": "link:@zavx0z/highlighter",
-    "@ui/components": "workspace:*",
-    "@ui/elements": "workspace:*",
-    "@ui/hud": "workspace:*"
+    "@ui/components": "workspace:*"
   },
   "devDependencies": {
     "@types/bun": "^1.4.0",

@@ -5,12 +5,7 @@
     "": {
       "name": "@ui/workspace",
       "dependencies": {
-        "@engine/core": "link:@engine/core",
-        "@layout/core": "link:@layout/core",
         "@ui/components": "workspace:*",
-        "@ui/elements": "workspace:*",
-        "@ui/hud": "workspace:*",
-        "@zavx0z/highlighter": "link:@zavx0z/highlighter",
       },
       "devDependencies": {
         "@types/bun": "^1.4.0",
@@ -25,29 +20,8 @@
       "name": "@ui/components",
       "version": "0.0.1",
       "dependencies": {
-        "@engine/core": "link:@engine/core",
-        "@layout/core": "link:@layout/core",
-        "@ui/elements": "workspace:*",
+        "@zavx0z/dom": "link:@zavx0z/dom",
         "@zavx0z/highlighter": "link:@zavx0z/highlighter",
-      },
-    },
-    "packages/elements": {
-      "name": "@ui/elements",
-      "version": "0.0.1",
-      "dependencies": {
-        "@engine/core": "link:@engine/core",
-        "@layout/core": "link:@layout/core",
-        "@zavx0z/highlighter": "link:@zavx0z/highlighter",
-      },
-    },
-    "packages/hud": {
-      "name": "@ui/hud",
-      "version": "0.0.1",
-      "dependencies": {
-        "@engine/core": "link:@engine/core",
-        "@layout/core": "link:@layout/core",
-        "@ui/components": "workspace:*",
-        "@ui/elements": "workspace:*",
       },
     },
     "packages/storybook": {
@@ -55,17 +29,17 @@
       "version": "0.0.1",
       "dependencies": {
         "@engine/core": "link:@engine/core",
-        "@layout/core": "link:@layout/core",
         "@ui/components": "workspace:*",
-        "@ui/elements": "workspace:*",
+        "@zavx0z/dom": "link:@zavx0z/dom",
+        "@zavx0z/renderer": "link:@zavx0z/renderer",
+        "@zavx0z/renderer-browser": "link:@zavx0z/renderer-browser",
+        "@zavx0z/renderer-webgpu": "link:@zavx0z/renderer-webgpu",
         "@zavx0z/storybook": "link:@zavx0z/storybook",
       },
     },
   },
   "packages": {
     "@engine/core": ["@engine/core@link:@engine/core", {}],
-
-    "@layout/core": ["@layout/core@link:@layout/core", {}],
 
     "@types/bun": ["@types/bun@1.4.0", "", { "dependencies": { "bun-types": "1.4.0" } }, "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ=="],
 
@@ -113,17 +87,21 @@
 
     "@ui/components": ["@ui/components@workspace:packages/components"],
 
-    "@ui/elements": ["@ui/elements@workspace:packages/elements"],
-
-    "@ui/hud": ["@ui/hud@workspace:packages/hud"],
-
     "@ui/storybook": ["@ui/storybook@workspace:packages/storybook"],
 
     "@webgpu/types": ["@webgpu/types@0.1.72", "", {}, "sha512-0cF7RFM2edNoiIS1ODJp0/Gzv4/xSXhwoR0YCza+OWpJWtn4wmo9DvK91aLlH9+uUnwIriP7ZiC3WitmyhuzBw=="],
 
+    "@zavx0z/dom": ["@zavx0z/dom@link:@zavx0z/dom", {}],
+
     "@zavx0z/highlighter": ["@zavx0z/highlighter@link:@zavx0z/highlighter", {}],
 
-    "@zavx0z/storybook": ["@zavx0z/storybook@link:@zavx0z/storybook", {}],
+    "@zavx0z/renderer": ["@zavx0z/renderer@link:@zavx0z/renderer", {}],
+
+    "@zavx0z/renderer-browser": ["@zavx0z/renderer-browser@link:@zavx0z/renderer-browser", {}],
+
+    "@zavx0z/renderer-webgpu": ["@zavx0z/renderer-webgpu@link:@zavx0z/renderer-webgpu", {}],
+
+    "@zavx0z/storybook": ["@zavx0z/storybook@link:@zavx0z/storybook", { "bin": { "storybook": "./scripts/storybook.ts", "create-storybook": "./scripts/create-storybook.ts" } }],
 
     "bun-types": ["bun-types@1.4.0", "", { "dependencies": { "@types/node": "*" } }, "sha512-iIKw23BspnQQYd3prITOBxeUsxBHnwzX6YJfGMuNOZzeNcMmVqzIIVGRm1l69ogaPQmb4wB6BN8mA5bE9YuC5Q=="],
 
