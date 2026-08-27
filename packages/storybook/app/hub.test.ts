@@ -84,6 +84,11 @@ describe("one-root UI Storybook", () => {
   test("registers exactly one canvas page and one runtime contract", () => {
     const app = createUiStorybookApp()
     expect(app.pages).toHaveLength(1)
+    expect(app.footer).toEqual({
+      lead: "Создано для",
+      owner: {label: "MetaFor", href: "https://github.com/zavx0z/metafor"},
+      detail: "переиспользуемая WebGPU-инфраструктура UI",
+    })
     expect(app.pages[0]).toMatchObject({
       id: "workbench",
       mountPath: "/",
@@ -92,6 +97,14 @@ describe("one-root UI Storybook", () => {
       canvas: {id: "ui-storybook-canvas", evidence: "non-black"},
     })
     expect(app.pages[0]?.routeTree.leaves).toHaveLength(133)
+  })
+
+  test("wires the sixth retained Workbench region through the shared StatusBar", async () => {
+    const entry = await Bun.file(`${hubRoot}/entry.ts`).text()
+    expect(entry).toContain("StorybookStatusBarSurface")
+    expect(entry).toContain("const statusBar = new StorybookStatusBarSurface()")
+    expect(entry).toContain("runtime.addSurface(statusBar, ({w, h}) => frames(w, h).status)")
+    expect(entry).toContain("storyPanel, statusBar, ...activeAggregateTiles()")
   })
 
   test("serves every category through the same no-HMR Workbench page", async () => {
@@ -125,6 +138,10 @@ describe("one-root UI Storybook", () => {
         expect(html, route).toContain("<title>UI storybook</title>")
         expect(html, route).toContain('<canvas id="ui-storybook-canvas"></canvas>')
         expect(html, route).toContain("/@storybook-assets/workbench/entry.js")
+        expect(html, route).toContain('name="storybook-status-bar-lead" content="Создано для"')
+        expect(html, route).toContain('name="storybook-status-bar-owner" content="MetaFor"')
+        expect(html, route).toContain('name="storybook-status-bar-detail" content="переиспользуемая WebGPU-инфраструктура UI"')
+        expect(html, route).not.toContain("data-storybook-footer")
         expect(html, route).not.toContain("ui-package-catalog")
         expect(html, route).not.toContain("data-storybook-home")
       }
@@ -145,6 +162,7 @@ describe("one-root UI Storybook", () => {
       expect(entry.status).toBe(200)
       expect(source).toContain("UiStoryPreviewSurface")
       expect(source).toContain("UiAggregateTileSurface")
+      expect(source).toContain("StorybookStatusBarSurface")
       expect(source).toContain("__elementsStoryControlBridge")
       expect(source).toContain("__componentsStoryControlBridge")
       expect(source).toContain("import(")

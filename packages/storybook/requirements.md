@@ -32,10 +32,12 @@ Components либо consumer.
    module. Labels-only route cards не заменяют production UI в
    preview; package namespace overview может оставаться информационным,
    поскольку он не является semantic primary row.
-2. Общий shell состоит из catalog, sections, preview, dock и info. Он является
-   desktop-only рабочей средой, сохраняет historical five-panel geometry и
-   занимает весь доступный canvas с небольшим внешним отступом; искусственный
-   `maxWidth`/`maxHeight` не оставляет вокруг панелей пустую рамку.
+2. Общий shell состоит из catalog, sections, preview, dock, info и нижней
+   retained StatusBar. Пять рабочих панелей сохраняют historical five-panel
+   geometry над шестой semantic region; StatusBar занимает отдельную
+   full-width строку и не перекрывает siblings. Shell занимает весь доступный
+   canvas с небольшим внешним отступом рабочих панелей; искусственный
+   `maxWidth`/`maxHeight` не оставляет вокруг них пустую рамку.
 3. Shell layout исполняет
    [`UI-COMPOSITION-001..004`](../../ARCHITECTURE.md#ui-composition-law) и
    вычисляется прямым `@layout/core/flex-css` по `LAYOUT-SLOT-001` и
@@ -63,8 +65,11 @@ Components либо consumer.
    и не становится production dependency.
 10. Статический backdrop остаётся осознанно flat: у него нет изменяемого
     descriptor state, независимого transform либо пользы от partial
-    materialization. Consumer preview остаётся отдельной consumer-owned Surface
-    и может иметь один retained parent без переноса consumer vocabulary в shell.
+    materialization. Нижняя `StorybookStatusBarSurface` получает immutable
+    package attribution из typed app manifest и вызывает production
+    `@ui/elements/status-bar` без локальной копии primitive или hit state.
+    Consumer preview остаётся отдельной consumer-owned Surface и может иметь
+    один retained parent без переноса consumer vocabulary в shell.
 11. Navigation и dock хранят один детерминированный focus среди enabled item:
     pointer, Arrow Up/Down/Left/Right и Home/End меняют одно keyed состояние,
     Enter/Space вызывают текущий route callback. Видимое перемещение focus
@@ -99,8 +104,9 @@ Components либо consumer.
     его ноды, assets и примеры не импортируются в storybook.
 16. Workbench сам следует глобальной Blender composition/form law: компактные
     editor headers, row navigation, thin separators и low-radius panels вместо
-    oversized pill stacks и больших rounded islands. Five-panel semantic regions
-    сохраняются и соответствуют Blender `ScrArea`: exact Workbench owner
+    oversized pill stacks и больших rounded islands. Пять исторических panel
+    regions и шестая нижняя StatusBar сохраняются как один Workbench; панели
+    соответствуют Blender `ScrArea`, а exact Workbench owner
     задаёт `borderRadius: 6` непосредственно в CSS-like style editor-region, а
     nested accordion/panel/box owner задаёт `borderRadius: 4`. Общий radius
     token/config отсутствует; caller `style` может явно переопределить owner
@@ -177,11 +183,15 @@ Components либо consumer.
 26. Comparison layout выбирает side-by-side либо top-to-bottom по максимальному
     общему scale subject/reference. Оба кадра используют один scale; wide и tall
     controls не получают один навязанный split.
-27. Каждая public Storybook page показывает ненавязчивый structured footer
+27. Каждая public Storybook page показывает ненавязчивую attribution
     `Создано для MetaFor · переиспользуемая WebGPU-инфраструктура UI`, не
-    превращая MetaFor в runtime dependency reusable UI packages. HTML string
-    replacement, дублирующий brand header и badge поверх рабочей области
-    отсутствуют. На DOM page footer остаётся после content и не перекрывает его.
+    превращая MetaFor в runtime dependency reusable UI packages. На canvas page
+    shared server передаёт три manifest-owned text value через inert meta, а
+    no-argument `StorybookStatusBarSurface` показывает их внутри зарезервированной
+    нижней строки production `@ui/elements/status-bar`; fixed DOM footer поверх
+    WebGPU Workbench отсутствует. На DOM page structured footer остаётся после
+    content и не перекрывает его. HTML string replacement, дублирующий brand
+    header и badge поверх рабочей области отсутствуют.
 28. Canvas page ставит общий ready marker только после того, как её owner
     запланировал первый render и дождался общей frame boundary из
     `@zavx0z/storybook/environment`. Эта browser boundary не заменяет отдельную

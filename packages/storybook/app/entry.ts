@@ -3,6 +3,7 @@ import {
   StorybookBackdropSurface,
   StorybookDockSurface,
   StorybookNavigationSurface,
+  StorybookStatusBarSurface,
   StorybookStoryPanelSurface,
   planStorybookShell,
   type StorybookStoryPanelCategory,
@@ -91,6 +92,7 @@ try {
   const preview = new UiStoryPreviewSurface()
   preview.setStory(descriptor, story, args)
   const dock = new StorybookDockSurface<string>(dockOptions())
+  const statusBar = new StorybookStatusBarSurface()
   let storyPanel: StorybookStoryPanelSurface
 
   function updateControl(key: string, value: unknown): void {
@@ -150,6 +152,7 @@ try {
   runtime.addSurface(preview, ({w, h}) => frames(w, h).preview)
   runtime.addSurface(dock, ({w, h}) => frames(w, h).dock)
   runtime.addSurface(storyPanel, ({w, h}) => frames(w, h).info)
+  runtime.addSurface(statusBar, ({w, h}) => frames(w, h).status)
   syncStoryPresentation()
 
   function primaryOptions() {
@@ -225,7 +228,7 @@ try {
   }
 
   function publish(): void {
-    for (const surface of [catalog, sections, preview, dock, storyPanel, ...activeAggregateTiles()]) {
+    for (const surface of [catalog, sections, preview, dock, storyPanel, statusBar, ...activeAggregateTiles()]) {
       surface.flushPendingRender()
     }
     runtime.space.updateWorldMatrix()
