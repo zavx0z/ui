@@ -37,7 +37,9 @@
     "@types/node": "^25.5.0",
     "@webgpu/types": "^0.1.68",
     "@ui/storybook": "workspace:*",
+    "@zavx0z/react": "link:@zavx0z/react",
     "@zavx0z/storybook": "link:@zavx0z/storybook",
+    "@zavx0z/template": "link:@zavx0z/template",
     "typescript": "^7.0.2"
   }
 }

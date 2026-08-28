@@ -18,7 +18,8 @@
     "@zavx0z/renderer": "link:@zavx0z/renderer",
     "@zavx0z/renderer-browser": "link:@zavx0z/renderer-browser",
     "@zavx0z/renderer-webgpu": "link:@zavx0z/renderer-webgpu",
-    "@zavx0z/storybook": "link:@zavx0z/storybook"
+    "@zavx0z/storybook": "link:@zavx0z/storybook",
+    "@zavx0z/template": "link:@zavx0z/template"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,6 @@
-import {join} from "node:path"
+import {join, resolve} from "node:path"
 import {defineStorybookApp, type StorybookAppManifest} from "@zavx0z/storybook/app"
+import {createTemplateJsxBunPlugin} from "@zavx0z/template/bun"
 import {UI_STORY_ROUTE_TREE} from "../dom-story-navigation.ts"
 
 export type UiStorybookAppOptions = Readonly<{
@@ -8,6 +9,7 @@ export type UiStorybookAppOptions = Readonly<{
 
 /** One root Workbench containing every package-owned UI story. */
 export function createUiStorybookApp(options: UiStorybookAppOptions = {}): StorybookAppManifest {
+  const packagesRoot = resolve(import.meta.dir, "../../..")
   return defineStorybookApp({
     id: "ui",
     title: "UI storybook",
@@ -28,6 +30,14 @@ export function createUiStorybookApp(options: UiStorybookAppOptions = {}): Story
       title: "UI storybook",
       mountPath: "/",
       entrypoint: join(import.meta.dir, "../bootstrap.ts"),
+      browserBuild: {
+        plugins: () => [createTemplateJsxBunPlugin({
+          sourceRoots: [
+            join(packagesRoot, "components"),
+            join(packagesRoot, "storybook")
+          ]
+        })]
+      },
       stylePath: join(import.meta.dir, "../style.css"),
       body: {kind: "canvas", canvasId: "ui-storybook-canvas"},
       capability: "webgpu",

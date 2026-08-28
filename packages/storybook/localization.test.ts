@@ -44,7 +44,7 @@ const forbiddenVisiblePhrases = [
 ] as const
 
 const requiredLocalizedPhrases = [
-  "Семантических DOM-разделов",
+  "Обзор компонентов",
   "Исходный код",
   "Сценарии",
 ] as const

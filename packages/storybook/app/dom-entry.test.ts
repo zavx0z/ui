@@ -72,36 +72,72 @@ describe("DOM Storybook route boundary", () => {
     expect(entry).toContain('from "@zavx0z/dom"')
     expect(entry).toContain('from "@zavx0z/renderer-browser"')
     expect(entry).toContain('from "@zavx0z/storybook/workbench"')
-    expect(entry).toContain('from "../../components/dom/inspector-story.ts"')
-    expect(entry).toContain('from "../../components/dom/button-story.ts"')
-    expect(entry).toContain('from "../../components/dom/text-field-story.ts"')
-    expect(entry).toContain('from "../../components/dom/foundation-stories.ts"')
-    expect(entry).toContain('from "../../components/dom/native-control-stories.ts"')
-    expect(entry).toContain('from "../../components/dom/field-stories.ts"')
-    expect(entry).toContain('from "../../components/dom/advanced-native-control-stories.ts"')
-    expect(entry).toContain('from "../../components/dom/data-stories.ts"')
-    expect(entry).toContain('from "../../components/dom/select-story.ts"')
-    expect(entry).toContain('from "../../components/dom/numeric-composite-stories.ts"')
-    expect(entry).toContain('from "../../components/dom/code-editor-story.ts"')
-    expect(entry).toContain('from "@ui/components/code-editor"')
-    expect(entry).toContain('from "@ui/components/inspector"')
+    expect(entry).toContain('from "./production-component-stories.ts"')
+    expect(entry).toContain('from "./compiled-inspector-production-story.tsx"')
+    expect(entry).toContain('from "./compiled-code-editor-production-story.tsx"')
     expect(entry).toContain('from "./dom-interface-story.ts"')
-    expect(entry).toContain('from "../../components/dom/resource-input-stories.ts"')
     expect(entry).toContain('from "./element-dom-story.ts"')
-    expect(entry).toContain('from "./enum-dom-story.ts"')
-    expect(entry).toContain('from "../../components/dom/hud-stories.ts"')
-    expect(entry).toContain('from "./button-icon-dom-story.ts"')
-    expect(entry).toContain('from "../../components/dom/color-stories.ts"')
     expect(entry).toContain('from "./popover-dom-story.ts"')
     expect(entry).toContain('from "./image-dom-story.ts"')
-    expect(entry).toContain('from "./dom-overview-story.ts"')
+    expect(entry).toContain('from "./aggregate-overview-story.ts"')
+    expect(entry).toContain('from "./route-style.ts"')
     expect(entry).toContain("createDocumentCanvasRuntime")
+    expect(entry).toContain("createAggregateOverviewStory")
+    for (const removedReplica of [
+      "../../components/dom/button-story.ts",
+      "../../components/dom/text-field-story.ts",
+      "../../components/dom/foundation-stories.ts",
+      "../../components/dom/hud-stories.ts",
+      "../../components/dom/native-control-stories.ts",
+      "../../components/dom/field-stories.ts",
+      "../../components/dom/advanced-native-control-stories.ts",
+      "../../components/dom/select-story.ts",
+      "../../components/dom/numeric-composite-stories.ts",
+      "../../components/dom/data-stories.ts",
+      "../../components/dom/resource-input-stories.ts",
+      "../../components/dom/color-stories.ts",
+      "../../components/dom/inspector-story.ts",
+      "../../components/dom/code-editor-story.ts",
+      "./button-icon-dom-story.ts",
+      "./enum-dom-story.ts",
+    ]) expect(entry).not.toContain(removedReplica)
     expect(entry).toContain('dataset.uiStorybookPipeline = "dom-webgpu"')
     for (const forbidden of ["UiSurface", "UiRuntime", "@layout/core", "@ui/elements", "@ui/components/dom/"]) {
       expect(entry).not.toContain(forbidden)
     }
     expect(DOM_INTERFACE_STORY_ROUTES).toHaveLength(43)
     expect(UI_DOM_STORY_ROUTES).toHaveLength(391)
+  })
+
+  test("keeps one persistent Router, Document, Workbench, runtime and canvas", async () => {
+    const entry = await Bun.file(new URL("./dom-entry.ts", import.meta.url)).text()
+
+    expect(entry.match(/new StorybookRouteTreeRouter/gu)).toHaveLength(1)
+    expect(entry.match(/createDocument\(\)/gu)).toHaveLength(1)
+    expect(entry.match(/createStorybookDomWorkbench\(/gu)).toHaveLength(1)
+    expect(entry.match(/createDocumentCanvasRuntime\(/gu)).toHaveLength(1)
+    expect(entry).toContain("router.go(target)")
+    expect(entry).toContain("router.subscribe((node)")
+    expect(entry).toContain("applyRoute(node.path)")
+    expect(entry).toContain('workbench.update("preview.node", story.element)')
+    expect(entry).toContain("disposeStory(previous)")
+    expect(entry).toContain("revision !== routeRevision")
+    expect(entry).not.toMatch(/window\.location\.(?:assign|replace|reload)|location\.href|location\.reload|window\.location\s*=/u)
+    expect(entry).not.toContain("document.location")
+  })
+
+  test("renders overview aggregates without selecting hidden secondary or scenario leaves", async () => {
+    const entry = await Bun.file(new URL("./dom-entry.ts", import.meta.url)).text()
+    const aggregate = await Bun.file(new URL("./aggregate-overview-story.ts", import.meta.url)).text()
+
+    expect(entry).toContain("planUiOverview(route)")
+    expect(entry).toContain("representativeRoute")
+    expect(entry).toContain('descriptor.kind === "detail"')
+    expect(entry).toContain(': null,')
+    expect(aggregate).toContain("preview.appendChild(child.element)")
+    expect(aggregate).toContain("child.source.typescript")
+    expect(aggregate).not.toContain('document.createElement("a")')
+    expect(aggregate).not.toContain('document.createElement("ul")')
   })
 
   test("declares each exact new runtime owner", async () => {

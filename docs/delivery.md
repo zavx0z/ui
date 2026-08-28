@@ -18,9 +18,11 @@ and is not part of a product bundle.
 ## Public ESM imports
 
 1. Independent consumers begin at an exact lowercase subpath instead of a compatibility barrel.
-2. Components publishes only `field`, `inspector`, `code-editor`, `hud`, `icons`
-   and `syntax-theme`. Standard elements, events and control state come directly
-   from the DOM.
+2. Components publishes the exact natural leaves listed in
+   `packages/components/requirements.md`: foundation controls, scalar and
+   composite inputs, collection/data views, Field, Inspector, CodeEditor, HUD,
+   icons, syntax theme and source-backed UI theme. Standard elements, events
+   and live control state still come directly from the DOM.
 3. A subpath points directly to one source owner. Aliases, generated copies, compatibility bundles, and Storybook exports from production packages are not allowed.
 
 ## Dynamic loading

@@ -10,9 +10,11 @@ object, manual rectangle or WebGPU resource.
 ## Final dependency direction
 
 ```text
-@zavx0z/template ───────┐
-                       ↓
-@ui/components ──→ @zavx0z/dom
+@zavx0z/template/compiler → @zavx0z/template/compiled
+                                      ↓
+                              @zavx0z/react
+                                      ↓
+@ui/components ──────────────→ @zavx0z/dom
                        ↓
                  @zavx0z/renderer
                        ↓
@@ -37,16 +39,33 @@ compact identities.
 
 Components owns only semantic compositions, controlled widget state, theme
 CSS, icons/assets and component-specific controllers. A primitive button,
-input, span or container is the corresponding standard HTML element rather
-than an `@ui/elements` wrapper.
+input, span or container is represented by the corresponding standard HTML
+element rather than an `@ui/elements` runtime wrapper. Production factories
+remain valid owners when they provide a reusable visual, interaction or
+controlled-state contract around those standard elements.
 
-Complex widgets may remain functions because a function is an authoring
-factory, not a runtime type hierarchy. For example,
-`createInspector(document, props)` creates one stable standard DOM subtree and
-subsequent updates mutate addressed attributes, Text and children. The DOM
+Components are ordinary TSX functions compiled by `@zavx0z/template` into
+static semantic DOM mounts and addressed bindings. `@zavx0z/react` owns compact
+hook slots and component scheduling without React, Fiber or a virtual DOM.
+Temporary `createX(document, props)` controllers remain only until their
+consumer chain is ported; they are not a second final authoring model. The DOM
 prototype chain itself remains class-based and standard-named.
 
 Components does not import Engine, renderer, WebGPU, Layout or Elements.
+
+### Visual compatibility law
+
+The DOM migration changes the authoring and rendering substrate, not the
+visible product. Blender 5.2 LTS remains the normative reference for control
+composition, density, grouping, palette, material states and interaction.
+Existing Button, Field, numeric, collection, color, Pane, HUD and Node consumer
+contracts must be ported to DOM/CSS before their former implementation can be
+removed. A direct `document.createElement()` proof is not a replacement for a
+production component that owned such behavior.
+
+Every visible migration slice requires an equal-scale reference comparison and
+an explicit owner verdict. Unit tests, route completeness, readiness and a
+non-black canvas prove mechanics only; they do not authorize a visual redesign.
 
 ### `@ui/storybook`
 
@@ -61,9 +80,10 @@ parallel illustrative string. Production packages never import Storybook.
 
 ### Retired boundaries
 
-- `@ui/elements` has no final owner role. Standard elements and DOM state move
-  to `@zavx0z/dom`; visual rules and assets remain in UI; paint realization
-  belongs to the renderer backend.
+- `@ui/elements` has no final runtime-wrapper role. Standard elements and DOM
+  state move to `@zavx0z/dom`; every reusable visual and interaction contract
+  must first move to a natural production Component or renderer-owned UA
+  behavior. Package removal is not permission to discard that contract.
 - `@layout/core` has no final UI runtime role. Cascade, layout, scrolling,
   clipping and hit projection are internal stages of `@zavx0z/renderer`.
 - `@ui/hud` is not a separate layer. Reusable Window/Timeline compositions
@@ -121,16 +141,12 @@ contain no tooltip-specific API.
 
 ## Current migration checkpoint
 
-The final public `@ui/components` surface contains only the natural exact
-subpaths `field`, `inspector`, `code-editor`, `hud`, `icons` and
-`syntax-theme`. They point directly to DOM/CSS implementations and publish no
-`dom/*`, Storybook or compatibility exports. UI Storybook is entirely on the
-document pipeline; its story factories are repository-private modules.
-
-The separate retained `@ui/hud` and `@ui/elements` packages are removed.
-The former staged legacy Component snapshot remains recoverable only in the Git
-index; the working tree and every buildable package contain the final DOM
-owners exclusively. Generic Layout has no UI production consumer.
+The document pipeline is the accepted runtime foundation, but the component
+cutover is complete only when the full reusable control surface and its
+Blender-compatible behavior are available as production DOM/CSS owners.
+Storybook-only direct-element proofs do not satisfy that gate. The retained
+implementation remains historical evidence for the port until every affected
+owner has equivalent production behavior and visual acceptance.
 
 ## Removal gates
 
@@ -139,11 +155,13 @@ after all of these are true:
 
 1. shipping source has zero imports of `UiSurface`, `@layout/core`,
    `@ui/elements` and the old renderer API;
-2. Components and HUD replacements author only DOM/CSS;
+2. Components and HUD replacements author only DOM/CSS and preserve the former
+   production visual, interaction and controlled-state contracts;
 3. Storybook exact routes run through DOM → CPU renderer → WebGPU and pass
    route readiness, console and non-black canvas checks;
 4. semantic, event, layout, visual, resource cleanup, bundle identity and
-   performance gates pass;
+   performance gates pass, including equal-scale Blender reference comparison
+   and an explicit owner verdict for every changed visible slice;
 5. Node, MetaFor, Interpreter, demo and shared Storybook consumers have moved;
 6. no dirty linked checkout is described as accepted integration.
 

@@ -12,7 +12,7 @@ function productionSources(directory = packagesDirectory): string[] {
     const path = join(directory, entry.name)
     if (entry.isDirectory()) {
       sources.push(...productionSources(path))
-    } else if (entry.name.endsWith(".ts") && !entry.name.endsWith(".test.ts")) {
+    } else if (/\.tsx?$/u.test(entry.name) && !/\.test\.tsx?$/u.test(entry.name)) {
       sources.push(path)
     }
   }

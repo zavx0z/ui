@@ -43,7 +43,9 @@ async function dependencyIdentities(): Promise<readonly StorybookDependencyIdent
     ["@zavx0z/renderer", import.meta.resolve("@zavx0z/renderer")],
     ["@zavx0z/renderer-browser", import.meta.resolve("@zavx0z/renderer-browser")],
     ["@zavx0z/renderer-webgpu", import.meta.resolve("@zavx0z/renderer-webgpu")],
+    ["@zavx0z/react", import.meta.resolve("@zavx0z/react")],
     ["@zavx0z/storybook", import.meta.resolve("@zavx0z/storybook/app")],
+    ["@zavx0z/template", import.meta.resolve("@zavx0z/template/compiled")],
   ] as const
   return Object.freeze(await Promise.all(inputs.map(async ([name, entry]) => ({
     name,

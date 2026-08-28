@@ -45,6 +45,8 @@ describe("@ui/storybook private application boundary", () => {
       "@zavx0z/renderer",
       "@zavx0z/renderer-browser",
       "@zavx0z/renderer-webgpu",
+      "@zavx0z/react",
+      "@zavx0z/template/compiled",
     ]) expect(build).toContain(`import.meta.resolve("${owner}")`)
 
     for (const path of removedGenericFiles) {
@@ -74,7 +76,8 @@ describe("@ui/storybook private application boundary", () => {
     const catalog = await Bun.file(join(root, "reference-catalog.ts")).text()
     expect(rootEntry).toContain('import("../reference-catalog.ts")')
     expect(catalog).toContain('await import("./assets/references/catalog.json"')
-    expect(catalog).not.toContain("@zavx0z/storybook")
+    expect(catalog).toContain('from "@zavx0z/storybook/references"')
+    expect(catalog).not.toContain('from "@zavx0z/storybook"')
   })
 
   test("contains no retained Workbench fallback", async () => {

@@ -103,6 +103,11 @@ describe("one-root UI Storybook", () => {
       canvas: {id: "ui-storybook-canvas", evidence: "non-black"},
     })
     expect(app.pages[0]?.routeTree.leaves).toHaveLength(176)
+    const plugins = app.pages[0]?.browserBuild?.plugins
+    expect(typeof plugins).toBe("function")
+    const resolved = typeof plugins === "function" ? plugins() : plugins
+    expect(resolved).toHaveLength(1)
+    expect(resolved?.[0]?.name).toBe("zavx0z-template-jsx")
   })
 
   test("wires the sixth DOM Workbench region through addressed status state", async () => {
@@ -194,7 +199,7 @@ describe("one-root UI Storybook", () => {
       const documentEntry = sources.find((source) => source.includes("createStorybookDomWorkbench"))
       expect(documentEntry).toBeDefined()
       expect(documentEntry).toContain("components/data/inspector/basic/default")
-      expect(documentEntry).toContain("function createButtonStory")
+      expect(documentEntry).toContain("function createButtonProductionStory")
       expect(documentEntry).not.toContain("UiStoryPreviewSurface")
       expect(documentEntry).not.toContain("function createPrimitiveStory")
       expect(sources.some((source) => source.includes("UiStoryPreviewSurface"))).toBeFalse()

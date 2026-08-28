@@ -31,14 +31,19 @@ for the private catalog.
 - Put DOM interfaces and state in [`zavx0z/renderer`](https://github.com/zavx0z/renderer)'s `@zavx0z/dom` package.
 - Put cascade, layout, display lists, hit projection and renderer adapters in
   [`zavx0z/renderer`](https://github.com/zavx0z/renderer), not this repository.
-- Put semantic Field, Inspector, CodeEditor and HUD compositions, CSS, icons and
-  syntax theme in `packages/components`.
+- Put reusable controls, Field, Inspector, CodeEditor and HUD compositions,
+  CSS, source-backed theme and icons in `packages/components`.
 - Put private story modules, the one root Workbench, comparison evidence,
   lifecycle and static-site code in `packages/storybook`.
 
 Production Components depend only on DOM and explicit semantic helpers.
 Production packages must not import Storybook, Engine, Layout, WebGPU or the
 retired Elements/HUD packages.
+
+Removing a runtime-wrapper package never removes its visible or interaction
+contract. Port that contract to the natural DOM/CSS owner, verify it against
+the recorded Blender reference at a common scale, and only then retire the old
+implementation.
 
 ## Naming and source evidence
 

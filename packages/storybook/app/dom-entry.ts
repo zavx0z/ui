@@ -1,70 +1,43 @@
 import {loadDocumentDefaultFont} from "@engine/core/default-font"
 import {
-  buttonStoryCss,
-  buttonStoryDefaultArgs,
-  createButtonStory,
-} from "../../components/dom/button-story.ts"
-import {
-  createBadgeStory,
-  createDividerStory,
-  createPaneStory,
-  createTypographyStory,
-  foundationStoriesCss,
-} from "../../components/dom/foundation-stories.ts"
-import {
-  INSPECTOR_STORY_ARGS_CHANGE_EVENT,
-  createInspectorStory,
-  type InspectorStoryArgsChange,
-} from "../../components/dom/inspector-story.ts"
-import {inspectorCss} from "@ui/components/inspector"
-import {
-  createTextFieldStory,
-  textFieldStoryCss,
-} from "../../components/dom/text-field-story.ts"
-import {
-  createCheckboxStory,
-  createNumberInputStory,
-  createSwitcherStory,
-  nativeControlStoriesCss,
-  numberInputStoryDefaultArgs,
-} from "../../components/dom/native-control-stories.ts"
-import {
-  createControlGroupStory,
-  createFieldStory,
-  fieldStoriesCss,
-} from "../../components/dom/field-stories.ts"
-import {
-  advancedNativeControlStoriesCss,
-  createProgressCheckboxStory,
-  createSliderControlStory,
-} from "../../components/dom/advanced-native-control-stories.ts"
-import {
-  createListStory,
-  createTableStory,
-  dataStoriesCss,
-} from "../../components/dom/data-stories.ts"
-import {
-  createSelectStory,
-  selectStoryCss,
-} from "../../components/dom/select-story.ts"
-import {
-  createMatrixStory,
-  createVectorStory,
-  numericCompositeStoriesCss,
-  vectorStoryDefaultArgs,
-} from "../../components/dom/numeric-composite-stories.ts"
-import {
-  createCodeEditorStory,
-} from "../../components/dom/code-editor-story.ts"
-import {codeEditorCss} from "@ui/components/code-editor"
-import {
-  collectionInputStoryDefaultArgs,
-  createCollectionInputStory,
-  createPathInputStory,
-  createReferenceInputStory,
-  pathInputStoryDefaultArgs,
-  resourceInputStoriesCss,
-} from "../../components/dom/resource-input-stories.ts"
+  buttonProductionStoryDefaultProps,
+  checkboxProductionStoryDefaultProps,
+  collectionInputProductionStoryDefaultProps,
+  colorInputProductionStoryDefaultProps,
+  controlGroupProductionStoryDefaultProps,
+  createControlGroupProductionStory,
+  createCollectionInputProductionStory,
+  createColorInputProductionStory,
+  createEnumInputProductionStory,
+  createIntegerInputProductionStory,
+  createListProductionStory,
+  createMatrixInputProductionStory,
+  createNumberInputProductionStory,
+  createPathInputProductionStory,
+  createProgressCheckboxProductionStory,
+  createReferenceInputProductionStory,
+  createSliderControlProductionStory,
+  createBadgeProductionStory,
+  createButtonProductionStory,
+  createCheckboxProductionStory,
+  createDividerProductionStory,
+  createFieldProductionStory,
+  createHudFrameProductionStory,
+  createHudWindowProductionStory,
+  createPaneProductionStory,
+  createSwitcherProductionStory,
+  createTableProductionStory,
+  createTextFieldProductionStory,
+  createTypographyProductionStory,
+  createTimelineProductionStory,
+  createVectorInputProductionStory,
+  enumInputProductionStoryDefaultProps,
+  integerInputProductionStoryDefaultProps,
+  pathInputProductionStoryDefaultProps,
+  switcherProductionStoryDefaultProps,
+} from "./production-component-stories.ts"
+import {createCompiledInspectorProductionStory} from "./compiled-inspector-production-story.tsx"
+import {createCompiledCodeEditorProductionStory} from "./compiled-code-editor-production-story.tsx"
 import {
   createDomInterfaceStory,
   domInterfaceStoryCss,
@@ -74,31 +47,6 @@ import {
   elementDomStoryCss,
   isElementDomStoryRoute,
 } from "./element-dom-story.ts"
-import {
-  createEnumDomStory,
-  enumDomStoryCss,
-  isEnumDomStoryRoute,
-} from "./enum-dom-story.ts"
-import {
-  createHudFrameStory,
-  createHudTimelineStory,
-  createHudWindowStory,
-  hudStoriesCss,
-} from "../../components/dom/hud-stories.ts"
-import {
-  buttonIconDomStoryCss,
-  createButtonIconDomStory,
-  isButtonIconDomStoryRoute,
-} from "./button-icon-dom-story.ts"
-import {
-  colorFieldStoryDefaultArgs,
-  colorInputClosedStoryDefaultArgs,
-  colorInputExpandedStoryDefaultArgs,
-  colorInputOpenStoryDefaultArgs,
-  colorStoriesCss,
-  createColorFieldStory,
-  createColorInputStory,
-} from "../../components/dom/color-stories.ts"
 import {
   createPopoverDomStory,
   isPopoverDomStoryRoute,
@@ -110,13 +58,14 @@ import {
   isImageDomStoryRoute,
 } from "./image-dom-story.ts"
 import {
-  createDomOverviewStory,
-  domOverviewStoryCss,
-} from "./dom-overview-story.ts"
+  createAggregateOverviewStory,
+  type AggregateChildStory,
+} from "./aggregate-overview-story.ts"
 import {
   createDocument,
   type CustomEvent as DomCustomEvent,
   type Document as SemanticDocument,
+  type HTMLElement,
 } from "@zavx0z/dom"
 import {createDocumentCanvasRuntime} from "@zavx0z/renderer-browser"
 import {
@@ -129,7 +78,12 @@ import {
   waitForStorybookFrameBoundary,
 } from "@zavx0z/storybook/environment"
 import {StorybookRouteTreeRouter} from "@zavx0z/storybook/route-tree"
-import {isUiDomStoryRoute, type UiDomStoryRoute} from "./dom-routes.ts"
+import {
+  BUTTON_ICON_DOM_STORY_ROUTES,
+  ENUM_DOM_STORY_ROUTES,
+  isUiDomStoryRoute,
+  type UiDomStoryRoute,
+} from "./dom-routes.ts"
 import {
   UI_STORY_ROUTE_TREE,
   uiDockItems,
@@ -141,6 +95,9 @@ import {
   uiSecondaryRoute,
   uiStoryDescriptor,
 } from "./dom-story-navigation.ts"
+import {uiStorybookWorkbenchCss} from "./workbench-style.ts"
+import {planUiOverview} from "./overview-plan.ts"
+import {uiRouteStoryCss} from "./route-style.ts"
 
 const canvas = document.getElementById("ui-storybook-canvas")
 if (!(canvas instanceof HTMLCanvasElement)) throw new Error("UI Storybook canvas not found")
@@ -149,6 +106,17 @@ declare global {
   var __uiStorybookCapturePresentedFrame: (() => Promise<Blob | null>) | undefined
   var __uiStorybookLoadReferenceCatalog: (() => Promise<unknown>) | undefined
 }
+
+type UiRouteStory = Readonly<{
+  element: HTMLElement
+  source: Readonly<{html: string; css: string; typescript: string}>
+  dispose?(): void
+}>
+
+type UiRouteStoryResult = Readonly<{
+  story: UiRouteStory
+  css: string
+}>
 
 document.documentElement.dataset.uiStorybook = "starting"
 document.documentElement.dataset.uiStorybookPage = "workbench"
@@ -160,27 +128,17 @@ try {
   const router = new StorybookRouteTreeRouter(UI_STORY_ROUTE_TREE, {
     basePath: storybookPublicPath("ui", "/"),
   })
-  if (!isUiDomStoryRoute(router.current.path)) {
-    throw new Error(`DOM entry received an unmigrated route: ${router.current.path}`)
-  }
-  const route = router.current.path
-  const descriptor = uiStoryDescriptor(route)
+  let route = exactRoute(router.current.path)
+  let descriptor = uiStoryDescriptor(route)
   const semanticDocument = createDocument()
-  const {story, css: storyCss} = createDomRouteStory(route, semanticDocument)
+  let {story} = await createDomRouteStory(route, semanticDocument)
   const catalogItems = uiPrimaryItems().map(({label, route: itemRoute}) => ({
     id: itemRoute,
     label,
     route: itemRoute,
   }))
-  const secondaryItems = uiSecondaryItems(route).map(({label, route: itemRoute}) => ({
-    id: itemRoute,
-    label,
-    route: itemRoute,
-  }))
-  const scenarioItems = uiDockItems(route).map(({route: itemRoute, label}) => ({
-    id: itemRoute,
-    label,
-  }))
+  const initialSecondaryItems = secondaryNavigationItems(route)
+  const initialScenarioItems = scenarioNavigationItems(route)
   const workbench = createStorybookDomWorkbench({
     document: semanticDocument,
     parent: semanticDocument,
@@ -190,13 +148,17 @@ try {
       "catalog.items": catalogItems,
       "catalog.active": presentActive(uiPrimaryRoute(route), catalogItems),
       "secondary.label": descriptor.category.label,
-      "secondary.items": secondaryItems,
-      "secondary.active": presentActive(uiSecondaryRoute(route), secondaryItems),
+      "secondary.items": initialSecondaryItems,
+      "secondary.active": descriptor.kind === "detail"
+        ? presentActive(uiSecondaryRoute(route), initialSecondaryItems)
+        : null,
       "preview.label": descriptor.title,
       "preview.node": story.element,
       "scenarios.label": uiDockTitle(route),
-      "scenarios.items": scenarioItems,
-      "scenarios.active": presentActive(uiDockRoute(route), scenarioItems),
+      "scenarios.items": initialScenarioItems,
+      "scenarios.active": descriptor.kind === "detail"
+        ? presentActive(uiDockRoute(route), initialScenarioItems)
+        : null,
       "inspector.label": "Исходный код",
       "inspector.source": story.source,
       status: {
@@ -212,7 +174,7 @@ try {
     canvas,
     document: semanticDocument,
     root: workbench.element,
-    styleSheets: [storybookDomWorkbenchCss, storyCss],
+    styleSheets: [storybookDomWorkbenchCss, uiStorybookWorkbenchCss, uiRouteStoryCss],
     font,
     tooltipDelayMs: 500,
     distance: 600,
@@ -220,50 +182,101 @@ try {
   globalThis.__uiStorybookCapturePresentedFrame = () =>
     runtime.captureLastPresentedFramePng()
   let disposed = false
-  const onStoryArgsChange = (event: unknown): void => {
-    const detail = (event as DomCustomEvent<InspectorStoryArgsChange>).detail
+  let routeRevision = 0
+
+  const publish = (): void => {
     workbench.update("inspector.source", story.source)
-    document.documentElement.dataset.uiStorybookArgs = JSON.stringify(detail.args)
+    publishReadyState(route, descriptor)
     runtime.requestRender()
   }
-  const onNavigate = (event: unknown): void => {
-    const detail = (event as DomCustomEvent<{route: string}>).detail
-    if (detail.route === route) return
-    const target = storybookPublicPath("ui", `/${detail.route}`)
-    window.location.assign(target)
-  }
-  const onScenario = (event: unknown): void => {
-    const detail = (event as DomCustomEvent<{id: string}>).detail
-    if (detail.id === route) {
+
+  const applyRoute = async (target: string): Promise<void> => {
+    if (disposed) return
+    const nextRoute = exactRoute(target)
+    if (nextRoute === route) {
       runtime.requestRender()
       return
     }
-    window.location.assign(storybookPublicPath("ui", `/${detail.id}`))
+    const revision = ++routeRevision
+    document.documentElement.dataset.uiStorybook = "starting"
+    const nextDescriptor = uiStoryDescriptor(nextRoute)
+    const {story: nextStory} = await createDomRouteStory(nextRoute, semanticDocument)
+    if (disposed || revision !== routeRevision) {
+      disposeStory(nextStory)
+      return
+    }
+    const previous = story
+    const nextSecondaryItems = secondaryNavigationItems(nextRoute)
+    const nextScenarioItems = scenarioNavigationItems(nextRoute)
+    route = nextRoute
+    descriptor = nextDescriptor
+    story = nextStory
+    semanticDocument.transaction(() => {
+      workbench.update("catalog.active", presentActive(uiPrimaryRoute(route), catalogItems))
+      workbench.update("secondary.label", descriptor.category.label)
+      workbench.update("secondary.items", nextSecondaryItems)
+      workbench.update("secondary.active", descriptor.kind === "detail"
+        ? presentActive(uiSecondaryRoute(route), nextSecondaryItems)
+        : null)
+      workbench.update("preview.label", descriptor.title)
+      workbench.update("preview.node", story.element)
+      workbench.update("scenarios.label", uiDockTitle(route))
+      workbench.update("scenarios.items", nextScenarioItems)
+      workbench.update("scenarios.active", descriptor.kind === "detail"
+        ? presentActive(uiDockRoute(route), nextScenarioItems)
+        : null)
+      workbench.update("inspector.source", story.source)
+      workbench.update("status", statusState())
+    })
+    disposeStory(previous)
+    publish()
+    await waitForStorybookFrameBoundary()
+    if (!disposed && revision === routeRevision) {
+      document.documentElement.dataset.uiStorybook = "ready"
+    }
   }
 
-  workbench.element.addEventListener(INSPECTOR_STORY_ARGS_CHANGE_EVENT, onStoryArgsChange)
+  const navigate = (target: string): void => {
+    if (!router.go(target)) throw new Error(`Unknown UI Storybook route: ${target}`)
+    if (target === route) runtime.requestRender()
+  }
+  const onNavigate = (event: unknown): void =>
+    navigate((event as DomCustomEvent<{route: string}>).detail.route)
+  const onScenario = (event: unknown): void =>
+    navigate((event as DomCustomEvent<{id: string}>).detail.id)
+  const onStoryMutation = (): void => publish()
+  const unsubscribe = router.subscribe((node) => {
+    void applyRoute(node.path).catch(publishError)
+  })
+
   workbench.element.addEventListener(STORYBOOK_DOM_WORKBENCH_EVENTS.navigate, onNavigate)
   workbench.element.addEventListener(STORYBOOK_DOM_WORKBENCH_EVENTS.scenario, onScenario)
+  workbench.element.addEventListener("input", onStoryMutation)
+  workbench.element.addEventListener("change", onStoryMutation)
+  workbench.element.addEventListener("click", onStoryMutation)
   const dispose = (): void => {
     if (disposed) return
     disposed = true
-    workbench.element.removeEventListener(INSPECTOR_STORY_ARGS_CHANGE_EVENT, onStoryArgsChange)
+    routeRevision += 1
+    unsubscribe()
+    router.dispose()
     workbench.element.removeEventListener(STORYBOOK_DOM_WORKBENCH_EVENTS.navigate, onNavigate)
     workbench.element.removeEventListener(STORYBOOK_DOM_WORKBENCH_EVENTS.scenario, onScenario)
-    if ("dispose" in story && typeof story.dispose === "function") story.dispose()
+    workbench.element.removeEventListener("input", onStoryMutation)
+    workbench.element.removeEventListener("change", onStoryMutation)
+    workbench.element.removeEventListener("click", onStoryMutation)
+    disposeStory(story)
     workbench.dispose()
     runtime.dispose()
+    globalThis.__uiStorybookCapturePresentedFrame = undefined
   }
   window.addEventListener("pagehide", dispose, {once: true})
 
-  publishReadyState(route, descriptor)
+  publish()
   await waitForStorybookFrameBoundary()
   document.documentElement.dataset.uiStorybook = "ready"
 } catch (error) {
-  document.documentElement.dataset.uiStorybook = "error"
-  document.documentElement.dataset.uiStorybookError = error instanceof Error
-    ? error.message
-    : String(error)
+  publishError(error)
   throw error
 }
 
@@ -274,38 +287,100 @@ function presentActive(
   return items.some(({id}) => id === candidate) ? candidate : null
 }
 
-function createDomRouteStory(route: UiDomStoryRoute, document: SemanticDocument) {
+function secondaryNavigationItems(route: UiDomStoryRoute): readonly Readonly<{
+  id: string
+  label: string
+  route: string
+}>[] {
+  return uiSecondaryItems(route).map(({label, route: itemRoute}) => ({
+    id: itemRoute,
+    label,
+    route: itemRoute,
+  }))
+}
+
+function scenarioNavigationItems(route: UiDomStoryRoute): readonly Readonly<{
+  id: string
+  label: string
+}>[] {
+  return uiDockItems(route).map(({route: itemRoute, label}) => ({id: itemRoute, label}))
+}
+
+function statusState(): Readonly<{lead: string; owner: string; detail: string}> {
+  return Object.freeze({lead: "Создано для ", owner: "MetaFor", detail: " · HTML DOM → WebGPU"})
+}
+
+function exactRoute(value: string): UiDomStoryRoute {
+  if (!isUiDomStoryRoute(value)) throw new Error(`Unknown UI Storybook route: ${value}`)
+  return value
+}
+
+function disposeStory(story: UiRouteStory): void {
+  story.dispose?.()
+}
+
+function publishError(error: unknown): void {
+  document.documentElement.dataset.uiStorybook = "error"
+  document.documentElement.dataset.uiStorybookError = error instanceof Error
+    ? error.stack ?? error.message
+    : String(error)
+  console.error(error)
+}
+
+async function createDomRouteStory(
+  route: UiDomStoryRoute,
+  document: SemanticDocument,
+): Promise<UiRouteStoryResult> {
+  if (route === "components/foundation/button/icon/svg") {
+    return createButtonProductionStory(document, {
+      ...buttonProductionStoryDefaultProps,
+      label: "▣ Output",
+      title: "SVG icon button",
+    })
+  }
   if (isImageDomStoryRoute(route)) {
     return Object.freeze({story: createImageDomStory(document, route), css: imageDomStoryCss})
   }
   if (isPopoverDomStoryRoute(route)) {
     return Object.freeze({story: createPopoverDomStory(document, route), css: popoverDomStoryCss})
   }
-  if (isButtonIconDomStoryRoute(route)) {
-    return Object.freeze({story: createButtonIconDomStory(document, route), css: buttonIconDomStoryCss})
+  if ((BUTTON_ICON_DOM_STORY_ROUTES as readonly string[]).includes(route)) {
+    const iconLeft = route.endsWith("/left")
+    return createButtonProductionStory(document, {
+      ...buttonProductionStoryDefaultProps,
+      label: iconLeft ? "◆ Output" : "Output ◆",
+      title: iconLeft ? "Icon left" : "Icon right",
+    })
   }
-  if (isEnumDomStoryRoute(route)) {
-    return Object.freeze({story: createEnumDomStory(document, route), css: enumDomStoryCss})
+  if ((ENUM_DOM_STORY_ROUTES as readonly string[]).includes(route)) {
+    return createEnumInputProductionStory(document, {
+      ...enumInputProductionStoryDefaultProps,
+      disabled: route.endsWith("/disabled") || route.endsWith("/readonly"),
+      title: route,
+    })
   }
   if (isElementDomStoryRoute(route)) {
     return Object.freeze({story: createElementDomStory(document, route), css: elementDomStoryCss})
   }
   const descriptor = uiStoryDescriptor(route)
   if (descriptor.kind === "overview") {
-    const dockItems = uiDockItems(route)
-    const secondaryItems = uiSecondaryItems(route)
-    const items = dockItems.length > 0
-      ? dockItems
-      : secondaryItems.length > 0
-        ? secondaryItems
-        : uiPrimaryItems()
+    const items = planUiOverview(route)
     return Object.freeze({
-      story: createDomOverviewStory(document, {
+      story: await createAggregateOverviewStory(document, {
         title: descriptor.title,
         route,
-        items: items.map(({label, route: itemRoute}) => ({label, route: itemRoute})),
+        css: uiRouteStoryCss,
+        items: items.map(({label, route: itemRoute, representativeRoute}) => ({
+          label,
+          route: itemRoute,
+          representativeRoute,
+        })),
+        async load(representativeRoute) {
+          const {story} = await createDomRouteStory(exactRoute(representativeRoute), document)
+          return story as AggregateChildStory
+        },
       }),
-      css: domOverviewStoryCss,
+      css: uiRouteStoryCss,
     })
   }
   if (route === "dom" || route.startsWith("dom/")) {
@@ -320,36 +395,40 @@ function createDomRouteStory(route: UiDomStoryRoute, document: SemanticDocument)
   }
   switch (route) {
     case "components/data/inspector/basic/default":
-      return Object.freeze({story: createInspectorStory(document), css: inspectorCss})
+      return createCompiledInspectorProductionStory(document)
     case "components/data/list/basic/default":
-      return Object.freeze({story: createListStory(document), css: dataStoriesCss})
+      return createListProductionStory(document)
     case "components/data/table/basic/default":
-      return Object.freeze({story: createTableStory(document), css: dataStoriesCss})
+      return createTableProductionStory(document)
     case "components/data/code-editor/state/read-only":
-      return Object.freeze({story: createCodeEditorStory(document), css: codeEditorCss})
+      return createCompiledCodeEditorProductionStory(document)
     case "components/foundation/button/basic/contained":
-      return Object.freeze({story: createButtonStory(document), css: buttonStoryCss})
+      return createButtonProductionStory(document)
     case "components/foundation/button/basic/text":
-      return Object.freeze({
-        story: createButtonStory(document, {...buttonStoryDefaultArgs, variant: "text", title: "Text button"}),
-        css: buttonStoryCss,
+      return createButtonProductionStory(document, {
+        ...buttonProductionStoryDefaultProps,
+        variant: "text",
+        title: "Text button",
       })
     case "components/foundation/button/basic/outlined":
-      return Object.freeze({
-        story: createButtonStory(document, {...buttonStoryDefaultArgs, variant: "outlined", title: "Outlined button"}),
-        css: buttonStoryCss,
+      return createButtonProductionStory(document, {
+        ...buttonProductionStoryDefaultProps,
+        variant: "outlined",
+        title: "Outlined button",
       })
     case "components/foundation/button/sizes/small":
-      return Object.freeze({
-        story: createButtonStory(document, {...buttonStoryDefaultArgs, size: "small", title: "Small button"}),
-        css: buttonStoryCss,
+      return createButtonProductionStory(document, {
+        ...buttonProductionStoryDefaultProps,
+        size: "small",
+        title: "Small button",
       })
     case "components/foundation/button/sizes/medium":
-      return Object.freeze({story: createButtonStory(document), css: buttonStoryCss})
+      return createButtonProductionStory(document)
     case "components/foundation/button/sizes/large":
-      return Object.freeze({
-        story: createButtonStory(document, {...buttonStoryDefaultArgs, size: "large", title: "Large button"}),
-        css: buttonStoryCss,
+      return createButtonProductionStory(document, {
+        ...buttonProductionStoryDefaultProps,
+        size: "large",
+        title: "Large button",
       })
     case "components/foundation/button/color/primary":
     case "components/foundation/button/color/success":
@@ -357,262 +436,279 @@ function createDomRouteStory(route: UiDomStoryRoute, document: SemanticDocument)
     case "components/foundation/button/color/error":
     case "components/foundation/button/color/neutral": {
       const tone = route.split("/").at(-1) as "primary" | "success" | "warning" | "error" | "neutral"
-      return Object.freeze({
-        story: createButtonStory(document, {...buttonStoryDefaultArgs, tone, title: `${tone} button`}),
-        css: buttonStoryCss,
+      return createButtonProductionStory(document, {
+        ...buttonProductionStoryDefaultProps,
+        tone,
+        title: `${tone} button`,
       })
     }
     case "components/inputs/text-field/basic/default":
-      return Object.freeze({story: createTextFieldStory(document), css: textFieldStoryCss})
+      return createTextFieldProductionStory(document)
     case "components/inputs/control-group/basic/default":
-      return Object.freeze({story: createControlGroupStory(document), css: fieldStoriesCss})
+      return createControlGroupProductionStory(document, controlGroupProductionStoryDefaultProps)
     case "components/inputs/field/text/default":
-      return Object.freeze({story: createFieldStory(document), css: fieldStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-text",
+        label: "Value",
+        kind: "text",
+        value: "Output",
+        description: "Text value",
+      })
     case "components/inputs/field/number/input":
-      return Object.freeze({
-        story: createFieldStory(document, {
-          label: "Value",
-          value: "42",
-          type: "number",
-          disabled: false,
-          readOnly: false,
-          title: "Numeric value",
-        }),
-        css: fieldStoriesCss,
+      return createFieldProductionStory(document, {
+        id: "field-number",
+        label: "Value",
+        kind: "number",
+        value: 42,
+        description: "Numeric value",
       })
     case "components/inputs/field/integer/input":
-      return Object.freeze({
-        story: createFieldStory(document, {
-          label: "Iterations",
-          value: "8",
-          type: "number",
-          disabled: false,
-          readOnly: false,
-          title: "Iteration count",
-        }),
-        css: fieldStoriesCss,
+      return createFieldProductionStory(document, {
+        id: "field-integer",
+        label: "Iterations",
+        kind: "integer",
+        value: 8,
+        description: "Iteration count",
       })
     case "components/inputs/field/readonly/default":
-      return Object.freeze({
-        story: createFieldStory(document, {
-          label: "Result",
-          value: "Output",
-          type: "text",
-          disabled: false,
-          readOnly: true,
-          title: "Read-only result",
-        }),
-        css: fieldStoriesCss,
+      return createFieldProductionStory(document, {
+        id: "field-readonly",
+        label: "Result",
+        kind: "readonly",
+        value: "Output",
+        description: "Read-only result",
       })
     case "components/inputs/field/number/slider":
-      return Object.freeze({story: createSliderControlStory(document), css: advancedNativeControlStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-slider",
+        label: "Коэффициент",
+        kind: "number",
+        presentation: "slider",
+        min: 0,
+        max: 1,
+        step: 0.01,
+        value: 0.5,
+      })
     case "components/inputs/field/boolean/switch":
-      return Object.freeze({story: createSwitcherStory(document), css: nativeControlStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-boolean",
+        label: "Enabled",
+        kind: "boolean",
+        presentation: "switch",
+        value: true,
+      })
     case "components/inputs/field/enum/default":
-      return Object.freeze({story: createSelectStory(document), css: selectStoryCss})
+      return createFieldProductionStory(document, {
+        id: "field-enum",
+        label: "Mode",
+        kind: "enum",
+        value: "output",
+        options: [
+          {value: "input", label: "Input"},
+          {value: "output", label: "Output"},
+          {value: "viewport", label: "Viewport"},
+        ],
+      })
     case "components/inputs/field/vector/default":
-      return Object.freeze({story: createVectorStory(document), css: numericCompositeStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-vector",
+        label: "Location",
+        kind: "vector",
+        value: [1, 2, 3],
+        axes: ["X", "Y", "Z"],
+      })
     case "components/inputs/field/rotation/default":
-      return Object.freeze({
-        story: createVectorStory(document, {
-          ...vectorStoryDefaultArgs,
-          title: "Rotation",
-          fields: [
-            {key: "x", label: "X", value: "0"},
-            {key: "y", label: "Y", value: "0"},
-            {key: "z", label: "Z", value: "0"},
-          ],
-        }),
-        css: numericCompositeStoriesCss,
+      return createFieldProductionStory(document, {
+        id: "field-rotation",
+        label: "Вращение",
+        kind: "rotation",
+        value: [0, 0, 0],
+        axes: ["X", "Y", "Z"],
       })
     case "components/inputs/field/matrix/default":
-      return Object.freeze({story: createMatrixStory(document), css: numericCompositeStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-matrix",
+        label: "Transform",
+        kind: "matrix",
+        value: [[1, 0], [0, 1]],
+      })
     case "components/inputs/field/reference/default":
-      return Object.freeze({story: createReferenceInputStory(document), css: resourceInputStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-reference",
+        label: "Target",
+        kind: "reference",
+        value: {id: "output", label: "Output", kind: "view"},
+      })
     case "components/inputs/field/collection/default":
-      return Object.freeze({story: createCollectionInputStory(document), css: resourceInputStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-collection",
+        label: "Items",
+        kind: "collection",
+        selectedId: "output",
+        items: [
+          {id: "input", label: "Input"},
+          {id: "output", label: "Output"},
+          {id: "viewport", label: "Viewport"},
+        ],
+      })
     case "components/inputs/field/path/default":
-      return Object.freeze({story: createPathInputStory(document), css: resourceInputStoriesCss})
+      return createFieldProductionStory(document, {
+        id: "field-path",
+        label: "File",
+        kind: "path",
+        value: "/project/output.exr",
+      })
     case "components/inputs/field/color/input":
-      return Object.freeze({
-        story: createColorFieldStory(document, colorFieldStoryDefaultArgs),
-        css: colorStoriesCss,
+      return createFieldProductionStory(document, {
+        id: "field-color",
+        label: "Color",
+        kind: "color",
+        value: {r: 0.2, g: 0.55, b: 0.8, a: 1},
       })
     case "components/inputs/number-input/basic/default":
-      return Object.freeze({story: createNumberInputStory(document), css: nativeControlStoriesCss})
+      return createNumberInputProductionStory(document)
     case "components/inputs/integer-input/basic/value":
-      return Object.freeze({
-        story: createNumberInputStory(document, {...numberInputStoryDefaultArgs, value: "8", title: "Integer value"}),
-        css: nativeControlStoriesCss,
+      return createIntegerInputProductionStory(document, {
+        ...integerInputProductionStoryDefaultProps,
+        title: "Integer value",
       })
     case "components/inputs/integer-input/basic/labeled":
-      return Object.freeze({
-        story: createFieldStory(document, {
-          label: "Iterations",
-          value: "8",
-          type: "number",
-          disabled: false,
-          readOnly: false,
-          title: "Iterations",
-        }),
-        css: fieldStoriesCss,
+      return createFieldProductionStory(document, {
+        id: "integer-input-labeled",
+        label: "Iterations",
+        kind: "integer",
+        value: 8,
       })
     case "components/inputs/integer-input/state/disabled":
-      return Object.freeze({
-        story: createNumberInputStory(document, {...numberInputStoryDefaultArgs, value: "8", disabled: true, title: "Disabled integer"}),
-        css: nativeControlStoriesCss,
+      return createIntegerInputProductionStory(document, {
+        ...integerInputProductionStoryDefaultProps,
+        disabled: true,
+        title: "Disabled integer",
       })
     case "components/inputs/integer-input/state/readonly":
-      return Object.freeze({
-        story: createNumberInputStory(document, {...numberInputStoryDefaultArgs, value: "8", readOnly: true, title: "Read-only integer"}),
-        css: nativeControlStoriesCss,
+      return createIntegerInputProductionStory(document, {
+        ...integerInputProductionStoryDefaultProps,
+        readOnly: true,
+        title: "Read-only integer",
       })
     case "components/inputs/checkbox/state/checked":
-      return Object.freeze({story: createCheckboxStory(document), css: nativeControlStoriesCss})
+      return createCheckboxProductionStory(document)
     case "components/inputs/checkbox/state/unchecked":
-      return Object.freeze({
-        story: createCheckboxStory(document, {
-          checked: false,
-          disabled: false,
-          title: "Unchecked checkbox",
-        }),
-        css: nativeControlStoriesCss,
+      return createCheckboxProductionStory(document, {
+        ...checkboxProductionStoryDefaultProps,
+        checked: false,
+        title: "Unchecked checkbox",
       })
     case "components/inputs/switcher/state/on":
-      return Object.freeze({story: createSwitcherStory(document), css: nativeControlStoriesCss})
+      return createSwitcherProductionStory(document)
     case "components/inputs/switcher/state/off":
-      return Object.freeze({
-        story: createSwitcherStory(document, {
-          checked: false,
-          disabled: false,
-          title: "Switcher off",
-        }),
-        css: nativeControlStoriesCss,
+      return createSwitcherProductionStory(document, {
+        ...switcherProductionStoryDefaultProps,
+        checked: false,
+        title: "Switcher off",
       })
     case "components/inputs/slider-control/basic/default":
-      return Object.freeze({
-        story: createSliderControlStory(document),
-        css: advancedNativeControlStoriesCss,
-      })
+      return createSliderControlProductionStory(document)
     case "components/inputs/progress-checkbox/progress/default":
-      return Object.freeze({
-        story: createProgressCheckboxStory(document),
-        css: advancedNativeControlStoriesCss,
-      })
+      return createProgressCheckboxProductionStory(document)
     case "components/inputs/enum-input/presentation/cycle":
-      return Object.freeze({story: createSelectStory(document), css: selectStoryCss})
+      return createEnumInputProductionStory(document)
     case "components/inputs/vector-input/basic/default":
-      return Object.freeze({story: createVectorStory(document), css: numericCompositeStoriesCss})
+      return createVectorInputProductionStory(document)
     case "components/inputs/matrix-input/basic/default":
-      return Object.freeze({story: createMatrixStory(document), css: numericCompositeStoriesCss})
+      return createMatrixInputProductionStory(document)
     case "components/inputs/reference-input/basic/default":
-      return Object.freeze({story: createReferenceInputStory(document), css: resourceInputStoriesCss})
+      return createReferenceInputProductionStory(document)
     case "components/inputs/path-input/value/path":
-      return Object.freeze({story: createPathInputStory(document), css: resourceInputStoriesCss})
+      return createPathInputProductionStory(document)
     case "components/inputs/path-input/value/empty":
-      return Object.freeze({
-        story: createPathInputStory(document, {...pathInputStoryDefaultArgs, value: ""}),
-        css: resourceInputStoriesCss,
+      return createPathInputProductionStory(document, {
+        ...pathInputProductionStoryDefaultProps,
+        value: "",
       })
     case "components/inputs/path-input/state/disabled":
-      return Object.freeze({
-        story: createPathInputStory(document, {...pathInputStoryDefaultArgs, disabled: true}),
-        css: resourceInputStoriesCss,
+      return createPathInputProductionStory(document, {
+        ...pathInputProductionStoryDefaultProps,
+        disabled: true,
       })
     case "components/inputs/path-input/state/readonly":
-      return Object.freeze({
-        story: createPathInputStory(document, {...pathInputStoryDefaultArgs, readOnly: true}),
-        css: resourceInputStoriesCss,
+      return createPathInputProductionStory(document, {
+        ...pathInputProductionStoryDefaultProps,
+        readOnly: true,
       })
     case "components/inputs/path-input/density/compact":
-      return Object.freeze({
-        story: createPathInputStory(document, {...pathInputStoryDefaultArgs, density: "compact"}),
-        css: resourceInputStoriesCss,
+      return createPathInputProductionStory(document, {
+        ...pathInputProductionStoryDefaultProps,
+        density: "compact",
       })
     case "components/inputs/collection-input/value/selected":
-      return Object.freeze({story: createCollectionInputStory(document), css: resourceInputStoriesCss})
+      return createCollectionInputProductionStory(document)
     case "components/inputs/collection-input/value/empty":
-      return Object.freeze({
-        story: createCollectionInputStory(document, {
-          ...collectionInputStoryDefaultArgs,
-          selectedKey: null,
-          items: [],
-        }),
-        css: resourceInputStoriesCss,
+      return createCollectionInputProductionStory(document, {
+        ...collectionInputProductionStoryDefaultProps,
+        selectedId: null,
+        items: [],
       })
     case "components/inputs/collection-input/state/disabled":
-      return Object.freeze({
-        story: createCollectionInputStory(document, {
-          ...collectionInputStoryDefaultArgs,
-          disabled: true,
-        }),
-        css: resourceInputStoriesCss,
+      return createCollectionInputProductionStory(document, {
+        ...collectionInputProductionStoryDefaultProps,
+        disabled: true,
       })
     case "components/inputs/collection-input/state/readonly":
-      return Object.freeze({
-        story: createCollectionInputStory(document, {
-          ...collectionInputStoryDefaultArgs,
-          readOnly: true,
-        }),
-        css: resourceInputStoriesCss,
+      return createCollectionInputProductionStory(document, {
+        ...collectionInputProductionStoryDefaultProps,
+        readOnly: true,
       })
     case "components/inputs/collection-input/density/compact":
-      return Object.freeze({
-        story: createCollectionInputStory(document, {
-          ...collectionInputStoryDefaultArgs,
-          density: "compact",
-        }),
-        css: resourceInputStoriesCss,
+      return createCollectionInputProductionStory(document, {
+        ...collectionInputProductionStoryDefaultProps,
+        density: "compact",
       })
     case "components/inputs/color-input/basic/color-input":
-      return Object.freeze({
-        story: createColorInputStory(document, colorInputClosedStoryDefaultArgs),
-        css: colorStoriesCss,
+      return createColorInputProductionStory(document, {
+        ...colorInputProductionStoryDefaultProps,
+        presentation: "closed",
       })
     case "components/inputs/color-input/state/open":
-      return Object.freeze({
-        story: createColorInputStory(document, colorInputOpenStoryDefaultArgs),
-        css: colorStoriesCss,
+      return createColorInputProductionStory(document, {
+        ...colorInputProductionStoryDefaultProps,
+        presentation: "open",
       })
     case "components/inputs/color-input/presentation/expanded":
-      return Object.freeze({
-        story: createColorInputStory(document, colorInputExpandedStoryDefaultArgs),
-        css: colorStoriesCss,
+      return createColorInputProductionStory(document, {
+        ...colorInputProductionStoryDefaultProps,
+        presentation: "expanded",
       })
     case "components/foundation/pane/variants/filled":
-      return Object.freeze({story: createPaneStory(document), css: foundationStoriesCss})
+      return createPaneProductionStory(document)
     case "components/foundation/pane/variants/glass":
-      return Object.freeze({
-        story: createPaneStory(document, {label: "Panel content", variant: "glass", title: "Glass pane"}),
-        css: foundationStoriesCss,
+      return createPaneProductionStory(document, {
+        content: "Panel content",
+        variant: "transparent",
+        title: "Glass pane",
       })
     case "components/foundation/pane/variants/outlined":
-      return Object.freeze({
-        story: createPaneStory(document, {label: "Panel content", variant: "outlined", title: "Outlined pane"}),
-        css: foundationStoriesCss,
+      return createPaneProductionStory(document, {
+        content: "Panel content",
+        variant: "outlined",
+        title: "Outlined pane",
       })
     case "components/foundation/badge/basic/default":
-      return Object.freeze({story: createBadgeStory(document), css: foundationStoriesCss})
+      return createBadgeProductionStory(document)
     case "components/foundation/typography/variants/default":
-      return Object.freeze({story: createTypographyStory(document), css: foundationStoriesCss})
+      return createTypographyProductionStory(document)
     case "components/foundation/divider/variants/full-width":
-      return Object.freeze({story: createDividerStory(document), css: foundationStoriesCss})
+      return createDividerProductionStory(document)
     case "components/foundation/divider/variants/inset":
-      return Object.freeze({
-        story: createDividerStory(document, {variant: "inset", title: "Inset divider"}),
-        css: foundationStoriesCss,
-      })
+      return createDividerProductionStory(document, {variant: "inset", title: "Inset divider"})
     case "components/foundation/divider/variants/middle":
-      return Object.freeze({
-        story: createDividerStory(document, {variant: "middle", title: "Middle divider"}),
-        css: foundationStoriesCss,
-      })
+      return createDividerProductionStory(document, {variant: "middle", title: "Middle divider"})
     case "hud/foundation/window/inventory/default":
-      return Object.freeze({story: createHudWindowStory(document), css: hudStoriesCss})
+      return createHudWindowProductionStory(document)
     case "hud/foundation/frame/inventory/default":
-      return Object.freeze({story: createHudFrameStory(document), css: hudStoriesCss})
+      return createHudFrameProductionStory(document)
     case "hud/foundation/timeline/inventory/default":
-      return Object.freeze({story: createHudTimelineStory(document), css: hudStoriesCss})
+      return createTimelineProductionStory(document)
   }
   throw new Error(`DOM story route has no implementation: ${route}`)
 }

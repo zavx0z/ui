@@ -13,7 +13,7 @@ events and preserve DOM identity across controlled updates.
 
 | Package | Responsibility |
 | --- | --- |
-| [`@ui/components`](packages/components) | Production DOM/CSS owners: Field, Inspector, CodeEditor, HUD compositions, icons and syntax theme. |
+| [`@ui/components`](packages/components) | Blender-compatible production DOM/CSS controls, Fields, collections, Inspector, CodeEditor, HUD, theme and assets. |
 | [`@ui/storybook`](packages/storybook) | Private one-Workbench UI catalog, owner routes, lifecycle and static application using `@zavx0z/storybook`. |
 
 Production authoring depends on `@zavx0z/dom`; read-only syntax presentation
@@ -55,6 +55,11 @@ Use `$storybook ensure @ui/storybook` for the local runtime and
 `$storybook build @ui/storybook` for the `/ui/` static artifact.
 
 References are metadata-first and image-lazy. Catalog metadata can remain in the initial bundle, while raster evidence is requested only for the selected comparison. Automated captures are candidates; acceptance remains an explicit owner decision.
+
+The DOM transition is an implementation migration, not a visual redesign.
+Production controls retain their compact editor density, material states and
+interaction ownership; a direct-element Storybook proof never replaces a
+public Component.
 
 ## Repository map
 
