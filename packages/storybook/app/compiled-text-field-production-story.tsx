@@ -1,6 +1,6 @@
 import {
   TextField,
-  textFieldComponentCss,
+  textFieldCss,
   type TextFieldProps
 } from "@ui/components/text-field"
 import {createRoot, useState} from "@zavx0z/react"
@@ -46,7 +46,7 @@ export function createCompiledTextFieldProductionStory(
     get source() {
       return Object.freeze({
         html: serialize(input),
-        css: textFieldComponentCss,
+        css: textFieldCss,
         typescript: source(props, input.value)
       })
     },
@@ -54,12 +54,12 @@ export function createCompiledTextFieldProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: textFieldComponentCss})
+  return Object.freeze({story, css: textFieldCss})
 }
 
 function source(props: TextFieldProps, value: string): string {
   return [
-    'import {TextField, textFieldComponentCss} from "@ui/components/text-field"',
+    'import {TextField, textFieldCss} from "@ui/components/text-field"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -74,7 +74,7 @@ function source(props: TextFieldProps, value: string): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void textFieldComponentCss"
+    "void textFieldCss"
   ].join("\n")
 }
 

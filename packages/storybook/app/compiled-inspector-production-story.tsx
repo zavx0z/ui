@@ -1,65 +1,66 @@
 import {
   Inspector,
+  InspectorSection,
   InspectorSections,
-  InspectorTextSection,
-  inspectorComponentCss,
-  isInspectorSectionVisible,
+  inspectorCss,
   type InspectorCategory
 } from "@ui/components/inspector"
+import {fieldCss, type FieldDefinition} from "@ui/components/field"
 import type {Document, Element, HTMLElement, Node} from "@zavx0z/dom"
 import {createRoot, useState} from "@zavx0z/react"
 import type {RoutedProductionComponentStory} from "./production-component-stories.ts"
+import {PROPS_INSPECTOR_COPY} from "./props-inspector-copy.ts"
+import {StoryPropsFields} from "./props-inspector.tsx"
 
 const categories: readonly InspectorCategory[] = Object.freeze([
-  Object.freeze({id: "source", label: "S", title: "Source documents", sectionIds: Object.freeze(["html", "css"])}),
-  Object.freeze({id: "events", label: "E", title: "DOM events", groupStart: true, sectionIds: Object.freeze(["events"])})
+  Object.freeze({id: "props", label: "P", title: "Props", sectionIds: Object.freeze(["props"])})
 ])
 
-type StorySection = Readonly<{
-  id: string
-  label: string
-  title: string
-  expanded: boolean
-  content: string
-}>
+const inspectorSections = Object.freeze([{id: "props"}] as const)
 
-const initialSections: readonly StorySection[] = Object.freeze([
-  Object.freeze({id: "html", label: "HTML", title: "Semantic HTML", expanded: true, content: "Semantic markup"}),
-  Object.freeze({id: "css", label: "CSS", title: "Executable CSS", expanded: true, content: "Executable stylesheet"}),
-  Object.freeze({id: "events", label: "Events", title: "DOM events", expanded: true, content: "Click and input events"})
+const inspectorStoryProps = Object.freeze({
+  ariaLabel: "Инспектор свойств",
+  selectedCategoryId: "props",
+  query: "",
+  context: Object.freeze({label: "Button", title: "Кнопка Output"}),
+})
+
+const propFields: readonly FieldDefinition[] = Object.freeze([
+  Object.freeze({id: "label", label: "label", kind: "text", value: "Output", readOnly: true}),
+  Object.freeze({id: "variant", label: "variant", kind: "enum", value: "contained", readOnly: true, options: Object.freeze([
+    Object.freeze({value: "contained", label: "Contained"}),
+    Object.freeze({value: "outlined", label: "Outlined"}),
+    Object.freeze({value: "text", label: "Text"}),
+  ])}),
+  Object.freeze({id: "disabled", label: "disabled", kind: "boolean", value: false, readOnly: true}),
 ])
 
 function InspectorStoryComponent() {
-  const [selectedCategoryId, setSelectedCategoryId] = useState("source")
   const [query, setQuery] = useState("")
-  const [sections, setSections] = useState(initialSections)
-  const onToggle = (id: string, expanded: boolean) => setSections(current => current.map(section =>
-    section.id === id ? {...section, expanded} : section
-  ))
+  const [expanded, setExpanded] = useState(true)
+  const normalizedQuery = query.trim().toLocaleLowerCase()
+  const fields = normalizedQuery.length === 0
+    ? propFields
+    : propFields.filter(field => field.label.toLocaleLowerCase().includes(normalizedQuery))
   return <Inspector
     ariaLabel="Inspector story"
     categoriesLabel="Story categories"
     categories={categories}
-    selectedCategoryId={selectedCategoryId}
+    selectedCategoryId="props"
     query={query}
-    searchLabel="Search sections"
-    searchPlaceholder="Search sections"
+    searchLabel={PROPS_INSPECTOR_COPY.searchLabel}
+    searchPlaceholder={PROPS_INSPECTOR_COPY.searchLabel}
     context={{label: "Button", title: "Inspected element"}}
-    onCategoryChange={setSelectedCategoryId}
     onQueryChange={setQuery}
   >
-    <InspectorSections>
-      {sections.map(section => <InspectorTextSection
-        key={section.id}
-        id={section.id}
-        label={section.label}
-        title={section.title}
-        content={section.content}
-        expanded={section.expanded}
-        hidden={!isInspectorSectionVisible(categories, selectedCategoryId, query, section)}
-        onToggle={onToggle}
-      />)}
-    </InspectorSections>
+    <InspectorSections>{inspectorSections.map(section => <InspectorSection
+      key={section.id}
+      id={section.id}
+      label={PROPS_INSPECTOR_COPY.sectionLabel}
+      title={PROPS_INSPECTOR_COPY.sectionTitle}
+      expanded={expanded}
+      onToggle={(_id, next) => setExpanded(next)}
+    ><StoryPropsFields fields={fields} /></InspectorSection>)}</InspectorSections>
   </Inspector>
 }
 
@@ -76,50 +77,39 @@ export function createCompiledInspectorProductionStory(document: Document): Rout
   owner.setAttribute("data-story-component", "inspector")
   const story = Object.freeze({
     element: owner,
+    props: inspectorStoryProps,
     get source() {
-      return Object.freeze({html: serialize(owner), css: inspectorComponentCss, typescript: source()})
+      return Object.freeze({html: serialize(owner), css: [inspectorCss, fieldCss].join("\n"), typescript: source()})
     },
     dispose() {
       root.unmount()
     }
   })
-  return Object.freeze({story, css: inspectorComponentCss})
+  return Object.freeze({story, css: [inspectorCss, fieldCss].join("\n")})
 }
 
 function source(): string {
   return [
-    'import {Inspector, InspectorSections, InspectorTextSection, inspectorComponentCss, isInspectorSectionVisible} from "@ui/components/inspector"',
+    'import {Inspector, InspectorSection, InspectorSections, inspectorCss} from "@ui/components/inspector"',
+    'import {Field, fieldCss} from "@ui/components/field"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
-    "type StorySection = Readonly<{id: string; label: string; title: string; expanded: boolean; content: string}>",
     `const categories = ${JSON.stringify(categories, null, 2)} as const`,
-    `const initialSections = ${JSON.stringify(initialSections, null, 2)} as const`,
+    `const fields = ${JSON.stringify(propFields, null, 2)} as const`,
     "",
     "function Story() {",
-    '  const [category, setCategory] = useState("source")',
     '  const [query, setQuery] = useState("")',
-    "  const [sections, setSections] = useState<readonly StorySection[]>(initialSections)",
-    "  const onToggle = (id: string, expanded: boolean) => setSections(current => current.map(section =>",
-    "    section.id === id ? {...section, expanded} : section",
-    "  ))",
-    "  return <Inspector categories={categories} selectedCategoryId={category} query={query}",
-    "    onCategoryChange={setCategory} onQueryChange={setQuery}>",
-    "    <InspectorSections>{sections.map(section =>",
-    "      <InspectorTextSection",
-    "        key={section.id}",
-    "        id={section.id}",
-    "        label={section.label}",
-    "        title={section.title}",
-    "        content={section.content}",
-    "        expanded={section.expanded}",
-    "        hidden={!isInspectorSectionVisible(categories, category, query, section)}",
-    "        onToggle={onToggle}",
-    "      />",
-    "    )}</InspectorSections>",
+    "  const [expanded, setExpanded] = useState(true)",
+    '  return <Inspector categories={categories} selectedCategoryId="props" query={query} onQueryChange={setQuery}>',
+    "    <InspectorSections><InspectorSection id=\"props\" label=\"Свойства\" expanded={expanded}",
+    "      onToggle={(_id, next) => setExpanded(next)}>",
+    "      <div>{fields.map(field => <Field key={field.id} definition={field} />)}</div>",
+    "    </InspectorSection></InspectorSections>",
     "  </Inspector>",
     "}",
     "createRoot(container).render(<Story />)",
-    "void inspectorComponentCss"
+    "void inspectorCss",
+    "void fieldCss"
   ].join("\n")
 }
 

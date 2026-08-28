@@ -1,11 +1,11 @@
 import {
   PathInput,
-  pathInputComponentCss,
+  pathInputCss,
   type PathInputProps
 } from "@ui/components/path-input"
 import {
   ReferenceInput,
-  referenceInputComponentCss,
+  referenceInputCss,
   type ReferenceInputProps,
   type ReferenceInputValue
 } from "@ui/components/reference-input"
@@ -78,7 +78,7 @@ export function createCompiledPathInputProductionStory(
     PathInputStoryComponent,
     {initial: props},
     "path-input",
-    pathInputComponentCss,
+    pathInputCss,
     owner => pathSource(props, (owner.querySelector("input") as HTMLInputElement).value)
   )
   return mounted
@@ -93,7 +93,7 @@ export function createCompiledReferenceInputProductionStory(
     ReferenceInputStoryComponent,
     {initial: props},
     "reference-input",
-    referenceInputComponentCss,
+    referenceInputCss,
     () => referenceSource(props)
   )
 }
@@ -130,7 +130,7 @@ function mountCompiledStory(
 
 function pathSource(props: PathInputProps, value: string): string {
   return [
-    'import {PathInput, pathInputComponentCss} from "@ui/components/path-input"',
+    'import {PathInput, pathInputCss} from "@ui/components/path-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -145,13 +145,13 @@ function pathSource(props: PathInputProps, value: string): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void pathInputComponentCss"
+    "void pathInputCss"
   ].join("\n")
 }
 
 function referenceSource(props: ReferenceInputProps): string {
   return [
-    'import {ReferenceInput, referenceInputComponentCss, type ReferenceInputValue} from "@ui/components/reference-input"',
+    'import {ReferenceInput, referenceInputCss, type ReferenceInputValue} from "@ui/components/reference-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -165,7 +165,7 @@ function referenceSource(props: ReferenceInputProps): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void referenceInputComponentCss"
+    "void referenceInputCss"
   ].join("\n")
 }
 

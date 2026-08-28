@@ -1,6 +1,6 @@
 import {
   Switcher,
-  switcherComponentCss,
+  switcherCss,
   type SwitcherProps
 } from "@ui/components/switcher"
 import {createRoot, useState} from "@zavx0z/react"
@@ -42,7 +42,7 @@ export function createCompiledSwitcherProductionStory(
     get source() {
       return Object.freeze({
         html: serialize(button),
-        css: switcherComponentCss,
+        css: switcherCss,
         typescript: source(props, button.getAttribute("aria-checked") === "true")
       })
     },
@@ -50,12 +50,12 @@ export function createCompiledSwitcherProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: switcherComponentCss})
+  return Object.freeze({story, css: switcherCss})
 }
 
 function source(props: SwitcherProps, checked: boolean): string {
   return [
-    'import {Switcher, switcherComponentCss} from "@ui/components/switcher"',
+    'import {Switcher, switcherCss} from "@ui/components/switcher"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -67,7 +67,7 @@ function source(props: SwitcherProps, checked: boolean): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void switcherComponentCss"
+    "void switcherCss"
   ].join("\n")
 }
 

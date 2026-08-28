@@ -1,4 +1,4 @@
-import {Field, fieldComponentCss, type FieldColor, type FieldDefinition} from "@ui/components/field"
+import {Field, fieldCss, type FieldColor, type FieldDefinition} from "@ui/components/field"
 import type {Document, Element, HTMLElement, Node} from "@zavx0z/dom"
 import {createRoot, useState, type StateDispatch} from "@zavx0z/react"
 import type {RoutedProductionComponentStory} from "./production-component-stories.ts"
@@ -27,7 +27,7 @@ export function createCompiledFieldProductionStory(
     get source() {
       return Object.freeze({
         html: serialize(owner),
-        css: fieldComponentCss,
+        css: fieldCss,
         typescript: source(definition)
       })
     },
@@ -35,7 +35,7 @@ export function createCompiledFieldProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: fieldComponentCss})
+  return Object.freeze({story, css: fieldCss})
 }
 
 function controlledDefinition(
@@ -124,7 +124,7 @@ function controlledDefinition(
 
 function source(definition: FieldDefinition): string {
   return [
-    'import {Field, fieldComponentCss, type FieldDefinition} from "@ui/components/field"',
+    'import {Field, fieldCss, type FieldDefinition} from "@ui/components/field"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -135,7 +135,7 @@ function source(definition: FieldDefinition): string {
     "  }} />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void fieldComponentCss"
+    "void fieldCss"
   ].join("\n")
 }
 

@@ -1,6 +1,6 @@
 import {
   Checkbox,
-  checkboxComponentCss,
+  checkboxCss,
   type CheckboxProps
 } from "@ui/components/checkbox"
 import {createRoot, useState} from "@zavx0z/react"
@@ -43,7 +43,7 @@ export function createCompiledCheckboxProductionStory(
     get source() {
       return Object.freeze({
         html: serialize(input),
-        css: checkboxComponentCss,
+        css: checkboxCss,
         typescript: source(props, input.checked)
       })
     },
@@ -51,12 +51,12 @@ export function createCompiledCheckboxProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: checkboxComponentCss})
+  return Object.freeze({story, css: checkboxCss})
 }
 
 function source(props: CheckboxProps, checked: boolean): string {
   return [
-    'import {Checkbox, checkboxComponentCss} from "@ui/components/checkbox"',
+    'import {Checkbox, checkboxCss} from "@ui/components/checkbox"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -69,7 +69,7 @@ function source(props: CheckboxProps, checked: boolean): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void checkboxComponentCss"
+    "void checkboxCss"
   ].join("\n")
 }
 

@@ -1,11 +1,11 @@
 import {describe, expect, test} from "bun:test"
 import {uiRouteStoryCss} from "./route-style.ts"
-import {buttonComponentCss} from "@ui/components/button"
-import {codeEditorComponentCss} from "@ui/components/code-editor"
-import {fieldComponentCss} from "@ui/components/field"
-import {inspectorComponentCss} from "@ui/components/inspector"
-import {textFieldComponentCss} from "@ui/components/text-field"
-import {numberInputComponentCss} from "@ui/components/number-input"
+import {buttonCss} from "@ui/components/button"
+import {codeEditorCss} from "@ui/components/code-editor"
+import {fieldCss} from "@ui/components/field"
+import {inspectorCss} from "@ui/components/inspector"
+import {textFieldCss} from "@ui/components/text-field"
+import {numberInputCss} from "@ui/components/number-input"
 
 describe("persistent UI Storybook route stylesheet", () => {
   test("contains every production and platform route family", () => {
@@ -16,12 +16,12 @@ describe("persistent UI Storybook route stylesheet", () => {
       ".image-dom-story",
       ".ui-aggregate-overview",
     ]) expect(uiRouteStoryCss, selector).toContain(selector)
-    expect(uiRouteStoryCss).toContain(buttonComponentCss)
-    expect(uiRouteStoryCss).toContain(codeEditorComponentCss)
-    expect(uiRouteStoryCss).toContain(fieldComponentCss)
-    expect(uiRouteStoryCss).toContain(inspectorComponentCss)
-    expect(uiRouteStoryCss).toContain(textFieldComponentCss)
-    expect(uiRouteStoryCss).toContain(numberInputComponentCss)
+    expect(uiRouteStoryCss).toContain(buttonCss)
+    expect(uiRouteStoryCss).toContain(codeEditorCss)
+    expect(uiRouteStoryCss).toContain(fieldCss)
+    expect(uiRouteStoryCss).toContain(inspectorCss)
+    expect(uiRouteStoryCss).toContain(textFieldCss)
+    expect(uiRouteStoryCss).toContain(numberInputCss)
   })
 
   test("is installed once without route-specific runtime recreation", async () => {

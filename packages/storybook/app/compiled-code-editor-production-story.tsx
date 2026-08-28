@@ -1,6 +1,6 @@
 import {
   CodeEditor,
-  codeEditorComponentCss,
+  codeEditorCss,
   type CodeEditorProps
 } from "@ui/components/code-editor"
 import type {Document, Element, HTMLElement, Node} from "@zavx0z/dom"
@@ -45,10 +45,11 @@ export function createCompiledCodeEditorProductionStory(
   owner.setAttribute("data-story-component", "code-editor")
   const story = Object.freeze({
     element: owner,
+    props: Object.freeze({...props}) as Readonly<Record<string, unknown>>,
     get source() {
       return Object.freeze({
         html: serialize(owner),
-        css: codeEditorComponentCss,
+        css: codeEditorCss,
         typescript: source(props)
       })
     },
@@ -56,12 +57,12 @@ export function createCompiledCodeEditorProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: codeEditorComponentCss})
+  return Object.freeze({story, css: codeEditorCss})
 }
 
 function source(props: CodeEditorProps): string {
   return [
-    'import {CodeEditor, codeEditorComponentCss} from "@ui/components/code-editor"',
+    'import {CodeEditor, codeEditorCss} from "@ui/components/code-editor"',
     'import {createRoot} from "@zavx0z/react"',
     "",
     "createRoot(container).render(<CodeEditor",
@@ -69,7 +70,7 @@ function source(props: CodeEditorProps): string {
     "  readOnly={true}",
     `  languageId={${JSON.stringify(props.languageId ?? "plaintext")}}`,
     "/>)",
-    "void codeEditorComponentCss"
+    "void codeEditorCss"
   ].join("\n")
 }
 

@@ -1,14 +1,14 @@
 import {
   NumberInput,
-  numberInputComponentCss,
+  numberInputCss,
   type NumberInputProps
 } from "@ui/components/number-input"
-import {buttonComponentCss} from "@ui/components/button"
+import {buttonCss} from "@ui/components/button"
 import {createRoot, useState} from "@zavx0z/react"
 import type {Document, Element, Event, HTMLElement, HTMLInputElement, Node} from "@zavx0z/dom"
 import type {RoutedProductionComponentStory} from "./production-component-stories.ts"
 
-const css = `${buttonComponentCss}\n${numberInputComponentCss}`
+const css = `${buttonCss}\n${numberInputCss}`
 
 function NumberInputStoryComponent(props: Readonly<{initial: NumberInputProps}>) {
   const [value, setValue] = useState(props.initial.value)
@@ -68,8 +68,8 @@ export function createCompiledNumberInputProductionStory(
 
 function source(props: NumberInputProps, value: number): string {
   return [
-    'import {NumberInput, numberInputComponentCss} from "@ui/components/number-input"',
-    'import {buttonComponentCss} from "@ui/components/button"',
+    'import {NumberInput, numberInputCss} from "@ui/components/number-input"',
+    'import {buttonCss} from "@ui/components/button"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -83,8 +83,8 @@ function source(props: NumberInputProps, value: number): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void buttonComponentCss",
-    "void numberInputComponentCss"
+    "void buttonCss",
+    "void numberInputCss"
   ].join("\n")
 }
 

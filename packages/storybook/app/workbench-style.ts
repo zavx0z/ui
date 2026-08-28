@@ -25,8 +25,7 @@ export const uiStorybookWorkbenchCss = String.raw`
 .storybook-dom-workbench__catalog,
 .storybook-dom-workbench__secondary,
 .storybook-dom-workbench__preview,
-.storybook-dom-workbench__scenarios,
-.storybook-dom-workbench__inspector {
+.storybook-dom-workbench__scenarios {
   box-sizing: border-box;
   overflow: hidden;
   border: 1px solid #111111;
@@ -76,47 +75,13 @@ export const uiStorybookWorkbenchCss = String.raw`
   gap: 2px;
 }
 
-.storybook-dom-workbench__inspector {
+.storybook-dom-workbench__inspector-host {
+  box-sizing: border-box;
+  display: flex;
   flex: 0 0 400px;
   width: 400px;
-  gap: 2px;
-  padding: 4px;
-  background: #292929;
-}
-
-.storybook-dom-workbench__sources {
-  gap: 4px;
-  overflow: auto;
-}
-
-.storybook-dom-workbench__source {
-  box-sizing: border-box;
-  gap: 0;
-  padding: 0;
+  min-height: 0;
   overflow: hidden;
-  border: 1px solid #151515;
-  border-radius: 4px;
-  background: #1d1d1d;
-}
-
-.storybook-dom-workbench__source .storybook-dom-workbench__heading {
-  box-sizing: border-box;
-  height: 22px;
-  padding: 3px 6px;
-  background: #303030;
-  color: #c8c8c8;
-}
-
-.storybook-dom-workbench__code {
-  box-sizing: border-box;
-  min-height: 64px;
-  margin: 0;
-  padding: 5px 6px;
-  overflow: auto;
-  background: #1d1d1d;
-  color: #d5d5d5;
-  font-size: 11px;
-  line-height: 16px;
 }
 
 .storybook-dom-workbench__search {

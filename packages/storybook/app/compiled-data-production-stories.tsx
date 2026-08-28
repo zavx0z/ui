@@ -1,19 +1,19 @@
 import {
   CollectionInput,
-  collectionInputComponentCss,
+  collectionInputCss,
   type CollectionInputItem,
   type CollectionInputMoveDirection,
   type CollectionInputProps
 } from "@ui/components/collection-input"
 import {
   ColorInput,
-  colorInputComponentCss,
+  colorInputCss,
   type ColorInputPresentation,
   type ColorInputProps,
   type ColorInputValue
 } from "@ui/components/color-input"
-import {List, listComponentCss, type ListProps} from "@ui/components/list"
-import {Table, tableComponentCss, type TableProps} from "@ui/components/table"
+import {List, listCss, type ListProps} from "@ui/components/list"
+import {Table, tableCss, type TableProps} from "@ui/components/table"
 import type {Document, Element, Event, HTMLElement, Node} from "@zavx0z/dom"
 import {createRoot, useState} from "@zavx0z/react"
 import type {RoutedProductionComponentStory} from "./production-component-stories.ts"
@@ -148,7 +148,7 @@ export function createCompiledColorInputProductionStory(
     ColorInputStoryComponent,
     {initial: props},
     "color-input",
-    colorInputComponentCss,
+    colorInputCss,
     colorSource(props)
   )
 }
@@ -162,7 +162,7 @@ export function createCompiledCollectionInputProductionStory(
     CollectionInputStoryComponent,
     {initial: props},
     "collection-input",
-    collectionInputComponentCss,
+    collectionInputCss,
     collectionSource(props)
   )
 }
@@ -176,7 +176,7 @@ export function createCompiledListProductionStory(
     ListStoryComponent,
     {initial: props},
     "list",
-    listComponentCss,
+    listCss,
     listSource(props)
   )
 }
@@ -190,7 +190,7 @@ export function createCompiledTableProductionStory(
     TableStoryComponent,
     {initial: props},
     "table",
-    tableComponentCss,
+    tableCss,
     tableSource(props)
   )
 }
@@ -241,7 +241,7 @@ function mountCompiledStory(
 
 function colorSource(props: ColorInputProps): string {
   return [
-    'import {ColorInput, colorInputComponentCss, type ColorInputPresentation, type ColorInputValue} from "@ui/components/color-input"',
+    'import {ColorInput, colorInputCss, type ColorInputPresentation, type ColorInputValue} from "@ui/components/color-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -254,13 +254,13 @@ function colorSource(props: ColorInputProps): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void colorInputComponentCss"
+    "void colorInputCss"
   ].join("\n")
 }
 
 function collectionSource(props: CollectionInputProps): string {
   return [
-    'import {CollectionInput, collectionInputComponentCss, type CollectionInputItem} from "@ui/components/collection-input"',
+    'import {CollectionInput, collectionInputCss, type CollectionInputItem} from "@ui/components/collection-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -272,13 +272,13 @@ function collectionSource(props: CollectionInputProps): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void collectionInputComponentCss"
+    "void collectionInputCss"
   ].join("\n")
 }
 
 function listSource(props: ListProps): string {
   return [
-    'import {List, listComponentCss} from "@ui/components/list"',
+    'import {List, listCss} from "@ui/components/list"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -286,13 +286,13 @@ function listSource(props: ListProps): string {
     `  return <List items={${literal(props.items)}} selectedKey={selectedKey} onSelect={setSelectedKey} />`,
     "}",
     "createRoot(container).render(<Story />)",
-    "void listComponentCss"
+    "void listCss"
   ].join("\n")
 }
 
 function tableSource(props: TableProps): string {
   return [
-    'import {Table, tableComponentCss} from "@ui/components/table"',
+    'import {Table, tableCss} from "@ui/components/table"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -302,7 +302,7 @@ function tableSource(props: TableProps): string {
     "  return <Table columns={columns} rows={rows} selectedKey={selectedKey} onRowActivate={setSelectedKey} />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void tableComponentCss"
+    "void tableCss"
   ].join("\n")
 }
 

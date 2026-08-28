@@ -1,6 +1,6 @@
 import {
   EnumInput,
-  enumInputComponentCss,
+  enumInputCss,
   type EnumInputProps
 } from "@ui/components/enum-input"
 import {createRoot, useState} from "@zavx0z/react"
@@ -43,7 +43,7 @@ export function createCompiledEnumInputProductionStory(
     get source() {
       return Object.freeze({
         html: serialize(select),
-        css: enumInputComponentCss,
+        css: enumInputCss,
         typescript: source(props, select.value)
       })
     },
@@ -51,12 +51,12 @@ export function createCompiledEnumInputProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: enumInputComponentCss})
+  return Object.freeze({story, css: enumInputCss})
 }
 
 function source(props: EnumInputProps, value: string): string {
   return [
-    'import {EnumInput, enumInputComponentCss} from "@ui/components/enum-input"',
+    'import {EnumInput, enumInputCss} from "@ui/components/enum-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     `const options = ${JSON.stringify(props.options, null, 2)} as const`,
@@ -71,7 +71,7 @@ function source(props: EnumInputProps, value: string): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void enumInputComponentCss"
+    "void enumInputCss"
   ].join("\n")
 }
 

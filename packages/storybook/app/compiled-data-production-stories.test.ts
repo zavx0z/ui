@@ -20,7 +20,7 @@ describe("compiled data production stories", () => {
     expect(trigger.getAttribute("aria-expanded")).toBe("true")
     expect(mounted.story.source.typescript).toContain("<ColorInput")
     expect(mounted.story.source.typescript).toContain("useState")
-    expect(mounted.story.source.typescript).toContain("colorInputComponentCss")
+    expect(mounted.story.source.typescript).toContain("colorInputCss")
     expect(mounted.story.source.typescript).not.toContain("createColorInput(")
     mounted.story.dispose()
   })
@@ -42,7 +42,7 @@ describe("compiled data production stories", () => {
     expect(owner.querySelector('[data-item-key="output"]')).toBe(output)
     expect(mounted.story.source.typescript).toContain("<CollectionInput")
     expect(mounted.story.source.typescript).toContain("useState")
-    expect(mounted.story.source.typescript).toContain("collectionInputComponentCss")
+    expect(mounted.story.source.typescript).toContain("collectionInputCss")
     expect(mounted.story.source.typescript).not.toContain("createCollectionInput(")
     mounted.story.dispose()
   })
@@ -58,7 +58,7 @@ describe("compiled data production stories", () => {
     listB.dispatchEvent(new Event("click", {bubbles: true}))
     expect(listB.getAttribute("aria-selected")).toBe("true")
     expect(list.story.element.querySelector('[data-item-key="a"]')).toBe(listA)
-    expect(list.story.source.typescript).toContain("listComponentCss")
+    expect(list.story.source.typescript).toContain("listCss")
     expect(list.story.source.typescript).not.toContain("createList(")
 
     const table = createCompiledTableProductionStory(document, {
@@ -71,7 +71,7 @@ describe("compiled data production stories", () => {
     rowB.dispatchEvent(new Event("click", {bubbles: true}))
     expect(rowB.getAttribute("aria-selected")).toBe("true")
     expect(table.story.element.querySelector('[data-row-key="a"]')).toBe(rowA)
-    expect(table.story.source.typescript).toContain("tableComponentCss")
+    expect(table.story.source.typescript).toContain("tableCss")
     expect(table.story.source.typescript).not.toContain("createTable(")
 
     for (const mounted of [list, table]) {

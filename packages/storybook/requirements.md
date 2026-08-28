@@ -50,13 +50,13 @@ presentation pipeline. Package не является production dependency UI и
 ## `UI-STORYBOOK-WORKBENCH-001` — six addressed regions
 
 Shared `@zavx0z/storybook/workbench` владеет одним stable semantic tree с
-catalog, secondary navigation, preview, scenarios, source inspector и status.
+catalog, secondary navigation, preview, scenarios, owner Inspector host и status.
 Каждый region меняется через addressed `update(address, value)` и сохраняет
 неизменённые Node/Text identities. Active navigation может быть `null` на
 настоящем overview; неизвестный non-null id запрещён.
 
 Эти шесть regions сохраняют историческую editor-композицию Workbench:
-catalog, secondary navigation, preview, scenarios и source inspector образуют
+catalog, secondary navigation, preview, scenarios и UI-owned Props Inspector образуют
 пять плотных рабочих панелей над отдельной full-width StatusBar. Workbench
 занимает доступный canvas без oversized card, pill stack либо декоративной
 пустой рамки. Panel/editor-region использует компактные headers, row navigation,

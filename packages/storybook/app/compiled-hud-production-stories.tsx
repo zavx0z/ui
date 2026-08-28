@@ -2,9 +2,9 @@ import {
   HudFrame,
   HudWindow,
   Timeline,
-  hudComponentCss,
-  type HudFrameProps,
-  type HudWindowProps,
+  hudCss,
+  type HudFrameDefaultProps,
+  type HudWindowDefaultProps,
   type TimelineProps
 } from "@ui/components/hud"
 import {Pane} from "@ui/components/pane"
@@ -12,7 +12,7 @@ import type {Document, Element, Event, HTMLElement, Node} from "@zavx0z/dom"
 import {createRoot, useState} from "@zavx0z/react"
 import type {RoutedProductionComponentStory} from "./production-component-stories.ts"
 
-function HudWindowStoryComponent(props: Readonly<{initial: HudWindowProps}>) {
+function HudWindowStoryComponent(props: Readonly<{initial: HudWindowDefaultProps}>) {
   const [minimized, setMinimized] = useState(props.initial.minimized)
   return <HudWindow
     title={props.initial.title}
@@ -24,7 +24,7 @@ function HudWindowStoryComponent(props: Readonly<{initial: HudWindowProps}>) {
   ><Pane content="Window body" variant="transparent" /></HudWindow>
 }
 
-function HudFrameStoryComponent(props: Readonly<{initial: HudFrameProps}>) {
+function HudFrameStoryComponent(props: Readonly<{initial: HudFrameDefaultProps}>) {
   return <HudFrame
     title={props.initial.title}
     edge={props.initial.edge}
@@ -52,14 +52,14 @@ function TimelineStoryComponent(props: Readonly<{initial: TimelineProps}>) {
 
 export function createCompiledHudWindowProductionStory(
   document: Document,
-  props: HudWindowProps
+  props: HudWindowDefaultProps
 ): RoutedProductionComponentStory {
   return mount(document, HudWindowStoryComponent, {initial: props}, "hud-window", hudWindowSource(props))
 }
 
 export function createCompiledHudFrameProductionStory(
   document: Document,
-  props: HudFrameProps
+  props: HudFrameDefaultProps
 ): RoutedProductionComponentStory {
   return mount(document, HudFrameStoryComponent, {initial: props}, "hud-frame", hudFrameSource(props))
 }
@@ -91,18 +91,18 @@ function mount(
   const story = Object.freeze({
     element: owner,
     get source() {
-      return Object.freeze({html: serialize(owner), css: hudComponentCss, typescript})
+      return Object.freeze({html: serialize(owner), css: hudCss, typescript})
     },
     dispose() {
       root.unmount()
     }
   })
-  return Object.freeze({story, css: hudComponentCss})
+  return Object.freeze({story, css: hudCss})
 }
 
-function hudFrameSource(props: HudFrameProps): string {
+function hudFrameSource(props: HudFrameDefaultProps): string {
   return [
-    'import {HudFrame, hudComponentCss} from "@ui/components/hud"',
+    'import {HudFrame, hudCss} from "@ui/components/hud"',
     'import {Pane} from "@ui/components/pane"',
     'import {createRoot} from "@zavx0z/react"',
     "",
@@ -114,13 +114,13 @@ function hudFrameSource(props: HudFrameProps): string {
     ">",
     '  <Pane content="Body" />',
     "</HudFrame>)",
-    "void hudComponentCss"
+    "void hudCss"
   ].join("\n")
 }
 
-function hudWindowSource(props: HudWindowProps): string {
+function hudWindowSource(props: HudWindowDefaultProps): string {
   return [
-    'import {HudWindow, hudComponentCss} from "@ui/components/hud"',
+    'import {HudWindow, hudCss} from "@ui/components/hud"',
     'import {Pane} from "@ui/components/pane"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
@@ -140,13 +140,13 @@ function hudWindowSource(props: HudWindowProps): string {
     "  </HudWindow>",
     "}",
     "createRoot(container).render(<Story />)",
-    "void hudComponentCss"
+    "void hudCss"
   ].join("\n")
 }
 
 function timelineSource(props: TimelineProps): string {
   return [
-    'import {Timeline, hudComponentCss} from "@ui/components/hud"',
+    'import {Timeline, hudCss} from "@ui/components/hud"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     `const props = ${literal(props)} as const`,
@@ -167,7 +167,7 @@ function timelineSource(props: TimelineProps): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void hudComponentCss"
+    "void hudCss"
   ].join("\n")
 }
 

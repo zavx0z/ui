@@ -1,9 +1,9 @@
-import {Badge, badgeComponentCss, type BadgeProps} from "@ui/components/badge"
-import {Divider, dividerComponentCss, type DividerProps} from "@ui/components/divider"
-import {Pane, paneComponentCss, type PaneProps} from "@ui/components/pane"
+import {Badge, badgeCss, type BadgeProps} from "@ui/components/badge"
+import {Divider, dividerCss, type DividerProps} from "@ui/components/divider"
+import {Pane, paneCss, type PaneProps} from "@ui/components/pane"
 import {
   Typography,
-  typographyComponentCss,
+  typographyCss,
   type TypographyProps
 } from "@ui/components/typography"
 import type {Document, Element, HTMLElement, Node} from "@zavx0z/dom"
@@ -14,14 +14,14 @@ export function createCompiledPaneProductionStory(
   document: Document,
   props: PaneProps
 ): RoutedProductionComponentStory {
-  return mountCompiledStory(document, Pane, props, "pane", paneComponentCss, paneSource(props))
+  return mountCompiledStory(document, Pane, props, "pane", paneCss, paneSource(props))
 }
 
 export function createCompiledBadgeProductionStory(
   document: Document,
   props: BadgeProps
 ): RoutedProductionComponentStory {
-  return mountCompiledStory(document, Badge, props, "badge", badgeComponentCss, badgeSource(props))
+  return mountCompiledStory(document, Badge, props, "badge", badgeCss, badgeSource(props))
 }
 
 export function createCompiledTypographyProductionStory(
@@ -33,7 +33,7 @@ export function createCompiledTypographyProductionStory(
     Typography,
     props,
     "typography",
-    typographyComponentCss,
+    typographyCss,
     typographySource(props)
   )
 }
@@ -47,7 +47,7 @@ export function createCompiledDividerProductionStory(
     Divider,
     props,
     "divider",
-    dividerComponentCss,
+    dividerCss,
     dividerSource(props)
   )
 }
@@ -85,7 +85,7 @@ function mountCompiledStory(
 function paneSource(props: PaneProps): string {
   return componentSource(
     "Pane",
-    "paneComponentCss",
+    "paneCss",
     "pane",
     props,
     [
@@ -100,7 +100,7 @@ function paneSource(props: PaneProps): string {
 function badgeSource(props: BadgeProps): string {
   return componentSource(
     "Badge",
-    "badgeComponentCss",
+    "badgeCss",
     "badge",
     props,
     ["  label={props.label}", "  tone={props.tone}", "  title={props.title}"]
@@ -110,7 +110,7 @@ function badgeSource(props: BadgeProps): string {
 function typographySource(props: TypographyProps): string {
   return componentSource(
     "Typography",
-    "typographyComponentCss",
+    "typographyCss",
     "typography",
     props,
     ["  text={props.text}", "  variant={props.variant}", "  title={props.title}"]
@@ -120,7 +120,7 @@ function typographySource(props: TypographyProps): string {
 function dividerSource(props: DividerProps): string {
   return componentSource(
     "Divider",
-    "dividerComponentCss",
+    "dividerCss",
     "divider",
     props,
     ["  variant={props.variant}", "  title={props.title}"]

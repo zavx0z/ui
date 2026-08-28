@@ -1,6 +1,6 @@
 import {describe, expect, test} from "bun:test"
 import {Event, createDocument, type HTMLInputElement} from "@zavx0z/dom"
-import {fieldComponentCss} from "@ui/components/field"
+import {fieldCss} from "@ui/components/field"
 import {createCompiledFieldProductionStory} from "./compiled-field-production-story.tsx"
 
 describe("compiled Field production story", () => {
@@ -17,10 +17,10 @@ describe("compiled Field production story", () => {
     input.dispatchEvent(new Event("input", {bubbles: true}))
     expect(input.value).toBe("Beta")
     expect(mounted.story.element.getAttribute("data-story-component")).toBe("field")
-    expect(mounted.story.source.css).toBe(fieldComponentCss)
+    expect(mounted.story.source.css).toBe(fieldCss)
     expect(mounted.story.source.typescript).toContain("<Field")
     expect(mounted.story.source.typescript).toContain("useState")
-    expect(mounted.story.source.typescript).toContain("fieldComponentCss")
+    expect(mounted.story.source.typescript).toContain("fieldCss")
     expect(mounted.story.source.typescript).not.toContain("createField")
     expect(mounted.story.source.html).not.toContain('class="')
     mounted.story.dispose()

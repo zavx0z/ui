@@ -1,16 +1,16 @@
 import {
   ControlGroup,
-  controlGroupComponentCss,
+  controlGroupCss,
   type ControlGroupProps
 } from "@ui/components/control-group"
 import {
   MatrixInput,
-  matrixInputComponentCss,
+  matrixInputCss,
   type MatrixInputProps
 } from "@ui/components/matrix-input"
 import {
   VectorInput,
-  vectorInputComponentCss,
+  vectorInputCss,
   type VectorInputProps
 } from "@ui/components/vector-input"
 import type {Document, Element, Event, HTMLElement, Node} from "@zavx0z/dom"
@@ -92,7 +92,7 @@ export function createCompiledControlGroupProductionStory(
     ControlGroupStoryComponent,
     {initial: props},
     "control-group",
-    controlGroupComponentCss,
+    controlGroupCss,
     controlGroupSource(props)
   )
 }
@@ -106,7 +106,7 @@ export function createCompiledVectorInputProductionStory(
     VectorInputStoryComponent,
     {initial: props},
     "vector-input",
-    vectorInputComponentCss,
+    vectorInputCss,
     vectorSource(props)
   )
 }
@@ -120,7 +120,7 @@ export function createCompiledMatrixInputProductionStory(
     MatrixInputStoryComponent,
     {initial: props},
     "matrix-input",
-    matrixInputComponentCss,
+    matrixInputCss,
     matrixSource(props)
   )
 }
@@ -157,7 +157,7 @@ function mountCompiledStory(
 
 function controlGroupSource(props: ControlGroupProps): string {
   return [
-    'import {ControlGroup, controlGroupComponentCss, type ControlGroupItem} from "@ui/components/control-group"',
+    'import {ControlGroup, controlGroupCss, type ControlGroupItem} from "@ui/components/control-group"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -167,13 +167,13 @@ function controlGroupSource(props: ControlGroupProps): string {
     "  } />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void controlGroupComponentCss"
+    "void controlGroupCss"
   ].join("\n")
 }
 
 function vectorSource(props: VectorInputProps): string {
   return [
-    'import {VectorInput, vectorInputComponentCss} from "@ui/components/vector-input"',
+    'import {VectorInput, vectorInputCss} from "@ui/components/vector-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -181,13 +181,13 @@ function vectorSource(props: VectorInputProps): string {
     "  return <VectorInput value={value} onInput={setValue} />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void vectorInputComponentCss"
+    "void vectorInputCss"
   ].join("\n")
 }
 
 function matrixSource(props: MatrixInputProps): string {
   return [
-    'import {MatrixInput, matrixInputComponentCss} from "@ui/components/matrix-input"',
+    'import {MatrixInput, matrixInputCss} from "@ui/components/matrix-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -195,7 +195,7 @@ function matrixSource(props: MatrixInputProps): string {
     "  return <MatrixInput value={value} onInput={setValue} />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void matrixInputComponentCss"
+    "void matrixInputCss"
   ].join("\n")
 }
 

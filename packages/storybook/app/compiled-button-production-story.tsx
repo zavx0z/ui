@@ -1,6 +1,6 @@
 import {
   Button,
-  buttonComponentCss,
+  buttonCss,
   type ButtonProps
 } from "@ui/components/button"
 import {createRoot} from "@zavx0z/react"
@@ -43,7 +43,7 @@ export function createCompiledButtonProductionStory(
     get source() {
       return Object.freeze({
         html: serialize(button),
-        css: buttonComponentCss,
+        css: buttonCss,
         typescript: source(props)
       })
     },
@@ -51,14 +51,14 @@ export function createCompiledButtonProductionStory(
       root.unmount()
     }
   })
-  return Object.freeze({story, css: buttonComponentCss})
+  return Object.freeze({story, css: buttonCss})
 }
 
 function source(props: ButtonProps): string {
   const serializable = JSON.stringify(props, (_key, value) =>
     typeof value === "function" ? undefined : value, 2)
   return [
-    'import {Button, buttonComponentCss} from "@ui/components/button"',
+    'import {Button, buttonCss} from "@ui/components/button"',
     'import {createRoot} from "@zavx0z/react"',
     "",
     `const props = ${serializable}`,
@@ -72,7 +72,7 @@ function source(props: ButtonProps): string {
     "  selected={props.selected}",
     "  title={props.title}",
     "/>)",
-    "void buttonComponentCss"
+    "void buttonCss"
   ].join("\n")
 }
 

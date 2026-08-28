@@ -38,7 +38,7 @@ compact identities.
 ### `@ui/components`
 
 Components owns only semantic compositions, controlled widget state, theme
-CSS, icons/assets and component-specific controllers. A primitive button,
+CSS and icons/assets. A primitive button,
 input, span or container is represented by the corresponding standard HTML
 element rather than an `@ui/elements` runtime wrapper. Production factories
 remain valid owners when they provide a reusable visual, interaction or
@@ -47,9 +47,9 @@ controlled-state contract around those standard elements.
 Components are ordinary TSX functions compiled by `@zavx0z/template` into
 static semantic DOM mounts and addressed bindings. `@zavx0z/react` owns compact
 hook slots and component scheduling without React, Fiber or a virtual DOM.
-Temporary `createX(document, props)` controllers remain only until their
-consumer chain is ported; they are not a second final authoring model. The DOM
-prototype chain itself remains class-based and standard-named.
+There is one natural `*.tsx` owner per Component and no parallel imperative
+`createX(document, props)` implementation. The DOM prototype chain itself
+remains class-based and standard-named.
 
 Components does not import Engine, renderer, WebGPU, Layout or Elements.
 
@@ -72,10 +72,10 @@ non-black canvas prove mechanics only; they do not authorize a visual redesign.
 The private Storybook application owns UI routes, examples, controls and
 acceptance. Natural shared `@zavx0z/storybook/{stories,catalog,workbench}`
 subpaths own the semantic Workbench and story controller. The exact story
-preview, Workbench and source panels belong
+preview, Workbench and the owner-supplied Props Inspector belong
 to the same `@zavx0z/dom` realm and render through the same CPU/WebGPU pipeline.
 
-Source documents are derived from executable DOM/CSS/TypeScript rather than a
+Source provenance is derived from executable DOM/CSS/TypeScript rather than a
 parallel illustrative string. Production packages never import Storybook.
 
 ### Retired boundaries
@@ -90,8 +90,7 @@ parallel illustrative string. Production packages never import Storybook.
   belong to Components; product reticles and commands belong to consumers;
   camera/world presentation belongs to the WebGPU/Engine adapter.
 
-These packages remain in the checkout only while legacy consumers still
-import them. They receive no compatibility aliases in the new graph.
+They receive no compatibility aliases in the final graph.
 
 ## Authoring laws
 
@@ -117,8 +116,8 @@ are renderer mechanics derived from computed style.
 
 Attributes and live control properties are the observable state boundary:
 `aria-pressed`, `aria-expanded`, `disabled`, `hidden`, `HTMLInputElement.value`
-and ordinary bubbling events. A controller may hold temporary interaction
-state but may not create another semantic owner tree.
+and ordinary bubbling events. A component hook or ref may hold temporary
+interaction state but may not create another semantic owner tree.
 
 ### `title` is generic user-agent behavior
 
@@ -141,28 +140,28 @@ contain no tooltip-specific API.
 
 ## Current migration checkpoint
 
-The document pipeline is the accepted runtime foundation, but the component
-cutover is complete only when the full reusable control surface and its
-Blender-compatible behavior are available as production DOM/CSS owners.
-Storybook-only direct-element proofs do not satisfy that gate. The retained
-implementation remains historical evidence for the port until every affected
-owner has equivalent production behavior and visual acceptance.
+The document pipeline is the accepted runtime foundation. All 29 public
+component subpaths now resolve directly to one natural TSX owner; the parallel
+imperative controllers and private legacy story graph have been removed.
+Storybook exercises those same owners through DOM → CPU renderer → WebGPU.
+Automated tests prove mechanics only: Blender 5.2 visual evidence remains
+candidate until explicit owner acceptance.
 
 ## Removal gates
 
-Old Layout, Elements, HUD and Renderer experiment code can be removed only
-after all of these are true:
+The local retired implementation stays absent only while all of these remain
+true:
 
 1. shipping source has zero imports of `UiSurface`, `@layout/core`,
    `@ui/elements` and the old renderer API;
-2. Components and HUD replacements author only DOM/CSS and preserve the former
-   production visual, interaction and controlled-state contracts;
+2. Components and HUD author only DOM/CSS and preserve the production visual,
+   interaction and controlled-state contracts;
 3. Storybook exact routes run through DOM → CPU renderer → WebGPU and pass
    route readiness, console and non-black canvas checks;
 4. semantic, event, layout, visual, resource cleanup, bundle identity and
    performance gates pass, including equal-scale Blender reference comparison
    and an explicit owner verdict for every changed visible slice;
-5. Node, MetaFor, Interpreter, demo and shared Storybook consumers have moved;
+5. external consumers import only public natural subpaths;
 6. no dirty linked checkout is described as accepted integration.
 
 ## Cross-repository map

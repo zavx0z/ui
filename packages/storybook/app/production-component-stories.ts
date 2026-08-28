@@ -1,5 +1,5 @@
 import {
-  buttonComponentCss,
+  buttonCss,
   type ButtonProps,
 } from "@ui/components/button"
 import {createCompiledButtonProductionStory} from "./compiled-button-production-story.tsx"
@@ -39,103 +39,103 @@ import {createCompiledTextFieldProductionStory} from "./compiled-text-field-prod
 import {createCompiledNumberInputProductionStory} from "./compiled-number-input-production-story.tsx"
 import {createCompiledSwitcherProductionStory} from "./compiled-switcher-production-story.tsx"
 import {
-  checkboxComponentCss,
+  checkboxCss,
   type CheckboxProps,
 } from "@ui/components/checkbox"
 import {
-  collectionInputComponentCss,
+  collectionInputCss,
   type CollectionInputProps,
 } from "@ui/components/collection-input"
 import {
-  colorInputComponentCss,
+  colorInputCss,
   type ColorInputProps,
 } from "@ui/components/color-input"
 import {
-  controlGroupComponentCss,
+  controlGroupCss,
   type ControlGroupProps,
 } from "@ui/components/control-group"
 import {
-  badgeComponentCss,
+  badgeCss,
   type BadgeProps,
 } from "@ui/components/badge"
 import {
-  dividerComponentCss,
+  dividerCss,
   type DividerProps,
 } from "@ui/components/divider"
 import {
-  fieldComponentCss,
+  fieldCss,
   type FieldDefinition,
 } from "@ui/components/field"
 import {
-  enumInputComponentCss,
+  enumInputCss,
   type EnumInputProps,
 } from "@ui/components/enum-input"
 import {
-  hudComponentCss,
+  hudCss,
   hudFrameDefaultProps,
   hudWindowDefaultProps,
   timelineDefaultProps,
-  type HudFrameProps,
-  type HudWindowProps,
+  type HudFrameDefaultProps,
+  type HudWindowDefaultProps,
   type TimelineProps,
 } from "@ui/components/hud"
 import {
-  integerInputComponentCss,
+  integerInputCss,
   type IntegerInputProps,
 } from "@ui/components/integer-input"
 import {
-  listComponentCss,
+  listCss,
   type ListProps,
 } from "@ui/components/list"
 import {
-  matrixInputComponentCss,
+  matrixInputCss,
   type MatrixInputProps,
 } from "@ui/components/matrix-input"
 import {
-  numberInputComponentCss,
+  numberInputCss,
   type NumberInputProps,
 } from "@ui/components/number-input"
 import {
-  paneComponentCss,
+  paneCss,
   type PaneProps,
 } from "@ui/components/pane"
 import {
-  pathInputComponentCss,
+  pathInputCss,
   type PathInputProps,
 } from "@ui/components/path-input"
 import {
-  progressCheckboxComponentCss,
+  progressCheckboxCss,
   type ProgressCheckboxProps,
 } from "@ui/components/progress-checkbox"
 import {
-  referenceInputComponentCss,
+  referenceInputCss,
   type ReferenceInputProps,
 } from "@ui/components/reference-input"
 import {
-  sliderControlComponentCss,
+  sliderControlCss,
   type SliderControlProps,
 } from "@ui/components/slider-control"
 import {
-  switcherComponentCss,
+  switcherCss,
   type SwitcherProps,
 } from "@ui/components/switcher"
 import {
-  tableComponentCss,
+  tableCss,
   type TableProps,
 } from "@ui/components/table"
 import {
-  textFieldComponentCss,
+  textFieldCss,
   type TextFieldProps,
 } from "@ui/components/text-field"
 import {
-  typographyComponentCss,
+  typographyCss,
   type TypographyProps,
 } from "@ui/components/typography"
 import {
-  vectorInputComponentCss,
+  vectorInputCss,
   type VectorInputProps,
 } from "@ui/components/vector-input"
-import type {Document, Element, Event, HTMLElement, Node} from "@zavx0z/dom"
+import type {Document, HTMLElement} from "@zavx0z/dom"
 
 export type ProductionComponentStorySource = Readonly<{
   html: string
@@ -146,6 +146,7 @@ export type ProductionComponentStorySource = Readonly<{
 export type ProductionComponentStory = Readonly<{
   element: HTMLElement
   source: ProductionComponentStorySource
+  props?: Readonly<Record<string, unknown>>
   dispose(): void
 }>
 
@@ -156,30 +157,30 @@ export type RoutedProductionComponentStory = Readonly<{
 
 /** One immutable sheet installed once by the persistent Storybook runtime. */
 export const productionComponentStoryCss = [
-  buttonComponentCss,
-  checkboxComponentCss,
-  collectionInputComponentCss,
-  colorInputComponentCss,
-  controlGroupComponentCss,
-  badgeComponentCss,
-  dividerComponentCss,
-  fieldComponentCss,
-  enumInputComponentCss,
-  hudComponentCss,
-  integerInputComponentCss,
-  listComponentCss,
-  matrixInputComponentCss,
-  numberInputComponentCss,
-  paneComponentCss,
-  pathInputComponentCss,
-  progressCheckboxComponentCss,
-  referenceInputComponentCss,
-  sliderControlComponentCss,
-  switcherComponentCss,
-  tableComponentCss,
-  textFieldComponentCss,
-  typographyComponentCss,
-  vectorInputComponentCss,
+  buttonCss,
+  checkboxCss,
+  collectionInputCss,
+  colorInputCss,
+  controlGroupCss,
+  badgeCss,
+  dividerCss,
+  fieldCss,
+  enumInputCss,
+  hudCss,
+  integerInputCss,
+  listCss,
+  matrixInputCss,
+  numberInputCss,
+  paneCss,
+  pathInputCss,
+  progressCheckboxCss,
+  referenceInputCss,
+  sliderControlCss,
+  switcherCss,
+  tableCss,
+  textFieldCss,
+  typographyCss,
+  vectorInputCss,
 ].join("\n")
 
 export const buttonProductionStoryDefaultProps: ButtonProps = Object.freeze({
@@ -331,262 +332,197 @@ export function createButtonProductionStory(
   document: Document,
   props: ButtonProps = buttonProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledButtonProductionStory(document, props)
+  return withProps(createCompiledButtonProductionStory(document, props), props)
 }
 
 export function createTextFieldProductionStory(
   document: Document,
   props: TextFieldProps = textFieldProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledTextFieldProductionStory(document, props)
+  return withProps(createCompiledTextFieldProductionStory(document, props), props)
 }
 
 export function createPaneProductionStory(
   document: Document,
   props: PaneProps = {content: "Panel content", variant: "filled", title: "Pane"},
 ): RoutedProductionComponentStory {
-  return createCompiledPaneProductionStory(document, props)
+  return withProps(createCompiledPaneProductionStory(document, props), props)
 }
 
 export function createBadgeProductionStory(
   document: Document,
   props: BadgeProps = {label: "Ready", tone: "neutral", title: "Status"},
 ): RoutedProductionComponentStory {
-  return createCompiledBadgeProductionStory(document, props)
+  return withProps(createCompiledBadgeProductionStory(document, props), props)
 }
 
 export function createTypographyProductionStory(
   document: Document,
   props: TypographyProps = {text: "Interface text", variant: "body", title: "Typography"},
 ): RoutedProductionComponentStory {
-  return createCompiledTypographyProductionStory(document, props)
+  return withProps(createCompiledTypographyProductionStory(document, props), props)
 }
 
 export function createDividerProductionStory(
   document: Document,
   props: DividerProps = {variant: "full-width", title: "Divider"},
 ): RoutedProductionComponentStory {
-  return createCompiledDividerProductionStory(document, props)
+  return withProps(createCompiledDividerProductionStory(document, props), props)
 }
 
 export function createCheckboxProductionStory(
   document: Document,
   props: CheckboxProps = checkboxProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledCheckboxProductionStory(document, props)
+  return withProps(createCompiledCheckboxProductionStory(document, props), props)
 }
 
 export function createSwitcherProductionStory(
   document: Document,
   props: SwitcherProps = switcherProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledSwitcherProductionStory(document, props)
+  return withProps(createCompiledSwitcherProductionStory(document, props), props)
 }
 
 export function createControlGroupProductionStory(
   document: Document,
   props: ControlGroupProps = controlGroupProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledControlGroupProductionStory(document, props)
+  return withProps(createCompiledControlGroupProductionStory(document, props), props)
 }
 
 export function createNumberInputProductionStory(
   document: Document,
   props: NumberInputProps = numberInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledNumberInputProductionStory(document, props)
+  return withProps(createCompiledNumberInputProductionStory(document, props), props)
 }
 
 export function createIntegerInputProductionStory(
   document: Document,
   props: IntegerInputProps = integerInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledIntegerInputProductionStory(document, props)
+  return withProps(createCompiledIntegerInputProductionStory(document, props), props)
 }
 
 export function createEnumInputProductionStory(
   document: Document,
   props: EnumInputProps = enumInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledEnumInputProductionStory(document, props)
+  return withProps(createCompiledEnumInputProductionStory(document, props), props)
 }
 
 export function createSliderControlProductionStory(
   document: Document,
   props: SliderControlProps = sliderControlProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledSliderControlProductionStory(document, props)
+  return withProps(createCompiledSliderControlProductionStory(document, props), props)
 }
 
 export function createProgressCheckboxProductionStory(
   document: Document,
   props: ProgressCheckboxProps = progressCheckboxProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledProgressCheckboxProductionStory(document, props)
+  return withProps(createCompiledProgressCheckboxProductionStory(document, props), props)
 }
 
 export function createVectorInputProductionStory(
   document: Document,
   props: VectorInputProps = vectorInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledVectorInputProductionStory(document, props)
+  return withProps(createCompiledVectorInputProductionStory(document, props), props)
 }
 
 export function createMatrixInputProductionStory(
   document: Document,
   props: MatrixInputProps = matrixInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledMatrixInputProductionStory(document, props)
+  return withProps(createCompiledMatrixInputProductionStory(document, props), props)
 }
 
 export function createReferenceInputProductionStory(
   document: Document,
   props: ReferenceInputProps = referenceInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledReferenceInputProductionStory(document, props)
+  return withProps(createCompiledReferenceInputProductionStory(document, props), props)
 }
 
 export function createPathInputProductionStory(
   document: Document,
   props: PathInputProps = pathInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledPathInputProductionStory(document, props)
+  return withProps(createCompiledPathInputProductionStory(document, props), props)
 }
 
 export function createCollectionInputProductionStory(
   document: Document,
   props: CollectionInputProps = collectionInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledCollectionInputProductionStory(document, props)
+  return withProps(createCompiledCollectionInputProductionStory(document, props), props)
 }
 
 export function createColorInputProductionStory(
   document: Document,
   props: ColorInputProps = colorInputProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledColorInputProductionStory(document, props)
+  return withProps(createCompiledColorInputProductionStory(document, props), props)
 }
 
 export function createListProductionStory(
   document: Document,
   props: ListProps = listProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledListProductionStory(document, props)
+  return withProps(createCompiledListProductionStory(document, props), props)
 }
 
 export function createTableProductionStory(
   document: Document,
   props: TableProps = tableProductionStoryDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledTableProductionStory(document, props)
+  return withProps(createCompiledTableProductionStory(document, props), props)
 }
 
 export function createFieldProductionStory(
   document: Document,
   definition: FieldDefinition,
 ): RoutedProductionComponentStory {
-  return createCompiledFieldProductionStory(document, definition)
+  return withProps(createCompiledFieldProductionStory(document, definition), {definition})
 }
 
 export function createHudWindowProductionStory(
   document: Document,
-  props: HudWindowProps = hudWindowDefaultProps,
+  props: HudWindowDefaultProps = hudWindowDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledHudWindowProductionStory(document, props)
+  return withProps(createCompiledHudWindowProductionStory(document, props), props)
 }
 
 export function createHudFrameProductionStory(
   document: Document,
-  props: HudFrameProps = hudFrameDefaultProps,
+  props: HudFrameDefaultProps = hudFrameDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledHudFrameProductionStory(document, props)
+  return withProps(createCompiledHudFrameProductionStory(document, props), props)
 }
 
 export function createTimelineProductionStory(
   document: Document,
   props: TimelineProps = timelineDefaultProps,
 ): RoutedProductionComponentStory {
-  return createCompiledTimelineProductionStory(document, props)
+  return withProps(createCompiledTimelineProductionStory(document, props), props)
 }
 
-function routedStory(
-  controller: Readonly<{element: HTMLElement; dispose(): void}>,
-  css: string,
-  typescript: readonly string[],
+function withProps<Props extends Readonly<object>>(
+  routed: RoutedProductionComponentStory,
+  props: Props,
 ): RoutedProductionComponentStory {
+  const source = routed.story
+  const snapshot = Object.freeze({...props}) as Readonly<Record<string, unknown>>
   const story: ProductionComponentStory = Object.freeze({
-    element: controller.element,
+    element: source.element,
     get source() {
-      return Object.freeze({
-        html: serialize(controller.element),
-        css,
-        typescript: typescript.join("\n"),
-      })
+      return source.source
     },
-    dispose: () => controller.dispose(),
+    props: snapshot,
+    dispose: () => source.dispose(),
   })
-  return Object.freeze({story, css})
-}
-
-function exactOwnerStory(
-  controller: Readonly<{element: HTMLElement; dispose(): void}>,
-  css: string,
-  owner: string,
-  factory: string,
-  variable: string,
-  props: unknown,
-): RoutedProductionComponentStory {
-  return routedStory(controller, css, [
-    `import {${factory}, ${cssExport(owner)}} from "@ui/components/${owner}"`,
-    'import {createDocument} from "@zavx0z/dom"',
-    "",
-    "const document = createDocument()",
-    `const ${variable} = ${factory}(document, ${literal(props)})`,
-    `document.appendChild(${variable}.element)`,
-    `void ${cssExport(owner)}`,
-  ])
-}
-
-function cssExport(owner: string): string {
-  return `${owner.replace(/-([a-z])/gu, (_match, letter: string) => letter.toUpperCase())}Css`
-}
-
-function literal(value: unknown): string {
-  return JSON.stringify(value, (_key, candidate) => typeof candidate === "function" ? undefined : candidate, 2)
-}
-
-function serialize(element: Element, depth = 0): string {
-  const indent = "  ".repeat(depth)
-  const attributes = new Map(element.getAttributeNames().map((name) => [name, element.getAttribute(name) ?? ""]))
-  const live = element as Element & Readonly<{
-    value?: unknown
-    checked?: unknown
-    indeterminate?: unknown
-  }>
-  if (
-    (element.localName === "input" || element.localName === "select" || element.localName === "textarea") &&
-    typeof live.value === "string"
-  ) attributes.set("value", live.value)
-  if (live.checked === true) attributes.set("checked", "")
-  if (live.indeterminate === true) attributes.set("aria-checked", "mixed")
-  const attrs = [...attributes].sort(([left], [right]) => left.localeCompare(right)).map(([name, value]) =>
-    ` ${name}="${escapeHtml(value)}"`
-  ).join("")
-  const children = [...element.childNodes]
-  if (children.length === 0) return `${indent}<${element.localName}${attrs}></${element.localName}>`
-  if (children.every((node) => node.nodeType === 3)) {
-    return `${indent}<${element.localName}${attrs}>${escapeHtml(element.textContent ?? "")}</${element.localName}>`
-  }
-  const body = children.map((node: Node) => node.nodeType === 3
-    ? `${"  ".repeat(depth + 1)}${escapeHtml(node.textContent ?? "")}`
-    : serialize(node as Element, depth + 1)).join("\n")
-  return `${indent}<${element.localName}${attrs}>\n${body}\n${indent}</${element.localName}>`
-}
-
-function escapeHtml(value: string): string {
-  return value
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
+  return Object.freeze({story, css: routed.css})
 }

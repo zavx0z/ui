@@ -99,6 +99,7 @@ describe("production Component Storybook adapters", () => {
       expect(story.source.css).toBe(css)
       expect(story.source.html).toContain(story.element.localName)
       expect(story.source.typescript).toContain("@ui/components/")
+      expect(story.props).toBeDefined()
       story.dispose()
     }
   })
@@ -182,7 +183,7 @@ describe("production Component Storybook adapters", () => {
     expect(integerInput.valueAsNumber).toBe(9)
     expect(integer.story.source.typescript).toContain("useState(9)")
     expect(integer.story.source.typescript).toContain("<IntegerInput")
-    expect(integer.story.source.typescript).toContain("integerInputComponentCss")
+    expect(integer.story.source.typescript).toContain("integerInputCss")
     expect(integer.story.source.typescript).not.toContain("createIntegerInput(")
   })
 

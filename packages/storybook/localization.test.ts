@@ -45,7 +45,7 @@ const forbiddenVisiblePhrases = [
 
 const requiredLocalizedPhrases = [
   "Обзор компонентов",
-  "Исходный код",
+  "Свойства",
   "Сценарии",
 ] as const
 

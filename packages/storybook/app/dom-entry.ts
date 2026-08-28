@@ -98,6 +98,10 @@ import {
 import {uiStorybookWorkbenchCss} from "./workbench-style.ts"
 import {planUiOverview} from "./overview-plan.ts"
 import {uiRouteStoryCss} from "./route-style.ts"
+import {
+  createStoryPropsInspector,
+  type StoryProps,
+} from "./props-inspector.tsx"
 
 const canvas = document.getElementById("ui-storybook-canvas")
 if (!(canvas instanceof HTMLCanvasElement)) throw new Error("UI Storybook canvas not found")
@@ -110,6 +114,7 @@ declare global {
 type UiRouteStory = Readonly<{
   element: HTMLElement
   source: Readonly<{html: string; css: string; typescript: string}>
+  props?: StoryProps
   dispose?(): void
 }>
 
@@ -132,6 +137,11 @@ try {
   let descriptor = uiStoryDescriptor(route)
   const semanticDocument = createDocument()
   let {story} = await createDomRouteStory(route, semanticDocument)
+  const propsInspector = createStoryPropsInspector(
+    semanticDocument,
+    inspectorContext(descriptor),
+    inspectedProps(route, descriptor, story),
+  )
   const catalogItems = uiPrimaryItems().map(({label, route: itemRoute}) => ({
     id: itemRoute,
     label,
@@ -159,8 +169,7 @@ try {
       "scenarios.active": descriptor.kind === "detail"
         ? presentActive(uiDockRoute(route), initialScenarioItems)
         : null,
-      "inspector.label": "Исходный код",
-      "inspector.source": story.source,
+      "inspector.node": propsInspector.element,
       status: {
         lead: "Создано для ",
         owner: "MetaFor",
@@ -185,7 +194,10 @@ try {
   let routeRevision = 0
 
   const publish = (): void => {
-    workbench.update("inspector.source", story.source)
+    propsInspector.update(
+      inspectorContext(descriptor),
+      inspectedProps(route, descriptor, story),
+    )
     publishReadyState(route, descriptor)
     runtime.requestRender()
   }
@@ -225,7 +237,10 @@ try {
       workbench.update("scenarios.active", descriptor.kind === "detail"
         ? presentActive(uiDockRoute(route), nextScenarioItems)
         : null)
-      workbench.update("inspector.source", story.source)
+      propsInspector.update(
+        inspectorContext(descriptor),
+        inspectedProps(route, descriptor, story),
+      )
       workbench.update("status", statusState())
     })
     disposeStory(previous)
@@ -265,6 +280,7 @@ try {
     workbench.element.removeEventListener("input", onStoryMutation)
     workbench.element.removeEventListener("change", onStoryMutation)
     workbench.element.removeEventListener("click", onStoryMutation)
+    propsInspector.dispose()
     disposeStory(story)
     workbench.dispose()
     runtime.dispose()
@@ -308,6 +324,56 @@ function scenarioNavigationItems(route: UiDomStoryRoute): readonly Readonly<{
 
 function statusState(): Readonly<{lead: string; owner: string; detail: string}> {
   return Object.freeze({lead: "Создано для ", owner: "MetaFor", detail: " · HTML DOM → WebGPU"})
+}
+
+function inspectorContext(
+  descriptor: ReturnType<typeof uiStoryDescriptor>,
+): Readonly<{label: string; title: string}> {
+  return Object.freeze({label: descriptor.apiName, title: descriptor.title})
+}
+
+function inspectedProps(
+  route: UiDomStoryRoute,
+  descriptor: ReturnType<typeof uiStoryDescriptor>,
+  story: UiRouteStory,
+): StoryProps {
+  if (descriptor.kind === "overview") {
+    return Object.freeze({kind: "overview", route: `/${route}`})
+  }
+  const declared = story.props ?? Object.freeze({})
+  const live = liveElementProps(story.element)
+  const reflected = Object.keys(declared).length === 0
+    ? live
+    : Object.freeze(Object.fromEntries(
+      Object.entries(live).filter(([key]) => Object.hasOwn(declared, key)),
+    ))
+  const props = Object.freeze({...declared, ...reflected})
+  if (Object.keys(props).length > 0) return props
+  return Object.freeze({element: story.element.localName})
+}
+
+function liveElementProps(element: HTMLElement): StoryProps {
+  const props: Record<string, unknown> = {}
+  const control = isValueControl(element)
+    ? element
+    : element.querySelector("input") ??
+      element.querySelector("select") ??
+      element.querySelector("textarea")
+  if (control && "value" in control && typeof control.value === "string") {
+    props.value = control.value
+  }
+  if (control && "checked" in control && typeof control.checked === "boolean") {
+    props.checked = control.checked
+  }
+  if (element.hasAttribute("disabled")) props.disabled = true
+  return Object.freeze(props)
+}
+
+function isValueControl(element: HTMLElement): element is HTMLElement & Readonly<{
+  value: string
+  checked?: boolean
+}> {
+  return element.localName === "input" || element.localName === "select" || element.localName === "textarea"
 }
 
 function exactRoute(value: string): UiDomStoryRoute {
@@ -722,5 +788,5 @@ function publishReadyState(
   document.documentElement.dataset.uiStorybookOwner = descriptor.category.id
   document.documentElement.dataset.uiStorybookComponent = descriptor.component.id
   document.documentElement.dataset.uiStorybookPackage = descriptor.owner.id
-  document.documentElement.dataset.uiStorybookPanelCategory = "source"
+  document.documentElement.dataset.uiStorybookPanelCategory = "props"
 }

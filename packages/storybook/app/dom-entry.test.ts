@@ -81,6 +81,7 @@ describe("DOM Storybook route boundary", () => {
     expect(entry).toContain('from "./image-dom-story.ts"')
     expect(entry).toContain('from "./aggregate-overview-story.ts"')
     expect(entry).toContain('from "./route-style.ts"')
+    expect(entry).toContain('from "./props-inspector.tsx"')
     expect(entry).toContain("createDocumentCanvasRuntime")
     expect(entry).toContain("createAggregateOverviewStory")
     for (const removedReplica of [
@@ -120,10 +121,14 @@ describe("DOM Storybook route boundary", () => {
     expect(entry).toContain("router.subscribe((node)")
     expect(entry).toContain("applyRoute(node.path)")
     expect(entry).toContain('workbench.update("preview.node", story.element)')
+    expect(entry).toContain('"inspector.node": propsInspector.element')
+    expect(entry).toContain("propsInspector.update(")
     expect(entry).toContain("disposeStory(previous)")
     expect(entry).toContain("revision !== routeRevision")
     expect(entry).not.toMatch(/window\.location\.(?:assign|replace|reload)|location\.href|location\.reload|window\.location\s*=/u)
     expect(entry).not.toContain("document.location")
+    expect(entry).not.toContain('"inspector.source"')
+    expect(entry).not.toContain('"inspector.label"')
   })
 
   test("renders overview aggregates without selecting hidden secondary or scenario leaves", async () => {

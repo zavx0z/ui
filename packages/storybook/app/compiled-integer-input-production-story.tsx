@@ -1,13 +1,13 @@
 import {
   IntegerInput,
-  integerInputComponentCss,
+  integerInputCss,
   type IntegerInputProps
 } from "@ui/components/integer-input"
 import type {Document, Element, Event, HTMLElement, HTMLInputElement, Node} from "@zavx0z/dom"
 import {createRoot, useState} from "@zavx0z/react"
 import type {RoutedProductionComponentStory} from "./production-component-stories.ts"
 
-const css = integerInputComponentCss
+const css = integerInputCss
 
 function IntegerInputStoryComponent(props: Readonly<{initial: IntegerInputProps}>) {
   const [value, setValue] = useState(props.initial.value)
@@ -58,7 +58,7 @@ export function createCompiledIntegerInputProductionStory(
 
 function source(props: IntegerInputProps, value: number): string {
   return [
-    'import {IntegerInput, integerInputComponentCss} from "@ui/components/integer-input"',
+    'import {IntegerInput, integerInputCss} from "@ui/components/integer-input"',
     'import {createRoot, useState} from "@zavx0z/react"',
     "",
     "function Story() {",
@@ -74,7 +74,7 @@ function source(props: IntegerInputProps, value: number): string {
     "  />",
     "}",
     "createRoot(container).render(<Story />)",
-    "void integerInputComponentCss"
+    "void integerInputCss"
   ].join("\n")
 }
 

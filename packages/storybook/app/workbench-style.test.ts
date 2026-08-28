@@ -14,21 +14,22 @@ describe("UI Storybook Workbench visual policy", () => {
     expect(status).toContain("font-size: 11px")
   })
 
-  test("keeps five compact editor regions and separate source materials", () => {
+  test("keeps four shell regions and one owner Inspector host", () => {
     for (const selector of [
       ".storybook-dom-workbench__catalog",
       ".storybook-dom-workbench__secondary",
       ".storybook-dom-workbench__preview",
       ".storybook-dom-workbench__scenarios",
-      ".storybook-dom-workbench__inspector",
+      ".storybook-dom-workbench__inspector-host",
     ]) {
       expect(uiStorybookWorkbenchCss).toContain(selector)
     }
 
-    expect(rule(".storybook-dom-workbench__source")).toContain("border-radius: 4px")
-    expect(rule(".storybook-dom-workbench__source .storybook-dom-workbench__heading"))
-      .toContain("background: #303030")
-    expect(rule(".storybook-dom-workbench__code")).toContain("background: #1d1d1d")
+    const inspector = rule(".storybook-dom-workbench__inspector-host")
+    expect(inspector).toContain("width: 400px")
+    expect(inspector).toContain("min-height: 0")
+    expect(uiStorybookWorkbenchCss).not.toContain("storybook-dom-workbench__source")
+    expect(uiStorybookWorkbenchCss).not.toContain("storybook-dom-workbench__code")
   })
 
   test("uses bounded low-radius controls without pill silhouettes", () => {
