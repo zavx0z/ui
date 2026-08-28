@@ -99,6 +99,47 @@ export const uiStorybookWorkbenchCss = String.raw`
   gap: 1px;
 }
 
+.storybook-dom-workbench__tree {
+  gap: 0;
+}
+
+.storybook-dom-workbench__group {
+  box-sizing: border-box;
+  gap: 0;
+  overflow: hidden;
+  border: 0 solid transparent;
+  border-radius: 4px;
+  background: #242424;
+}
+
+.storybook-dom-workbench__group-toggle {
+  box-sizing: border-box;
+  height: 24px;
+  min-height: 24px;
+  gap: 4px;
+  padding: 3px 6px;
+  overflow: hidden;
+  border: 1px solid #151515;
+  border-radius: 2px;
+  background: #292929;
+  color: #d8d8d8;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.storybook-dom-workbench__disclosure {
+  box-sizing: border-box;
+  flex: 0 0 12px;
+  width: 12px;
+  color: #878787;
+}
+
+.storybook-dom-workbench__group-items {
+  gap: 0;
+  padding: 0;
+  background: #242424;
+}
+
 .storybook-dom-workbench__item {
   box-sizing: border-box;
   min-height: 24px;
@@ -108,6 +149,13 @@ export const uiStorybookWorkbenchCss = String.raw`
   background: #303030;
   color: #c8c8c8;
   font-size: 11px;
+}
+
+.storybook-dom-workbench__item--nested {
+  padding: 3px 6px 3px 18px;
+  border: 1px solid #242424;
+  border-radius: 0;
+  background: #303030;
 }
 
 .storybook-dom-workbench__item[data-active] {

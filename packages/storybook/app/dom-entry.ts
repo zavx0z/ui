@@ -142,11 +142,7 @@ try {
     inspectorContext(descriptor),
     inspectedProps(route, descriptor, story),
   )
-  const catalogItems = uiPrimaryItems().map(({label, route: itemRoute}) => ({
-    id: itemRoute,
-    label,
-    route: itemRoute,
-  }))
+  const catalogItems = uiPrimaryItems()
   const initialSecondaryItems = secondaryNavigationItems(route)
   const initialScenarioItems = scenarioNavigationItems(route)
   const workbench = createStorybookDomWorkbench({

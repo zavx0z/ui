@@ -43,6 +43,29 @@ describe("UI Storybook Workbench visual policy", () => {
     expect(uiStorybookWorkbenchCss).not.toMatch(/border-radius:\s*(?:999|50%)/u)
   })
 
+  test("keeps grouped catalog rows compact and visually nested", () => {
+    const group = rule(".storybook-dom-workbench__group")
+    const toggle = rule(".storybook-dom-workbench__group-toggle")
+    const disclosure = rule(".storybook-dom-workbench__disclosure")
+    const groupItems = rule(".storybook-dom-workbench__group-items")
+    const nested = rule(".storybook-dom-workbench__item--nested")
+
+    expect(group).toContain("border: 0 solid transparent")
+    expect(group).toContain("border-radius: 4px")
+    expect(group).toContain("background: #242424")
+    expect(toggle).toContain("min-height: 24px")
+    expect(toggle).toContain("height: 24px")
+    expect(toggle).toContain("border: 1px solid #151515")
+    expect(toggle).not.toContain("border-bottom")
+    expect(toggle).toContain("background: #292929")
+    expect(disclosure).toContain("flex: 0 0 12px")
+    expect(disclosure).toContain("width: 12px")
+    expect(groupItems).toContain("background: #242424")
+    expect(nested).toContain("padding: 3px 6px 3px 18px")
+    expect(nested).toContain("border: 1px solid #242424")
+    expect(nested).toContain("border-radius: 0")
+  })
+
   test("stays scoped to the semantic Workbench", () => {
     for (const selector of uiStorybookWorkbenchCss.matchAll(/([^{}]+)\{/gu)) {
       for (const branch of (selector[1] ?? "").split(",")) {

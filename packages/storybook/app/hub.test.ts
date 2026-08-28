@@ -3,7 +3,17 @@ import {fileURLToPath} from "node:url"
 import {mkdtemp, readdir, readFile, rm} from "node:fs/promises"
 import {tmpdir} from "node:os"
 import {join} from "node:path"
+import {
+  createDocument,
+  type CustomEvent as DomCustomEvent,
+  type HTMLButtonElement,
+  type HTMLElement,
+} from "@zavx0z/dom"
 import {startStorybookHubServer} from "@zavx0z/storybook/server"
+import {
+  createStorybookDomWorkbench,
+  STORYBOOK_DOM_WORKBENCH_EVENTS,
+} from "@zavx0z/storybook/workbench"
 import {engineFontPath} from "../engine-assets.ts"
 import {createUiStorybookApp} from "./server/page-registry.ts"
 import {
@@ -72,6 +82,80 @@ describe("one-root UI Storybook", () => {
     expect(uiStoryDescriptor("components/foundation/button")).toMatchObject({kind: "overview"})
     expect(uiStoryDescriptor("components/foundation/button/basic/contained")).toMatchObject({kind: "detail"})
     expect(uiStoryDescriptor("components/foundation/button/basic/contained").apiName).toBe("Button")
+  })
+
+  test("delivers the exact grouped catalog metadata to the shared DOM Workbench", () => {
+    const items = uiPrimaryItems()
+    expect(items.every(({searchText}) => typeof searchText === "string" && searchText.length > 0)).toBeTrue()
+
+    const document = createDocument()
+    const workbench = createStorybookDomWorkbench({
+      document,
+      parent: document,
+      initial: {
+        "catalog.items": items,
+        "catalog.active": "components/inputs",
+      },
+    })
+    const stored = workbench.controller.read("catalog.items")
+    expect(stored).toHaveLength(items.length)
+    for (const [index, item] of items.entries()) {
+      expect(stored[index]?.group, item.id).toEqual(item.group)
+      expect(stored[index]?.searchText, item.id).toBe(item.searchText)
+    }
+    expect(workbench.elements.catalogItems.getAttribute("role")).toBe("tree")
+
+    const groupRows = [
+      ...workbench.elements.catalogItems.querySelectorAll(".storybook-dom-workbench__group"),
+    ] as HTMLElement[]
+    expect(groupRows.map((row) => ({
+      id: row.getAttribute("data-group-id"),
+      label: row.getAttribute("aria-label"),
+    }))).toEqual([
+      {id: "dom", label: "DOM"},
+      {id: "elements", label: "Элементы"},
+      {id: "components", label: "Компоненты"},
+      {id: "hud", label: "HUD"},
+    ])
+
+    const leaves = [
+      ...workbench.elements.catalogItems.querySelectorAll(".storybook-dom-workbench__item--nested"),
+    ] as HTMLButtonElement[]
+    expect(leaves).toHaveLength(9)
+    expect(leaves.map((leaf) => leaf.getAttribute("data-route"))).toEqual(items.map(({route}) => route))
+    expect(leaves.find((leaf) => leaf.getAttribute("data-route") === "components/inputs")
+      ?.getAttribute("aria-current")).toBe("page")
+
+    let navigationCount = 0
+    const groupToggles: unknown[] = []
+    workbench.element.addEventListener(STORYBOOK_DOM_WORKBENCH_EVENTS.navigate, () => {
+      navigationCount += 1
+    })
+    workbench.element.addEventListener(STORYBOOK_DOM_WORKBENCH_EVENTS.groupToggle, (event) => {
+      groupToggles.push((event as DomCustomEvent).detail)
+    })
+    const componentsGroup = groupRows.find((row) => row.getAttribute("data-group-id") === "components")
+    if (componentsGroup === undefined) throw new Error("Components catalog group is missing")
+    const componentsToggle = componentsGroup.children[0] as HTMLButtonElement | undefined
+    if (componentsToggle === undefined) throw new Error("Components catalog toggle is missing")
+    componentsToggle.click()
+
+    expect(groupToggles).toEqual([{kind: "catalog", id: "components", collapsed: true}])
+    expect(navigationCount).toBe(0)
+    expect(workbench.controller.read("catalog.active")).toBe("components/inputs")
+    expect(uiSecondaryItems("components/foundation/button").map(({route}) => route)).toEqual([
+      "components/foundation/button/basic",
+      "components/foundation/button/icon",
+      "components/foundation/button/icon-label",
+      "components/foundation/button/sizes",
+      "components/foundation/button/color",
+    ])
+    expect(uiDockItems("components/foundation/button/basic").map(({route}) => route)).toEqual([
+      "components/foundation/button/basic/text",
+      "components/foundation/button/basic/contained",
+      "components/foundation/button/basic/outlined",
+    ])
+    workbench.dispose()
   })
 
   test("keeps one complete prefixed route tree without a landing page", () => {

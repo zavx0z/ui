@@ -55,6 +55,16 @@ catalog, secondary navigation, preview, scenarios, owner Inspector host и statu
 неизменённые Node/Text identities. Active navigation может быть `null` на
 настоящем overview; неизвестный non-null id запрещён.
 
+Catalog является grouped navigation tree, а не flat listbox. UI передаёт shared
+Workbench полные `group` и `searchText` из `uiPrimaryItems()` без промежуточной
+потери metadata. Группы `DOM`, `Элементы`, `Компоненты` и `HUD` являются
+раскрываемыми `treeitem`, но не routes; их leaves сохраняют exact category route.
+Collapse state принадлежит Workbench, keyed по `group.id`, а toggle публикует
+semantic event без route navigation. Поиск использует group label и полные
+`label`/`title`/`route`/`searchText` leaf metadata. Обновление catalog сохраняет
+DOM identities неизменившихся group и leaf nodes, active route и независимое
+состояние остальных групп.
+
 Эти шесть regions сохраняют историческую editor-композицию Workbench:
 catalog, secondary navigation, preview, scenarios и UI-owned Props Inspector образуют
 пять плотных рабочих панелей над отдельной full-width StatusBar. Workbench

@@ -117,6 +117,8 @@ describe("DOM Storybook route boundary", () => {
     expect(entry.match(/createDocument\(\)/gu)).toHaveLength(1)
     expect(entry.match(/createStorybookDomWorkbench\(/gu)).toHaveLength(1)
     expect(entry.match(/createDocumentCanvasRuntime\(/gu)).toHaveLength(1)
+    expect(entry).toContain("const catalogItems = uiPrimaryItems()")
+    expect(entry).not.toContain("uiPrimaryItems().map")
     expect(entry).toContain("router.go(target)")
     expect(entry).toContain("router.subscribe((node)")
     expect(entry).toContain("applyRoute(node.path)")
