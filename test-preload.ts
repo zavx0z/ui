@@ -5,7 +5,6 @@ import {createTemplateJsxBunPlugin} from "@zavx0z/template/bun"
 plugin(createTemplateJsxBunPlugin({
   persistent: true,
   sourceRoots: [
-    resolve(import.meta.dir, "packages/components"),
-    resolve(import.meta.dir, "packages/storybook")
+    resolve(import.meta.dir, "packages/components")
   ]
 }))

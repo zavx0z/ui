@@ -11,7 +11,9 @@ Read this reference when visible UI semantics or visual parity are in scope. It 
 - Owner-only optional mirror: `/Users/zavx0z/repozitarium/blender-reference-manual` contains legacy 4.5 evidence at revision `48f79b7e9246f670283b043da8c6f4240e547241`; public contributors do not need this path.
 - Portable routing uses the official `v5.2.0` source tag, rendered Manual/API URLs below, or the configured read-only MCP. Never make an owner-local mirror a build, test, or acceptance prerequisite.
 
-No owner-accepted 5.2 UI raster is currently registered in `packages/storybook/assets/references/catalog.json`. A live MCP capture is current evidence but begins as `candidate`, never as owner acceptance.
+No owner-accepted 5.2 UI raster is currently registered in
+`packages/components/.storybook/resources/references/catalog.json`. A live
+capture is current evidence but begins as `candidate`, never as owner acceptance.
 
 Do not invalidate every 4.5 artifact mechanically. Classify its exact scope as `compatible`, `changed`, or `unverified`. A compatible artifact may remain only after a bounded 5.2 source, API, and visual check records why the relevant law did not change. Changed scopes require 5.2 evidence; unverified scopes cannot claim parity.
 

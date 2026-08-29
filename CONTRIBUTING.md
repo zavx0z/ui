@@ -2,12 +2,12 @@
 
 > Visual UI is **[Built for MetaFor](https://github.com/zavx0z/metafor)** and welcomes changes that preserve reuse across WebGPU and immersive applications.
 
-[Project overview](README.md) · [Architecture](ARCHITECTURE.md) · [Static Storybook](https://zavx0z.github.io/ui/)
+[Project overview](README.md) · [Architecture](ARCHITECTURE.md)
 
 ## Set up the workspace
 
-Use sibling `renderer`, `engine`, `highlighter`, `storybook`, and `ui`
-checkouts. Register their exact package owners before installing UI. Do not
+Use sibling `renderer`, `engine`, `highlighter`, and `ui` owner checkouts.
+External Storybook is attached separately and is not installed by UI. Do not
 replace them with file paths, TypeScript aliases, barrels or compatibility
 packages.
 
@@ -23,8 +23,8 @@ bun run typecheck
 bun run test
 ```
 
-Use `$storybook ensure @ui/storybook` and `$storybook check @ui/storybook`
-for the private catalog.
+Attach `.storybook/manifest.json` to the external Storybook server and open
+the exact `@ui/components` package tab for catalog evidence.
 
 ## Choose the owning package
 
@@ -33,8 +33,8 @@ for the private catalog.
   [`zavx0z/renderer`](https://github.com/zavx0z/renderer), not this repository.
 - Put reusable controls, Field, Inspector, CodeEditor and HUD compositions,
   CSS, source-backed theme and icons in `packages/components`.
-- Put private story modules, the one root Workbench, comparison evidence,
-  lifecycle and static-site code in `packages/storybook`.
+- Put private owner stories and comparison resources under
+  `packages/components/.storybook`; Workbench and lifecycle remain external.
 
 Production Components depend only on DOM and explicit semantic helpers.
 Production packages must not import Storybook, Engine, Layout, WebGPU or the
@@ -50,15 +50,15 @@ implementation.
 Public identifiers, routes, package names, data attributes, and user-facing copy use neutral semantic names. A source product name belongs only in provenance, exact source paths, or owner-facing evidence. Do not add aliases or re-exports when renaming a public owner.
 
 Use lowercase semantic directories recognized by the repository tooling:
-`packages`, `components`, `storybook`, `assets`, `icons`, `scripts`, and
+`packages`, `components`, `.storybook`, `assets`, `icons`, `scripts`, and
 `tests`. Every TypeScript source and test filename is lowercase kebab-case;
 exported TypeScript symbols retain their semantic language casing.
 
 ## Add or update a story
 
-Private story modules own their route presentation, controls, source generator
-and exact natural production import. They are imported by `@ui/storybook`
-through repository-private relative paths and are never package exports. If a
+Private story modules own their route presentation, props/source projection
+and exact natural production import. External generated loaders address one
+static module/export from JSON; stories are never production package exports. If a
 story has external visual evidence, register a lazy reference loader and record:
 
 - exact source version and revision;
@@ -77,6 +77,9 @@ Run the smallest relevant tests while editing, then finish with:
 bun run check
 ```
 
-The final check typechecks all packages, runs unit and Storybook tests, and builds the static `/ui/` site. Also inspect the rendered comparison at a common scale when the change is visual; passing unit tests alone is not visual acceptance.
+The final check typechecks all packages and runs unit tests. External
+PackageSession checks compile the declaration catalog independently. Also
+inspect the rendered comparison at a common scale when the change is visual;
+passing unit tests alone is not visual acceptance.
 
 Changes consumed by [`MetaFor`](https://github.com/zavx0z/metafor) should identify the exact UI revision so product integration remains reproducible while this repository stays independently reusable.

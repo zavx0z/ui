@@ -1,8 +1,8 @@
 # Production delivery
 
 This document owns delivery rules for `@ui/components`. Visual semantics remain
-with its exact package contracts; `@ui/storybook` is development infrastructure
-and is not part of a product bundle.
+with its exact package contracts. External Storybook reads owner declarations
+and is neither a UI dependency nor part of a product bundle.
 
 ## Module identity
 
@@ -33,7 +33,9 @@ and is not part of a product bundle.
    emitted as shared chunks rather than copied into each leaf.
 3. A leaf chunk contains its implementation and imports shared chunks. Loading
    a leaf never creates a second DOM realm, renderer, GPU cache or input host.
-4. Storybook may keep metadata eager and invoke a lazy story factory, but the factory must import the same production subpath used by an application.
+4. External Storybook keeps JSON metadata eager and loads one static owner
+   module/export lazily; that story imports the same production subpath used by
+   an application.
 
 ## Acceptance
 

@@ -10,10 +10,8 @@
       "devDependencies": {
         "@types/bun": "^1.4.0",
         "@types/node": "^25.5.0",
-        "@ui/storybook": "workspace:*",
         "@webgpu/types": "^0.1.68",
         "@zavx0z/react": "link:@zavx0z/react",
-        "@zavx0z/storybook": "link:@zavx0z/storybook",
         "@zavx0z/template": "link:@zavx0z/template",
         "typescript": "^7.0.2",
       },
@@ -31,24 +29,8 @@
         "@zavx0z/renderer": "link:@zavx0z/renderer",
       },
     },
-    "packages/storybook": {
-      "name": "@ui/storybook",
-      "version": "0.0.1",
-      "dependencies": {
-        "@engine/core": "link:@engine/core",
-        "@ui/components": "workspace:*",
-        "@zavx0z/dom": "link:@zavx0z/dom",
-        "@zavx0z/renderer": "link:@zavx0z/renderer",
-        "@zavx0z/renderer-browser": "link:@zavx0z/renderer-browser",
-        "@zavx0z/renderer-webgpu": "link:@zavx0z/renderer-webgpu",
-        "@zavx0z/storybook": "link:@zavx0z/storybook",
-        "@zavx0z/template": "link:@zavx0z/template",
-      },
-    },
   },
   "packages": {
-    "@engine/core": ["@engine/core@link:@engine/core", {}],
-
     "@types/bun": ["@types/bun@1.4.0", "", { "dependencies": { "bun-types": "1.4.0" } }, "sha512-K+lZULY23vRgK/CfTjFIV+tyifaNdSMlPh9j+6mQ/cLfpOznLyAuzgV/JQysyECpkBQLVMSyvjlr2fBUSA9wFQ=="],
 
     "@types/node": ["@types/node@25.9.5", "", { "dependencies": { "undici-types": ">=7.24.0 <7.24.7" } }, "sha512-OScDchr2fwuUmWdf4kZ9h7PcJiYDVInhJizG/biAq3cAvqwYktuy/TYGGdZNMtNTFUP7rnb0NU4TUdm82kt4Rg=="],
@@ -95,8 +77,6 @@
 
     "@ui/components": ["@ui/components@workspace:packages/components"],
 
-    "@ui/storybook": ["@ui/storybook@workspace:packages/storybook"],
-
     "@webgpu/types": ["@webgpu/types@0.1.72", "", {}, "sha512-0cF7RFM2edNoiIS1ODJp0/Gzv4/xSXhwoR0YCza+OWpJWtn4wmo9DvK91aLlH9+uUnwIriP7ZiC3WitmyhuzBw=="],
 
     "@zavx0z/dom": ["@zavx0z/dom@link:@zavx0z/dom", {}],
@@ -106,12 +86,6 @@
     "@zavx0z/react": ["@zavx0z/react@link:@zavx0z/react", {}],
 
     "@zavx0z/renderer": ["@zavx0z/renderer@link:@zavx0z/renderer", {}],
-
-    "@zavx0z/renderer-browser": ["@zavx0z/renderer-browser@link:@zavx0z/renderer-browser", {}],
-
-    "@zavx0z/renderer-webgpu": ["@zavx0z/renderer-webgpu@link:@zavx0z/renderer-webgpu", {}],
-
-    "@zavx0z/storybook": ["@zavx0z/storybook@link:@zavx0z/storybook", { "bin": { "storybook": "./scripts/storybook.ts", "create-storybook": "./scripts/create-storybook.ts" } }],
 
     "@zavx0z/template": ["@zavx0z/template@link:@zavx0z/template", {}],
 

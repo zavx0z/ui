@@ -1,0 +1,4358 @@
+{
+  "schemaVersion": 1,
+  "oldPrivatePackage": "@ui/storybook",
+  "unknownRoutesFailClosed": true,
+  "overviewFallback": false,
+  "leafMappings": [
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/node/hierarchy/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/node/hierarchy/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/element/attributes/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/element/attributes/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-element/title/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-element/title/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-button-element/activation/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-button-element/activation/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-input-element/value/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-input-element/value/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-select-element/selection/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-select-element/selection/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-text-area-element/value/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-text-area-element/value/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-progress-element/value/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-progress-element/value/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-meter-element/value/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-meter-element/value/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/event-target/listeners/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/event-target/listeners/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/document/tree/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/document/tree/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/document-fragment/mutation/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/document-fragment/mutation/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/character-data/data/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/character-data/data/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/text/data/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/text/data/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/comment/anchors/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/comment/anchors/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/node-list/snapshot/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/node-list/snapshot/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/dom-token-list/classes/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/dom-token-list/classes/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-div-element/container/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-div-element/container/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-span-element/inline/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-span-element/inline/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-image-element/attributes/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-image-element/attributes/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-option-element/selectedness/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-option-element/selectedness/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-label-element/control/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-label-element/control/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-field-set-element/disabled/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-field-set-element/disabled/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-legend-element/caption/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-legend-element/caption/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-u-list-element/list/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-u-list-element/list/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-li-element/item/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-li-element/item/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-heading-element/heading/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-heading-element/heading/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-paragraph-element/text/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-paragraph-element/text/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-element/table/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-element/table/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-section-element/section/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-section-element/section/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-row-element/row/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-row-element/row/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-cell-element/cell/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-cell-element/cell/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/event/propagation/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/event/propagation/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/custom-event/detail/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/custom-event/detail/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/toggle-event/states/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/toggle-event/states/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/ui-event/detail/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/ui-event/detail/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/focus-event/related-target/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/focus-event/related-target/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/mouse-event/pointer/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/mouse-event/pointer/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/pointer-event/samples/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/pointer-event/samples/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/wheel-event/delta/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/wheel-event/delta/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/keyboard-event/key/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/keyboard-event/key/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/input-event/data/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/input-event/data/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/composition-event/data/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/composition-event/data/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/basic/background"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/basic/background"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/basic/border"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/basic/border"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/basic/padding"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/basic/padding"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/basic/z-index"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/basic/z-index"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/overflow/nested"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/overflow/nested"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/scroll/vertical"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/scroll/vertical"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/scroll/horizontal"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/scroll/horizontal"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/scroll/both"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div/scroll/both"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/span/content/left"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/span/content/left"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/span/content/center"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/span/content/center"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/span/content/right"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/span/content/right"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/button/state/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/button/state/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/button/state/disabled"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/button/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/button/state/clickable"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/button/state/clickable"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/input/state/inactive"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/input/state/inactive"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/input/state/active"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/input/state/active"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/input/state/disabled"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/input/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state/inactive"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select/state/inactive"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state/active"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select/state/active"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state/open"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select/state/open"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state/header"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select/state/header"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state/flipped"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select/state/flipped"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state/disabled"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/popover/state/closed"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/popover/state/closed"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/popover/state/open"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/popover/state/open"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/img/fit/cover"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/img/fit/cover"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/img/fit/contain"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/img/fit/contain"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/list/mode/regular"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/list/mode/regular"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/list/mode/dense"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/list/mode/dense"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/list/mode/interactive"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/list/mode/interactive"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/list/mode/scroll"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/list/mode/scroll"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/status-bar/content/statistics"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/status-bar/content/statistics"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/padding/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css/padding/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/flex/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css/flex/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/border/rounded"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css/border/rounded"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/border/capsule"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css/border/capsule"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/color/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css/color/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/typography/default"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css/typography/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/theme/tone/cyan"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/theme/tone/cyan"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/theme/tone/green"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/theme/tone/green"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/theme/tone/orange"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/theme/tone/orange"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/theme/tone/red"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/theme/tone/red"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state/idle"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer/state/idle"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state/hover"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer/state/hover"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state/press"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer/state/press"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state/release"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer/state/release"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state/click"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer/state/click"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state/disabled"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/basic/text"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/basic/text"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/basic/contained"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/basic/contained"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/basic/outlined"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/basic/outlined"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/icon/svg"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/icon/svg"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/icon-label/left"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/icon-label/left"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/icon-label/right"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/icon-label/right"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/sizes/small"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/sizes/small"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/sizes/medium"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/sizes/medium"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/sizes/large"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/sizes/large"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/color/primary"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/color/primary"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/color/success"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/color/success"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/color/warning"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/color/warning"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/color/error"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/color/error"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/color/neutral"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button/color/neutral"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/pane/variants/glass"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/pane/variants/glass"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/pane/variants/outlined"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/pane/variants/outlined"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/pane/variants/filled"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/pane/variants/filled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/badge/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/badge/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/typography/variants/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/typography/variants/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/divider/variants/full-width"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/divider/variants/full-width"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/divider/variants/inset"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/divider/variants/inset"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/divider/variants/middle"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/divider/variants/middle"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/control-group/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/control-group/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/text/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/text/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/number/input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/number/input"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/number/slider"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/number/slider"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/integer/input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/integer/input"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/boolean/switch"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/boolean/switch"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/enum/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/enum/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/color/input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/color/input"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/vector/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/vector/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/rotation/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/rotation/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/matrix/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/matrix/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/reference/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/reference/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/collection/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/collection/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/path/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/path/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/readonly/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field/readonly/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/text-field/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/text-field/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/number-input/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/number-input/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input/basic/value"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input/basic/value"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input/basic/labeled"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input/basic/labeled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input/state/disabled"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input/state/readonly"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input/state/readonly"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input/basic/color-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input/basic/color-input"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input/state/open"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input/state/open"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input/presentation/expanded"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input/presentation/expanded"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/vector-input/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/vector-input/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/matrix-input/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/matrix-input/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/reference-input/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/reference-input/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/presentation/cycle"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/presentation/cycle"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/presentation/expanded"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/presentation/expanded"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/value/selected-description"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/value/selected-description"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/value/header-icons"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/value/header-icons"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/value/mixed-icons"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/value/mixed-icons"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/value/invalid-legacy"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/value/invalid-legacy"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/exception/no-items"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/exception/no-items"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/exception/menu-undefined"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/exception/menu-undefined"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/exception/menu-error"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/exception/menu-error"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/state/disabled"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/state/readonly"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input/state/readonly"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/value/selected"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input/value/selected"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/value/empty"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input/value/empty"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/state/disabled"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/state/readonly"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input/state/readonly"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/density/compact"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input/density/compact"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/value/path"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input/value/path"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/value/empty"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input/value/empty"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/state/disabled"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input/state/disabled"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/state/readonly"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input/state/readonly"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/density/compact"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input/density/compact"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/checkbox/state/unchecked"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/checkbox/state/unchecked"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/checkbox/state/checked"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/checkbox/state/checked"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/switcher/state/off"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/switcher/state/off"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/switcher/state/on"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/switcher/state/on"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/progress-checkbox/progress/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/progress-checkbox/progress/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/slider-control/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/slider-control/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/inspector/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/code-editor/state/read-only"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/code-editor/state/read-only"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/list/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/list/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/table/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/table/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/scrollbar/vertical/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/scrollbar/vertical/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/noti/status/unavailable"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/noti/status/unavailable"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/window/inventory/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/window/inventory/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/frame/inventory/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/frame/inventory/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/timeline/inventory/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/timeline/inventory/default"
+      }
+    }
+  ],
+  "overviewMappings": [
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": ""
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "",
+        "kind": "package-root",
+        "reason": "The former shared root is the UI Components package overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "",
+        "kind": "owner-collapse",
+        "reason": "Former owner page is represented by the exact package overview, never a leaf fallback"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/node"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/node",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/node/hierarchy"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/node",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/element/attributes"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-element/title"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-button-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-button-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-button-element/activation"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-button-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-input-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-input-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-input-element/value"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-input-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-select-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-select-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-select-element/selection"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-select-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-text-area-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-text-area-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-text-area-element/value"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-text-area-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-progress-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-progress-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-progress-element/value"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-progress-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-meter-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-meter-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-meter-element/value"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-meter-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/event-target"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/event-target",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/event-target/listeners"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/event-target",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/document"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/document",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/document/tree"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/document",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/document-fragment"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/document-fragment",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/document-fragment/mutation"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/document-fragment",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/character-data"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/character-data",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/character-data/data"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/character-data",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/text"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/text",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/text/data"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/text",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/comment"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/comment",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/comment/anchors"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/comment",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/node-list"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/node-list",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/node-list/snapshot"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/node-list",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/dom-token-list"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/dom-token-list",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/dom-token-list/classes"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/dom-token-list",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-div-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-div-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-div-element/container"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-div-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-span-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-span-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-span-element/inline"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-span-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-image-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-image-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-image-element/attributes"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-image-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-option-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-option-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-option-element/selectedness"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-option-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-label-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-label-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-label-element/control"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-label-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-field-set-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-field-set-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-field-set-element/disabled"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-field-set-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-legend-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-legend-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-legend-element/caption"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-legend-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-u-list-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-u-list-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-u-list-element/list"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-u-list-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-li-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-li-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-li-element/item"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-li-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-heading-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-heading-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-heading-element/heading"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-heading-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-paragraph-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-paragraph-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-paragraph-element/text"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-paragraph-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-element/table"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-section-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-section-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-section-element/section"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-section-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-row-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-row-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-row-element/row"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-row-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-cell-element"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-cell-element",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/html-table-cell-element/cell"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/html-table-cell-element",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/event/propagation"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/custom-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/custom-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/custom-event/detail"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/custom-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/toggle-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/toggle-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/toggle-event/states"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/toggle-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/ui-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/ui-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/ui-event/detail"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/ui-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/focus-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/focus-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/focus-event/related-target"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/focus-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/mouse-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/mouse-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/mouse-event/pointer"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/mouse-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/pointer-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/pointer-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/pointer-event/samples"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/pointer-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/wheel-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/wheel-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/wheel-event/delta"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/wheel-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/keyboard-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/keyboard-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/keyboard-event/key"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/keyboard-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/input-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/input-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/input-event/data"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/input-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/composition-event"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/composition-event",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "dom/interfaces/composition-event/data"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "dom/interfaces/composition-event",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "",
+        "kind": "owner-collapse",
+        "reason": "Former owner page is represented by the exact package overview, never a leaf fallback"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/basic"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/overflow"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/div/scroll"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/div",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/span"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/span",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/span/content"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/span",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/button"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/button",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/button/state"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/button",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/input"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/input/state"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/select/state"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/select",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/popover"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/popover",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/popover/state"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/popover",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/img"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/img",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/img/fit"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/img",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/list"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/list",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/list/mode"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/list",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/status-bar"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/status-bar",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/primitives/status-bar/content"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/primitives/status-bar",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/padding"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/flex"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/border"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/color"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/css/typography"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/css",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/theme"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/theme",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/style/theme/tone"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/style/theme",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "elements/events/pointer/state"
+      },
+      "to": {
+        "packageId": "@zavx0z/dom",
+        "route": "elements/events/pointer",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "",
+        "kind": "owner-collapse",
+        "reason": "Former owner page is represented by the exact package overview, never a leaf fallback"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/icon"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/icon-label"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/sizes"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/button/color"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/button",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/pane"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/pane",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/pane/variants"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/pane",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/badge"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/badge",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/badge/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/badge",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/typography"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/typography",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/typography/variants"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/typography",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/divider"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/divider",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/foundation/divider/variants"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/divider",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/control-group"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/control-group",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/control-group/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/control-group",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/text"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/number"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/integer"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/boolean"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/enum"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/color"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/vector"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/rotation"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/matrix"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/reference"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/collection"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/path"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/field/readonly"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/text-field"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/text-field",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/text-field/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/text-field",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/number-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/number-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/number-input/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/number-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/integer-input/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/integer-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/color-input/presentation"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/color-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/vector-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/vector-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/vector-input/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/vector-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/matrix-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/matrix-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/matrix-input/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/matrix-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/reference-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/reference-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/reference-input/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/reference-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/presentation"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/value"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/exception"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/enum-input/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/enum-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/value"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/collection-input/density"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/collection-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/value"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/path-input/density"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/path-input",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/checkbox"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/checkbox",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/checkbox/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/checkbox",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/switcher"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/switcher",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/switcher/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/switcher",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/progress-checkbox"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/progress-checkbox",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/progress-checkbox/progress"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/progress-checkbox",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/slider-control"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/slider-control",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/inputs/slider-control/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/inputs/slider-control",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/inspector"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/inspector/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/code-editor"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/code-editor",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/code-editor/state"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/code-editor",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/list"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/list",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/list/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/list",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/table"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/table",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/table/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/table",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/scrollbar"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/scrollbar",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/scrollbar/vertical"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/scrollbar",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/noti"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/noti",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "components/data/noti/status"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/noti",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "",
+        "kind": "owner-collapse",
+        "reason": "Former owner page is represented by the exact package overview, never a leaf fallback"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation",
+        "kind": "category",
+        "reason": "Exact former category overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/window"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/window",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/window/inventory"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/window",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/frame"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/frame",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/frame/inventory"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/frame",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/timeline"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/timeline",
+        "kind": "subject",
+        "reason": "Exact former component or interface overview"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/storybook",
+        "route": "hud/foundation/timeline/inventory"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "hud/foundation/timeline",
+        "kind": "section-collapse",
+        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    }
+  ],
+  "documentedAdditions": [
+    {
+      "packageId": "@zavx0z/dom",
+      "route": "",
+      "kind": "package-root",
+      "reason": "Renderer is now an independently openable package tab"
+    }
+  ]
+}

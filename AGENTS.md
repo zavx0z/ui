@@ -1,9 +1,8 @@
 # UI agent rules
 
 - Use `$ui-dev` from `.agents/skills/ui-dev` for UI implementation, tests and
-  visual-reference semantics. Use the single global `$storybook` for
-  `@ui/storybook` lifecycle, static build, exact-route browser checks and
-  profiling.
+  visual-reference semantics. External Storybook attaches
+  `.storybook/manifest.json`; UI owns no Storybook process, port or package.
 - Before changing behavior, read `ARCHITECTURE.md`, the affected package
   `requirements.md`, public types, implementation, and focused tests.
 - `@zavx0z/dom` owns the semantic tree and standard events;

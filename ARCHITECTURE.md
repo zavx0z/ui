@@ -24,9 +24,9 @@ object, manual rectangle or WebGPU resource.
 
 @zavx0z/highlighter ──→ @ui/components/code-editor
 
-@zavx0z/storybook/* ─────┐
-private UI story modules ┼─→ @ui/storybook (development only)
-document pipeline ───────┘
+external Storybook ──loads──→ @ui/components/.storybook declarations
+private UI story modules ───→ exact production owners
+document pipeline ──────────→ one package-tab realm
 ```
 
 The DOM is the only public UI tree. Computed style, layout boxes, display
@@ -67,16 +67,16 @@ Every visible migration slice requires an equal-scale reference comparison and
 an explicit owner verdict. Unit tests, route completeness, readiness and a
 non-black canvas prove mechanics only; they do not authorize a visual redesign.
 
-### `@ui/storybook`
+### External `@ui/components` catalog
 
-The private Storybook application owns UI routes, examples, controls and
-acceptance. Natural shared `@zavx0z/storybook/{stories,catalog,workbench}`
-subpaths own the semantic Workbench and story controller. The exact story
-preview, Workbench and the owner-supplied Props Inspector belong
-to the same `@zavx0z/dom` realm and render through the same CPU/WebGPU pipeline.
+The external Storybook tool owns server, Workbench, routing, revisions and
+diagnostics. UI provides only versioned JSON declarations, static owner story
+exports, a structural runtime adapter and resources below
+`packages/components/.storybook`. Preview and Workbench belong to the same
+`@zavx0z/dom` realm and render through the same CPU/WebGPU pipeline.
 
-Source provenance is derived from executable DOM/CSS/TypeScript rather than a
-parallel illustrative string. Production packages never import Storybook.
+UI has no dependency, import, private npm package, server or build wrapper for
+Storybook. Source provenance remains derived from executable DOM/CSS/TypeScript.
 
 ### Retired boundaries
 

@@ -1,11 +1,11 @@
 ---
 name: ui-dev
-description: "Develop and verify the standalone Visual UI repository, its DOM/CSS Components, private Storybook, visual references, and production contracts. Use the global storybook skill for @ui/storybook and nodes-dev for node-specific UI."
+description: "Develop and verify the standalone Visual UI repository, its DOM/CSS Components, external catalog declarations, visual references, and production contracts. Use the external Storybook workflow and nodes-dev for node-specific UI."
 ---
 
 # UI development
 
-Use the exact UI checkout supplied for the task. Preserve its branch or detached HEAD, unrelated changes, listeners, and browser targets. `@ui/storybook` owns the UI catalog and package pages; the global `$storybook` owns their package-named lifecycle and exact browser target.
+Use the exact UI checkout supplied for the task. Preserve its branch or detached HEAD, unrelated changes, listeners, and browser targets. UI owns declaration data, owner stories and resources under `packages/components/.storybook`; the external Storybook server owns lifecycle and browser targets.
 
 Before changing a contract, read the repository `ARCHITECTURE.md`, the affected package requirements, public types, and focused tests. A new law is written in the owning requirements before its implementation.
 
@@ -48,21 +48,21 @@ Every story prefix is an overview with trailing `/`; an exact story leaf has no 
 
 ## Storybook boundary
 
-Use the single global `$storybook` with exact package `@ui/storybook` for
-lifecycle, automatic origin, static build, exact-route browser evidence,
-interaction and profiling. This skill contains no lifecycle/browser scripts,
-selector, port, process state or copied Storybook rules.
+Attach `.storybook/manifest.json` to the single external Storybook server and
+open exact package `@ui/components` for route evidence, interaction and
+profiling. This repository contains no lifecycle/browser scripts, selector,
+port, process state or Storybook dependency.
 
 UI remains the semantic owner of its package catalog, Blender-compatible visual
 reference, preview behavior, accepted rasters and route-specific expectations.
 Those laws stay in package requirements and `references/blender-reference.md`;
-generic Storybook mechanics stay only in `$storybook`.
+generic Storybook mechanics stay only in the external tool.
 
 Consumer UI is authored as `@zavx0z/template` HTML plus CSS and resolved by
 target-neutral `@zavx0z/renderer`. Components create standard DOM subtrees and
 do not parse selectors, calculate sibling geometry or own GPU resources.
 Do not add `sx`; standard class/attribute state plus CSS is the styling
-boundary. Package-owned Storybook shows three independent documents for one fixed story:
+boundary. The package-owned runtime publishes three independent documents for one fixed story:
 raw HTML, raw CSS with the full inherited owner/part/state chain, and exact
 TypeScript imports/props/internal calls. Existing Controls and Events remain
 bound to the same story args; future editor mutation is an additional authoring

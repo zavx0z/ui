@@ -1,7 +1,7 @@
 {
   "name": "@ui/workspace",
   "version": "0.1.0",
-  "description": "DOM and CSS components with a private WebGPU Storybook. Built for MetaFor and reusable in immersive interfaces.",
+  "description": "DOM and CSS components with external owner declarations. Built for MetaFor and reusable in immersive interfaces.",
   "type": "module",
   "private": true,
   "packageManager": "bun@1.4.0",
@@ -11,7 +11,7 @@
   "scripts": {
     "test": "bun test packages",
     "typecheck": "tsc --project tsconfig.json --pretty false",
-    "check": "bun run typecheck && bun run test && bun run --cwd packages/storybook build"
+    "check": "bun run typecheck && bun run test"
   },
   "repository": {
     "type": "git",
@@ -26,7 +26,7 @@
     "ui",
     "immersive",
     "spatial",
-    "storybook",
+    "catalog",
     "metafor"
   ],
   "dependencies": {
@@ -36,9 +36,7 @@
     "@types/bun": "^1.4.0",
     "@types/node": "^25.5.0",
     "@webgpu/types": "^0.1.68",
-    "@ui/storybook": "workspace:*",
     "@zavx0z/react": "link:@zavx0z/react",
-    "@zavx0z/storybook": "link:@zavx0z/storybook",
     "@zavx0z/template": "link:@zavx0z/template",
     "typescript": "^7.0.2"
   }

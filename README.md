@@ -7,36 +7,35 @@ spatial workspaces and heads-up presentations rendered through the document
 engine and WebGPU. Components create ordinary semantic elements, use standard
 events and preserve DOM identity across controlled updates.
 
-[Open the Storybook](https://zavx0z.github.io/ui/) · [Read the architecture](ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md)
+[Read the architecture](ARCHITECTURE.md) · [Contribute](CONTRIBUTING.md)
 
 ## Packages
 
 | Package | Responsibility |
 | --- | --- |
 | [`@ui/components`](packages/components) | Blender-compatible production DOM/CSS controls, Fields, collections, Inspector, CodeEditor, HUD, theme and assets. |
-| [`@ui/storybook`](packages/storybook) | Private one-Workbench UI catalog, owner routes, lifecycle and static application using `@zavx0z/storybook`. |
+| [`@ui/components` catalog](packages/components/.storybook) | External declarations, owner stories and preserved visual resources; lifecycle remains outside UI. |
 
 Production authoring depends on `@zavx0z/dom`; read-only syntax presentation
 also uses [`@zavx0z/highlighter`](https://github.com/zavx0z/highlighter).
 Cascade, layout, hit projection and rendering belong to the document renderer,
 while [`@engine/core`](https://github.com/zavx0z/engine) owns WebGPU resources.
-`@zavx0z/storybook` and the private UI Storybook app remain development
-consumers and never enter a production component graph.
+Storybook is an external development tool and never enters the UI dependency
+or production component graph.
 
 The project-default TTF is owned by Engine and loaded by the document host.
 UI packages and individual stories do not import or fetch it themselves.
 
 ## Local development
 
-Keep Renderer, Engine, Highlighter, Storybook and UI as sibling checkouts. UI
-manifests resolve only exact package owners:
+Keep Renderer, Engine, Highlighter and UI as linked owner checkouts. External
+Storybook is attached separately and is not installed by UI:
 
 ```text
 repozitarium/
 ├── engine/
 ├── renderer/
 ├── highlighter/
-├── storybook/
 └── ui/
 ```
 
@@ -46,13 +45,12 @@ Then run:
 cd ../renderer && bun link
 cd ../engine/packages/core && bun link
 cd ../../../highlighter && bun link
-cd ../storybook && bun link
 cd ../webxr-space/projects/ui
 bun install
 ```
 
-Use `$storybook ensure @ui/storybook` for the local runtime and
-`$storybook build @ui/storybook` for the `/ui/` static artifact.
+Attach `.storybook/manifest.json` to the external Storybook server and open
+the exact `@ui/components` package tab.
 
 References are metadata-first and image-lazy. Catalog metadata can remain in the initial bundle, while raster evidence is requested only for the selected comparison. Automated captures are candidates; acceptance remains an explicit owner decision.
 
