@@ -136,7 +136,12 @@ contain no tooltip-specific API.
 - GPU objects, geometry and materials remain stable when their resolved visual
   fragment is unchanged.
 - Removal detaches listeners and invalidates renderer-owned GPU resources.
-- One application must resolve exactly one DOM realm and one Engine identity.
+- One application Experience must resolve exactly one semantic DOM realm,
+  native canvas, Engine Renderer, Space and ViewPoint through the shared
+  Renderer presentation host. Display, world and HUD placement are projection
+  roots of that owner, never separate Documents or runtimes. The detailed
+  topology and mobility contract belongs to
+  [`@zavx0z/renderer-browser`](../../../renderer/packages/browser/requirements.md).
 
 ## Current migration checkpoint
 
