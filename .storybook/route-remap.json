@@ -3274,8 +3274,8 @@
       "to": {
         "packageId": "@ui/components",
         "route": "components/foundation/button",
-        "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "kind": "category",
+        "reason": "Promoted Button remains an exact primary component category overview"
       }
     },
     {
@@ -3285,9 +3285,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/foundation/button",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/foundation/button/basic",
+        "kind": "subject",
+        "reason": "Promoted Button section remains an exact secondary subject overview"
       }
     },
     {
@@ -3297,9 +3297,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/foundation/button",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/foundation/button/icon",
+        "kind": "subject",
+        "reason": "Promoted Button section remains an exact secondary subject overview"
       }
     },
     {
@@ -3309,9 +3309,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/foundation/button",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/foundation/button/icon-label",
+        "kind": "subject",
+        "reason": "Promoted Button section remains an exact secondary subject overview"
       }
     },
     {
@@ -3321,9 +3321,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/foundation/button",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/foundation/button/sizes",
+        "kind": "subject",
+        "reason": "Promoted Button section remains an exact secondary subject overview"
       }
     },
     {
@@ -3333,9 +3333,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/foundation/button",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/foundation/button/color",
+        "kind": "subject",
+        "reason": "Promoted Button section remains an exact secondary subject overview"
       }
     },
     {
