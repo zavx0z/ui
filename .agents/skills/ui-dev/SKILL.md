@@ -68,5 +68,13 @@ TypeScript imports/props/internal calls. Existing Controls and Events remain
 bound to the same story args; future editor mutation is an additional authoring
 path rather than a replacement for them.
 
+Accessibility is not an independent product priority or default acceptance
+dimension. Keep native semantics that come with the exact HTML elements, but
+do not introduce shared accessibility contracts, mandatory `aria-label` props,
+ARIA-only wrappers, keyboard behavior, catalog variants, tests, or bundle
+growth without an explicit current-task accessibility scope. Accessibility
+must not override the accepted visual, interaction, ownership or public-API
+contract.
+
 At handoff report affected UI owners, focused and repository checks, reference
 compatibility where applicable, and every remaining product or owner gate.

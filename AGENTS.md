@@ -12,3 +12,8 @@
 - Preserve the supplied checkout, unrelated changes, linked dependency
   identity, listeners, and browser targets. Use the skill-owned background
   browser path instead of focusing desktop browser windows.
+- Accessibility is not a default product priority or an independent acceptance
+  gate. Preserve native HTML semantics that already follow from the chosen
+  elements, but do not expand public props, add ARIA abstractions, keyboard
+  behavior, stories, tests, or bundle work solely for accessibility unless
+  zavx0z explicitly scopes that work.
