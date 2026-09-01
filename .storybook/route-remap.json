@@ -1141,7 +1141,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/control-group/basic/default"
+        "route": "components/controls/control-group/basic/default"
       }
     },
     {
@@ -1151,7 +1151,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/text/default"
+        "route": "components/fields/text-field/basic/default"
       }
     },
     {
@@ -1161,7 +1161,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/number/input"
+        "route": "components/fields/number-field/basic/default"
       }
     },
     {
@@ -1171,7 +1171,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/number/slider"
+        "route": "components/fields/number-field/presentation/slider"
       }
     },
     {
@@ -1181,7 +1181,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/integer/input"
+        "route": "components/fields/integer-field/basic/default"
       }
     },
     {
@@ -1191,7 +1191,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/boolean/switch"
+        "route": "components/fields/boolean-field/presentation/switch"
       }
     },
     {
@@ -1201,7 +1201,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/enum/default"
+        "route": "components/fields/enum-field/basic/default"
       }
     },
     {
@@ -1211,7 +1211,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/color/input"
+        "route": "components/fields/color-field/basic/default"
       }
     },
     {
@@ -1221,7 +1221,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/vector/default"
+        "route": "components/fields/vector-field/basic/default"
       }
     },
     {
@@ -1231,7 +1231,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/rotation/default"
+        "route": "components/fields/rotation-field/basic/default"
       }
     },
     {
@@ -1241,7 +1241,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/matrix/default"
+        "route": "components/fields/matrix-field/basic/default"
       }
     },
     {
@@ -1251,7 +1251,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/reference/default"
+        "route": "components/fields/reference-field/basic/default"
       }
     },
     {
@@ -1261,7 +1261,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/collection/default"
+        "route": "components/fields/collection-field/basic/default"
       }
     },
     {
@@ -1271,7 +1271,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/path/default"
+        "route": "components/fields/path-field/basic/default"
       }
     },
     {
@@ -1281,7 +1281,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field/readonly/default"
+        "route": "components/fields/readonly-field/basic/default"
       }
     },
     {
@@ -1291,7 +1291,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/text-field/basic/default"
+        "route": "components/controls/text-control/basic/default"
       }
     },
     {
@@ -1301,7 +1301,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/number-input/basic/default"
+        "route": "components/controls/number-control/basic/default"
       }
     },
     {
@@ -1311,7 +1311,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input/basic/value"
+        "route": "components/controls/integer-control/basic/value"
       }
     },
     {
@@ -1321,7 +1321,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input/basic/labeled"
+        "route": "components/fields/integer-field/basic/default"
       }
     },
     {
@@ -1331,7 +1331,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input/state/disabled"
+        "route": "components/controls/integer-control/state/disabled"
       }
     },
     {
@@ -1341,7 +1341,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input/state/readonly"
+        "route": "components/controls/integer-control/state/readonly"
       }
     },
     {
@@ -1351,7 +1351,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input/basic/color-input"
+        "route": "components/controls/color-control/basic/default"
       }
     },
     {
@@ -1361,7 +1361,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input/state/open"
+        "route": "components/controls/color-control/state/open"
       }
     },
     {
@@ -1371,7 +1371,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input/presentation/expanded"
+        "route": "components/controls/color-control/presentation/expanded"
       }
     },
     {
@@ -1381,7 +1381,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/vector-input/basic/default"
+        "route": "components/controls/vector-control/basic/default"
       }
     },
     {
@@ -1391,7 +1391,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/matrix-input/basic/default"
+        "route": "components/controls/matrix-control/basic/default"
       }
     },
     {
@@ -1401,7 +1401,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/reference-input/basic/default"
+        "route": "components/controls/reference-control/basic/default"
       }
     },
     {
@@ -1411,7 +1411,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/presentation/cycle"
+        "route": "components/controls/enum-control/presentation/cycle"
       }
     },
     {
@@ -1421,7 +1421,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/presentation/expanded"
+        "route": "components/controls/enum-control/presentation/expanded"
       }
     },
     {
@@ -1431,7 +1431,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/value/selected-description"
+        "route": "components/controls/enum-control/value/selected-description"
       }
     },
     {
@@ -1441,7 +1441,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/value/header-icons"
+        "route": "components/controls/enum-control/value/header-icons"
       }
     },
     {
@@ -1451,7 +1451,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/value/mixed-icons"
+        "route": "components/controls/enum-control/value/mixed-icons"
       }
     },
     {
@@ -1461,7 +1461,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/value/invalid-legacy"
+        "route": "components/controls/enum-control/value/invalid-legacy"
       }
     },
     {
@@ -1471,7 +1471,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/exception/no-items"
+        "route": "components/controls/enum-control/exception/no-items"
       }
     },
     {
@@ -1481,7 +1481,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/exception/menu-undefined"
+        "route": "components/controls/enum-control/exception/menu-undefined"
       }
     },
     {
@@ -1491,7 +1491,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/exception/menu-error"
+        "route": "components/controls/enum-control/exception/menu-error"
       }
     },
     {
@@ -1501,7 +1501,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/state/disabled"
+        "route": "components/controls/enum-control/state/disabled"
       }
     },
     {
@@ -1511,7 +1511,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input/state/readonly"
+        "route": "components/controls/enum-control/state/readonly"
       }
     },
     {
@@ -1521,7 +1521,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input/value/selected"
+        "route": "components/controls/collection-control/value/selected"
       }
     },
     {
@@ -1531,7 +1531,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input/value/empty"
+        "route": "components/controls/collection-control/value/empty"
       }
     },
     {
@@ -1541,7 +1541,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input/state/disabled"
+        "route": "components/controls/collection-control/state/disabled"
       }
     },
     {
@@ -1551,7 +1551,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input/state/readonly"
+        "route": "components/controls/collection-control/state/readonly"
       }
     },
     {
@@ -1561,7 +1561,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input/density/compact"
+        "route": "components/controls/collection-control/density/compact"
       }
     },
     {
@@ -1571,7 +1571,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input/value/path"
+        "route": "components/controls/path-control/value/path"
       }
     },
     {
@@ -1581,7 +1581,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input/value/empty"
+        "route": "components/controls/path-control/value/empty"
       }
     },
     {
@@ -1591,7 +1591,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input/state/disabled"
+        "route": "components/controls/path-control/state/disabled"
       }
     },
     {
@@ -1601,7 +1601,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input/state/readonly"
+        "route": "components/controls/path-control/state/readonly"
       }
     },
     {
@@ -1611,7 +1611,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input/density/compact"
+        "route": "components/controls/path-control/density/compact"
       }
     },
     {
@@ -1621,7 +1621,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/checkbox/state/unchecked"
+        "route": "components/controls/checkbox/state/unchecked"
       }
     },
     {
@@ -1631,7 +1631,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/checkbox/state/checked"
+        "route": "components/controls/checkbox/state/checked"
       }
     },
     {
@@ -1641,7 +1641,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/switcher/state/off"
+        "route": "components/controls/switcher/state/off"
       }
     },
     {
@@ -1651,7 +1651,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/switcher/state/on"
+        "route": "components/controls/switcher/state/on"
       }
     },
     {
@@ -1661,7 +1661,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/progress-checkbox/progress/default"
+        "route": "components/controls/progress-checkbox/progress/default"
       }
     },
     {
@@ -1671,7 +1671,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/slider-control/basic/default"
+        "route": "components/controls/slider-control/basic/default"
       }
     },
     {
@@ -3441,9 +3441,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs",
+        "route": "components/controls",
         "kind": "category",
-        "reason": "Exact former category overview"
+        "reason": "Former Inputs overview now resolves to the canonical Controls category"
       }
     },
     {
@@ -3453,9 +3453,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/control-group",
+        "route": "components/controls/control-group",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3465,9 +3465,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/control-group",
+        "route": "components/controls/control-group",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3477,9 +3477,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "route": "components/fields",
+        "kind": "category",
+        "reason": "Former generic Field overview now resolves to the concrete Fields category"
       }
     },
     {
@@ -3489,9 +3489,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/text-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3501,9 +3501,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/number-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3513,9 +3513,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/integer-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3525,9 +3525,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/boolean-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3537,9 +3537,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/enum-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3549,9 +3549,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/color-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3561,9 +3561,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/vector-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3573,9 +3573,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/rotation-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3585,9 +3585,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/matrix-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3597,9 +3597,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/reference-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3609,9 +3609,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/collection-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3621,9 +3621,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/path-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3633,9 +3633,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/field",
-        "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "route": "components/fields/readonly-field",
+        "kind": "subject",
+        "reason": "Former generic Field section is now an exact concrete Field subject overview"
       }
     },
     {
@@ -3645,9 +3645,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/text-field",
+        "route": "components/controls/text-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3657,9 +3657,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/text-field",
+        "route": "components/controls/text-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3669,9 +3669,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/number-input",
+        "route": "components/controls/number-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3681,9 +3681,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/number-input",
+        "route": "components/controls/number-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3693,9 +3693,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input",
+        "route": "components/controls/integer-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3705,9 +3705,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input",
+        "route": "components/controls/integer-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3717,9 +3717,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/integer-input",
+        "route": "components/controls/integer-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3729,9 +3729,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input",
+        "route": "components/controls/color-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3741,9 +3741,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input",
+        "route": "components/controls/color-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3753,9 +3753,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input",
+        "route": "components/controls/color-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3765,9 +3765,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/color-input",
+        "route": "components/controls/color-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3777,9 +3777,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/vector-input",
+        "route": "components/controls/vector-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3789,9 +3789,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/vector-input",
+        "route": "components/controls/vector-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3801,9 +3801,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/matrix-input",
+        "route": "components/controls/matrix-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3813,9 +3813,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/matrix-input",
+        "route": "components/controls/matrix-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3825,9 +3825,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/reference-input",
+        "route": "components/controls/reference-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3837,9 +3837,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/reference-input",
+        "route": "components/controls/reference-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3849,9 +3849,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input",
+        "route": "components/controls/enum-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3861,9 +3861,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input",
+        "route": "components/controls/enum-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3873,9 +3873,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input",
+        "route": "components/controls/enum-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3885,9 +3885,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input",
+        "route": "components/controls/enum-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3897,9 +3897,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/enum-input",
+        "route": "components/controls/enum-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3909,9 +3909,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input",
+        "route": "components/controls/collection-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3921,9 +3921,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input",
+        "route": "components/controls/collection-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3933,9 +3933,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input",
+        "route": "components/controls/collection-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3945,9 +3945,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/collection-input",
+        "route": "components/controls/collection-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3957,9 +3957,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input",
+        "route": "components/controls/path-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -3969,9 +3969,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input",
+        "route": "components/controls/path-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3981,9 +3981,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input",
+        "route": "components/controls/path-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -3993,9 +3993,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/path-input",
+        "route": "components/controls/path-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -4005,9 +4005,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/checkbox",
+        "route": "components/controls/checkbox",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -4017,9 +4017,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/checkbox",
+        "route": "components/controls/checkbox",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -4029,9 +4029,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/switcher",
+        "route": "components/controls/switcher",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -4041,9 +4041,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/switcher",
+        "route": "components/controls/switcher",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -4053,9 +4053,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/progress-checkbox",
+        "route": "components/controls/progress-checkbox",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -4065,9 +4065,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/progress-checkbox",
+        "route": "components/controls/progress-checkbox",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {
@@ -4077,9 +4077,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/slider-control",
+        "route": "components/controls/slider-control",
         "kind": "subject",
-        "reason": "Exact former component or interface overview"
+        "reason": "Former Input component overview now resolves to the exact Control subject"
       }
     },
     {
@@ -4089,9 +4089,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/inputs/slider-control",
+        "route": "components/controls/slider-control",
         "kind": "section-collapse",
-        "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
       }
     },
     {

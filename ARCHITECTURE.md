@@ -58,7 +58,7 @@ Components does not import Engine, renderer, WebGPU, Layout or Elements.
 The DOM migration changes the authoring and rendering substrate, not the
 visible product. Blender 5.2 LTS remains the normative reference for control
 composition, density, grouping, palette, material states and interaction.
-Existing Button, Field, numeric, collection, color, Pane, HUD and Node consumer
+Existing Button, specialized Fields, Controls, Pane, HUD and Node consumer
 contracts must be ported to DOM/CSS before their former implementation can be
 removed. A direct `document.createElement()` proof is not a replacement for a
 production component that owned such behavior.
@@ -145,7 +145,7 @@ contain no tooltip-specific API.
 
 ## Current migration checkpoint
 
-The document pipeline is the accepted runtime foundation. All 29 public
+The document pipeline is the accepted runtime foundation. All 44 public
 component subpaths now resolve directly to one natural TSX owner; the parallel
 imperative controllers and private legacy story graph have been removed.
 Storybook exercises those same owners through DOM → CPU renderer → WebGPU.
