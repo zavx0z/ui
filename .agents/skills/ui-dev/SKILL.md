@@ -21,6 +21,25 @@ The document host loads it. The static build may copy the exact Engine asset
 once into its application output, but production UI packages never own or
 eagerly load it.
 
+## Package implementation boundary
+
+Inside `packages/components`, every public Component stays outside `src/` at
+the exact path exported by `package.json`. That file is the natural readable
+TSX owner of its public props, semantic DOM and CSS; it is never a facade,
+barrel or re-export for an implementation hidden under `src/`.
+
+`src/` is package-private implementation space. Put single-domain algorithms,
+models and pure mechanics under `src/<domain>/`; use `src/shared/` only when the
+same implementation is consumed by at least two independent public owners.
+Single-use helpers are not shared. Public owners import exact internal files
+directly. `package.json` never exports `src/**`, no `src/index.ts` barrel is
+created, Storybook imports only public exact subpaths, and boundary tests reject
+consumer imports of `@ui/components/src/*`.
+
+Visible component DOM and its one governed ``style={css`...`}`` remain in the
+public owner. Moving visual TSX into `src/` and re-exporting it is not an
+implementation cleanup: it creates a hidden owner and is forbidden.
+
 ## UI reference and product vocabulary
 
 The adopted Blender 5.2 LTS source and visual reference constrains visible

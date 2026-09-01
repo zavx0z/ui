@@ -17,3 +17,9 @@
   elements, but do not expand public props, add ARIA abstractions, keyboard
   behavior, stories, tests, or bundle work solely for accessibility unless
   zavx0z explicitly scopes that work.
+- In `packages/components`, an exported Component remains the real readable
+  TSX owner at its public path, outside `src/`; it may import package-private
+  mechanics from `src/` but must not re-export or facade an owner implemented
+  there. Put domain-specific internals in `src/<domain>/` and code genuinely
+  reused by at least two independent owners in `src/shared/`. Never export
+  `src/**`, add a `src` barrel, or let consumers import it.
