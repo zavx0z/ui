@@ -39,6 +39,10 @@ describe("UI repository package boundaries", () => {
         }
       }
 
+      if (/["']@ui\/components\/src(?:\/|["'])/u.test(source)) {
+        violations.push(`${location}: private @ui/components/src import`)
+      }
+
       for (const match of source.matchAll(/^\s*export\s+(?:type\s+)?(?:\*|\{[^}]*\})\s+from\s+["']@ui\/([^/"']+)(?:\/[^"']+)?["']/gm)) {
         const target = match[1] ?? ""
         if (exactSubpathOwners.has(target) && target !== owner) {

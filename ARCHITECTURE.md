@@ -44,6 +44,17 @@ element rather than an `@ui/elements` runtime wrapper. Production factories
 remain valid owners when they provide a reusable visual, interaction or
 controlled-state contract around those standard elements.
 
+Concrete Fields are classified by interaction mechanism, not by the domain
+meaning of their value. Each Field owns that mechanism and an optional label;
+configuration and `readOnly`/`disabled` remain states, while genuinely different
+interaction or lifecycle receives another exact owner. There is no parallel
+Control namespace, presentation dispatcher, generic Field or data-kind wrapper.
+
+`Panel` is the neutral Blender-like disclosure owner for a persistent header,
+controlled body and optional header actions. `Inspector` owns its scrolling
+Panel stack directly. Catalog Navigation Tree groups remain separate tree
+owners with hierarchy, focus, selection, keyboard traversal and windowing.
+
 Components are ordinary TSX functions compiled by `@zavx0z/template` into
 static semantic DOM mounts and addressed bindings. `@zavx0z/react` owns compact
 hook slots and component scheduling without React, Fiber or a virtual DOM.
@@ -58,7 +69,7 @@ Components does not import Engine, renderer, WebGPU, Layout or Elements.
 The DOM migration changes the authoring and rendering substrate, not the
 visible product. Blender 5.2 LTS remains the normative reference for control
 composition, density, grouping, palette, material states and interaction.
-Existing Button, specialized Fields, Controls, Pane, HUD and Node consumer
+Existing Button, concrete Fields, Pane, HUD and Node consumer
 contracts must be ported to DOM/CSS before their former implementation can be
 removed. A direct `document.createElement()` proof is not a replacement for a
 production component that owned such behavior.
@@ -145,7 +156,7 @@ contain no tooltip-specific API.
 
 ## Current migration checkpoint
 
-The document pipeline is the accepted runtime foundation. All 44 public
+The document pipeline is the accepted runtime foundation. All 32 public
 component subpaths now resolve directly to one natural TSX owner; the parallel
 imperative controllers and private legacy story graph have been removed.
 Storybook exercises those same owners through DOM → CPU renderer → WebGPU.

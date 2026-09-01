@@ -40,6 +40,13 @@ Visible component DOM and its one governed ``style={css`...`}`` remain in the
 public owner. Moving visual TSX into `src/` and re-exporting it is not an
 implementation cleanup: it creates a hidden owner and is forbidden.
 
+Data meaning, interaction mechanism and current state are independent axes.
+Create another public owner only for its own invariants, behavior or lifecycle;
+differences in naming, configuration, constraints, styling or state remain
+props/composition. A concrete Field owns one interaction mechanism and an
+optional label. Generic Field dispatch, presentation-based mechanism switching,
+and separate integer, boolean or read-only wrappers are forbidden.
+
 ## UI reference and product vocabulary
 
 The adopted Blender 5.2 LTS source and visual reference constrains visible
@@ -50,7 +57,7 @@ scope-specific compatibility check; otherwise it is legacy navigation.
 
 The reference product name is evidence vocabulary, not product vocabulary. It may appear in internal provenance, exact source paths, comparison artifacts, and owner-facing acceptance records, but not in new user-facing labels, public TypeScript identifiers, package names, production routes, story IDs, CSS/data identifiers, or copied source examples.
 
-Name production APIs by their neutral role, for example `Timeline`, `Frame`, `NumberInput`, or `Theme`. The current UI public surface is neutral: any source-branded API, alias, or re-export is a regression.
+Name production APIs by their neutral role, for example `Timeline`, `Frame`, `NumberField`, or `Theme`. The current UI public surface is neutral: any source-branded API, alias, or re-export is a regression.
 
 Read [references/blender-reference.md](references/blender-reference.md) before changing or accepting visible semantics, naming, shape, density, or interaction. Pure server, router, and lifecycle work does not load unrelated visual reference sections.
 
@@ -83,7 +90,7 @@ do not parse selectors, calculate sibling geometry or own GPU resources.
 Do not add `sx`; standard class/attribute state plus CSS is the styling
 boundary. The package-owned runtime publishes three independent documents for one fixed story:
 raw HTML, raw CSS with the full inherited owner/part/state chain, and exact
-TypeScript imports/props/internal calls. Existing Controls and Events remain
+TypeScript imports/props/internal calls. Existing Fields and Events remain
 bound to the same story args; future editor mutation is an additional authoring
 path rather than a replacement for them.
 

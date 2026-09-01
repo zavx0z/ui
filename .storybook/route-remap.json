@@ -1141,7 +1141,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/control-group/basic/default"
+        "route": "components/fields/field-group/basic/default"
       }
     },
     {
@@ -1171,7 +1171,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/number-field/presentation/slider"
+        "route": "components/fields/slider-field/basic/default"
       }
     },
     {
@@ -1181,7 +1181,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/integer-field/basic/default"
+        "route": "components/fields/number-field/step/one"
       }
     },
     {
@@ -1191,7 +1191,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/boolean-field/presentation/switch"
+        "route": "components/fields/switch-field/state/on"
       }
     },
     {
@@ -1201,7 +1201,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/enum-field/basic/default"
+        "route": "components/fields/select-field/basic/default"
       }
     },
     {
@@ -1231,7 +1231,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/rotation-field/basic/default"
+        "route": "components/fields/vector-field/basic/default"
       }
     },
     {
@@ -1261,7 +1261,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/collection-field/basic/default"
+        "route": "components/fields/collection-field/value/selected"
       }
     },
     {
@@ -1271,7 +1271,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/path-field/basic/default"
+        "route": "components/fields/path-field/value/path"
       }
     },
     {
@@ -1281,7 +1281,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/readonly-field/basic/default"
+        "route": "components/fields/text-field/state/readonly"
       }
     },
     {
@@ -1291,7 +1291,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/text-control/basic/default"
+        "route": "components/fields/text-field/basic/default"
       }
     },
     {
@@ -1301,7 +1301,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/number-control/basic/default"
+        "route": "components/fields/number-field/basic/default"
       }
     },
     {
@@ -1311,7 +1311,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/integer-control/basic/value"
+        "route": "components/fields/number-field/step/one"
       }
     },
     {
@@ -1321,7 +1321,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/integer-field/basic/default"
+        "route": "components/fields/number-field/step/one"
       }
     },
     {
@@ -1331,7 +1331,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/integer-control/state/disabled"
+        "route": "components/fields/number-field/state/disabled"
       }
     },
     {
@@ -1341,7 +1341,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/integer-control/state/readonly"
+        "route": "components/fields/number-field/state/readonly"
       }
     },
     {
@@ -1351,7 +1351,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control/basic/default"
+        "route": "components/fields/color-field/basic/default"
       }
     },
     {
@@ -1361,7 +1361,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control/state/open"
+        "route": "components/fields/color-field/state/open"
       }
     },
     {
@@ -1371,7 +1371,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control/presentation/expanded"
+        "route": "components/fields/color-picker-field/basic/default"
       }
     },
     {
@@ -1381,7 +1381,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/vector-control/basic/default"
+        "route": "components/fields/vector-field/basic/default"
       }
     },
     {
@@ -1391,7 +1391,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/matrix-control/basic/default"
+        "route": "components/fields/matrix-field/basic/default"
       }
     },
     {
@@ -1401,7 +1401,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/reference-control/basic/default"
+        "route": "components/fields/reference-field/basic/default"
       }
     },
     {
@@ -1411,7 +1411,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/presentation/cycle"
+        "route": "components/fields/select-field/basic/default"
       }
     },
     {
@@ -1421,7 +1421,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/presentation/expanded"
+        "route": "components/fields/option-group-field/basic/default"
       }
     },
     {
@@ -1431,7 +1431,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/value/selected-description"
+        "route": "components/fields/select-field/value/selected-description"
       }
     },
     {
@@ -1441,7 +1441,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/value/header-icons"
+        "route": "components/fields/cycle-field/value/header-icons"
       }
     },
     {
@@ -1451,7 +1451,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/value/mixed-icons"
+        "route": "components/fields/cycle-field/value/mixed-icons"
       }
     },
     {
@@ -1461,7 +1461,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/value/invalid-legacy"
+        "route": "components/fields/select-field/value/invalid-legacy"
       }
     },
     {
@@ -1471,7 +1471,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/exception/no-items"
+        "route": "components/fields/select-field/exception/no-items"
       }
     },
     {
@@ -1481,7 +1481,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/exception/menu-undefined"
+        "route": "components/fields/select-field/exception/menu-undefined"
       }
     },
     {
@@ -1491,7 +1491,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/exception/menu-error"
+        "route": "components/fields/select-field/exception/menu-error"
       }
     },
     {
@@ -1501,7 +1501,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/state/disabled"
+        "route": "components/fields/select-field/state/disabled"
       }
     },
     {
@@ -1511,7 +1511,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control/state/readonly"
+        "route": "components/fields/select-field/state/readonly"
       }
     },
     {
@@ -1521,7 +1521,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control/value/selected"
+        "route": "components/fields/collection-field/value/selected"
       }
     },
     {
@@ -1531,7 +1531,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control/value/empty"
+        "route": "components/fields/collection-field/value/empty"
       }
     },
     {
@@ -1541,7 +1541,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control/state/disabled"
+        "route": "components/fields/collection-field/state/disabled"
       }
     },
     {
@@ -1551,7 +1551,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control/state/readonly"
+        "route": "components/fields/collection-field/state/readonly"
       }
     },
     {
@@ -1561,7 +1561,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control/density/compact"
+        "route": "components/fields/collection-field/density/compact"
       }
     },
     {
@@ -1571,7 +1571,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control/value/path"
+        "route": "components/fields/path-field/value/path"
       }
     },
     {
@@ -1581,7 +1581,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control/value/empty"
+        "route": "components/fields/path-field/value/empty"
       }
     },
     {
@@ -1591,7 +1591,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control/state/disabled"
+        "route": "components/fields/path-field/state/disabled"
       }
     },
     {
@@ -1601,7 +1601,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control/state/readonly"
+        "route": "components/fields/path-field/state/readonly"
       }
     },
     {
@@ -1611,7 +1611,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control/density/compact"
+        "route": "components/fields/path-field/density/compact"
       }
     },
     {
@@ -1621,7 +1621,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/checkbox/state/unchecked"
+        "route": "components/fields/checkbox-field/state/unchecked"
       }
     },
     {
@@ -1631,7 +1631,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/checkbox/state/checked"
+        "route": "components/fields/checkbox-field/state/checked"
       }
     },
     {
@@ -1641,7 +1641,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/switcher/state/off"
+        "route": "components/fields/switch-field/state/off"
       }
     },
     {
@@ -1651,7 +1651,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/switcher/state/on"
+        "route": "components/fields/switch-field/state/on"
       }
     },
     {
@@ -1661,7 +1661,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/progress-checkbox/progress/default"
+        "route": "components/fields/checkbox-field/state/indeterminate"
       }
     },
     {
@@ -1671,7 +1671,7 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/slider-control/basic/default"
+        "route": "components/fields/slider-field/basic/default"
       }
     },
     {
@@ -1762,6 +1762,36 @@
       "to": {
         "packageId": "@ui/components",
         "route": "hud/foundation/timeline/inventory/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-sections/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-section/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/panel/basic/default"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-text-section/basic/default"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/panel/basic/default"
       }
     }
   ],
@@ -3441,9 +3471,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls",
+        "route": "components/fields",
         "kind": "category",
-        "reason": "Former Inputs overview now resolves to the canonical Controls category"
+        "reason": "Former input catalog now resolves to the single Fields category"
       }
     },
     {
@@ -3453,9 +3483,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/control-group",
+        "route": "components/fields/field-group",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3465,9 +3495,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/control-group",
+        "route": "components/fields/field-group",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3479,7 +3509,7 @@
         "packageId": "@ui/components",
         "route": "components/fields",
         "kind": "category",
-        "reason": "Former generic Field overview now resolves to the concrete Fields category"
+        "reason": "Former Field catalog resolves to the single Fields category"
       }
     },
     {
@@ -3491,7 +3521,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/text-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3501,9 +3531,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/number-field",
-        "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "route": "components/fields",
+        "kind": "category",
+        "reason": "Former value-oriented overview now spans multiple concrete Field mechanisms"
       }
     },
     {
@@ -3513,9 +3543,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/integer-field",
+        "route": "components/fields/number-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3525,9 +3555,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/boolean-field",
+        "route": "components/fields/switch-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3537,9 +3567,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/enum-field",
+        "route": "components/fields/select-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3551,7 +3581,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/color-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3563,7 +3593,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/vector-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3573,9 +3603,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/rotation-field",
+        "route": "components/fields/vector-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3587,7 +3617,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/matrix-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3599,7 +3629,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/reference-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3611,7 +3641,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/collection-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3623,7 +3653,7 @@
         "packageId": "@ui/components",
         "route": "components/fields/path-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3633,9 +3663,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/fields/readonly-field",
+        "route": "components/fields/text-field",
         "kind": "subject",
-        "reason": "Former generic Field section is now an exact concrete Field subject overview"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3645,9 +3675,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/text-control",
+        "route": "components/fields/text-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3657,9 +3687,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/text-control",
+        "route": "components/fields/text-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3669,9 +3699,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/number-control",
+        "route": "components/fields/number-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3681,9 +3711,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/number-control",
+        "route": "components/fields/number-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3693,9 +3723,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/integer-control",
+        "route": "components/fields/number-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3705,9 +3735,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/integer-control",
+        "route": "components/fields/number-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3717,9 +3747,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/integer-control",
+        "route": "components/fields/number-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3729,9 +3759,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control",
-        "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "route": "components/fields",
+        "kind": "category",
+        "reason": "Former value-oriented overview now spans multiple concrete Field mechanisms"
       }
     },
     {
@@ -3741,9 +3771,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control",
+        "route": "components/fields/color-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3753,9 +3783,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control",
+        "route": "components/fields/color-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3765,9 +3795,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/color-control",
+        "route": "components/fields/color-picker-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3777,9 +3807,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/vector-control",
+        "route": "components/fields/vector-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3789,9 +3819,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/vector-control",
+        "route": "components/fields/vector-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3801,9 +3831,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/matrix-control",
+        "route": "components/fields/matrix-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3813,9 +3843,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/matrix-control",
+        "route": "components/fields/matrix-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3825,9 +3855,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/reference-control",
+        "route": "components/fields/reference-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3837,9 +3867,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/reference-control",
+        "route": "components/fields/reference-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3849,9 +3879,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control",
-        "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "route": "components/fields",
+        "kind": "category",
+        "reason": "Former value-oriented overview now spans multiple concrete Field mechanisms"
       }
     },
     {
@@ -3861,9 +3891,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control",
-        "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "route": "components/fields",
+        "kind": "category",
+        "reason": "Former value-oriented overview now spans multiple concrete Field mechanisms"
       }
     },
     {
@@ -3873,9 +3903,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control",
-        "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "route": "components/fields",
+        "kind": "category",
+        "reason": "Former value-oriented overview now spans multiple concrete Field mechanisms"
       }
     },
     {
@@ -3885,9 +3915,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control",
+        "route": "components/fields/select-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3897,9 +3927,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/enum-control",
+        "route": "components/fields/select-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3909,9 +3939,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control",
+        "route": "components/fields/collection-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3921,9 +3951,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control",
+        "route": "components/fields/collection-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3933,9 +3963,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control",
+        "route": "components/fields/collection-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3945,9 +3975,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/collection-control",
+        "route": "components/fields/collection-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3957,9 +3987,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control",
+        "route": "components/fields/path-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -3969,9 +3999,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control",
+        "route": "components/fields/path-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3981,9 +4011,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control",
+        "route": "components/fields/path-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -3993,9 +4023,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/path-control",
+        "route": "components/fields/path-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -4005,9 +4035,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/checkbox",
+        "route": "components/fields/checkbox-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -4017,9 +4047,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/checkbox",
+        "route": "components/fields/checkbox-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -4029,9 +4059,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/switcher",
+        "route": "components/fields/switch-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -4041,9 +4071,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/switcher",
+        "route": "components/fields/switch-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -4053,9 +4083,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/progress-checkbox",
+        "route": "components/fields/checkbox-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -4065,9 +4095,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/progress-checkbox",
+        "route": "components/fields/checkbox-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -4077,9 +4107,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/slider-control",
+        "route": "components/fields/slider-field",
         "kind": "subject",
-        "reason": "Former Input component overview now resolves to the exact Control subject"
+        "reason": "Former overview resolves to its exact concrete Field subject"
       }
     },
     {
@@ -4089,9 +4119,9 @@
       },
       "to": {
         "packageId": "@ui/components",
-        "route": "components/controls/slider-control",
+        "route": "components/fields/slider-field",
         "kind": "section-collapse",
-        "reason": "Former section resolves to its concrete Control subject overview without selecting a leaf"
+        "reason": "Former section resolves to its exact concrete Field subject overview without selecting a leaf"
       }
     },
     {
@@ -4344,6 +4374,78 @@
         "route": "hud/foundation/timeline",
         "kind": "section-collapse",
         "reason": "Former section is variant grouping metadata and resolves to its subject overview without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-sections"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector",
+        "kind": "subject",
+        "reason": "The former section stack is now owned directly by Inspector"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-sections/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector",
+        "kind": "section-collapse",
+        "reason": "The former section stack variant resolves to the Inspector owner without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-section"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/panel",
+        "kind": "subject",
+        "reason": "InspectorSection was generalized into the exact neutral Panel owner"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-section/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/panel",
+        "kind": "section-collapse",
+        "reason": "The former InspectorSection variant resolves to Panel without selecting a leaf"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-text-section"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/panel",
+        "kind": "subject",
+        "reason": "The text-only wrapper had no interaction owner beyond Panel"
+      }
+    },
+    {
+      "from": {
+        "packageId": "@ui/components",
+        "route": "components/data/inspector-text-section/basic"
+      },
+      "to": {
+        "packageId": "@ui/components",
+        "route": "components/foundation/panel",
+        "kind": "section-collapse",
+        "reason": "The former text-only variant resolves to Panel without selecting a leaf"
       }
     }
   ],

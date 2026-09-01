@@ -23,3 +23,8 @@
   there. Put domain-specific internals in `src/<domain>/` and code genuinely
   reused by at least two independent owners in `src/shared/`. Never export
   `src/**`, add a `src` barrel, or let consumers import it.
+- Classify data meaning, interaction mechanism and current state independently.
+  Add a public owner only for its own invariants, behavior or lifecycle; naming,
+  configuration, constraints, styling and state do not justify another owner.
+  A concrete Field owns one interaction mechanism plus an optional label. It
+  does not dispatch another Field by data kind or presentation variant.

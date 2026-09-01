@@ -9,7 +9,7 @@
     "packages/*"
   ],
   "scripts": {
-    "test": "bun test packages",
+    "test": "bun test packages && bun test ./packages/components/.storybook",
     "typecheck": "tsc --project tsconfig.json --pretty false",
     "check": "bun run typecheck && bun run test"
   },
